@@ -105,11 +105,10 @@ export default function PasswordCourse({
       </nav>
       <main className={styles.main}>
         <header>
-          <p className={styles.eyebrow}>Aihe 1 · Salasanojen turvallisuus</p>
           <h1>Kokeile salasanan vahvuutta</h1>
           <p>
-            Millainen salasana on vaikea arvata? Tutki esimerkkejä ja kokeile
-            sitten omaa harjoitussalasanaa. Voit edetä rauhassa.
+            Aino miettii, miten keksisi hyvän salasanan. Kokeile ensin kolmea
+            esimerkkiä ja katso, miten arvio muuttuu. Keksi sitten oma.
           </p>
           <div role="status" aria-live="polite">
             {isComplete && (
@@ -119,13 +118,11 @@ export default function PasswordCourse({
         </header>
         <div className={styles.layout}>
           <section className={styles.card} aria-labelledby="practice-title">
-            <h2 id="practice-title">Salasanalaboratorio</h2>
+            <h2 id="practice-title">Kokeile tässä</h2>
             <p id="privacy" className={styles.notice}>
-              <strong>Käytä vain keksittyjä harjoitussalasanoja.</strong> Älä
-              kirjoita tähän oikeaa salasanaasi. Harjoitus arvioi tekstin omassa
-              selaimessasi eikä lähetä sitä palvelimelle. Kun valitset Tallenna,
-              tähän selaimeen tallennetaan tarkistustieto kurssin viimeistä
-              kysymystä varten, ei salasanaa luettavassa muodossa.
+              <strong>Älä kirjoita tähän oikeaa salasanaasi.</strong> Keksi
+              salasana vain tätä harjoitusta varten. Sitä ei lähetetä
+              palvelimelle.
             </p>
             <label className={styles.label} htmlFor="practice-password">
               Harjoitussalasana
@@ -222,17 +219,16 @@ export default function PasswordCourse({
                 aria-labelledby="create-password-title"
               >
                 <h3 id="create-password-title">
-                  Seuraava tehtävä: luo vahva salasana
+                  Keksi nyt oma harjoitussalasana
                 </h3>
                 <p>
-                  Kirjoita yllä olevaan kenttään oma keksitty harjoitussalasana,
-                  jonka arvio on 4/4. Valitse sitten Tallenna ansaitaksesi
-                  merkin. Älä käytä esimerkkisalasanaa.
+                  Kirjoita kenttään oma salasana ja muokkaa sitä, kunnes arvio
+                  on 4/4. Esimerkkisalasanaa ei voi tallentaa omaksi.
                 </p>
                 <p>
-                  Muista luomasi salasana: syötät sen uudelleen kurssin
-                  viimeisessä kysymyksessä. Tallennus toimii tässä selaimessa.
-                  Uusi tallennus korvaa aiemman harjoitussalasanan.
+                  Paina salasana mieleesi. Tarvitset sitä tietovisan lopussa.
+                  Tähän selaimeen tallennetaan vain tarkistustieto, ei salasanaa
+                  luettavassa muodossa. Uusi tallennus korvaa aiemman.
                 </p>
                 <button
                   type="button"
@@ -240,11 +236,11 @@ export default function PasswordCourse({
                   onClick={savePassword}
                   aria-describedby="save-requirements"
                 >
-                  {isSaving ? "Tallennetaan…" : "Tallenna"}
+                  {isSaving ? "Tallennetaan…" : "Tallenna harjoitussalasana"}
                 </button>
                 <p id="save-requirements">
-                  Tallennus avautuu, kun oma kirjoittamasi salasana saa arvion
-                  4/4.
+                  Kun salasana saa arvion 4/4, voit tallentaa sen ja saat
+                  harjoituksesta merkin.
                 </p>
               </section>
             )}
@@ -253,8 +249,7 @@ export default function PasswordCourse({
               {hasSaved && (
                 <CompletionNotice>
                   <p>
-                    Harjoitussalasanasi on tallennettu tarkistusta varten ja
-                    olet ansainnut merkin! Käytä samaa salasanaa kurssin
+                    Valmista tuli! Käytä samaa harjoitussalasanaa tietovisan
                     viimeisessä kysymyksessä.
                   </p>
                 </CompletionNotice>
@@ -267,10 +262,10 @@ export default function PasswordCourse({
             </p>
           </section>
           <aside className={styles.card} aria-labelledby="examples-title">
-            <h2 id="examples-title">Tutki</h2>
+            <h2 id="examples-title">Aloita näistä esimerkeistä</h2>
             <p>
-              Valitse esimerkki ja huomaa, miten arvio muuttuu. Älä käytä
-              esimerkkejä oikeilla tileilläsi.
+              Valitse esimerkki. Sen salasana ja arvio näkyvät kokeilukentässä.
+              Nämä salasanat on tarkoitettu vain harjoitteluun.
             </p>
             <div className={styles.examples}>
               {examples.map((item, index) => (
@@ -305,9 +300,8 @@ export default function PasswordCourse({
               {examplesInspected && (
                 <div className={styles.notice}>
                   <p>
-                    Hienoa, tutkit kaikki esimerkit! Luo nyt oma
-                    harjoitussalasana, jonka arvio on 4/4, ja tallenna se
-                    ansaitaksesi merkin.
+                    Kaikki kolme on nyt kokeiltu. Millaisen salasanan sinä
+                    keksisit?
                   </p>
                   <button
                     type="button"
@@ -321,16 +315,11 @@ export default function PasswordCourse({
                       input.current?.focus();
                     }}
                   >
-                    Luo oma salasana
+                    Kokeile omaa salasanaa
                   </button>
                 </div>
               )}
             </div>
-            <p className={styles.small}>
-              Ansaitset merkin tutkimalla kaikki esimerkit ja tallentamalla oman
-              4/4-harjoitussalasanan. Esimerkkien tutkiminen yksin ei vielä
-              riitä.
-            </p>
           </aside>
         </div>
         <section className={styles.takeaway} aria-labelledby="remember-title">

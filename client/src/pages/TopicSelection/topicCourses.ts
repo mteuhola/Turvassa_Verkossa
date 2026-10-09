@@ -27,7 +27,7 @@ const courseCatalog: TopicCourse[] = [
         isComplete: false,
         title: "Kokeile salasanan vahvuutta",
         description:
-          "Tutki esimerkkisalasanoja ja kokeile omaa keksittyä salasanaa. Opi, mikä tekee salasanasta vaikeasti arvattavan.",
+          "Vertaa kolmea esimerkkiä ja kokeile sitten omaa keksittyä salasanaa.",
         path: "/course/passwords/password-strength",
       },
     ],
@@ -68,7 +68,7 @@ export const topicCourses: TopicCourse[] = courseCatalog.map((course) => ({
       isComplete: false,
       title: "Kurssin tietovisa",
       description:
-        "Kertaa kurssin asioita. Valitse oikeat vastaukset ja lue selitykset omaan tahtiisi.",
+        "Kokeile, mitä muistat. Saat vastauksista palautetta ja voit yrittää uudelleen.",
       path: `${course.path}/quiz`,
     },
   ],

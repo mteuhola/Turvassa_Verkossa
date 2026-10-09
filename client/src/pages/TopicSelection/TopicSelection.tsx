@@ -1,5 +1,6 @@
 import CompletionBadge from "../../components/CompletionBadge";
 import CourseProgress from "../../components/CourseProgress";
+import CourseGuide from "../../components/CourseGuide";
 import { Link } from "react-router-dom";
 import TextSizeControl, {
   type TextSizeProps,
@@ -28,16 +29,14 @@ export default function TopicSelection({
       </nav>
       <main className={styles.main}>
         <header className={styles.header}>
-          <p className={styles.eyebrow}>Kurssin aiheet</p>
           <h1>{course.title}</h1>
-          <p>
-            Valitse aihe aloittaaksesi. Voit edetä omaan tahtiisi ja palata
-            tähän näkymään harjoituksesta.
-          </p>
-          <CourseProgress course={course} />
         </header>
+        <CourseGuide courseId={course.id} />
         <section aria-labelledby="topics-title">
-          <h2 id="topics-title">Valitse aihe</h2>
+          <div className={styles.sectionHeading}>
+            <h2 id="topics-title">Kurssin aiheet</h2>
+            <CourseProgress course={course} />
+          </div>
           {course.topics.length > 0 ? (
             <ol className={styles.topics}>
               {course.topics.map((topic, index) => (
@@ -48,9 +47,6 @@ export default function TopicSelection({
                     </span>
                     <div className={styles.content}>
                       <h3>{topic.title}</h3>
-                      {topic.kind === "quiz" && (
-                        <span>Kurssin lopputehtävä</span>
-                      )}
                       {topic.isComplete && <CompletionBadge />}
                       <p>{topic.description}</p>
                     </div>
@@ -66,8 +62,8 @@ export default function TopicSelection({
             <div className={styles.empty}>
               <h3>Kurssin aiheet ovat tulossa</h3>
               <p>
-                Tähän kurssiin ei ole vielä lisätty harjoituksia. Voit sillä
-                välin tutustua muihin kursseihin.
+                Harjoitukset eivät ole vielä valmiina. Voit sillä välin kokeilla
+                toista kurssia.
               </p>
               <Link to="/">Palaa kurssivalintaan →</Link>
             </div>

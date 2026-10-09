@@ -125,12 +125,11 @@ export default function Quiz({
       </nav>
       <main className={styles.main}>
         <header>
-          <p className={styles.eyebrow}>{course.title} · Tietovisa</p>
-          <h1>Testaa oppimaasi</h1>
+          <h1>{course.title}: tietovisa</h1>
           <p>
-            Vastaa rauhassa ja tarkista vastauksesi. Voit yrittää uudelleen niin
-            monta kertaa kuin haluat. Saat merkin, kun vastaat kaikkiin
-            kysymyksiin oikein ja päätät tietovisan.
+            Kokeillaan, mitä jäi mieleen. Saat jokaisesta vastauksesta
+            palautetta, ja voit yrittää uudelleen. Kun kaikki vastaukset ovat
+            oikein, saat tietovisasta merkin.
           </p>
           {isComplete && <CompletionBadge label="Tietovisa suoritettu" />}
         </header>
@@ -147,10 +146,10 @@ export default function Quiz({
         {finished ? (
           <div role="status">
             <CompletionNotice badgeLabel="Tietovisa suoritettu">
-              <h2>Hienoa, kaikki vastaukset ovat oikein!</h2>
+              <h2>Valmista tuli, kaikki oikein!</h2>
               <p>
-                Suoritit tietovisan. Voit palata kurssin aiheisiin tai kerrata
-                kysymykset. Kertaaminen ei poista merkkiäsi.
+                Voit jatkaa muihin aiheisiin tai kokeilla tietovisaa uudelleen.
+                Ansaitsemasi merkki säilyy.
               </p>
               <div className={styles.actions}>
                 <Link to={course.path}>Palaa aiheisiin →</Link>
@@ -240,7 +239,7 @@ export default function Quiz({
                   <p id="answer-instructions" className={styles.instructions}>
                     {question.type === "single"
                       ? "Valitse yksi vastaus."
-                      : "Valitse kaikki oikeat vastaukset. Oikeita vastauksia on useita."}
+                      : "Valitse kaikki oikeat vastaukset."}
                   </p>
                   {question.options.map((option) => (
                     <label
@@ -290,7 +289,7 @@ export default function Quiz({
                     onClick={advance}
                   >
                     {index === total - 1
-                      ? "Päätä tietovisa ja saa merkki"
+                      ? "Valmis – ota merkki vastaan"
                       : "Seuraava kysymys →"}
                   </button>
                 )}

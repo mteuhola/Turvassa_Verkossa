@@ -19,10 +19,19 @@ export function parseProgress(stored: string | null): string[] {
     if (!Array.isArray(parsed)) return [];
     return [
       ...new Set(
-        parsed.filter(
-          (path): path is string =>
-            typeof path === "string" && topicPaths.has(path),
-        ),
+        parsed
+          .map((path: unknown) =>
+            typeof path === "string"
+              ? path.replace(
+                  /^\/course\/romance-fraud(?=\/|$)/,
+                  "/course/financial-fraud",
+                )
+              : path,
+          )
+          .filter(
+            (path): path is string =>
+              typeof path === "string" && topicPaths.has(path),
+          ),
       ),
     ];
   } catch {

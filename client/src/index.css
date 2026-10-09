@@ -112,7 +112,7 @@ nav button.text-size-control:focus-visible {
   --course-ink: #185fa5;
 }
 
-[data-course="romance-fraud"] {
+[data-course="financial-fraud"] {
   --course-tint: #fbeaf0;
   --course-notice-ink: #72243e;
   --course-accent: #993556;

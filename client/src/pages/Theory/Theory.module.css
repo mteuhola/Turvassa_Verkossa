@@ -1,0 +1,156 @@
+.root {
+  min-height: 100vh;
+  color: var(--text);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.root a {
+  color: var(--course-ink);
+  text-underline-offset: 4px;
+}
+.root a:focus-visible,
+.root button:focus-visible {
+  outline: 3px solid var(--course-ink);
+  outline-offset: 4px;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px var(--page-gutter);
+  border-bottom: 1px solid var(--border);
+}
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+}
+.nav .brand {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 1.75rem;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav .brand:hover {
+  text-decoration: underline;
+}
+.main {
+  width: 100%;
+  max-width: var(--reading-width);
+  margin-inline: auto;
+  padding: 40px var(--page-gutter) 56px;
+}
+.header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--course-accent);
+}
+.course {
+  color: var(--course-ink);
+  margin: 0 0 8px;
+}
+.root h1,
+.root h2 {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-weight: 400;
+  line-height: 1.25;
+}
+.root h1 {
+  font-size: clamp(2rem, 1.75rem + 1vw, 2.875rem);
+  margin: 0;
+}
+.root h1:focus {
+  outline: none;
+}
+.root h2 {
+  font-size: 1.75rem;
+  margin: 0 0 16px;
+}
+.content {
+  max-width: 70ch;
+}
+.section + .section {
+  margin-top: 36px;
+}
+.section p {
+  margin: 0 0 20px;
+}
+.figure {
+  margin: 24px 0;
+}
+.figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.figure figcaption {
+  margin-top: 12px;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+.continue {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 32px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.continue > div {
+  flex: 1 1 20rem;
+  min-width: 0;
+}
+.continue p {
+  margin: 0 0 8px;
+}
+.help {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+.continue button {
+  max-width: 100%;
+  min-height: 48px;
+  padding: 12px 24px;
+  border: 2px solid var(--course-ink);
+  border-radius: 8px;
+  background: var(--course-ink);
+  color: #fff;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+.continue button:hover {
+  background: var(--course-tint);
+  color: var(--course-ink);
+}
+@media (max-width: 40rem) {
+  .main {
+    padding-top: 32px;
+  }
+  .continue button {
+    width: 100%;
+  }
+}
+
+.character {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.portrait {
+  width: 112px;
+  flex-shrink: 0;
+}
+.character p {
+  flex: 1 1 15rem;
+  margin: 0;
+  color: var(--text-muted);
+}

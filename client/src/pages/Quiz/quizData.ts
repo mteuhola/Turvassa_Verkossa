@@ -121,7 +121,7 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
       },
     ],
   },
-  "romance-fraud": {
+  "financial-fraud": {
     questions: [
       {
         id: "money",

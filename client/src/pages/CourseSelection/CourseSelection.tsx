@@ -1,4 +1,5 @@
-﻿import { Link } from "react-router-dom";
+import DebugProgressReset from "../../components/DebugProgressReset";
+import { Link } from "react-router-dom";
 import CourseProgress from "../../components/CourseProgress";
 import { LockIcon, EmailIcon, MaskIcon } from "../../components/icons";
 import type { TopicCourse } from "../TopicSelection/topicCourses";
@@ -19,17 +20,21 @@ const courseDetails: Record<string, { description: string; duration: string }> =
         "Harjoittele tunnistamaan huijausviestit ja epäilyttävät linkit.",
       duration: "Noin 12 minuuttia",
     },
-    "romance-fraud": {
+    "financial-fraud": {
       description:
-        "Opi tunnistamaan verkossa tapahtuvaa tunnemanipulaatiota, ja huomaamaan, jos jokin on liian hyvää ollakseen totta.",
+        "Harjoittele tunnistamaan epäilyttävät sijoitustarjoukset ja verkossa esitetyt rahapyynnöt.",
       duration: "Noin 15 minuuttia",
     },
   };
 
 export default function CourseSelection({
   progressCourses,
+  onResetProgress,
   ...textSizeProps
-}: TextSizeProps & { progressCourses: TopicCourse[] }) {
+}: TextSizeProps & {
+  progressCourses: TopicCourse[];
+  onResetProgress: () => boolean;
+}) {
   return (
     <div className={styles.root}>
       <nav className={styles.nav} aria-label="Päänavigaatio">
@@ -42,8 +47,9 @@ export default function CourseSelection({
         <header className={styles.hero}>
           <h1>Tervetuloa oppimaan!</h1>
           <p>
-            Täällä voit harjoitella turvallista verkon käyttöä tuttujen arjen tilanteiden
-            avulla. Et tarvitse ennakkotietoja, ja voit edetä omaan tahtiisi.
+            Täällä voit harjoitella turvallista verkon käyttöä tuttujen arjen
+            tilanteiden avulla. Et tarvitse ennakkotietoja, ja voit edetä omaan
+            tahtiisi.
           </p>
         </header>
         <section aria-labelledby="courses-title">
@@ -68,7 +74,7 @@ export default function CourseSelection({
                       {course.id === "phishing" && (
                         <EmailIcon color="currentColor" />
                       )}
-                      {course.id === "romance-fraud" && (
+                      {course.id === "financial-fraud" && (
                         <MaskIcon color="currentColor" />
                       )}
                     </span>
@@ -106,6 +112,9 @@ export default function CourseSelection({
             kursseihin myöhemmin.
           </p>
         </footer>
+        {import.meta.env.VITE_ENABLE_DEBUG_TOOLS === "true" && (
+          <DebugProgressReset onReset={onResetProgress} />
+        )}
       </main>
     </div>
   );

@@ -1,33 +1,13 @@
+import { LockIcon, EmailIcon, MaskIcon } from "./icons";
 import styles from "./CourseGuide.module.css";
 
-const courseGuides: Record<
-  string,
-  { name: string; introduction: string; quote: string; invitation: string }
-> = {
-  passwords: {
-    name: "Sanna",
-    introduction: "Tutustu Sannaan",
-    quote:
-      "Salasanoja tarvitaan joka paikkaan. Miten keksisin sellaisen, jonka muistan itse mutta jota muut eivät arvaa?",
-    invitation:
-      "Kokeile Sannan kanssa, millainen salasana on vahva. Aloita esimerkeistä ja keksi sitten oma harjoitussalasana.",
-  },
-  phishing: {
-    name: "Kaarlo",
-    introduction: "Tutustu Kaarloon",
-    quote:
-      "Sain pankin nimissä viestin, jossa pyydetään toimimaan heti. Uskallanko avata siinä olevan linkin?",
-    invitation:
-      "Tutki harjoitusviestiä Kaarlon kanssa. Etsi kohdat, joiden vuoksi viestiin ei kannata luottaa.",
-  },
-  "romance-fraud": {
-    name: "Raija",
-    introduction: "Tutustu Raijaan",
-    quote:
-      "Olen jutellut mukavan ihmisen kanssa netissä. Nyt hän pyytää rahaa, vaikka emme ole koskaan tavanneet. Mitä minun pitäisi ajatella?",
-    invitation:
-      "Pohdi Raijan tilannetta. Voit aloittaa alla olevasta tietovisasta.",
-  },
+const courseOverviews: Record<string, string> = {
+  passwords:
+    "Tutustu salasanojen turvallisuuteen, kokeile salasanan vahvuutta ja pohdi, miten opittua voi käyttää arjessa. Lopuksi kertaat asiat tietovisassa.",
+  phishing:
+    "Opi huomaamaan huijausviestin merkkejä. Tutki harjoitussähköpostia, pohdi erilaisia viestitilanteita ja kertaa oppimasi tietovisassa.",
+  "financial-fraud":
+    "Tutustu romanssi- ja sijoitushuijausten varoitusmerkkeihin. Pohdi verkossa syntyvää luottamusta ja rahapyyntöjä sekä kertaa aiheita tietovisassa.",
 };
 
 export function CharacterPortrait({ courseId }: { courseId: string }) {
@@ -41,18 +21,18 @@ export function CharacterPortrait({ courseId }: { courseId: string }) {
 }
 
 export default function CourseGuide({ courseId }: { courseId: string }) {
-  const guide = courseGuides[courseId];
-  if (!guide) return null;
+  const overview = courseOverviews[courseId];
+  if (!overview) return null;
   return (
     <section className={styles.guide} aria-labelledby={`${courseId}-guide`}>
-      <CharacterPortrait courseId={courseId} />
-      <div className={styles.story}>
-        <h2 id={`${courseId}-guide`}>{guide.introduction}</h2>
-        <blockquote>”{guide.quote}”</blockquote>
-        <p>{guide.invitation}</p>
-        <p className={styles.caption}>
-          {guide.name} on kuvitteellinen harjoituskaveri.
-        </p>
+      <span className={styles.icon} aria-hidden="true">
+        {courseId === "passwords" && <LockIcon color="currentColor" />}
+        {courseId === "phishing" && <EmailIcon color="currentColor" />}
+        {courseId === "financial-fraud" && <MaskIcon color="currentColor" />}
+      </span>
+      <div className={styles.overview}>
+        <h2 id={`${courseId}-guide`}>Tällä kurssilla</h2>
+        <p>{overview}</p>
       </div>
     </section>
   );

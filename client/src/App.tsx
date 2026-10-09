@@ -1,5 +1,11 @@
 import { courseQuizzes } from "./pages/Quiz/quizData";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import { lazy, Suspense } from "react";
 import CourseSelection from "./pages/CourseSelection/CourseSelection";
 import { useTextSize } from "./useTextSize";
@@ -14,11 +20,34 @@ const PhishingCourse = lazy(
   () => import("./pages/PhishingCourse/PhishingCourse"),
 );
 
+function LegacyFinancialRoute() {
+  const location = useLocation();
+  return (
+    <Navigate
+      replace
+      to={
+        location.pathname.replace(
+          "/course/romance-fraud",
+          "/course/financial-fraud",
+        ) +
+        location.search +
+        location.hash
+      }
+    />
+  );
+}
+
+const InvestmentActivity = lazy(
+  () => import("./pages/FinancialFraud/InvestmentActivity"),
+);
+
+const Theory = lazy(() => import("./pages/Theory/Theory"));
+
 const Quiz = lazy(() => import("./pages/Quiz/Quiz"));
 
 function App() {
   const textSizeProps = useTextSize();
-  const { courses, markComplete } = useCourseProgress();
+  const { courses, markComplete, resetProgress } = useCourseProgress();
   const isComplete = (path: string) =>
     courses.some((course) =>
       course.topics.some((topic) => topic.path === path && topic.isComplete),
@@ -27,9 +56,33 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
+          path="/course/romance-fraud/*"
+          element={<LegacyFinancialRoute />}
+        />
+        <Route
+          path="/course/financial-fraud/investment-offers"
+          element={
+            <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
+              <InvestmentActivity
+                {...textSizeProps}
+                isComplete={isComplete(
+                  "/course/financial-fraud/investment-offers",
+                )}
+                onComplete={() =>
+                  markComplete("/course/financial-fraud/investment-offers")
+                }
+              />
+            </Suspense>
+          }
+        />
+        <Route
           path="/"
           element={
-            <CourseSelection {...textSizeProps} progressCourses={courses} />
+            <CourseSelection
+              {...textSizeProps}
+              progressCourses={courses}
+              onResetProgress={resetProgress}
+            />
           }
         />
         <Route
@@ -60,6 +113,28 @@ function App() {
             </Suspense>
           }
         />
+        {courses.flatMap((course) =>
+          course.topics.map((topic) =>
+            topic.kind === "theory" ? (
+              <Route
+                key={topic.path}
+                path={topic.path}
+                element={
+                  <Suspense fallback={<p role="status">Ladataan aihetta…</p>}>
+                    <Theory
+                      key={topic.path}
+                      course={course}
+                      topic={topic}
+                      {...textSizeProps}
+                      isComplete={topic.isComplete}
+                      onComplete={() => markComplete(topic.path)}
+                    />
+                  </Suspense>
+                }
+              />
+            ) : null,
+          ),
+        )}
         {courses.map((course) => (
           <Route
             key={course.id}

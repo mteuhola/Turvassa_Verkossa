@@ -1,3 +1,4 @@
+import { resetStoredProgress } from "./resetProgress";
 import {
   readPracticePassword,
   reconcilePasswordCompletion,
@@ -33,6 +34,16 @@ export function useCourseProgress() {
   const markComplete = useCallback((path: string) => {
     setCompleted((previous) => completeTopic(previous, path));
   }, []);
+  const resetProgress = useCallback(() => {
+    let persisted = true;
+    try {
+      resetStoredProgress(localStorage);
+    } catch {
+      persisted = false;
+    }
+    setCompleted([]);
+    return persisted;
+  }, []);
   const courses = useMemo(() => applyProgress(completed), [completed]);
-  return { courses, markComplete };
+  return { courses, markComplete, resetProgress };
 }

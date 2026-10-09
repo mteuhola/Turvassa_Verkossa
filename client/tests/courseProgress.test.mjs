@@ -25,12 +25,15 @@ test("fresh courses and topics are incomplete, including empty courses", () => {
 
 test("completion updates only the correct topic and course", () => {
   const courses = applyProgress(completeTopic([], password));
-  assert.equal(courses[0].topics[0].isComplete, true);
+  assert.equal(
+    courses[0].topics.find((topic) => topic.path === password).isComplete,
+    true,
+  );
   assert.equal(courses[0].isComplete, false); // The final quiz remains incomplete.
   assert.equal(courses[1].isComplete, false);
   assert.equal(courses[1].topics[0].isComplete, false);
   assert.equal(
-    topicCourses[0].topics[0].isComplete,
+    topicCourses[0].topics.find((topic) => topic.path === password).isComplete,
     false,
     "catalog must not be mutated",
   );
@@ -76,9 +79,9 @@ test("a course with multiple topics needs all of them; new topics update its tot
     {
       ...topicCourses[0],
       topics: [
-        topicCourses[0].topics[0],
+        topicCourses[0].topics.find((topic) => topic.path === password),
         {
-          ...topicCourses[1].topics[0],
+          ...topicCourses[1].topics.find((topic) => topic.path === phishing),
           path: "/course/passwords/second-topic",
         },
       ],

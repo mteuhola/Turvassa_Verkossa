@@ -107,7 +107,7 @@ export default function PasswordCourse({
         <header>
           <h1>Kokeile salasanan vahvuutta</h1>
           <p>
-            Aino miettii, miten keksisi hyvän salasanan. Kokeile ensin kolmea
+            Sanna miettii, miten keksisi hyvän salasanan. Kokeile ensin kolmea
             esimerkkiä ja katso, miten arvio muuttuu. Keksi sitten oma.
           </p>
           <div role="status" aria-live="polite">

@@ -2,7 +2,7 @@ import './App.css'
 
 // Replace the image in public/ and edit this copy for your exercise.
 const content = {
-  image: `${import.meta.env.BASE_URL}phishing-icon.png`,
+  image: `${import.meta.env.BASE_URL}images/phishing-icon.png`,
   imageAlt: '',
   heading: 'Hups!',
   message:

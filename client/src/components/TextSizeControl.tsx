@@ -1,7 +1,7 @@
 const sizes = [
+  { value: "150", label: "Erittäin suuri" },
   { value: "100", label: "Tavallinen" },
   { value: "125", label: "Suuri" },
-  { value: "150", label: "Erittäin suuri" },
 ] as const;
 
 export interface TextSizeProps {

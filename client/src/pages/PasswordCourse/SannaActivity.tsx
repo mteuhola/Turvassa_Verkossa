@@ -159,7 +159,7 @@ export default function SannaActivity({
               <p>
                 Vaihdat salasanat yksi kerrallaan ja tallennat ne Sannan
                 harjoitussalasananhallintaan. Lopuksi autat häntä kirjautumaan
-                harrastuskerhoon.
+                kirjakerhoon.
               </p>
               <p className={styles.small}>
                 Käytä vain keksittyjä salasanoja, joita et käytä muualla. Sannan
@@ -427,7 +427,7 @@ export default function SannaActivity({
           {stage === "login" && (
             <section aria-labelledby="sanna-login">
               <h2 id="sanna-login" ref={heading} tabIndex={-1}>
-                Auta Sannaa harrastuskerhoon
+                Auta Sannaa kirjakerhoon
               </h2>
               <p>
                 ”Haluaisin katsoa kerhon seuraavan tapaamisen. Mistä löydän
@@ -449,7 +449,7 @@ export default function SannaActivity({
                 className={own.manager}
               >
                 <h3>Sannan tallennetut tilit</h3>
-                <p>Etsi harrastuskerhon merkintä ja täytä sen salasana.</p>
+                <p>Etsi kirjakerhon merkintä ja täytä sen salasana.</p>
                 <ul className={own.accounts}>
                   {sannaAccounts.map((item) => (
                     <li key={item.id}>
@@ -479,7 +479,7 @@ export default function SannaActivity({
                   event.preventDefault();
                   if (!planCorrect || !canSignInAsSanna(saved, login)) {
                     setFeedback(
-                      "Sanna: Tämä ei avannut harrastuskerhon tiliä. Avaa salasananhallinta ja etsi juuri harrastuskerhon merkintä.",
+                      "Sanna: Tämä ei avannut kirjakerhon tiliä. Avaa salasananhallinta ja etsi juuri kirjakerhon merkintä.",
                     );
                     return;
                   }
@@ -493,10 +493,10 @@ export default function SannaActivity({
                   setStage("complete");
                 }}
               >
-                <h3>Harrastuskerhon harjoituskirjautuminen</h3>
+                <h3>Kirjakerhon harjoituskirjautuminen</h3>
                 <p>Käyttäjä: Sanna</p>
                 <label className={styles.label} htmlFor="sanna-login-password">
-                  Harrastuskerhon salasana
+                  Kirjakerhon salasana
                 </label>
                 <input
                   ref={loginInput}
@@ -528,7 +528,7 @@ export default function SannaActivity({
                     type="submit"
                     disabled={!login}
                   >
-                    Kirjaudu harrastuskerhoon
+                    Kirjaudu kirjakerhoon
                   </button>
                   <button type="button" onClick={() => edit(2)}>
                     Palaa vaihtamaan salasanoja
@@ -541,7 +541,7 @@ export default function SannaActivity({
           {stage === "complete" && (
             <section aria-labelledby="sanna-complete">
               <h2 id="sanna-complete" ref={heading} tabIndex={-1}>
-                Sanna pääsi harrastuskerhoon
+                Sanna pääsi kirjakerhoon!
               </h2>
               <CompletionBadge label="Auta Sannaa suoritettu" />
               <p>
@@ -551,7 +551,7 @@ export default function SannaActivity({
               <ul>
                 <li>Kolme eri salasanaa vaihdettu ja tallennettu.</li>
                 <li>
-                  Harrastuskerhon salasana löydetty ja kirjautuminen onnistui.
+                  Kirjakerhon salasana löydetty ja kirjautuminen onnistui.
                 </li>
               </ul>
               <p>

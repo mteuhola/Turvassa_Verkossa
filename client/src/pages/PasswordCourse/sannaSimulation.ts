@@ -1,7 +1,7 @@
 export const sannaAccounts = [
   { id: "email", name: "Sähköposti" },
-  { id: "shop", name: "Verkkokauppa" },
-  { id: "club", name: "Harrastuskerho" },
+  { id: "shop", name: "Vaatekauppa" },
+  { id: "club", name: "Kirjakerho" },
 ] as const;
 
 export type SannaAccountId = (typeof sannaAccounts)[number]["id"];
@@ -15,6 +15,11 @@ export const sannaBestPractices = [
     correct: true,
   },
   {
+    id: "personal",
+    text: "Käytetään salasanoissa ja niiden tunnuksissa Sannan nimeä ja syntymäaikaa, jotta ne on helppo muistaa ja arvata.",
+    correct: false,
+  },
+  {
     id: "reuse",
     text: "Käytetään samaa vahvaa salasanaa kaikissa palveluissa.",
     correct: false,
@@ -25,23 +30,23 @@ export const sannaBestPractices = [
     correct: true,
   },
   {
-    id: "punctuation",
-    text: "Lisätään mustikka3-salasanan loppuun huutomerkki. Se yksin riittää.",
+    id: "mainwordreuse",
+    text: "Marjoja on paljon erilaisia, joten käytetään eri marjaa eri palveluissa!",
     correct: false,
   },
   {
-    id: "manager",
-    text: "Tallennetaan eri salasanat salasananhallintaan, jotta niitä ei tarvitse muistaa ulkoa.",
-    correct: true,
-  },
-  {
-    id: "personal",
-    text: "Käytetään Sannan nimeä ja syntymäaikaa, jotta salasana on helppo muistaa.",
+    id: "title",
+    text: "Kirjoitetaan itse salasana merkinnän nimeksi.",
     correct: false,
   },
   {
     id: "names",
     text: "Annetaan tallennetuille salasanoille nimet, joista palvelun tunnistaa.",
+    correct: true,
+  },
+  {
+    id: "manager",
+    text: "Tallennetaan eri salasanat salasananhallintaan, jotta niitä ei tarvitse muistaa ulkoa.",
     correct: true,
   },
   {
@@ -55,9 +60,9 @@ export const sannaBestPractices = [
     correct: true,
   },
   {
-    id: "title",
-    text: "Kirjoitetaan itse salasana merkinnän nimeksi.",
-    correct: false,
+    id: "advice",
+    text: "Neuvo Sannaa olemaan kertomatta salasanojaan muille.",
+    correct: true,
   },
 ];
 

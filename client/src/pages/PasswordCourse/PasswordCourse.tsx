@@ -534,7 +534,7 @@ export default function PasswordCourse({
                       ? "Tallennetaan…"
                       : storageMethod === "manager"
                         ? "Tallenna salasananhallintaan"
-                        : "Valmis – olen säilyttänyt salasanan"}
+                        : "Valmis, olen säilyttänyt salasanan"}
                   </button>
                 </>
               )}

@@ -49,10 +49,7 @@ test("old completion records keep badges but require the new introduction", () =
 
 test("help topics follow the requested activities and count toward completion", () => {
   const expected = [
-    [
-      "passwords",
-      ["introduction", "password-strength", "theory", "help-sanna", "quiz"],
-    ],
+    ["passwords", ["introduction", "password-strength", "help-sanna", "quiz"]],
     [
       "phishing",
       ["introduction", "suspicious-email", "theory", "help-kaarlo", "quiz"],
@@ -83,4 +80,29 @@ test("help topics follow the requested activities and count toward completion", 
     );
     assert.deepEqual(parseProgress(JSON.stringify(completed)), completed);
   }
+});
+
+test("password course merges reading and activities into four independently earned topics", () => {
+  const course = topicCourses.find((item) => item.id === "passwords");
+  assert.equal(course.topics.length, 4);
+  assert.equal(course.topics[0].flow, "password-introduction");
+  const introduction = course.topics[0].path;
+  const practice = course.topics[1].path;
+  const completed = completeTopic([], introduction);
+  const progress = applyProgress(completed).find(
+    (item) => item.id === "passwords",
+  );
+  assert.equal(progress.topics[0].isComplete, true);
+  assert.equal(progress.topics[1].isComplete, false);
+  assert.equal(progress.isComplete, false);
+  assert.deepEqual(
+    parseProgress(
+      JSON.stringify([introduction, "/course/passwords/theory", practice]),
+    ),
+    [introduction, practice],
+  );
+  assert.deepEqual(
+    parseProgress(JSON.stringify(["/course/passwords/theory"])),
+    [],
+  );
 });

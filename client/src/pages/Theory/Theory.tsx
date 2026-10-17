@@ -12,6 +12,7 @@ import styles from "./Theory.module.css";
 interface TheoryProps extends TextSizeProps, ActivityProgressProps {
   course: TopicCourse;
   topic: Extract<CourseTopic, { kind: "theory" }>;
+  continuation?: { label: string; onContinue: () => void };
 }
 
 export default function Theory({
@@ -19,6 +20,7 @@ export default function Theory({
   topic,
   isComplete,
   onComplete,
+  continuation,
   ...textSizeProps
 }: TheoryProps) {
   const navigate = useNavigate();
@@ -32,6 +34,10 @@ export default function Theory({
   }, [topic.path]);
 
   function continueCourse() {
+    if (continuation) {
+      continuation.onContinue();
+      return;
+    }
     onComplete();
     navigate(nextTopic?.path ?? course.path);
     window.scrollTo(0, 0);
@@ -87,23 +93,26 @@ export default function Theory({
         </article>
         <footer className={styles.continue}>
           <div>
-            {nextTopic && (
+            {!continuation && nextTopic && (
               <p>
                 Seuraavaksi: <strong>{nextTopic.title}</strong>
               </p>
             )}
-            <p id="completion-help" className={styles.help}>
-              {isComplete
-                ? "Olet jo suorittanut tämän aiheen. Voit jatkaa eteenpäin."
-                : "Kun jatkat, tämä aihe merkitään suoritetuksi."}
-            </p>
+            {!continuation && (
+              <p id="completion-help" className={styles.help}>
+                {isComplete
+                  ? "Olet jo suorittanut tämän aiheen. Voit jatkaa eteenpäin."
+                  : "Kun jatkat, tämä aihe merkitään suoritetuksi."}
+              </p>
+            )}
           </div>
           <button
             type="button"
             onClick={continueCourse}
-            aria-describedby="completion-help"
+            aria-describedby={continuation ? undefined : "completion-help"}
           >
-            {nextTopic ? "Seuraava aihe" : "Valmis – palaa aiheisiin"}
+            {continuation?.label ??
+              (nextTopic ? "Seuraava aihe" : "Valmis - palaa aiheisiin")}
             <span aria-hidden="true"> →</span>
           </button>
         </footer>

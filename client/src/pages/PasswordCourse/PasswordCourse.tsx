@@ -9,30 +9,23 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { assessPassword, MAX_PASSWORD_LENGTH } from "./passwordStrength";
 import styles from "./PasswordCourse.module.css";
+import Theory from "../Theory/Theory";
+import { courseIntroductions, passwordTheory } from "../Theory/theoryData";
+import { topicCourses } from "../TopicSelection/topicCourses";
 import TextSizeControl, {
   type TextSizeProps,
 } from "../../components/TextSizeControl";
 
-const examples = [
-  {
-    name: "Yleinen salasana",
-    value: "salasana",
-    lesson:
-      "Tuttu sana on helppo arvata. Myös suomalaiset sanat voivat löytyä hyökkääjän sanalistalta.",
-  },
-  {
-    name: "Pieni muutos",
-    value: "Salasana123!",
-    lesson:
-      "Iso alkukirjain, numerosarja ja huutomerkki ovat tavallisia muutoksia. Merkkien vaihtelu ei yksin tee salasanasta vahvaa.",
-  },
-  {
-    name: "Useita sanoja",
-    value: "majakka sieni viulu pilvi",
-    lesson:
-      "Pituus ja toisistaan riippumattomat sanat vaikeuttavat arvaamista. Huom: Tämä julkinen esimerkki ei sovi oikeaksi salasanaksi.",
-  },
-].map((item) => ({ ...item, assessment: assessPassword(item.value) }));
+import {
+  passwordExamples,
+  allExamplesCorrect,
+  isExampleCorrect,
+} from "./passwordExamples";
+
+const examples = passwordExamples.map((item) => ({
+  ...item,
+  assessment: assessPassword(item.value),
+}));
 
 function StrengthMeter({
   assessment,
@@ -58,21 +51,30 @@ function StrengthMeter({
 }
 
 export default function PasswordCourse({
+  mode = "practice",
   isComplete,
   onComplete,
   ...textSizeProps
-}: TextSizeProps & ActivityProgressProps) {
+}: TextSizeProps &
+  ActivityProgressProps & { mode?: "introduction" | "practice" }) {
   const [password, setPassword] = useState("");
+  const [choices, setChoices] = useState<Record<number, number[]>>({});
+  const [checkedAnswers, setCheckedAnswers] = useState<
+    Record<number, number[]>
+  >({});
+  const reviewComplete = allExamplesCorrect(checkedAnswers);
+  const correctCount = examples.filter((item, index) =>
+    isExampleCorrect(checkedAnswers[index], item.correctAnswers),
+  ).length;
   const [visible, setVisible] = useState(false);
   const [hasTyped, setHasTyped] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [hasSaved, setHasSaved] = useState(
     () => readPracticePassword() !== null,
   );
-  const [stage, setStage] = useState<"examples" | "practice" | "complete">(
-    () =>
-      isComplete && readPracticePassword() !== null ? "complete" : "examples",
-  );
+  const [stage, setStage] = useState<
+    "reading" | "examples" | "practice" | "complete"
+  >("reading");
   const heading = useRef<HTMLHeadingElement>(null);
   const previousStage = useRef(stage);
   useEffect(() => {
@@ -113,6 +115,38 @@ export default function PasswordCourse({
     }
   }
 
+  if (stage === "reading") {
+    const course = topicCourses.find((item) => item.id === "passwords")!;
+    const theoryProps = {
+      ...textSizeProps,
+      course,
+      topic: {
+        id: mode === "introduction" ? "introduction" : "password-strength",
+        kind: "theory" as const,
+        title: mode === "introduction" ? "Johdanto" : "Salasanojen ylläpito",
+        description: "",
+        path: `/course/passwords/${mode === "introduction" ? "introduction" : "password-strength"}`,
+        content:
+          mode === "introduction"
+            ? courseIntroductions.passwords
+            : passwordTheory,
+        isComplete,
+      },
+      isComplete,
+      onComplete,
+      continuation: {
+        label:
+          mode === "introduction"
+            ? "Tutustu esimerkkeihin"
+            : "Siirry harjoitukseen",
+        onContinue: () =>
+          setStage(mode === "introduction" ? "examples" : "practice"),
+      },
+    };
+
+    return <Theory {...theoryProps} />;
+  }
+
   return (
     <div className={styles.root} data-course="passwords">
       <nav className={styles.nav} aria-label="Päänavigaatio">
@@ -126,7 +160,11 @@ export default function PasswordCourse({
       </nav>
       <main className={styles.main}>
         <header>
-          <h1>Kokeile salasanan vahvuutta</h1>
+          <h1>
+            {mode === "introduction"
+              ? "Johdanto"
+              : "Kokeile salasanan vahvuutta"}
+          </h1>
         </header>
         <div className={styles.activity}>
           {stage === "examples" && (
@@ -135,34 +173,116 @@ export default function PasswordCourse({
                 Tutustu esimerkkeihin
               </h2>
               <p>
-                Avaa esimerkki ja lue, mikä tekee siitä heikon tai vahvan. Voit
-                myös siirtyä suoraan oman harjoitussalasanan tekemiseen.
+                Valitse kaikki oikeat vaihtoehdot. Oikeita voi olla yksi, useita
+                tai ei yhtään. Jos mikään ei ole oikein, jätä kaikki
+                valitsematta ja paina ”Tarkista vastaus”. Saat merkin, kun
+                vastaat kaikkiin viiteen oikein. Voit yrittää uudelleen.
               </p>
               <div className={styles.examples}>
-                {examples.map((item) => (
+                {examples.map((item, index) => (
                   <details key={item.name}>
                     <summary>
                       {item.name}
                       <span>{item.value}</span>
+                      {isExampleCorrect(
+                        checkedAnswers[index],
+                        item.correctAnswers,
+                      ) && <span>Vastattu oikein</span>}
                     </summary>
                     <div className={styles.exampleResult}>
                       {item.assessment && (
                         <StrengthMeter assessment={item.assessment} />
                       )}
-                      <p>{item.lesson}</p>
+                      <fieldset
+                        className={styles.question}
+                        disabled={isExampleCorrect(
+                          checkedAnswers[index],
+                          item.correctAnswers,
+                        )}
+                      >
+                        <legend>{item.question}</legend>
+                        {item.choices.map((choice, choiceIndex) => (
+                          <label key={choice} className={styles.choice}>
+                            <input
+                              type="checkbox"
+                              name={`example-${index}`}
+                              value={choiceIndex}
+                              checked={(choices[index] ?? []).includes(
+                                choiceIndex,
+                              )}
+                              onChange={() => {
+                                setChoices((current) => ({
+                                  ...current,
+                                  [index]: (current[index] ?? []).includes(
+                                    choiceIndex,
+                                  )
+                                    ? current[index].filter(
+                                        (value) => value !== choiceIndex,
+                                      )
+                                    : [...(current[index] ?? []), choiceIndex],
+                                }));
+                                setCheckedAnswers((current) => {
+                                  const next = { ...current };
+                                  delete next[index];
+                                  return next;
+                                });
+                              }}
+                            />
+                            <span>{choice}</span>
+                          </label>
+                        ))}
+                      </fieldset>
+                      <button
+                        type="button"
+                        disabled={isExampleCorrect(
+                          checkedAnswers[index],
+                          item.correctAnswers,
+                        )}
+                        onClick={() =>
+                          setCheckedAnswers((current) => ({
+                            ...current,
+                            [index]: [...(choices[index] ?? [])],
+                          }))
+                        }
+                      >
+                        Tarkista vastaus
+                      </button>
+                      <div role="status" aria-atomic="true">
+                        {checkedAnswers[index] !== undefined && (
+                          <p>
+                            <strong>
+                              {isExampleCorrect(
+                                checkedAnswers[index],
+                                item.correctAnswers,
+                              )
+                                ? "Oikein! "
+                                : "Ei vielä oikein. Kokeile uudelleen. "}
+                            </strong>
+                            {item.lesson}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </details>
                 ))}
               </div>
+              <p id="review-progress" role="status">
+                Oikeita vastauksia: {correctCount}/{examples.length}.
+                {reviewComplete && " Kaikki oikein! Voit nyt lunastaa merkin."}
+              </p>
               <div className={styles.actions}>
                 <button
                   className={styles.primary}
                   type="button"
-                  onClick={() => setStage("practice")}
+                  disabled={!reviewComplete}
+                  aria-describedby="review-progress"
+                  onClick={() => {
+                    if (!reviewComplete) return;
+                    onComplete();
+                    setStage("complete");
+                  }}
                 >
-                  {password
-                    ? "Jatka omaa harjoitussalasanaa"
-                    : "Siirry omaan harjoitussalasanaan"}
+                  Valmis!
                 </button>
               </div>
             </section>
@@ -284,10 +404,10 @@ export default function PasswordCourse({
                 disabled={isSaving}
                 onClick={() => {
                   setVisible(false);
-                  setStage("examples");
+                  setStage("reading");
                 }}
               >
-                Palaa esimerkkeihin
+                Palaa teoriaan
               </button>
               <p className={styles.small}>
                 Arvio ei takaa turvallisuutta. Mittari ei tunnista kaikkia
@@ -299,37 +419,54 @@ export default function PasswordCourse({
           {stage === "complete" && (
             <section aria-labelledby="complete-title">
               <h2 id="complete-title" ref={heading} tabIndex={-1}>
-                Harjoitussalasana tallennettu
+                {mode === "introduction"
+                  ? "Johdanto suoritettu"
+                  : "Harjoitussalasana tallennettu"}
               </h2>
-              <CompletionBadge label="Aihe suoritettu – ansaitsit merkin!" />
+              <CompletionBadge label="Aihe suoritettu!" />
               <p>
-                Tarvitset harjoitussalasanaasi kurssin lopussa. Voit nyt jatkaa
-                muihin aiheisiin.
+                {mode === "introduction"
+                  ? "Seuraavaksi opit lisää hyvän salasanan ominaisuuksista ja luot oman harjoitussalasanan."
+                  : "Tarvitset harjoitussalasanaasi kurssin lopussa. Voit nyt jatkaa muihin aiheisiin."}
               </p>
               <div className={styles.actions}>
-                <Link className={styles.primaryLink} to="/course/passwords">
-                  Jatka aiheisiin
+                <Link
+                  className={styles.primaryLink}
+                  to={
+                    mode === "introduction"
+                      ? "/course/passwords/password-strength"
+                      : "/course/passwords/help-sanna"
+                  }
+                >
+                  Seuraava aihe
                 </Link>
                 <button
                   type="button"
                   className={styles.secondary}
-                  onClick={() => setStage("practice")}
+                  onClick={() =>
+                    setStage(mode === "introduction" ? "reading" : "practice")
+                  }
                 >
-                  Vaihda harjoitussalasana
+                  {mode === "introduction"
+                    ? "Kertaa johdanto"
+                    : "Vaihda harjoitussalasana"}
                 </button>
               </div>
-              <section
-                className={styles.takeaway}
-                aria-labelledby="remember-title"
-              >
-                <h2 id="remember-title">Muista oikeilla tileilläsi</h2>
-                <p>
-                  Käytä pitkää ja yksilöllistä salasanaa jokaisessa palvelussa.
-                  Salasananhallintaohjelma auttaa. Ota myös monivaiheinen
-                  tunnistautuminen käyttöön: silloin kirjautuminen vahvistetaan
-                  salasanan lisäksi esimerkiksi puhelimella.
-                </p>
-              </section>
+              {mode === "practice" && (
+                <section
+                  className={styles.takeaway}
+                  aria-labelledby="remember-title"
+                >
+                  <h2 id="remember-title">Muista oikeilla tileilläsi</h2>
+                  <p>
+                    Käytä pitkää ja yksilöllistä salasanaa jokaisessa
+                    palvelussa. Salasananhallintaohjelma auttaa. Ota myös
+                    monivaiheinen tunnistautuminen käyttöön: silloin
+                    kirjautuminen vahvistetaan salasanan lisäksi esimerkiksi
+                    puhelimella.
+                  </p>
+                </section>
+              )}
             </section>
           )}
         </div>

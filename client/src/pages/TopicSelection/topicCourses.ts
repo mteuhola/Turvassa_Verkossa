@@ -10,6 +10,7 @@ interface TopicDetails {
   title: string;
   description: string;
   path: string;
+  flow?: "password-introduction";
 }
 
 export type CourseTopic = TopicDetails &
@@ -35,7 +36,7 @@ const courseCatalog: TopicCourse[] = [
         isComplete: false,
         title: "Kokeile salasanan vahvuutta",
         description:
-          "Vertaa kolmea esimerkkiä ja kokeile sitten omaa keksittyä salasanaa.",
+          "Lue, millainen on hyvä salasana, ja luo oma harjoitussalasanasi.",
         path: "/course/passwords/password-strength",
       },
     ],
@@ -82,6 +83,9 @@ export const topicCourses: TopicCourse[] = courseCatalog.map((course) => ({
     {
       id: "introduction",
       kind: "theory",
+      ...(course.id === "passwords"
+        ? { flow: "password-introduction" as const }
+        : {}),
       isComplete: false,
       title: "Johdanto",
       description:
@@ -90,15 +94,19 @@ export const topicCourses: TopicCourse[] = courseCatalog.map((course) => ({
       content: courseIntroductions[course.id],
     },
     ...course.topics,
-    {
-      id: "theory",
-      kind: "theory",
-      isComplete: false,
-      title: "Teoria",
-      description: "",
-      path: `${course.path}/theory`,
-      content: { sections: [] },
-    },
+    ...(course.id === "passwords"
+      ? []
+      : [
+          {
+            id: "theory",
+            kind: "theory" as const,
+            isComplete: false,
+            title: "Teoria",
+            description: "",
+            path: `${course.path}/theory`,
+            content: { sections: [] },
+          },
+        ]),
     {
       id: helpStories[course.id].id,
       kind: "theory",

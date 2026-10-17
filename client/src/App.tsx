@@ -86,10 +86,27 @@ function App() {
           }
         />
         <Route
+          path="/course/passwords/introduction"
+          element={
+            <Suspense fallback={<p role="status">Ladataan aihetta…</p>}>
+              <PasswordCourse
+                key="password-introduction"
+                mode="introduction"
+                {...textSizeProps}
+                isComplete={isComplete("/course/passwords/introduction")}
+                onComplete={() =>
+                  markComplete("/course/passwords/introduction")
+                }
+              />
+            </Suspense>
+          }
+        />
+        <Route
           path="/course/passwords/password-strength"
           element={
             <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
               <PasswordCourse
+                key="password-practice"
                 {...textSizeProps}
                 isComplete={isComplete("/course/passwords/password-strength")}
                 onComplete={() =>
@@ -97,6 +114,12 @@ function App() {
                 }
               />
             </Suspense>
+          }
+        />
+        <Route
+          path="/course/passwords/theory"
+          element={
+            <Navigate replace to="/course/passwords/password-strength" />
           }
         />
         <Route
@@ -115,7 +138,8 @@ function App() {
         />
         {courses.flatMap((course) =>
           course.topics.map((topic) =>
-            topic.kind === "theory" ? (
+            topic.kind === "theory" &&
+            topic.path !== "/course/passwords/introduction" ? (
               <Route
                 key={topic.path}
                 path={topic.path}

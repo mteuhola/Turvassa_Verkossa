@@ -289,7 +289,7 @@ export default function Quiz({
                     onClick={advance}
                   >
                     {index === total - 1
-                      ? "Valmis – ota merkki vastaan"
+                      ? "Valmis!"
                       : "Seuraava kysymys →"}
                   </button>
                 )}

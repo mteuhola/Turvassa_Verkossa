@@ -9,17 +9,15 @@ interface PracticePasswordRecord {
 }
 
 export function canSavePracticePassword({
-  examplesInspected,
   hasTyped,
   isExample,
   score,
 }: {
-  examplesInspected: boolean;
   hasTyped: boolean;
   isExample: boolean;
   score: number | undefined;
 }) {
-  return examplesInspected && hasTyped && !isExample && score === 4;
+  return hasTyped && !isExample && score === 4;
 }
 
 export function readPracticePassword(): PracticePasswordRecord | null {

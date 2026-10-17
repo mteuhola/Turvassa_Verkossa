@@ -23,16 +23,14 @@ beforeEach(() => {
   storage.setItem = (key, value) => values.set(key, value);
 });
 
-test("save requires all examples, typed input, a non-example, and exactly 4/4", () => {
+test("save needs no example review, but requires typed input, a non-example, and exactly 4/4", () => {
   const ready = {
-    examplesInspected: true,
     hasTyped: true,
     isExample: false,
     score: 4,
   };
   assert.equal(canSavePracticePassword(ready), true);
   for (const change of [
-    { examplesInspected: false },
     { hasTyped: false },
     { isExample: true },
     { score: 3 },

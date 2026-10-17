@@ -32,9 +32,7 @@ export default function PhishingCourse({
       setFound((previous) =>
         previous.includes(part.id) ? previous : [...previous, part.id],
       );
-      setFeedback(
-        `Hyvä havainto! ${part.title}: ${part.explanation} Löydetty ${nextCount}/${clues.length}.${nextCount === clues.length ? " Löysit kaikki merkit! Lue alta, miten toimia turvallisesti." : ""}`,
-      );
+      setFeedback(`Hyvä havainto! ${part.title}: ${part.explanation}`);
     }
   }
 
@@ -117,20 +115,20 @@ export default function PhishingCourse({
             <p className={styles.eyebrow}>Aihe 2 · Vaaralliset viestit</p>
             <h1>Huomaatko huijauksen merkit?</h1>
             <p>
-              Tutki sähköpostia ja etsi siitä varoitusmerkkejä.
-              Valitse epäilyttävä kohta suoraan viestistä. Voit tutkia viestin eri osioita, kuten aihetta,
-              lähettäjää, tekstiä ja liitettä. Kaikki valittavat kohdat
-              eivät ole varoitusmerkkejä.
+              Tutki sähköpostia ja etsi siitä varoitusmerkkejä. Valitse
+              epäilyttävä kohta suoraan viestistä. Voit tutkia viestin eri
+              osioita, kuten aihetta, lähettäjää, tekstiä ja liitettä. Kaikki
+              valittavat kohdat eivät ole varoitusmerkkejä.
             </p>
             <p className={styles.notice}>
-              <strong>Tämä on kuvitteellinen harjoitus.</strong> Pankin osoite
-              on tässä esimerkissä <strong>tonttupankki.example</strong>.
-              Valinnat eivät avaa linkkejä tai liitteitä. Voit kokeilla rauhassa
-              ilman aikarajaa.
+              <strong>Tämä on kuvitteellinen harjoitus.</strong> Oikean pankin
+              osoite on tässä esimerkissä{" "}
+              <strong>tonttupankki.yksityinen</strong>. Valinnat eivät avaa
+              linkkejä tai liitteitä. Voit kokeilla rauhassa ilman aikarajaa.
             </p>
             <div role="status" aria-live="polite">
               {isComplete && (
-                <CompletionBadge label="Aihe suoritettu – ansaitsit merkin!" />
+                <CompletionBadge label="Aihe suoritettu - ansaitsit merkin!" />
               )}
             </div>
           </header>

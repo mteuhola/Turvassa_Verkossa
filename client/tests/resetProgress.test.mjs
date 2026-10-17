@@ -19,7 +19,14 @@ test("reset clears completion and verifier without changing unrelated browser se
         "/course/phishing/quiz",
       ]),
     ],
-    [practicePasswordStorageKey, "saved verifier"],
+    [
+      practicePasswordStorageKey,
+      JSON.stringify({
+        managerPassword: "fictional practice password",
+        salt: "salt",
+        digest: "verifier",
+      }),
+    ],
     ["turvassa-verkossa-text-size", "150"],
     ["unrelated-key", "keep"],
   ]);
@@ -28,6 +35,7 @@ test("reset clears completion and verifier without changing unrelated browser se
     setItem: (key, value) => values.set(key, value),
   };
   resetStoredProgress(storage);
+  assert.equal(values.has(practicePasswordStorageKey), false);
   assert.deepEqual(
     reconcilePasswordCompletion(
       parseProgress(values.get(progressStorageKey)),

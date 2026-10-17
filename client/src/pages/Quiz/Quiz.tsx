@@ -4,6 +4,7 @@ import TextSizeControl, {
   type TextSizeProps,
 } from "../../components/TextSizeControl";
 import CompletionBadge from "../../components/CompletionBadge";
+import PracticePasswordManager from "../../components/PracticePasswordManager";
 import CompletionNotice from "../../components/CompletionNotice";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import {
@@ -174,8 +175,9 @@ export default function Quiz({
                 <div>
                   <h3>{question.prompt}</h3>
                   <p id="password-help">
-                    Kirjoita salasanaharjoituksessa tallentamasi keksitty
-                    salasana. Älä kirjoita oikean tilisi salasanaa.
+                    Käytä muistiinpanoasi tai avaa harjoituksen
+                    salasananhallinta. Älä kirjoita oikean tilisi salasanaa.
+                    Harjoitussalasanaa ei saa käyttää muualla.
                   </p>
                   {missingPracticePassword ? (
                     <p className={styles.feedback}>
@@ -188,6 +190,16 @@ export default function Quiz({
                     </p>
                   ) : (
                     <>
+                      <PracticePasswordManager
+                        disabled={checking || correct}
+                        onFill={(saved) => {
+                          setPassword(saved);
+                          setVisible(false);
+                          setFeedback(
+                            "Harjoitussalasana täytetty. Paina Tarkista vastaus.",
+                          );
+                        }}
+                      />
                       <label
                         className={styles.passwordLabel}
                         htmlFor="quiz-password"
@@ -288,9 +300,7 @@ export default function Quiz({
                     type="button"
                     onClick={advance}
                   >
-                    {index === total - 1
-                      ? "Valmis!"
-                      : "Seuraava kysymys →"}
+                    {index === total - 1 ? "Valmis!" : "Seuraava kysymys →"}
                   </button>
                 )}
               </div>

@@ -4,6 +4,7 @@ import {
   savePracticePassword,
 } from "../../progress/practicePassword";
 import CompletionBadge from "../../components/CompletionBadge";
+import PracticePasswordManager from "../../components/PracticePasswordManager";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -58,6 +59,10 @@ export default function PasswordCourse({
 }: TextSizeProps &
   ActivityProgressProps & { mode?: "introduction" | "practice" }) {
   const [password, setPassword] = useState("");
+  const [storageMethod, setStorageMethod] = useState<
+    "written" | "manager" | null
+  >(null);
+  const [writtenConfirmed, setWrittenConfirmed] = useState(false);
   const [choices, setChoices] = useState<Record<number, number[]>>({});
   const [checkedAnswers, setCheckedAnswers] = useState<
     Record<number, number[]>
@@ -73,7 +78,7 @@ export default function PasswordCourse({
     () => readPracticePassword() !== null,
   );
   const [stage, setStage] = useState<
-    "reading" | "examples" | "practice" | "complete"
+    "reading" | "examples" | "practice" | "storage" | "complete"
   >("reading");
   const heading = useRef<HTMLHeadingElement>(null);
   const previousStage = useRef(stage);
@@ -95,11 +100,17 @@ export default function PasswordCourse({
   });
 
   async function savePassword() {
-    if (!canSave || isSaving) return;
+    if (
+      !canSave ||
+      isSaving ||
+      !storageMethod ||
+      (storageMethod === "written" && !writtenConfirmed)
+    )
+      return;
     setIsSaving(true);
     setSaveError("");
     try {
-      await savePracticePassword(password);
+      await savePracticePassword(password, storageMethod);
       setHasSaved(true);
       setPassword("");
       setVisible(false);
@@ -371,9 +382,8 @@ export default function PasswordCourse({
               </div>
               <div className={styles.saveSection}>
                 <p id="save-requirements">
-                  Muokkaa salasanaa, kunnes arvio on 4/4. Tallenna se saadaksesi
-                  harjoituksesta merkin. Paina salasana mieleesi: tarvitset sitä
-                  kurssin lopussa.
+                  Muokkaa salasanaa, kunnes arvio on 4/4. Seuraavaksi valitset,
+                  miten säilytät harjoitussalasanan kurssin tietovisaa varten.
                 </p>
                 {examples.some((item) => item.value === password) && (
                   <p role="status">
@@ -385,18 +395,16 @@ export default function PasswordCourse({
                   className={styles.primary}
                   type="button"
                   disabled={!canSave || isSaving}
-                  onClick={savePassword}
-                  aria-describedby="save-requirements storage-note"
+                  onClick={() => {
+                    setVisible(false);
+                    setWrittenConfirmed(false);
+                    setStorageMethod(null);
+                    setStage("storage");
+                  }}
+                  aria-describedby="save-requirements"
                 >
-                  {isSaving ? "Tallennetaan…" : "Tallenna harjoitussalasana"}
+                  Jatka salasanan säilyttämiseen
                 </button>
-                {saveError && <p role="alert">{saveError}</p>}
-                <p id="storage-note" className={styles.small}>
-                  Selaimeen tallennetaan vain tarkistustieto, ei salasanaa
-                  luettavassa muodossa.
-                  {hasSaved &&
-                    " Uusi tallennus korvaa aiemman harjoitussalasanan."}
-                </p>
               </div>
               <button
                 type="button"
@@ -416,6 +424,136 @@ export default function PasswordCourse({
               </p>
             </section>
           )}
+          {stage === "storage" && (
+            <section aria-labelledby="storage-title">
+              <h2 id="storage-title" ref={heading} tabIndex={-1}>
+                Säilytä harjoitussalasanasi
+              </h2>
+              <p>
+                Tarvitset salasanaa tietovisassa. Kirjoita se muistiin tai
+                kokeile harjoituksen salasananhallintaa.
+              </p>
+              <p>
+                <strong>
+                  Käytä vain tätä harjoitusta varten keksittyä salasanaa. Älä
+                  käytä sitä missään oikeassa palvelussa.
+                </strong>
+              </p>
+              <fieldset className={styles.question} disabled={isSaving}>
+                <legend>Miten haluat säilyttää salasanan?</legend>
+                <label className={styles.choice}>
+                  <input
+                    type="radio"
+                    name="storage-method"
+                    checked={storageMethod === "written"}
+                    onChange={() => setStorageMethod("written")}
+                  />
+                  Kirjoitan harjoitussalasanan muistiin
+                </label>
+                <label className={styles.choice}>
+                  <input
+                    type="radio"
+                    name="storage-method"
+                    checked={storageMethod === "manager"}
+                    onChange={() => setStorageMethod("manager")}
+                  />
+                  Kokeilen harjoituksen salasananhallintaa
+                </label>
+              </fieldset>
+              {storageMethod && (
+                <>
+                  {storageMethod === "manager" && (
+                    <>
+                      <h3>Harjoituksen salasananhallinta</h3>
+                      <p>
+                        Palvelu: <strong>Turvassa Verkossa -harjoitus</strong>
+                      </p>
+                      <p>
+                        Tämä ei ole oikea salasananhallintaohjelma. Salasana
+                        tallennetaan tähän selaimeen luettavassa muodossa. Voit
+                        hakea sen tietovisassa. Se säilyy, kunnes vaihdat sen
+                        tai nollaat edistymisen.
+                      </p>
+                    </>
+                  )}
+                  <label className={styles.label} htmlFor="storage-password">
+                    Harjoitussalasana
+                  </label>
+                  <input
+                    id="storage-password"
+                    type={visible ? "text" : "password"}
+                    value={password}
+                    readOnly
+                    autoComplete="off"
+                  />
+                  <div className={styles.controls}>
+                    <button
+                      type="button"
+                      aria-pressed={visible}
+                      onClick={() => setVisible(!visible)}
+                    >
+                      {visible ? "Piilota salasana" : "Näytä salasana"}
+                    </button>
+                  </div>
+                  {storageMethod === "written" && (
+                    <>
+                      <p>
+                        Kirjoita salasana muistiin täsmälleen tässä muodossa.
+                        Selaimeen tallennetaan vain tarkistustieto, ei luettavaa
+                        salasanaa.
+                      </p>
+                      <label className={styles.choice}>
+                        <input
+                          type="checkbox"
+                          checked={writtenConfirmed}
+                          disabled={isSaving}
+                          onChange={(event) =>
+                            setWrittenConfirmed(event.target.checked)
+                          }
+                        />
+                        Olen kirjoittanut harjoitussalasanan muistiin.
+                      </label>
+                    </>
+                  )}
+                  {hasSaved && (
+                    <p>
+                      Uusi tallennus korvaa aiemman harjoitussalasanan ja sen
+                      mahdollisen salasananhallinnan merkinnän.
+                    </p>
+                  )}
+                  <button
+                    type="button"
+                    className={styles.primary}
+                    disabled={
+                      isSaving ||
+                      (storageMethod === "written" && !writtenConfirmed)
+                    }
+                    onClick={savePassword}
+                  >
+                    {isSaving
+                      ? "Tallennetaan…"
+                      : storageMethod === "manager"
+                        ? "Tallenna salasananhallintaan"
+                        : "Valmis – olen säilyttänyt salasanan"}
+                  </button>
+                </>
+              )}
+              {saveError && <p role="alert">{saveError}</p>}
+              <div className={styles.actions}>
+                <button
+                  type="button"
+                  disabled={isSaving}
+                  onClick={() => {
+                    setVisible(false);
+                    setSaveError("");
+                    setStage("practice");
+                  }}
+                >
+                  Palaa muokkaamaan salasanaa
+                </button>
+              </div>
+            </section>
+          )}
           {stage === "complete" && (
             <section aria-labelledby="complete-title">
               <h2 id="complete-title" ref={heading} tabIndex={-1}>
@@ -424,6 +562,9 @@ export default function PasswordCourse({
                   : "Harjoitussalasana tallennettu"}
               </h2>
               <CompletionBadge label="Aihe suoritettu!" />
+              {mode === "practice" && storageMethod === "manager" && (
+                <PracticePasswordManager />
+              )}
               <p>
                 {mode === "introduction"
                   ? "Seuraavaksi opit lisää hyvän salasanan ominaisuuksista ja luot oman harjoitussalasanan."

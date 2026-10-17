@@ -20,8 +20,8 @@ export const helpStories: Record<
         {
           heading: "Sanna kertoo",
           paragraphs: [
-            "”Olen käyttänyt salasanaa mustikka3 melkein kaikkialla: sähköpostissa, verkkokaupoissa ja muissa palveluissa. Se on helppo muistaa, mutta nyt mietin, onko se tarpeeksi vahva. Haluaisin tehdä siitä turvallisemman.”",
-            "”Riittäisikö, jos vaihtaisin ensimmäisen kirjaimen isoksi tai lisäisin loppuun huutomerkin? Voisinko sitten käyttää uutta salasanaa edelleen joka paikassa?”",
+            "”Olen käyttänyt salasanaa mustikka3 melkein kaikkialla: sähköpostissa, verkkokaupoissa ja muissa palveluissa. Se on helppo muistaa, mutta nyt mietin, onko se tarpeeksi vahva.”",
+            "”Riittäisikö, jos vaihtaisin ensimmäisen kirjaimen isoksi tai lisäisin loppuun huutomerkin, taikkapa korvaisin s:n 5:lla? Voisinko sitten käyttää uutta salasanaa edelleen joka paikassa?”",
           ],
         },
         {

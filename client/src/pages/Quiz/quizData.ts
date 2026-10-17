@@ -62,7 +62,7 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
       {
         id: "recall",
         type: "practice-password",
-        prompt: "Muistatko luomasi harjoitussalasanan?",
+        prompt: "Käytä tallentamaasi harjoitussalasanaa.",
         explanation:
           "Syötit saman harjoitussalasanan kuin tallensit. Oikeita salasanoja ei tarvitse opetella kaikkia ulkoa: salasananhallintaohjelma auttaa muistamaan ne.",
       },

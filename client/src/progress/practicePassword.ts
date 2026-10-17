@@ -6,6 +6,7 @@ interface PracticePasswordRecord {
   version: 1;
   salt: string;
   digest: string;
+  managerPassword?: string;
 }
 
 export function canSavePracticePassword({
@@ -33,7 +34,16 @@ export function readPracticePassword(): PracticePasswordRecord | null {
       !/^[a-f0-9]{64}$/.test(record.digest)
     )
       return null;
-    return { version: 1, salt: record.salt, digest: record.digest };
+    return {
+      version: 1,
+      salt: record.salt,
+      digest: record.digest,
+      ...(typeof record.managerPassword === "string" &&
+      record.managerPassword.length > 0 &&
+      record.managerPassword.length <= 128
+        ? { managerPassword: record.managerPassword }
+        : {}),
+    };
   } catch {
     return null;
   }
@@ -50,11 +60,19 @@ async function digestPassword(password: string, salt: string) {
   return hex(new Uint8Array(await crypto.subtle.digest("SHA-256", bytes)));
 }
 
-/** Saves a verifier, never the readable practice password. Requires HTTPS or localhost. */
-export async function savePracticePassword(password: string): Promise<void> {
+/** The optional manager stores ONLY a fictional practice password in readable form. */
+export async function savePracticePassword(
+  password: string,
+  method: "written" | "manager" = "written",
+): Promise<void> {
   const salt = hex(crypto.getRandomValues(new Uint8Array(16)));
   const digest = await digestPassword(password, salt);
-  const record: PracticePasswordRecord = { version: 1, salt, digest };
+  const record: PracticePasswordRecord = {
+    version: 1,
+    salt,
+    digest,
+    ...(method === "manager" ? { managerPassword: password } : {}),
+  };
   localStorage.setItem(practicePasswordStorageKey, JSON.stringify(record));
 }
 

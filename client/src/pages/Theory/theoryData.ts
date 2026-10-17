@@ -35,7 +35,7 @@ export const courseIntroductions: Record<string, TheoryContent> = {
         heading: "Millainen on hyvä salasana?",
         paragraphs: [
           "Hyvä salasana yhdistää seuraavia ominaisuuksia: pituus, arvaamattomuus ja yksilöllisyys.",
-          "Pituus: salasana on riittävän pitkä, tavoitteena vähintään 12 merkkiä. ",
+          "Pituus: salasana on riittävän pitkä, tavoitteena 15 merkkiä. Pidemmät salasanat ovat vaikeampia murtaa.",
           "Arvaamattomuus: salasana ei sisällä helposti arvattavia sanoja tai numerosarjoja, kuten henkilöiden tai palveluiden nimiä.",
           "Yksilöllisyys: salasana on ainutlaatuinen, eikä käytetä muissa palvelussa.",
           "Pitkän salasanan ei tarvitse olla vaikea muistaa. Esimerkiksi useamman toisistaan riippumattoman sanan yhdistäminen voi auttaa muodostamaan pitkän ja helposti muistettavan salasanan.",

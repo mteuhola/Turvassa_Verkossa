@@ -62,6 +62,48 @@ test("saving a replacement changes the answer and uses a fresh salt", async () =
   assert.equal(await matchesPracticePassword("second practice password"), true);
 });
 
+test("manager entry persists the exact fictional password with its matching verifier", async () => {
+  const password = " fictional practice password 42! ";
+  await savePracticePassword(password, "manager");
+  assert.equal(readPracticePassword().managerPassword, password);
+  assert.equal(
+    await matchesPracticePassword(readPracticePassword().managerPassword),
+    true,
+  );
+  await savePracticePassword("replacement practice password", "manager");
+  assert.equal(
+    readPracticePassword().managerPassword,
+    "replacement practice password",
+  );
+  assert.equal(await matchesPracticePassword(password), false);
+  await savePracticePassword("written practice password", "written");
+  assert.equal(readPracticePassword().managerPassword, undefined);
+  assert.equal(
+    values
+      .get(practicePasswordStorageKey)
+      .includes("replacement practice password"),
+    false,
+  );
+});
+
+test("failed manager replacement preserves both old entry and verifier", async () => {
+  await savePracticePassword("original fictional password", "manager");
+  storage.setItem = () => {
+    throw new Error("Storage blocked");
+  };
+  await assert.rejects(
+    savePracticePassword("new fictional password", "manager"),
+  );
+  assert.equal(
+    readPracticePassword().managerPassword,
+    "original fictional password",
+  );
+  assert.equal(
+    await matchesPracticePassword("original fictional password"),
+    true,
+  );
+});
+
 test("missing or corrupted saved data does not match", async () => {
   for (const value of [
     "bad JSON",

@@ -33,7 +33,6 @@ export const strengthLabels = [
 ];
 
 export function assessPassword(password: string) {
-  // Reject, rather than silently scoring a truncated password.
   if (!password || password.length > MAX_PASSWORD_LENGTH) return null;
   const result = estimator.check(password);
   const patterns = new Set(result.sequence.map((match) => match.pattern));

@@ -42,6 +42,9 @@ const InvestmentActivity = lazy(
 );
 
 const Theory = lazy(() => import("./pages/Theory/Theory"));
+const SannaActivity = lazy(
+  () => import("./pages/PasswordCourse/SannaActivity"),
+);
 
 const Quiz = lazy(() => import("./pages/Quiz/Quiz"));
 
@@ -123,6 +126,18 @@ function App() {
           }
         />
         <Route
+          path="/course/passwords/help-sanna"
+          element={
+            <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
+              <SannaActivity
+                {...textSizeProps}
+                isComplete={isComplete("/course/passwords/help-sanna")}
+                onComplete={() => markComplete("/course/passwords/help-sanna")}
+              />
+            </Suspense>
+          }
+        />
+        <Route
           path="/course/phishing/suspicious-email"
           element={
             <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
@@ -139,7 +154,8 @@ function App() {
         {courses.flatMap((course) =>
           course.topics.map((topic) =>
             topic.kind === "theory" &&
-            topic.path !== "/course/passwords/introduction" ? (
+            topic.path !== "/course/passwords/introduction" &&
+            topic.path !== "/course/passwords/help-sanna" ? (
               <Route
                 key={topic.path}
                 path={topic.path}

@@ -184,10 +184,15 @@ export default function PasswordCourse({
                 Tutustu esimerkkeihin
               </h2>
               <p>
+                Tässä näet erilaisia esimerkkisalasanoja ja niiden arvioidun vahvuuden. 
+                Arvio perustuu johdantokappaleessa esiteltyihin salasanan ominaisuuksiin.
+                Klikkaamalla salasanaa näet arvion sekä kysymyksiä salasanan vahvuuteen liittyen.
+                <br></br>
                 Valitse kaikki oikeat vaihtoehdot. Oikeita voi olla yksi, useita
-                tai ei yhtään. Jos mikään ei ole oikein, jätä kaikki
-                valitsematta ja paina ”Tarkista vastaus”. Saat merkin, kun
-                vastaat kaikkiin viiteen oikein. Voit yrittää uudelleen.
+                tai ei yhtään. Paina ”Tarkista vastaus”-painiketta, kun haluat tarkistaa vastauksesi. Pääset eteenpäin, kun
+                vastaat kaikkiin viiteen salasanaan liittyviin kysymyksiin oikein ja painat alhaalta löytyvää Valmis-painiketta. Kysymyksiä voi yrittää uudelleen. 
+
+                Huom: Nämä esimerkit ovat julkisia, eivätkä ne sovi oikeiksi salasanoiksi. Älä käytä niitä omissa palveluissasi.
               </p>
               <div className={styles.examples}>
                 {examples.map((item, index) => (
@@ -293,7 +298,7 @@ export default function PasswordCourse({
                     setStage("complete");
                   }}
                 >
-                  Valmis!
+                  Valmis
                 </button>
               </div>
             </section>
@@ -304,9 +309,9 @@ export default function PasswordCourse({
                 Keksi oma harjoitussalasana
               </h2>
               <p id="privacy" className={styles.privacy}>
-                <strong>Älä kirjoita tähän oikeaa salasanaasi.</strong> Keksi
-                salasana vain tätä harjoitusta varten. Sitä ei lähetetä
-                palvelimelle.
+                Tässä näkymässä voit kokeilla erilaisten salasanojen vahvuutta sekä nähdä ehdotuksia niiden vahvistamiseen.
+                <strong>Älä kirjoita tähän olemassaolevaa salasanaasi.</strong> Keksi
+                salasana vain tätä harjoitusta varten. Sitä ei tallenneta mihinkään.
               </p>
               <label className={styles.label} htmlFor="practice-password">
                 Harjoitussalasana
@@ -383,12 +388,11 @@ export default function PasswordCourse({
               <div className={styles.saveSection}>
                 <p id="save-requirements">
                   Muokkaa salasanaa, kunnes arvio on 4/4. Seuraavaksi valitset,
-                  miten säilytät harjoitussalasanan kurssin tietovisaa varten.
+                  miten säilytät harjoitussalasanan.
                 </p>
                 {examples.some((item) => item.value === password) && (
                   <p role="status">
-                    Keksi oma salasana. Julkista esimerkkiä ei voi tallentaa
-                    omaksi.
+                    Keksi oma salasana. Julkista esimerkkiä ei suositella tallennettavaksi omaksi.
                   </p>
                 )}
                 <button
@@ -430,7 +434,7 @@ export default function PasswordCourse({
                 Säilytä harjoitussalasanasi
               </h2>
               <p>
-                Tarvitset salasanaa tietovisassa. Kirjoita se muistiin tai
+                Tarvitset salasanaa myöhemmin. Kirjoita se muistiin tai
                 kokeile harjoituksen salasananhallintaa.
               </p>
               <p>
@@ -469,10 +473,8 @@ export default function PasswordCourse({
                         Palvelu: <strong>Turvassa Verkossa -harjoitus</strong>
                       </p>
                       <p>
-                        Tämä ei ole oikea salasananhallintaohjelma. Salasana
-                        tallennetaan tähän selaimeen luettavassa muodossa. Voit
-                        hakea sen tietovisassa. Se säilyy, kunnes vaihdat sen
-                        tai nollaat edistymisen.
+                        Tämä ei ole oikea salasananhallintaohjelma, vaan harjoitus siitä, miten hallintasovellukset yleensä toimivat. 
+                        Hallintasovellus antaa sinun hakea salasanan myöhemmin tarvittaessa. Se säilyy tallessa, kunnes vaihdat sen.
                       </p>
                     </>
                   )}
@@ -517,8 +519,7 @@ export default function PasswordCourse({
                   )}
                   {hasSaved && (
                     <p>
-                      Uusi tallennus korvaa aiemman harjoitussalasanan ja sen
-                      mahdollisen salasananhallinnan merkinnän.
+                      Uusi tallennus korvaa aiemman harjoitussalasanan.
                     </p>
                   )}
                   <button
@@ -601,7 +602,7 @@ export default function PasswordCourse({
                   <h2 id="remember-title">Muista oikeilla tileilläsi</h2>
                   <p>
                     Käytä pitkää ja yksilöllistä salasanaa jokaisessa
-                    palvelussa. Salasananhallintaohjelma auttaa. Ota myös
+                    palvelussa. Salasananhallintaohjelma auttaa! Ota myös
                     monivaiheinen tunnistautuminen käyttöön: silloin
                     kirjautuminen vahvistetaan salasanan lisäksi esimerkiksi
                     puhelimella.

@@ -79,3 +79,22 @@ test("Unicode input and spaces are accepted without throwing", () => {
     assert.ok(result.tips.length > 0);
   }
 });
+
+test("Sanna completion rechecks all saved passwords using the real estimator", async () => {
+  const { canSignInAsSanna, passwordProblem } =
+    await import("../src/pages/PasswordCourse/sannaSimulation.ts");
+  const score = (password) => assessPassword(password)?.score;
+  const saved = {
+    email: "majakka sieni viulu pilvi",
+    shop: "Q7!nR2?zL8!vT4?bP6!x",
+    club: "J9?mC3!wK5?yH8!dF2?r",
+  };
+  assert.equal(canSignInAsSanna(saved, saved.club, "club", score), true);
+  for (const weak of ["salasana", "Salasana123!", "x".repeat(129)]) {
+    assert.equal(passwordProblem("email", weak, score(weak), saved), "weak");
+    assert.equal(
+      canSignInAsSanna({ ...saved, email: weak }, saved.club, "club", score),
+      false,
+    );
+  }
+});

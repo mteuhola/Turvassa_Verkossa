@@ -28,16 +28,17 @@ export const courseIntroductions: Record<string, TheoryContent> = {
         paragraphs: [
           "Sähköposti on yksi tärkeimmistä palveluista digitaalisessa arjessa. Sähköpostiin saapuu esimerkiksi viestejä läheisiltä tai viranomaisilta, verkkokauppojen tilausvahvistuksia ja eri palveluiden ilmoituksia. Sähköpostia käytetään myös muiden palveluiden salasanojen palauttamiseen. Jos unohdat esimerkiksi verkkokaupan salasanan, voit yleensä tilata sähköpostiisi linkin, jonka avulla voit vaihtaa salasanasi.",
           "Sähköpostin kautta pystyy myös kirjautumaan suoraan moniin muihin palveluihin luomatta erillistä tunnusta. Tällainen kirjautuminen eroaa uuden käyttäjän luomisesta siten, että kirjautuminen tapahtuu toisen palvelun, eli sähköpostin, tunnuksilla. Tämä voi tehdä kirjautumisesta helpompaa, mutta jos sähköpostitilisi salasana on heikko, voi se vaarantaa myös muiden palveluiden turvallisuuden.",
-          "Jos joku pääsee sähköpostitiliisi käsiksi, hänellä on mahdollisuus vaihtaa myös muiden käyttämiesi palveluiden salasanoja. Siksi sähköpostin salasanan tulee olla vahva, riittävän pitkä ja sellainen, jota ei käytetä missään muussa palvelussa.",
+          "Jos joku pääsee sähköpostitiliisi käsiksi, hänellä on mahdollisuus vaihtaa myös muiden käyttämiesi palveluiden salasanoja. Siksi sähköpostin salasanan tulee olla vahva ja sellainen, jota ei käytetä missään muussa palvelussa.",
         ],
       },
       {
         heading: "Millainen on hyvä salasana?",
         paragraphs: [
-          "Hyvä salasana yhdistää seuraavia ominaisuuksia: pituus, arvaamattomuus ja yksilöllisyys.",
+          "Hyvä salasana yhdistää seuraavia ominaisuuksia: pituus, arvaamattomuus, vaihtelevuus ja yksilöllisyys.",
           "Pituus: salasana on riittävän pitkä, tavoitteena 15 merkkiä. Pidemmät salasanat ovat vaikeampia murtaa.",
           "Arvaamattomuus: salasana ei sisällä helposti arvattavia sanoja tai numerosarjoja, kuten henkilöiden tai palveluiden nimiä.",
-          "Yksilöllisyys: salasana on ainutlaatuinen, eikä käytetä muissa palvelussa.",
+          "Vaihtelevuus: salasana sisältää erilaisia merkkejä, kuten isoja ja pieniä kirjaimia, numeroita ja erikoismerkkejä.",
+          "Yksilöllisyys: salasana on ainutlaatuinen, eikä sitä käytetä muissa palvelussa.",
           "Pitkän salasanan ei tarvitse olla vaikea muistaa. Esimerkiksi useamman toisistaan riippumattoman sanan yhdistäminen voi auttaa muodostamaan pitkän ja helposti muistettavan salasanan.",
         ],
       },
@@ -83,12 +84,13 @@ export const passwordTheory: TheoryContent = {
         "Salasanojen hallintaohjelmat ovat sovelluksia, joiden avulla voit tallentaa salasanojasi turvallisesti yhteen paikkaan. Näin sinun ei tarvitse muistaa kaikkia salasanojasi erikseen.",
         "Hallintaohjelmat voivat myös luoda puolestasi pitkiä ja vaikeasti arvattavia salasanoja sekä täyttää niitä automaattisesti kirjautumisen yhteydessä. Useimpia hallintaohjelmia voi käyttää sekä tietokoneella että puhelimella.",
         "Hallintaohjelmaan pääsee yleensä yhdellä pääsalasanalla, jonka avulla muut tallennetut salasanat pysyvät suojattuina. Siksi pääsalasanaksi suositellaan erityisen vahvaa salasanaa, jota ei käytetä missään muualla.",
+        "On suositeltavaa käyttää vain tunnettuja salasanojen hallintaohjelmia, jotka ovat todistetusti luotettavia ja turvallisia. Tunnetuimmat sovellukset löytyvät verkosta helposti, ja niistä on saatavilla arvosteluja ja ohjeita.",
       ],
     },
     {
       heading: "Kaksivaiheinen tunnistautuminen",
       paragraphs: [
-        "Kaksivaiheinen tunnistautuminen on tapa suojata käyttäjätiliä salasanan lisäksi toisella varmistuksella. Kirjautumisen yhteydessä palvelu, kuten pankki, voi esimerkiksi pyytää sinua syöttämään puhelimeesi lähetetyn koodin tai hyväksymään kirjautumisen puhelimen sovelluksessa.",
+        "Kaksivaiheinen tunnistautuminen on tapa suojata käyttäjätiliä salasanan lisäksi toisella varmistuksella. Kirjautumisen yhteydessä palvelu, kuten sähköposti, voi esimerkiksi pyytää sinua syöttämään puhelimeesi lähetetyn koodin tai hyväksymään kirjautumisen puhelimen sovelluksessa.",
         "Kaksivaiheinen tunnistautuminen parantaa käyttäjätilisi turvallisuutta, sillä pelkkä salasana ei näin riitä kirjautumiseen. Vaikka kaksivaiheisuus voi tuntua työläältä, se kannattaa ottaa käyttöön erityisesti tärkeissä palveluissa, kuten sähköpostissa.",
         "Jos saat puhelimeesi kirjautumispyynnön, jota et itse ole aloittanut, älä hyväksy sitä. Myös kirjautumisen vahvistuskoodit kannattaa pitää vain omana tietonaan.",
       ],

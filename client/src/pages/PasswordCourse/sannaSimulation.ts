@@ -41,7 +41,7 @@ export const sannaBestPractices = [
   },
   {
     id: "names",
-    text: "Annetaan tallennetuille salasanoille nimet, joista palvelun tunnistaa.",
+    text: "Annetaan salasananhallintaan tallennetuille salasanoille nimet, joista palvelun tunnistaa helposti.",
     correct: true,
   },
   {
@@ -106,17 +106,33 @@ export function passwordProblem(
   return null;
 }
 
-export function canSignInAsSanna(saved: SannaPasswords, password: string) {
+export function createSannaLoginTask(random = Math.random) {
+  const target = sannaAccounts[Math.floor(random() * sannaAccounts.length)];
+  const entries = [...sannaAccounts];
+  for (let index = entries.length - 1; index > 0; index--) {
+    const other = Math.floor(random() * (index + 1));
+    [entries[index], entries[other]] = [entries[other], entries[index]];
+  }
+  return { target, entries };
+}
+
+export function canSignInAsSanna(
+  saved: SannaPasswords,
+  password: string,
+  target: SannaAccountId,
+  getScore: (password: string) => number | undefined,
+) {
   const values = sannaAccounts.map(({ id }) => saved[id]);
   return (
     values.every(
       (value) =>
         typeof value === "string" &&
         value.length > 0 &&
-        value !== sannaOldPassword,
+        value !== sannaOldPassword &&
+        getScore(value) === 4,
     ) &&
     new Set(values).size === sannaAccounts.length &&
-    password === saved.club
+    password === saved[target]
   );
 }
 

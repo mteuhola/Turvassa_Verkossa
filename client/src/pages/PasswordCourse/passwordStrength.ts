@@ -60,7 +60,7 @@ export function assessPassword(password: string) {
   if (!tips.length)
     tips.push(
       result.score >= 3
-        ? "Hyvä suunta! Käytä oikeissakin palveluissa jokaiseen tiliin omaa salasanaa."
+        ? "Mainiota! Käytä oikeissakin palveluissa jokaiseen tiliin omaa salasanaa."
         : "Kokeile useita toisiinsa liittymättömiä sanoja tai sisältöä, joka ei koostu oikeista sanoista. Vältä tuttuja sanontoja ja henkilötietoja.",
     );
   return { score: result.score, label: strengthLabels[result.score], tips };

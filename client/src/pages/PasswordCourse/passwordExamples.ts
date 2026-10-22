@@ -15,7 +15,7 @@ export const passwordExamples = [
   {
     name: "Pieni muutos 1",
     value: "sal4sana1pekka",
-    question: "Miksi tämä salasana on heikko?",
+    question: "Mitkä väitteet tästä salasanasta pitävät paikkansa?",
     choices: [
       "Salasana on vahva: oman nimen lisääminen tekee siitä yksilöllisen.",
       "A:n korvaaminen numerolla 4 tekee salasanasta arvaamattoman.",
@@ -36,7 +36,7 @@ export const passwordExamples = [
     ],
     correctAnswers: [0, 1, 2],
     lesson:
-      "Iso alkukirjain, numerosarja ja huutomerkki ovat tavallisia muutoksia. Merkkien vaihtelu ei yksin tee salasanasta vahvaa.",
+      "Iso alkukirjain, numerosarja ja huutomerkki ovat tavallisia muutoksia. Merkkien vaihtelu vahvistaa salasanaa, mutta se ei yksin tee salasanasta vahvaa.",
   },
   {
     name: "Useita sanoja",
@@ -49,7 +49,7 @@ export const passwordExamples = [
     ],
     correctAnswers: [0, 2],
     lesson:
-      "Pituus ja toisistaan riippumattomat sanat vaikeuttavat arvaamista. Huom: Tämä julkinen esimerkki ei sovi oikeaksi salasanaksi.",
+      "Pituus ja toisistaan riippumattomat sanat vaikeuttavat arvaamista.",
   },
   {
     name: "Monimutkainen salasana",
@@ -62,7 +62,7 @@ export const passwordExamples = [
     ],
     correctAnswers: [1, 2],
     lesson:
-      "Erilaiset numerot ja erikoismerkit vaikeuttavat arvaamista. Huom: Tämä julkinen esimerkki ei sovi oikeaksi salasanaksi.",
+      "Erilaiset numerot ja erikoismerkit vaikeuttavat arvaamista, minkä lisäksi salasanassa ei käytetä oikeita sanoja.",
   },
 ];
 

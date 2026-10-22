@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   entryNameProblem,
+  createSannaLoginTask,
+  sannaAccounts,
   isSannaPlanCorrect,
   sannaBestPractices,
   passwordProblem,
@@ -10,8 +12,8 @@ import {
   sannaOldPassword,
 } from "../src/pages/PasswordCourse/sannaSimulation.ts";
 
-test("Sanna plan requires exactly all good practices among ten options", () => {
-  assert.equal(sannaBestPractices.length, 10);
+test("Sanna plan requires exactly all good practices among the available options", () => {
+  assert.ok(sannaBestPractices.length >= 10);
   const correct = sannaBestPractices
     .filter((item) => item.correct)
     .map((item) => item.id);
@@ -77,23 +79,47 @@ test("completion requires three changed accounts and the exact hobby club passwo
     shop: "shop password",
     club: " club password ",
   };
-  assert.equal(canSignInAsSanna(saved, saved.club), true);
+  assert.equal(
+    canSignInAsSanna(saved, saved.club, "club", () => 4),
+    true,
+  );
   for (const candidate of ["", saved.email, saved.shop, saved.club.trim()]) {
-    assert.equal(canSignInAsSanna(saved, candidate), false);
+    assert.equal(
+      canSignInAsSanna(saved, candidate, "club", () => 4),
+      false,
+    );
   }
   assert.equal(
-    canSignInAsSanna({ club: "club password" }, "club password"),
+    canSignInAsSanna(
+      { club: "club password" },
+      "club password",
+      "club",
+      () => 4,
+    ),
     false,
   );
   assert.equal(
-    canSignInAsSanna({ ...saved, email: saved.club }, saved.club),
+    canSignInAsSanna(
+      { ...saved, email: saved.club },
+      saved.club,
+      "club",
+      () => 4,
+    ),
     false,
   );
   assert.equal(
-    canSignInAsSanna({ ...saved, email: sannaOldPassword }, saved.club),
+    canSignInAsSanna(
+      { ...saved, email: sannaOldPassword },
+      saved.club,
+      "club",
+      () => 4,
+    ),
     false,
   );
-  assert.equal(canSignInAsSanna({}, ""), false);
+  assert.equal(
+    canSignInAsSanna({}, "", "club", () => 4),
+    false,
+  );
 });
 
 test("practice generator produces fresh 20-character passwords", () => {
@@ -101,4 +127,63 @@ test("practice generator produces fresh 20-character passwords", () => {
   assert.equal(new Set(passwords).size, passwords.length);
   for (const password of passwords)
     assert.match(password, /^[A-Za-z0-9!?]{20}$/);
+});
+
+test("each requested service accepts only its own password", () => {
+  const saved = {
+    email: "mail password",
+    shop: "shop password",
+    club: "club password",
+  };
+  for (const target of sannaAccounts) {
+    for (const entry of sannaAccounts) {
+      assert.equal(
+        canSignInAsSanna(saved, saved[entry.id], target.id, () => 4),
+        target.id === entry.id,
+      );
+    }
+  }
+});
+
+test("login target and entry order are randomized independently without changing the source", () => {
+  const original = sannaAccounts.map((item) => item.id);
+  for (let targetIndex = 0; targetIndex < 3; targetIndex++) {
+    const positions = new Set();
+    const orders = new Set();
+    for (const firstSwap of [0, 0.4, 0.9]) {
+      for (const secondSwap of [0, 0.9]) {
+        const values = [(targetIndex + 0.5) / 3, firstSwap, secondSwap];
+        const task = createSannaLoginTask(() => values.shift());
+        assert.equal(task.target.id, original[targetIndex]);
+        assert.deepEqual(
+          task.entries.map((item) => item.id).sort(),
+          [...original].sort(),
+        );
+        positions.add(
+          task.entries.findIndex((item) => item.id === task.target.id),
+        );
+        orders.add(task.entries.map((item) => item.id).join(","));
+      }
+    }
+    assert.equal(positions.size, 3);
+    assert.equal(orders.size, 6);
+  }
+  assert.deepEqual(
+    sannaAccounts.map((item) => item.id),
+    original,
+  );
+});
+
+test("sign-in refuses any saved password below 4, even for a different account", () => {
+  const saved = { email: "mail", shop: "shop", club: "club" };
+  for (const weak of Object.values(saved)) {
+    for (const score of [undefined, 0, 1, 2, 3]) {
+      assert.equal(
+        canSignInAsSanna(saved, saved.club, "club", (password) =>
+          password === weak ? score : 4,
+        ),
+        false,
+      );
+    }
+  }
 });

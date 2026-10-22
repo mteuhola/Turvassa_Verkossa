@@ -94,10 +94,17 @@
   padding: 24px 12px;
   text-decoration: none;
 }
-.topic:hover {
+.topic:not(.locked):hover {
   background: var(--surface);
 }
-.topic:hover h3 {
+.locked {
+  cursor: default;
+}
+.locked .start {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.topic:not(.locked):hover h3 {
   text-decoration: underline;
   text-underline-offset: 4px;
 }

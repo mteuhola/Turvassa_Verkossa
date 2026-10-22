@@ -6,6 +6,7 @@ import TextSizeControl, {
   type TextSizeProps,
 } from "../../components/TextSizeControl";
 import type { TopicCourse } from "./topicCourses";
+import { canEnterQuiz } from "../../progress/courseProgress";
 import styles from "./TopicSelection.module.css";
 
 interface TopicSelectionProps extends TextSizeProps {
@@ -39,9 +40,10 @@ export default function TopicSelection({
           </div>
           {course.topics.length > 0 ? (
             <ol className={styles.topics}>
-              {course.topics.map((topic, index) => (
-                <li key={topic.id}>
-                  <Link to={topic.path} className={styles.topic}>
+              {course.topics.map((topic, index) => {
+                const locked = topic.kind === "quiz" && !canEnterQuiz(course);
+                const content = (
+                  <>
                     <span className={styles.number} aria-hidden="true">
                       {index + 1}
                     </span>
@@ -49,14 +51,40 @@ export default function TopicSelection({
                       <h3>{topic.title}</h3>
                       {topic.isComplete && <CompletionBadge />}
                       <p>{topic.description}</p>
+                      {locked && (
+                        <p>
+                          Tietovisa avautuu, kun olet suorittanut kurssin muut
+                          aiheet.
+                        </p>
+                      )}
                     </div>
                     <span className={styles.start}>
-                      {topic.isComplete ? "Kertaa" : "Aloita"}{" "}
-                      <span aria-hidden="true">→</span>
+                      {locked
+                        ? "Lukittu"
+                        : topic.isComplete
+                          ? "Kertaa"
+                          : "Aloita"}{" "}
+                      {!locked && <span aria-hidden="true">→</span>}
                     </span>
-                  </Link>
-                </li>
-              ))}
+                  </>
+                );
+                return (
+                  <li key={topic.id}>
+                    {locked ? (
+                      <div
+                        className={`${styles.topic} ${styles.locked}`}
+                        aria-disabled="true"
+                      >
+                        {content}
+                      </div>
+                    ) : (
+                      <Link to={topic.path} className={styles.topic}>
+                        {content}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
             </ol>
           ) : (
             <div className={styles.empty}>

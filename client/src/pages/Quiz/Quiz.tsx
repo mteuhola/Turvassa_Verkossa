@@ -8,6 +8,10 @@ import PracticePasswordManager from "../../components/PracticePasswordManager";
 import CompletionNotice from "../../components/CompletionNotice";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import {
+  canEnterQuiz,
+  unfinishedQuizPrerequisites,
+} from "../../progress/courseProgress";
+import {
   matchesPracticePassword,
   readPracticePassword,
   passwordTopicPath,
@@ -21,7 +25,43 @@ interface QuizProps extends TextSizeProps, ActivityProgressProps {
   quiz: CourseQuiz;
 }
 
-export default function Quiz({
+export default function Quiz(props: QuizProps) {
+  if (canEnterQuiz(props.course)) return <QuizActivity {...props} />;
+  return (
+    <div className={styles.root} data-course={props.course.id}>
+      <nav className={styles.nav} aria-label="Päänavigaatio">
+        <Link to="/" className={styles.brand}>
+          Turvassa Verkossa
+        </Link>
+        <div className="nav-actions">
+          <Link to={props.course.path}>← Takaisin aiheisiin</Link>
+          <TextSizeControl
+            textSize={props.textSize}
+            onTextSizeChange={props.onTextSizeChange}
+          />
+        </div>
+      </nav>
+      <main className={styles.main}>
+        <h1>{props.course.title}: tietovisa</h1>
+        <h2>Suorita ensin muut aiheet</h2>
+        <p>
+          Tietovisa avautuu, kun olet suorittanut kaikki tämän kurssin muut
+          aiheet. Voit jatkaa tästä:
+        </p>
+        <ul>
+          {unfinishedQuizPrerequisites(props.course).map((topic) => (
+            <li key={topic.path}>
+              <Link to={topic.path}>{topic.title}</Link>
+            </li>
+          ))}
+        </ul>
+        <Link to={props.course.path}>Palaa kurssin aiheisiin</Link>
+      </main>
+    </div>
+  );
+}
+
+function QuizActivity({
   course,
   quiz,
   isComplete,

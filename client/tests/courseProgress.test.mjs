@@ -2,12 +2,47 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   applyProgress,
+  canEnterQuiz,
+  unfinishedQuizPrerequisites,
   completeTopic,
   parseProgress,
 } from "../src/progress/courseProgress.ts";
 import { topicCourses } from "../src/pages/TopicSelection/topicCourses.ts";
 const password = "/course/passwords/password-strength";
 const phishing = "/course/phishing/suspicious-email";
+
+test("every course quiz requires all its other topics, even with an old quiz badge", () => {
+  for (const course of topicCourses) {
+    const prerequisites = course.topics.filter(
+      (topic) => topic.kind !== "quiz",
+    );
+    assert.equal(canEnterQuiz(course), false);
+    const ready = {
+      ...course,
+      topics: course.topics.map((topic) => ({
+        ...topic,
+        isComplete: topic.kind !== "quiz",
+      })),
+    };
+    assert.equal(canEnterQuiz(ready), true);
+    assert.deepEqual(unfinishedQuizPrerequisites(ready), []);
+    for (const missing of prerequisites) {
+      const locked = {
+        ...course,
+        topics: course.topics.map((topic) => ({
+          ...topic,
+          isComplete: topic.path !== missing.path,
+        })),
+      };
+      assert.equal(canEnterQuiz(locked), false);
+      assert.deepEqual(
+        unfinishedQuizPrerequisites(locked).map((topic) => topic.path),
+        [missing.path],
+      );
+    }
+  }
+  assert.equal(canEnterQuiz({ ...topicCourses[0], topics: [] }), false);
+});
 
 test("fresh courses and topics are incomplete, including empty courses", () => {
   const courses = applyProgress([]);

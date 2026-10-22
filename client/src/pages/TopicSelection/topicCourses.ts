@@ -122,7 +122,7 @@ export const topicCourses: TopicCourse[] = courseCatalog.map((course) => ({
       isComplete: false,
       title: "Kurssin tietovisa",
       description:
-        "Kokeile, mitä muistat. Saat vastauksista palautetta ja voit yrittää uudelleen.",
+        "Kokeile, mitä olet oppinut. Saat vastauksista palautetta ja voit yrittää uudelleen.",
       path: `${course.path}/quiz`,
     },
   ],

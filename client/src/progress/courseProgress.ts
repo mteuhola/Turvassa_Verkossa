@@ -13,6 +13,19 @@ export interface ActivityProgressProps {
   onComplete: () => void;
 }
 
+export function unfinishedQuizPrerequisites(course: TopicCourse) {
+  return course.topics.filter(
+    (topic) => topic.kind !== "quiz" && !topic.isComplete,
+  );
+}
+
+export function canEnterQuiz(course: TopicCourse) {
+  return (
+    course.topics.some((topic) => topic.kind === "quiz") &&
+    unfinishedQuizPrerequisites(course).length === 0
+  );
+}
+
 export function parseProgress(stored: string | null): string[] {
   try {
     const parsed: unknown = JSON.parse(stored ?? "null");

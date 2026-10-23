@@ -32,9 +32,7 @@ export default function PhishingCourse({
       setFound((previous) =>
         previous.includes(part.id) ? previous : [...previous, part.id],
       );
-      setFeedback(
-        `Hyvä havainto! ${part.title}: ${part.explanation} Löydetty ${nextCount}/${clues.length}.${nextCount === clues.length ? " Löysit kaikki merkit! Lue alta, miten toimia turvallisesti." : ""}`,
-      );
+      setFeedback(`Hyvä havainto! ${part.title}: ${part.explanation}`);
     }
   }
 
@@ -112,169 +110,175 @@ export default function PhishingCourse({
         </div>
       </nav>
       <main className={styles.main}>
-        <header className={styles.intro}>
-          <p className={styles.eyebrow}>Aihe 2 · Vaaralliset viestit</p>
-          <h1>Huomaatko huijauksen merkit?</h1>
-          <p>
-            Tutki sähköpostia ja etsi sen {clues.length} varoitusmerkkiä.
-            Valitse epäilyttävä kohta suoraan viestistä. Voit tutkia aihetta,
-            lähettäjää, viestin tekstiä ja liitettä. Kaikki valittavat kohdat
-            eivät ole varoitusmerkkejä.
-          </p>
-          <p className={styles.notice}>
-            <strong>Tämä on kuvitteellinen harjoitus.</strong> Pankin osoite on
-            tässä esimerkissä <strong>tonttupankki.example</strong>. Valinnat
-            eivät avaa linkkejä tai liitteitä. Voit kokeilla rauhassa ilman
-            aikarajaa.
-          </p>
-          <div role="status" aria-live="polite">
-            {isComplete && (
-              <CompletionBadge label="Aihe suoritettu – ansaitsit merkin!" />
-            )}
-          </div>
-        </header>
-        <div className={styles.layout}>
-          <section className={styles.email} aria-labelledby="email-title">
-            <div className={styles.mailToolbar}>
-              <span>Saapuneet</span>
-              <span className={styles.trainingBadge}>Harjoitusviesti</span>
+        <div className={styles.workspace}>
+          <header className={styles.intro}>
+            <p className={styles.eyebrow}>Aihe 2 · Vaaralliset viestit</p>
+            <h1>Huomaatko huijauksen merkit?</h1>
+            <p>
+              Tutki sähköpostia ja etsi siitä varoitusmerkkejä. Valitse
+              epäilyttävä kohta suoraan viestistä. Voit tutkia viestin eri
+              osioita, kuten aihetta, lähettäjää, tekstiä ja liitettä. Kaikki
+              valittavat kohdat eivät ole varoitusmerkkejä.
+            </p>
+            <p className={styles.notice}>
+              <strong>Tämä on kuvitteellinen harjoitus.</strong> Oikean pankin
+              osoite on tässä esimerkissä{" "}
+              <strong>tonttupankki.yksityinen</strong>. Valinnat eivät avaa
+              linkkejä tai liitteitä. Voit kokeilla rauhassa ilman aikarajaa.
+            </p>
+            <div role="status" aria-live="polite">
+              {isComplete && (
+                <CompletionBadge label="Aihe suoritettu - ansaitsit merkin!" />
+              )}
             </div>
-            <div className={styles.emailHeader}>
-              <h2 id="email-title" className={styles.subject}>
-                {renderEmailPart("subject")}
-              </h2>
-              <div className={styles.senderRow}>
-                <span className={styles.avatar} aria-hidden="true">
-                  A
-                </span>
-                <div className={styles.senderDetails}>
-                  <div className={styles.senderLabel}>Lähettäjä</div>
-                  {renderEmailPart("sender")}
-                  <p className={styles.recipient}>Vastaanottaja: sinä</p>
+          </header>
+          <div className={styles.layout}>
+            <section className={styles.email} aria-labelledby="email-title">
+              <div className={styles.mailToolbar}>
+                <span>Saapuneet</span>
+                <span className={styles.trainingBadge}>Harjoitusviesti</span>
+              </div>
+              <div className={styles.emailHeader}>
+                <h2 id="email-title" className={styles.subject}>
+                  {renderEmailPart("subject")}
+                </h2>
+                <div className={styles.senderRow}>
+                  <span className={styles.avatar} aria-hidden="true">
+                    A
+                  </span>
+                  <div className={styles.senderDetails}>
+                    <div className={styles.senderLabel}>Lähettäjä</div>
+                    {renderEmailPart("sender")}
+                    <p className={styles.recipient}>Vastaanottaja: sinä</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className={styles.emailBody}>
-              {(
-                [
-                  "greeting",
-                  "request",
-                  "attachmentInstructions",
-                  "link",
-                  "fakeLink",
-                  "secrecy",
-                  "signature",
-                ] as const
-              ).map((id) => (
-                <p key={id} className={styles.emailParagraph}>
-                  {renderEmailPart(id)}
-                </p>
-              ))}
-            </div>
-            <div className={styles.attachments}>
-              <p className={styles.attachmentLabel}>1 liite</p>
-              <div className={styles.attachmentFile}>
-                <svg
-                  aria-hidden="true"
-                  width="24"
-                  height="28"
-                  viewBox="0 0 24 28"
-                  fill="none"
-                >
-                  <path
-                    d="M4 1h10l6 6v20H4V1Z"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  />
-                  <path
-                    d="M14 1v7h6M8 15h8M8 20h8"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  />
-                </svg>
-                {renderEmailPart("attachment")}
+              <div className={styles.emailBody}>
+                {(
+                  [
+                    "greeting",
+                    "request",
+                    "attachmentInstructions",
+                    "link",
+                    "fakeLink",
+                    "secrecy",
+                    "signature",
+                  ] as const
+                ).map((id) => (
+                  <p key={id} className={styles.emailParagraph}>
+                    {renderEmailPart(id)}
+                  </p>
+                ))}
               </div>
-            </div>
-          </section>
-          <aside className={styles.panel} aria-labelledby="progress-title">
-            <h2 id="progress-title">Sinun havaintosi</h2>
-            <p className={styles.count}>
-              Löydetty{" "}
-              <strong>
-                {found.length}/{clues.length}
-              </strong>{" "}
-              varoitusmerkkiä
-            </p>
-            <progress
-              className={styles.progress}
-              value={found.length}
-              max={clues.length}
-              aria-label="Löydetyt varoitusmerkit"
-            />
-            <div
-              className={styles.feedback}
-              role="status"
-              aria-live="polite"
-              aria-atomic="true"
-            >
-              {feedback}
-            </div>
-            <div className={styles.actions}>
-              <button
-                type="button"
-                className={styles.action}
-                disabled={complete}
-                onClick={() => {
-                  const next = clues.find((clue) => !found.includes(clue.id));
-                  if (next) setFeedback(`Vihje: ${next.hint}`);
-                }}
+              <div className={styles.attachments}>
+                <p className={styles.attachmentLabel}>1 liite</p>
+                <div className={styles.attachmentFile}>
+                  <svg
+                    aria-hidden="true"
+                    width="24"
+                    height="28"
+                    viewBox="0 0 24 28"
+                    fill="none"
+                  >
+                    <path
+                      d="M4 1h10l6 6v20H4V1Z"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    />
+                    <path
+                      d="M14 1v7h6M8 15h8M8 20h8"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    />
+                  </svg>
+                  {renderEmailPart("attachment")}
+                </div>
+              </div>
+            </section>
+            <aside className={styles.panel} aria-labelledby="progress-title">
+              <h2 id="progress-title">Sinun havaintosi</h2>
+              <p className={styles.count}>
+                Löydetty{" "}
+                <strong>
+                  {found.length}/{clues.length}
+                </strong>{" "}
+                varoitusmerkkiä
+              </p>
+              <progress
+                className={styles.progress}
+                value={found.length}
+                max={clues.length}
+                aria-label="Löydetyt varoitusmerkit"
+              />
+              <div
+                className={styles.feedback}
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
               >
-                Anna vihje
-              </button>
-              <button type="button" className={styles.action} onClick={restart}>
-                Aloita alusta
-              </button>
-            </div>
-            {found.length > 0 && (
-              <section aria-labelledby="found-title">
-                <h3 id="found-title">Löydetyt merkit</h3>
-                <ul className={styles.findings}>
-                  {clues
-                    .filter((clue) => found.includes(clue.id))
-                    .map((clue) => (
-                      <li key={clue.id}>
-                        <details>
-                          <summary>{clue.title}</summary>
-                          <p>{clue.explanation}</p>
-                        </details>
-                      </li>
-                    ))}
-                </ul>
-              </section>
-            )}
-            {complete && (
-              <CompletionNotice labelledBy="complete-title">
-                <h3 id="complete-title">Kaikki merkit löytyivät!</h3>
-                <p>
-                  Hienoa työtä! Harjoittelit viestin tarkistamista. Oikeassa
-                  huijausviestissä voi olla vain yksi näistä merkeistä tai aivan
-                  erilaisia merkkejä.
-                </p>
-                <p>
-                  <strong>Turvallinen lähestymistapa:</strong> Epäillessäsi
-                  viestin aitoutta, älä vastaa, avaa liitettä tai klikkaa
-                  viestin linkkiä. Tarkista asia pankin omasta sovelluksesta tai
-                  tutusta puhelinnumerosta. Ilmoita viesti roskapostiksi tai
-                  tietojenkalasteluksi.
-                </p>
-              </CompletionNotice>
-            )}
-            <p className={styles.small}>
-              Kun löydät kaikki varoitusmerkit, ansaitset suoritusmerkin. Merkki
-              tallennetaan tähän selaimeen, jos tallennus on sallittu. Uusi
-              yritys ei poista ansaittua merkkiä.
-            </p>
-          </aside>
+                {feedback}
+              </div>
+              <div className={styles.actions}>
+                <button
+                  type="button"
+                  className={styles.action}
+                  disabled={complete}
+                  onClick={() => {
+                    const next = clues.find((clue) => !found.includes(clue.id));
+                    if (next) setFeedback(`Vihje: ${next.hint}`);
+                  }}
+                >
+                  Anna vihje
+                </button>
+                <button
+                  type="button"
+                  className={styles.action}
+                  onClick={restart}
+                >
+                  Aloita alusta
+                </button>
+              </div>
+              {found.length > 0 && (
+                <section aria-labelledby="found-title">
+                  <h3 id="found-title">Löydetyt merkit</h3>
+                  <ul className={styles.findings}>
+                    {clues
+                      .filter((clue) => found.includes(clue.id))
+                      .map((clue) => (
+                        <li key={clue.id}>
+                          <details>
+                            <summary>{clue.title}</summary>
+                            <p>{clue.explanation}</p>
+                          </details>
+                        </li>
+                      ))}
+                  </ul>
+                </section>
+              )}
+              {complete && (
+                <CompletionNotice labelledBy="complete-title">
+                  <h3 id="complete-title">Kaikki merkit löytyivät!</h3>
+                  <p>
+                    Hienoa työtä! Harjoittelit viestin tarkistamista. Oikeassa
+                    huijausviestissä voi olla vain yksi näistä merkeistä tai
+                    aivan erilaisia merkkejä.
+                  </p>
+                  <p>
+                    <strong>Turvallinen lähestymistapa:</strong> Epäillessäsi
+                    viestin aitoutta, älä vastaa, avaa liitettä tai klikkaa
+                    viestin linkkiä. Tarkista asia pankin omasta sovelluksesta
+                    tai tutusta puhelinnumerosta. Ilmoita viesti roskapostiksi
+                    tai tietojenkalasteluksi.
+                  </p>
+                </CompletionNotice>
+              )}
+              <p className={styles.small}>
+                Kun löydät kaikki varoitusmerkit, ansaitset suoritusmerkin.
+                Merkki tallennetaan tähän selaimeen, jos tallennus on sallittu.
+                Uusi yritys ei poista ansaittua merkkiä.
+              </p>
+            </aside>
+          </div>
         </div>
       </main>
     </div>

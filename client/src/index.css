@@ -1,8 +1,39 @@
+:root {
+  --page-gutter: clamp(16px, 3vw, 40px);
+  --content-width: 76rem;
+  --reading-width: 60rem;
+  --layout-gap: 32px;
+  --panel-padding: 24px;
+  --page-bg: #faf5ec;
+  --surface: #fffdf8;
+  --text: #352d26;
+  --text-muted: #685c50;
+  --border: #dfd3c2;
+  --warm-accent: #865c3a;
+}
+* {
+  box-sizing: border-box;
+}
+::selection {
+  background: #e4d3b8;
+  color: #352d26;
+}
+html {
+  scrollbar-color: #978774 var(--page-bg);
+}
+input {
+  caret-color: var(--course-ink, var(--warm-accent));
+}
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
 body {
   margin: 0;
-  font-family: "DM Sans", sans-serif;
-  background: #f7f5f0;
-  color: #1a1a18;
+  font-family: "DM Sans", Arial, sans-serif;
+  background: var(--page-bg);
+  color: var(--text);
 }
 
 .nav-actions {
@@ -24,11 +55,11 @@ nav button.text-size-control {
   min-height: 48px;
   max-width: 100%;
   padding: 8px 16px 8px 10px;
-  border: 1px solid #d6d3ca;
-  border-radius: 16px;
-  background: #fff;
-  color: #5f5e5a;
-  font-family: "DM Sans", sans-serif;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: "DM Sans", Arial, sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -43,9 +74,7 @@ nav button.text-size-control {
   flex-shrink: 0;
   width: 2.25em;
   height: 2.25em;
-  border-radius: 10px;
-  background: #f7f5f0;
-  color: var(--course-ink, #1a1a18);
+  color: var(--course-ink, var(--text));
   font-family: "DM Serif Display", serif;
   font-size: 1.125rem;
 }
@@ -56,36 +85,43 @@ nav button.text-size-control {
 }
 
 .text-size-control__value {
-  color: var(--course-ink, #1a1a18);
+  color: var(--course-ink, var(--text));
   font-weight: 500;
 }
 
 nav button.text-size-control:hover {
-  border-color: var(--course-ink, #888780);
-  background: #f7f5f0;
+  border-color: var(--course-ink, var(--text-muted));
+  background: var(--page-bg);
 }
 
 nav button.text-size-control:focus-visible {
-  outline: 3px solid var(--course-ink, #1a1a18);
+  outline: 3px solid var(--course-ink, var(--text));
   outline-offset: 3px;
 }
 [data-course="passwords"] {
-  --course-tint: #e1f5ee;
+  --page-bg: #e3fade;
+  --course-tint: #e3fade;
   --course-notice-ink: #085041;
   --course-accent: #1d9e75;
   --course-ink: #0f6e56;
 }
 
 [data-course="phishing"] {
-  --course-tint: #e6f1fb;
+  --page-bg: #ebf1fc;
+  --course-tint: #ebf1fc;
   --course-notice-ink: #0c447c;
   --course-accent: #185fa5;
   --course-ink: #185fa5;
 }
 
-[data-course="romance-fraud"] {
-  --course-tint: #fbeaf0;
+[data-course="financial-fraud"] {
+  --page-bg: #f8e4ea;
+  --course-tint: #f8e4ea;
   --course-notice-ink: #72243e;
   --course-accent: #993556;
   --course-ink: #993556;
+}
+
+div[data-course] {
+  background-color: var(--page-bg);
 }

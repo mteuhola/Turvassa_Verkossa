@@ -28,7 +28,7 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
           { id: "reuse", text: "Käytän samaa vahvaa salasanaa kaikkialla." },
           {
             id: "unique",
-            text: "Käytän jokaisessa palvelussa omaa pitkää salasanaa.",
+            text: "Käytän jokaisessa palvelussa omaa vahvaa salasanaa.",
           },
           {
             id: "suffix",
@@ -37,7 +37,7 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
         ],
         correctOptionIds: ["unique"],
         explanation:
-          "Oma salasana jokaisessa palvelussa estää yhden palvelun salasanavuotoa avaamasta muita tilejäsi. Salasananhallintaohjelma auttaa muistamaan eri salasanat.",
+          "Oma salasana jokaisessa palvelussa estää yhden palvelun salasanavuotoa avaamasta muita tilejäsi. Palvelun nimen lisääminen tekee salasanan arvattavaksi, koska se antaa tietoa siitä, missä palvelussa salasanaa käytetään.",
       },
       {
         id: "strong",
@@ -51,20 +51,63 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
           { id: "repeat", text: "Toistan samaa lyhyttä sanaa monta kertaa." },
           {
             id: "manager",
-            text: "Käytän salasananhallintaohjelmaa erilaisten salasanojen luomiseen ja muistamiseen.",
+            text: "Käytän salasanojen hallintaohjelmaa erilaisten salasanojen luomiseen ja muistamiseen.",
           },
           { id: "mfa", text: "Otan monivaiheisen tunnistautumisen käyttöön." },
         ],
         correctOptionIds: ["length", "manager", "mfa"],
         explanation:
-          "Pituus ja arvaamattomuus auttavat. Salasananhallintaohjelma helpottaa erilaisten salasanojen käyttöä, ja monivaiheinen tunnistautuminen tuo lisäsuojaa. Ennustettava toisto ei yksin tee salasanasta vahvaa.",
+          "Pituus ja arvaamattomuus auttavat. Salasanojen hallintaohjelma helpottaa erilaisten salasanojen käyttöä, ja monivaiheinen tunnistautuminen tuo lisäsuojaa. Ennustettava toisto ei yksin tee salasanasta vahvaa.",
+      },
+      {
+        id: "unique",
+        type: "single",
+        prompt: "Mikä seuraavista on ohjepituus salasanalle?",
+        options: [
+          { id: "none", 
+            text: "Pituudella ei ole merkitystä, kunhan salasana on vaikeasti arvattava."
+          },
+          {
+            id: "15",
+            text: "15 merkkiä",
+          },
+          {
+            id: "12",
+            text: "12 merkkiä",
+          },
+          {
+            id: "9",
+            text: "9 merkkiä",
+          },
+        ],
+        correctOptionIds: ["15"],
+        explanation:
+          "15 merkkiä on suositeltava pituus vahvan salasanan luomiseksi.",
+      },
+      {
+        id: "strong",
+        type: "single",
+        prompt: "Totta vai tarua: Selainten salasanojen hallintaohjelmien käyttö on turvallinen tapa tallentaa salasanoja.",
+        options: [
+          {
+            id: "true",
+            text: "Totta",
+          },
+          {
+            id: "false",
+            text: "Tarua.",
+          },
+        ],
+        correctOptionIds: ["false"],
+        explanation:
+          "Selainten salasanojen hallintaohjelmien käyttö on kätevää, mutta se ei ole yhtä turvallista kuin käyttää erillistä salasanojen hallintaohjelmaa. Selaimen salasanat voivat olla alttiita haittaohjelmille ja selaimen haavoittuvuuksille.",
       },
       {
         id: "recall",
         type: "practice-password",
-        prompt: "Muistatko luomasi harjoitussalasanan?",
+        prompt: "Käytä tallentamaasi harjoitussalasanaa.",
         explanation:
-          "Syötit saman harjoitussalasanan kuin tallensit. Oikeita salasanoja ei tarvitse opetella kaikkia ulkoa: salasananhallintaohjelma auttaa muistamaan ne.",
+          "Syötit saman harjoitussalasanan kuin tallensit. Oikeita salasanoja ei tarvitse opetella kaikkia ulkoa: salasanojen hallintaohjelma auttaa muistamaan ne.",
       },
     ],
   },
@@ -121,7 +164,7 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
       },
     ],
   },
-  "romance-fraud": {
+  "financial-fraud": {
     questions: [
       {
         id: "money",

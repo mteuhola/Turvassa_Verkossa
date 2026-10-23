@@ -13,16 +13,38 @@ export interface ActivityProgressProps {
   onComplete: () => void;
 }
 
+export function unfinishedQuizPrerequisites(course: TopicCourse) {
+  return course.topics.filter(
+    (topic) => topic.kind !== "quiz" && !topic.isComplete,
+  );
+}
+
+export function canEnterQuiz(course: TopicCourse) {
+  return (
+    course.topics.some((topic) => topic.kind === "quiz") &&
+    unfinishedQuizPrerequisites(course).length === 0
+  );
+}
+
 export function parseProgress(stored: string | null): string[] {
   try {
     const parsed: unknown = JSON.parse(stored ?? "null");
     if (!Array.isArray(parsed)) return [];
     return [
       ...new Set(
-        parsed.filter(
-          (path): path is string =>
-            typeof path === "string" && topicPaths.has(path),
-        ),
+        parsed
+          .map((path: unknown) =>
+            typeof path === "string"
+              ? path.replace(
+                  /^\/course\/romance-fraud(?=\/|$)/,
+                  "/course/financial-fraud",
+                )
+              : path,
+          )
+          .filter(
+            (path): path is string =>
+              typeof path === "string" && topicPaths.has(path),
+          ),
       ),
     ];
   } catch {

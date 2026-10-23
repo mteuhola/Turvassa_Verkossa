@@ -1,9 +1,8 @@
 .notice {
   margin-block: 1em;
-  padding: 16px;
-  background: var(--course-tint, #f7f5f0);
-  border-radius: 8px;
-  color: var(--course-notice-ink, #1a1a18);
+  padding: 20px 0;
+  border-block: 1px solid var(--border);
+  color: var(--course-notice-ink, var(--text));
   overflow-wrap: anywhere;
 }
 

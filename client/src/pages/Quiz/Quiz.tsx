@@ -4,8 +4,13 @@ import TextSizeControl, {
   type TextSizeProps,
 } from "../../components/TextSizeControl";
 import CompletionBadge from "../../components/CompletionBadge";
+import PracticePasswordManager from "../../components/PracticePasswordManager";
 import CompletionNotice from "../../components/CompletionNotice";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
+import {
+  canEnterQuiz,
+  unfinishedQuizPrerequisites,
+} from "../../progress/courseProgress";
 import {
   matchesPracticePassword,
   readPracticePassword,
@@ -20,7 +25,43 @@ interface QuizProps extends TextSizeProps, ActivityProgressProps {
   quiz: CourseQuiz;
 }
 
-export default function Quiz({
+export default function Quiz(props: QuizProps) {
+  if (canEnterQuiz(props.course)) return <QuizActivity {...props} />;
+  return (
+    <div className={styles.root} data-course={props.course.id}>
+      <nav className={styles.nav} aria-label="Päänavigaatio">
+        <Link to="/" className={styles.brand}>
+          Turvassa Verkossa
+        </Link>
+        <div className="nav-actions">
+          <Link to={props.course.path}>← Takaisin aiheisiin</Link>
+          <TextSizeControl
+            textSize={props.textSize}
+            onTextSizeChange={props.onTextSizeChange}
+          />
+        </div>
+      </nav>
+      <main className={styles.main}>
+        <h1>{props.course.title}: tietovisa</h1>
+        <h2>Suorita ensin muut aiheet</h2>
+        <p>
+          Tietovisa avautuu, kun olet suorittanut kaikki tämän kurssin muut
+          aiheet. Voit jatkaa tästä:
+        </p>
+        <ul>
+          {unfinishedQuizPrerequisites(props.course).map((topic) => (
+            <li key={topic.path}>
+              <Link to={topic.path}>{topic.title}</Link>
+            </li>
+          ))}
+        </ul>
+        <Link to={props.course.path}>Palaa kurssin aiheisiin</Link>
+      </main>
+    </div>
+  );
+}
+
+function QuizActivity({
   course,
   quiz,
   isComplete,
@@ -125,12 +166,11 @@ export default function Quiz({
       </nav>
       <main className={styles.main}>
         <header>
-          <p className={styles.eyebrow}>{course.title} · Tietovisa</p>
-          <h1>Testaa oppimaasi</h1>
+          <h1>{course.title}: tietovisa</h1>
           <p>
-            Vastaa rauhassa ja tarkista vastauksesi. Voit yrittää uudelleen niin
-            monta kertaa kuin haluat. Saat merkin, kun vastaat kaikkiin
-            kysymyksiin oikein ja päätät tietovisan.
+            Kokeillaan, mitä jäi mieleen. Saat jokaisesta vastauksesta
+            palautetta, ja voit yrittää uudelleen. Kun kaikki vastaukset ovat
+            oikein, saat tietovisasta merkin.
           </p>
           {isComplete && <CompletionBadge label="Tietovisa suoritettu" />}
         </header>
@@ -147,10 +187,10 @@ export default function Quiz({
         {finished ? (
           <div role="status">
             <CompletionNotice badgeLabel="Tietovisa suoritettu">
-              <h2>Hienoa, kaikki vastaukset ovat oikein!</h2>
+              <h2>Valmista tuli, kaikki oikein!</h2>
               <p>
-                Suoritit tietovisan. Voit palata kurssin aiheisiin tai kerrata
-                kysymykset. Kertaaminen ei poista merkkiäsi.
+                Voit jatkaa muihin aiheisiin tai kokeilla tietovisaa uudelleen.
+                Ansaitsemasi merkki säilyy.
               </p>
               <div className={styles.actions}>
                 <Link to={course.path}>Palaa aiheisiin →</Link>
@@ -175,8 +215,9 @@ export default function Quiz({
                 <div>
                   <h3>{question.prompt}</h3>
                   <p id="password-help">
-                    Kirjoita salasanaharjoituksessa tallentamasi keksitty
-                    salasana. Älä kirjoita oikean tilisi salasanaa.
+                    Käytä muistiinpanoasi tai avaa harjoituksen
+                    salasanojen hallintaohjelma. Älä kirjoita oikean tilisi salasanaa.
+                    Harjoitussalasanaa ei saa käyttää muualla.
                   </p>
                   {missingPracticePassword ? (
                     <p className={styles.feedback}>
@@ -189,6 +230,16 @@ export default function Quiz({
                     </p>
                   ) : (
                     <>
+                      <PracticePasswordManager
+                        disabled={checking || correct}
+                        onFill={(saved) => {
+                          setPassword(saved);
+                          setVisible(false);
+                          setFeedback(
+                            "Harjoitussalasana täytetty. Paina Tarkista vastaus.",
+                          );
+                        }}
+                      />
                       <label
                         className={styles.passwordLabel}
                         htmlFor="quiz-password"
@@ -240,7 +291,7 @@ export default function Quiz({
                   <p id="answer-instructions" className={styles.instructions}>
                     {question.type === "single"
                       ? "Valitse yksi vastaus."
-                      : "Valitse kaikki oikeat vastaukset. Oikeita vastauksia on useita."}
+                      : "Valitse kaikki oikeat vastaukset."}
                   </p>
                   {question.options.map((option) => (
                     <label
@@ -289,9 +340,7 @@ export default function Quiz({
                     type="button"
                     onClick={advance}
                   >
-                    {index === total - 1
-                      ? "Päätä tietovisa ja saa merkki"
-                      : "Seuraava kysymys →"}
+                    {index === total - 1 ? "Valmis!" : "Seuraava kysymys →"}
                   </button>
                 )}
               </div>

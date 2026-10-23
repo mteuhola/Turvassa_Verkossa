@@ -1,0 +1,60 @@
+.companion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.portrait {
+  width: 8rem;
+  flex-shrink: 0;
+}
+.companion > p {
+  flex: 1 1 15rem;
+  min-width: 0;
+  margin: 0;
+}
+.portrait img,
+.portrait svg {
+  max-width: 100%;
+  height: auto;
+}
+.accounts {
+  list-style: none;
+  padding: 0 !important;
+  margin-block: 24px;
+}
+.accounts li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.secret {
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.generator {
+  margin-block: 24px;
+}
+.generator p {
+  margin-bottom: 8px;
+}
+.entryNameLabel {
+  margin-top: 24px;
+}
+.manager,
+.login {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+@media (max-width: 30rem) {
+  .companion {
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

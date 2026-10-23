@@ -1,0 +1,29 @@
+.root {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--border);
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+.root p {
+  margin: 0 0 12px;
+}
+.root button {
+  min-height: 48px;
+  max-width: 100%;
+  padding: 12px 20px;
+  margin-bottom: 12px;
+  border: 1px solid var(--warm-accent);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--warm-accent);
+  font: inherit;
+  cursor: pointer;
+}
+.root button:hover {
+  background: var(--page-bg);
+}
+.root button:focus-visible {
+  outline: 3px solid var(--warm-accent);
+  outline-offset: 4px;
+}

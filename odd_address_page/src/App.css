@@ -1,0 +1,43 @@
+.exercise {
+  width: min(100%, 640px);
+  margin: auto;
+  padding-block: 48px;
+  text-align: center;
+}
+
+.exercise-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: 36px;
+}
+
+.exercise h1 {
+  margin: 0 0 20px;
+  color: var(--text-h);
+  font-size: clamp(28px, 5vw, 40px);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.exercise p {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.exercise .closing {
+  margin-top: 24px;
+  font-size: 30px;
+}
+
+@media (max-width: 480px) {
+  .exercise { padding-block: 32px; }
+  .exercise-image { margin-bottom: 28px; }
+}

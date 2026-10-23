@@ -1,0 +1,15 @@
+:root {
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  color: #f3eee5;
+  background: #185fa5;
+  --text-h: #f3eee5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 280px; }
+#root { min-height: 100svh; display: flex; padding-inline: 24px; }
+::selection { background: #e9ddfa; color: #222128; }

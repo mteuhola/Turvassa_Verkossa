@@ -23,16 +23,14 @@ beforeEach(() => {
   storage.setItem = (key, value) => values.set(key, value);
 });
 
-test("save requires all examples, typed input, a non-example, and exactly 4/4", () => {
+test("save needs no example review, but requires typed input, a non-example, and exactly 4/4", () => {
   const ready = {
-    examplesInspected: true,
     hasTyped: true,
     isExample: false,
     score: 4,
   };
   assert.equal(canSavePracticePassword(ready), true);
   for (const change of [
-    { examplesInspected: false },
     { hasTyped: false },
     { isExample: true },
     { score: 3 },
@@ -62,6 +60,48 @@ test("saving a replacement changes the answer and uses a fresh salt", async () =
   assert.notEqual(first.salt, readPracticePassword().salt);
   assert.equal(await matchesPracticePassword("first practice password"), false);
   assert.equal(await matchesPracticePassword("second practice password"), true);
+});
+
+test("manager entry persists the exact fictional password with its matching verifier", async () => {
+  const password = " fictional practice password 42! ";
+  await savePracticePassword(password, "manager");
+  assert.equal(readPracticePassword().managerPassword, password);
+  assert.equal(
+    await matchesPracticePassword(readPracticePassword().managerPassword),
+    true,
+  );
+  await savePracticePassword("replacement practice password", "manager");
+  assert.equal(
+    readPracticePassword().managerPassword,
+    "replacement practice password",
+  );
+  assert.equal(await matchesPracticePassword(password), false);
+  await savePracticePassword("written practice password", "written");
+  assert.equal(readPracticePassword().managerPassword, undefined);
+  assert.equal(
+    values
+      .get(practicePasswordStorageKey)
+      .includes("replacement practice password"),
+    false,
+  );
+});
+
+test("failed manager replacement preserves both old entry and verifier", async () => {
+  await savePracticePassword("original fictional password", "manager");
+  storage.setItem = () => {
+    throw new Error("Storage blocked");
+  };
+  await assert.rejects(
+    savePracticePassword("new fictional password", "manager"),
+  );
+  assert.equal(
+    readPracticePassword().managerPassword,
+    "original fictional password",
+  );
+  assert.equal(
+    await matchesPracticePassword("original fictional password"),
+    true,
+  );
 });
 
 test("missing or corrupted saved data does not match", async () => {

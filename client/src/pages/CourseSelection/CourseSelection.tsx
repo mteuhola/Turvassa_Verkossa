@@ -1,191 +1,117 @@
+import DebugProgressReset from "../../components/DebugProgressReset";
+import { Link } from "react-router-dom";
 import CourseProgress from "../../components/CourseProgress";
+import { LockIcon, EmailIcon, MaskIcon } from "../../components/icons";
 import type { TopicCourse } from "../TopicSelection/topicCourses";
-import { useNavigate } from "react-router-dom";
-import styles from "./CourseSelection.module.css";
 import TextSizeControl, {
   type TextSizeProps,
 } from "../../components/TextSizeControl";
-import {
-  LockIcon,
-  EmailIcon,
-  MaskIcon,
-  ClockIcon,
-  ArrowIcon,
-} from "../../components/icons.tsx";
+import styles from "./CourseSelection.module.css";
 
-interface Course {
-  id: string;
-  number: string;
-  title: string;
-  description: string;
-  duration: string;
-  exercises: string;
-  accentColor: string;
-  iconBg: string;
-  numberColor: string;
-  badgeBg: string;
-  badgeColor: string;
-  route: string;
-  icon: React.ReactNode;
-}
-
-const courses: Course[] = [
+const courseDetails: Record<string, { description: string; duration: string }> =
   {
-    id: "passwords",
-    number: "Aihe 1",
-    title: "Salasanojen turvallisuus",
-    description:
-      "Opi luomaan salasanoja, joita on vaikea murtaa mutta helppo muistaa, ja ymmärrä miksi se on tärkeää.",
-    duration: "Noin 10 minuuttia",
-    exercises: "3 harjoitusta · 1 tietovisa",
-    accentColor: "#1D9E75",
-    iconBg: "#E1F5EE",
-    numberColor: "#0F6E56",
-    badgeBg: "#E1F5EE",
-    badgeColor: "#085041",
-    route: "/course/passwords",
-    icon: <LockIcon color="#0F6E56" />,
-  },
-  {
-    id: "phishing",
-    number: "Aihe 2",
-    title: "Vaaralliset viestit",
-    description:
-      "Tunnista huijaussähköpostit ja vaaralliset linkit ennen kuin ne aiheuttavat vahinkoa - harjoittele esimerkeillä.",
-    duration: "Noin 12 minuuttia",
-    exercises: "4 harjoitusta · 1 tietovisa",
-    accentColor: "#185FA5",
-    iconBg: "#E6F1FB",
-    numberColor: "#185FA5",
-    badgeBg: "#E6F1FB",
-    badgeColor: "#0C447C",
-    route: "/course/phishing",
-    icon: <EmailIcon color="#185FA5" />,
-  },
-  {
-    id: "romance-fraud",
-    number: "Aihe 3",
-    title: "Liian hyvää ollakseen totta",
-    description:
-      "Opi tunnistamaan verkossa tapahtuvaa tunnemanipulaatiota ja tunnistamaan, jos jokin tuntuu liian hyvältä ollakseen totta.",
-    duration: "Noin 15 minuuttia",
-    exercises: "4 harjoitusta · 1 tietovisa",
-    accentColor: "#993556",
-    iconBg: "#FBEAF0",
-    numberColor: "#993556",
-    badgeBg: "#FBEAF0",
-    badgeColor: "#72243E",
-    route: "/course/romance-fraud",
-    icon: <MaskIcon color="#993556" />,
-  },
-];
+    passwords: {
+      description:
+        "Kokeile, millainen salasana on helppo muistaa mutta vaikea arvata.",
+      duration: "Noin 10 minuuttia",
+    },
+    phishing: {
+      description:
+        "Harjoittele tunnistamaan huijausviestit ja epäilyttävät linkit.",
+      duration: "Noin 12 minuuttia",
+    },
+    "financial-fraud": {
+      description:
+        "Harjoittele tunnistamaan epäilyttävät sijoitustarjoukset ja verkossa esitetyt rahapyynnöt.",
+      duration: "Noin 15 minuuttia",
+    },
+  };
 
 export default function CourseSelection({
   progressCourses,
+  onResetProgress,
   ...textSizeProps
-}: TextSizeProps & { progressCourses: TopicCourse[] }) {
-  const navigate = useNavigate();
-
+}: TextSizeProps & {
+  progressCourses: TopicCourse[];
+  onResetProgress: () => boolean;
+}) {
   return (
     <div className={styles.root}>
-      <nav className={styles.nav}>
-        <div className={styles.logo}>
-          <div className={styles.logoIcon}>
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path
-                d="M9 2L3 6v8h4v-3h4v3h4V6L9 2z"
-                fill="#fff"
-                opacity="0.9"
-              />
-              <circle cx="9" cy="9" r="1.5" fill="#1a1a18" />
-            </svg>
-          </div>
-          <span className={styles.logoText}>Turvassa Verkossa</span>
-        </div>
+      <nav className={styles.nav} aria-label="Päänavigaatio">
+        <span className={styles.logoText}>Turvassa Verkossa</span>
         <div className="nav-actions">
           <TextSizeControl {...textSizeProps} />
         </div>
       </nav>
-
-      <div className={styles.hero}>
-        <h1 className={styles.title}>Kurssivaihtoehdot</h1>
-        <p className={styles.subtitle}>
-          Jokainen aihe on lyhyt itsenäinen kokonaisuus, jossa voit edetä omaan
-          tahtiisi.
-        </p>
-      </div>
-
-      <div className={styles.grid}>
-        {courses.map((course) => {
-          const progress = progressCourses.find(
-            (item) => item.id === course.id,
-          )!;
-          return (
-            <button
-              key={course.id}
-              className={styles.card}
-              data-course={course.id}
-              onClick={() => navigate(course.route)}
-              aria-label={`${course.title}: ${progress.topics.filter((topic) => topic.isComplete).length}/${progress.topics.length} aihetta suoritettu. ${progress.isComplete ? "Kurssi suoritettu. Kertaa kurssia." : "Avaa kurssin aiheet."}`}
-            >
-              <div
-                className={styles.cardAccent}
-                style={{ background: course.accentColor }}
-              />
-
-              <div
-                className={styles.cardIcon}
-                style={{ background: course.iconBg }}
-              >
-                {course.icon}
-              </div>
-
-              <div
-                className={styles.cardNumber}
-                style={{ color: course.numberColor }}
-              >
-                {course.number}
-              </div>
-
-              <h2 className={styles.cardTitle}>{course.title}</h2>
-              <p className={styles.cardDesc}>{course.description}</p>
-
-              <div
-                className={styles.badge}
-                style={{ background: course.badgeBg, color: course.badgeColor }}
-              >
-                <ClockIcon color={course.badgeColor} />
-                {course.duration}
-              </div>
-
-              <CourseProgress course={progress} />
-              <div className={styles.cardMeta}>
-                <div className={styles.cardDuration}>
-                  <ClockIcon />
-                  {progress.topics.length} aihetta
-                </div>
-                <div
-                  className={styles.cardBtn}
-                  style={{ background: course.accentColor }}
-                >
-                  {progress.isComplete ? "Kertaa" : "Aloita"}
-                  <ArrowIcon />
-                </div>
-              </div>
-            </button>
-          );
-        })}
-      </div>
-
-      <div className={styles.divider} />
-
-      <div className={styles.footer}>
-        <div className={styles.footerDot} />
-        <span className={styles.footerText}>
-          Voit palata tähän näkymään milloin tahansa ja jatkaa toisesta
-          aiheesta.
-        </span>
-      </div>
+      <main className={styles.main}>
+        <header className={styles.hero}>
+          <h1>Tervetuloa oppimaan!</h1>
+          <p>
+            Tämän oppimisympäristön avulla voit harjoitella turvallista verkon käyttöä tuttujen arjen
+            tilanteiden avulla. Et tarvitse ennakkotietoja, ja voit edetä omaan
+            tahtiisi.
+          </p>
+        </header>
+        <section aria-labelledby="courses-title">
+          <div className={styles.sectionHeading}>
+            <h2 id="courses-title">Valitse kurssi, josta haluat aloittaa.</h2>
+          </div>
+          <ul className={styles.courses}>
+            {progressCourses.map((course) => {
+              const details = courseDetails[course.id];
+              const started = course.topics.some((topic) => topic.isComplete);
+              return (
+                <li key={course.id} data-course={course.id}>
+                  <Link
+                    to={course.path}
+                    className={styles.course}
+                    aria-labelledby={`${course.id}-title`}
+                  >
+                    <span className={styles.courseIcon} aria-hidden="true">
+                      {course.id === "passwords" && (
+                        <LockIcon color="currentColor" />
+                      )}
+                      {course.id === "phishing" && (
+                        <EmailIcon color="currentColor" />
+                      )}
+                      {course.id === "financial-fraud" && (
+                        <MaskIcon color="currentColor" />
+                      )}
+                    </span>
+                    <div className={styles.content}>
+                      <h3 id={`${course.id}-title`}>{course.title}</h3>
+                      {details && <p>{details.description}</p>}
+                      <span className={styles.meta}>
+                        {details && <span>{details.duration}</span>}
+                        <span>
+                          {course.topics.length}{" "}
+                          {course.topics.length === 1 ? "aihe" : "aihetta"}
+                        </span>
+                      </span>
+                    </div>
+                    <div className={styles.courseAction}>
+                      <CourseProgress course={course} />
+                      <span className={styles.open}>
+                        {course.isComplete
+                          ? "Kertaa kurssia"
+                          : started
+                            ? "Jatka kurssia"
+                            : "Avaa kurssi"}
+                        <span aria-hidden="true">→</span>
+                      </span>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+        <footer className={styles.footer}>
+        </footer>
+        {import.meta.env.VITE_ENABLE_DEBUG_TOOLS === "true" && (
+          <DebugProgressReset onReset={onResetProgress} />
+        )}
+      </main>
     </div>
   );
 }

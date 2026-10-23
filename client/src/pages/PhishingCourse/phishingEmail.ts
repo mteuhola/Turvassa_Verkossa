@@ -2,11 +2,11 @@ export const emailParts = [
   {
     id: "sender",
     label: "Lähettäjä",
-    text: "Tonttupankki <turva@tonttupankki-tarkistus.example>",
+    text: "Tonttupankki <pomo@tonttupankki-turvatilit.yksityinen>",
     suspicious: true,
     title: "Lähettäjän osoite",
     explanation:
-      "Näyttönimi voi olla mikä tahansa. Lähettäjän verkkotunnus tonttupankki-tarkistus.example eroaa harjoituksen pankin osoitteesta tonttupankki.example. Myöskään tutulta näyttävä lähettäjä ei yksin takaa aitoutta.",
+      "Näyttönimi voi olla mikä tahansa. Lähettäjän verkkotunnus tonttupankki-turvatilit.yksityinen eroaa harjoituksen pankin osoitteesta tonttupankki.yksityinen. Myöskään tutulta näyttävä lähettäjä ei yksin takaa aitoutta.",
     hint: "Vertaa lähettäjän @-merkin jälkeistä osaa pankin osoitteeseen.",
   },
   {
@@ -52,18 +52,18 @@ export const emailParts = [
   {
     id: "link",
     label: "Linkki ja sen kohde",
-    text: "Vahvista tilisi: https://tonttupankki-turva.example/kirjaudu",
+    text: "Vahvista tilisi: https://tonttupankki-turvatilit.yksityinen/kirjaudu",
     suspicious: true,
     title: "Väärään osoitteeseen vievä linkki",
     explanation:
-      "Linkin osoite ei ole harjoituksen pankin tonttupankki.example. Pankin nimi osoitteen osana tai https-alku ei takaa aitoutta. Avaa pankin sovellus tai kirjoita tuntemasi osoite itse.",
+      "Linkin osoite ei ole harjoituksen pankin tonttupankki.yksityinen. Pankin nimi osoitteen osana tai https-alku ei takaa aitoutta. Avaa pankin sovellus tai kirjoita tuntemasi osoite itse.",
     hint: "Vertaa linkin verkkotunnusta harjoituksen pankin osoitteeseen.",
   },
   {
     id: "fakeLink",
     label: "Linkki ja sen kohde (huijauslinkki)",
-    text: "Vaihtoehtoisesti voit kirjautua sisään tästä: https://tonttupankki.example/kirjaudu",
-    href: "https://omituinenosoite.fi/huijaus",
+    text: "Vaihtoehtoisesti voit kirjautua sisään tästä: https://tonttupankki.yksityinen/kirjaudu",
+    href: "https://omituinen-osoite.netlify.app/",
     suspicious: true,
     title:
       "Näennäisesti oikeaan osoitteeseen vievä linkki, mutta ohjaa kuitenkin väärään kohteeseen",

@@ -35,10 +35,15 @@ export function parseProgress(stored: string | null): string[] {
         parsed
           .map((path: unknown) =>
             typeof path === "string"
-              ? path.replace(
-                  /^\/course\/romance-fraud(?=\/|$)/,
-                  "/course/financial-fraud",
-                )
+              ? path
+                  .replace(
+                    /^\/course\/romance-fraud(?=\/|$)/,
+                    "/course/financial-fraud",
+                  )
+                  .replace(
+                    /^\/course\/phishing\/suspicious-email$/,
+                    "/course/phishing/introduction",
+                  )
               : path,
           )
           .filter(

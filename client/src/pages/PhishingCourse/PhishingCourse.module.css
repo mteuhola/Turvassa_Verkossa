@@ -7,6 +7,237 @@
   line-height: 1.65;
   overflow-wrap: anywhere;
 }
+.clueDialog {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  max-width: calc(100vw - 32px);
+  padding: 24px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 2px solid var(--course-ink);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  overflow-wrap: anywhere;
+}
+.clueDialog::backdrop {
+  background: rgb(12 28 44 / 65%);
+}
+.clueDialog h2 {
+  margin-top: 0;
+}
+.root .primaryAction {
+  display: inline-block;
+  background: var(--course-ink);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+.root .primaryAction:hover {
+  background: #0c447c;
+}
+.findingsReview {
+  margin-top: 24px;
+}
+.findingsReview > summary {
+  padding-block: 12px;
+  min-height: 48px;
+  color: var(--course-ink);
+  cursor: pointer;
+}
+.responsePractice {
+  max-width: 65ch;
+}
+.kaarloMain {
+  max-width: 70ch;
+}
+.kaarloInboxMain {
+  max-width: 90rem;
+}
+.kaarloInboxMain > .kaarloConcern {
+  max-width: 70ch;
+}
+.mailDesktop {
+  border: 3px solid #334b60;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.mailAppBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 16px 24px;
+  background: #173c5c;
+  color: #fff;
+}
+.mailWorkspace {
+  display: grid;
+  grid-template-columns: minmax(10rem, 14rem) minmax(0, 1fr);
+}
+.mailFolders {
+  padding: 16px;
+  background: #e6f1fb;
+}
+.mailFolders button {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  text-align: left;
+  font: inherit;
+  color: #0c447c;
+  background: transparent;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.mailFolders button[aria-pressed="true"] {
+  border-color: #0c447c;
+  background: var(--surface);
+  font-weight: 600;
+}
+.mailContent {
+  min-width: 0;
+  padding: 24px;
+}
+.inboxList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  border-top: 1px solid var(--border);
+}
+.inboxList button {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 16px;
+  text-align: left;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.inboxList button:hover,
+.inboxList button[aria-pressed="true"] {
+  background: #e6f1fb;
+  color: #0c447c;
+}
+.inboxList button[aria-pressed="true"] {
+  outline: 2px solid var(--course-ink);
+  outline-offset: -2px;
+}
+.mailCommandBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+@media (max-width: 60rem) {
+  .mailWorkspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mailFolders {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .mailFolders button {
+    width: auto;
+    margin: 0;
+  }
+  .mailContent {
+    padding: 16px;
+  }
+}
+.kaarloConcern {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.kaarloPortrait {
+  width: 8rem;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+.kaarloConcern > p {
+  flex: 1 1 15rem;
+  min-width: 0;
+  margin: 0;
+}
+.emailMetadata {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px 16px;
+}
+.emailMetadata dt {
+  font-weight: 500;
+}
+.emailMetadata dd {
+  margin: 0;
+}
+.destinationAddress {
+  padding: 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow-wrap: anywhere;
+}
+@media (max-width: 480px) {
+  .emailMetadata {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .emailMetadata dd {
+    margin-bottom: 12px;
+  }
+}
+.sequenceList {
+  padding-left: 1.5em;
+  margin-block: 24px;
+}
+.sequenceList li {
+  padding: 12px 0 24px 8px;
+  border-bottom: 1px solid var(--border);
+}
+.sequenceList li::marker {
+  color: var(--course-ink);
+  font-weight: 600;
+}
+.sequenceList li:focus {
+  outline: 3px solid var(--course-ink);
+  outline-offset: 4px;
+}
+.sequencePlayback {
+  margin-block: 32px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.responseScenario {
+  margin-block: 32px;
+}
+.responseOptions {
+  display: grid;
+  gap: 12px;
+}
+.responseOptions button {
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.responseOptions button[aria-pressed="true"] {
+  border-color: var(--course-ink);
+  background: #e6f1fb;
+  color: var(--course-ink);
+}
 .root * {
   box-sizing: border-box;
 }

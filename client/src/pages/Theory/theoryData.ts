@@ -49,7 +49,11 @@ export const courseIntroductions: Record<string, TheoryContent> = {
     sections: [
       {
         heading: "Tervetuloa tutkimaan epäilyttäviä viestejä!",
-        paragraphs: [],
+        paragraphs: [
+          "Huijausviesti voi näyttää pankin, pakettipalvelun tai tutun ihmisen lähettämältä. Sen tavoitteena voi olla saada sinut luovuttamaan tietojasi, maksamaan tai avaamaan haitallinen liite. Pelkkä lähettäjän nimi tai tuttu logo ei todista viestin aitoutta.",
+          "Pysähdy erityisesti silloin, kun viesti kiirehtii, uhkailee tai pyytää salasanoja. Tarkista lähettäjän osoite ja mieti, odotitko viestiä. Myös odottamaton liite tai oudolta näyttävä verkko-osoite voi olla varoitusmerkki. Virheetön kieli ei yksin tee viestistä turvallista.",
+          "Seuraavaksi tutkit kuvitteellista sähköpostia. Etsi sen varoitusmerkit omaan tahtiisi. Saat havainnoista palautetta ja voit pyytää vihjeitä. Johdanto valmistuu, kun olet löytänyt kaikki harjoituksen varoitusmerkit.",
+        ],
       },
     ],
   },

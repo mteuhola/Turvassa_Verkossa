@@ -13,17 +13,17 @@ const courseDetails: Record<string, { description: string; duration: string }> =
     passwords: {
       description:
         "Kokeile, millainen salasana on helppo muistaa mutta vaikea arvata.",
-      duration: "Noin 10 minuuttia",
+      duration: "Noin 15 minuuttia",
     },
     phishing: {
       description:
         "Harjoittele tunnistamaan huijausviestit ja epäilyttävät linkit.",
-      duration: "Noin 12 minuuttia",
+      duration: "Noin 15 minuuttia",
     },
     "financial-fraud": {
       description:
         "Harjoittele tunnistamaan epäilyttävät sijoitustarjoukset ja verkossa esitetyt rahapyynnöt.",
-      duration: "Noin 15 minuuttia",
+      duration: "Noin 20 minuuttia",
     },
   };
 

@@ -1,13 +1,14 @@
 import CompletionNotice from "../../components/CompletionNotice";
 import CompletionBadge from "../../components/CompletionBadge";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import TextSizeControl, {
   type TextSizeProps,
 } from "../../components/TextSizeControl";
 import { clues, emailParts } from "./phishingEmail";
 import styles from "./PhishingCourse.module.css";
+import ClueExplanation from "./ClueExplanation";
 
 export default function PhishingCourse({
   isComplete,
@@ -15,24 +16,34 @@ export default function PhishingCourse({
   ...textSizeProps
 }: TextSizeProps & ActivityProgressProps) {
   const [found, setFound] = useState<string[]>([]);
+  const [activeClue, setActiveClue] = useState<{
+    part: (typeof emailParts)[number];
+    anchor: HTMLElement;
+  } | null>(null);
+  const nextTopic = useRef<HTMLAnchorElement>(null);
   const [feedback, setFeedback] = useState(
     "Valitse viestistä kohta, jota pidät epäilyttävänä.",
   );
   const firstPart = useRef<HTMLButtonElement>(null);
+  const heading = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    heading.current?.focus({ preventScroll: true });
+  }, []);
   const complete = found.length === clues.length;
+  useEffect(() => {
+    if (complete) {
+      nextTopic.current?.focus();
+      nextTopic.current?.scrollIntoView({ block: "center" });
+    }
+  }, [complete]);
 
-  function inspect(part: (typeof emailParts)[number]) {
+  function inspect(part: (typeof emailParts)[number], anchor: HTMLElement) {
+    if (activeClue) return;
     if (!part.suspicious) {
       setFeedback(`${part.title}: ${part.explanation}`);
-    } else if (found.includes(part.id)) {
-      setFeedback(`Löysit tämän jo. ${part.title}: ${part.explanation}`);
     } else {
-      const nextCount = found.length + 1;
-      if (nextCount === clues.length) onComplete();
-      setFound((previous) =>
-        previous.includes(part.id) ? previous : [...previous, part.id],
-      );
-      setFeedback(`Hyvä havainto! ${part.title}: ${part.explanation}`);
+      setActiveClue({ part, anchor });
     }
   }
 
@@ -56,7 +67,7 @@ export default function PhishingCourse({
             type="button"
             className={styles.emailPartOverlay}
             aria-label={`${part.label}: ${part.text}${discovered ? ". Varoitusmerkki löydetty." : ""}`}
-            onClick={() => inspect(part)}
+            onClick={(event) => inspect(part, event.currentTarget)}
           />
           {prompt}
           <a
@@ -64,7 +75,7 @@ export default function PhishingCourse({
             className={styles.emailLink}
             onClick={(event) => {
               event.preventDefault();
-              inspect(part);
+              inspect(part, event.currentTarget);
             }}
             onAuxClick={(event) => event.preventDefault()}
           >
@@ -86,7 +97,7 @@ export default function PhishingCourse({
         className={`${styles.emailPart} ${id === "link" ? styles.emailLink : ""}`}
         data-found={discovered}
         aria-label={`${part.label}: ${part.text}${discovered ? ". Varoitusmerkki löydetty." : ""}`}
-        onClick={() => inspect(part)}
+        onClick={(event) => inspect(part, event.currentTarget)}
       >
         {part.text}
         {discovered && (
@@ -112,13 +123,16 @@ export default function PhishingCourse({
       <main className={styles.main}>
         <div className={styles.workspace}>
           <header className={styles.intro}>
-            <p className={styles.eyebrow}>Aihe 2 · Vaaralliset viestit</p>
-            <h1>Huomaatko huijauksen merkit?</h1>
+            <h1 ref={heading} tabIndex={-1}>
+              Huomaatko huijauksen merkit?
+            </h1>
             <p>
               Tutki sähköpostia ja etsi siitä varoitusmerkkejä. Valitse
               epäilyttävä kohta suoraan viestistä. Voit tutkia viestin eri
               osioita, kuten aihetta, lähettäjää, tekstiä ja liitettä. Kaikki
-              valittavat kohdat eivät ole varoitusmerkkejä.
+              valittavat kohdat eivät ole varoitusmerkkejä. Kun löydät
+              varoitusmerkin, lue sen selitys ja valitse ”Ymmärsin, jatka” ennen
+              seuraavaa havaintoa.
             </p>
             <p className={styles.notice}>
               <strong>Tämä on kuvitteellinen harjoitus.</strong> Oikean pankin
@@ -127,9 +141,7 @@ export default function PhishingCourse({
               linkkejä tai liitteitä. Voit kokeilla rauhassa ilman aikarajaa.
             </p>
             <div role="status" aria-live="polite">
-              {isComplete && (
-                <CompletionBadge label="Aihe suoritettu - ansaitsit merkin!" />
-              )}
+              {isComplete && <CompletionBadge label="Aihe suoritettu!" />}
             </div>
           </header>
           <div className={styles.layout}>
@@ -196,6 +208,31 @@ export default function PhishingCourse({
               </div>
             </section>
             <aside className={styles.panel} aria-labelledby="progress-title">
+              {complete && (
+                <CompletionNotice labelledBy="complete-title">
+                  <h3 id="complete-title">Kaikki merkit löytyivät!</h3>
+                  <p>Johdanto suoritettu.</p>
+                  <Link
+                    ref={nextTopic}
+                    className={`${styles.action} ${styles.primaryAction}`}
+                    to="/course/phishing/safe-responses"
+                  >
+                    Jatka: Miten toimit epäilyttävän viestin kanssa?
+                  </Link>
+                  <p>
+                    Hienoa työtä! Harjoittelit viestin tarkistamista. Oikeassa
+                    huijausviestissä voi olla vain yksi näistä merkeistä tai
+                    aivan erilaisia merkkejä.
+                  </p>
+                  <p>
+                    <strong>Turvallinen lähestymistapa:</strong> Epäillessäsi
+                    viestin aitoutta, älä vastaa, avaa liitettä tai klikkaa
+                    viestin linkkiä. Tarkista asia pankin omasta sovelluksesta
+                    tai tutusta puhelinnumerosta. Ilmoita viesti roskapostiksi
+                    tai tietojenkalasteluksi.
+                  </p>
+                </CompletionNotice>
+              )}
               <h2 id="progress-title">Sinun havaintosi</h2>
               <p className={styles.count}>
                 Löydetty{" "}
@@ -239,8 +276,8 @@ export default function PhishingCourse({
                 </button>
               </div>
               {found.length > 0 && (
-                <section aria-labelledby="found-title">
-                  <h3 id="found-title">Löydetyt merkit</h3>
+                <details className={styles.findingsReview}>
+                  <summary>Kertaa löydetyt merkit ({found.length})</summary>
                   <ul className={styles.findings}>
                     {clues
                       .filter((clue) => found.includes(clue.id))
@@ -253,34 +290,35 @@ export default function PhishingCourse({
                         </li>
                       ))}
                   </ul>
-                </section>
-              )}
-              {complete && (
-                <CompletionNotice labelledBy="complete-title">
-                  <h3 id="complete-title">Kaikki merkit löytyivät!</h3>
-                  <p>
-                    Hienoa työtä! Harjoittelit viestin tarkistamista. Oikeassa
-                    huijausviestissä voi olla vain yksi näistä merkeistä tai
-                    aivan erilaisia merkkejä.
-                  </p>
-                  <p>
-                    <strong>Turvallinen lähestymistapa:</strong> Epäillessäsi
-                    viestin aitoutta, älä vastaa, avaa liitettä tai klikkaa
-                    viestin linkkiä. Tarkista asia pankin omasta sovelluksesta
-                    tai tutusta puhelinnumerosta. Ilmoita viesti roskapostiksi
-                    tai tietojenkalasteluksi.
-                  </p>
-                </CompletionNotice>
+                </details>
               )}
               <p className={styles.small}>
-                Kun löydät kaikki varoitusmerkit, ansaitset suoritusmerkin.
-                Merkki tallennetaan tähän selaimeen, jos tallennus on sallittu.
-                Uusi yritys ei poista ansaittua merkkiä.
+                Kun löydät kaikki varoitusmerkit, johdanto merkitään
+                suoritetuksi. Uusi yritys ei poista johdannon suoritusta.
               </p>
             </aside>
           </div>
         </div>
       </main>
+      {activeClue && (
+        <ClueExplanation
+          title={activeClue.part.title}
+          explanation={activeClue.part.explanation}
+          anchor={activeClue.anchor}
+          reviewed={found.includes(activeClue.part.id)}
+          onDismiss={() => setActiveClue(null)}
+          onConfirm={() => {
+            const id = activeClue.part.id;
+            if (!found.includes(id)) {
+              const next = [...found, id];
+              setFound(next);
+              setFeedback(`Havainto kirjattu: ${activeClue.part.title}.`);
+              if (next.length === clues.length) onComplete();
+            }
+            setActiveClue(null);
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -19,6 +19,7 @@
   color: #352d26;
 }
 html {
+  font-size: 175%;
   scrollbar-color: #978774 var(--page-bg);
 }
 input {

@@ -430,11 +430,6 @@ export default function PasswordCourse({
               >
                 Palaa teoriaan
               </button>
-              <p className={styles.small}>
-                Arvio ei takaa turvallisuutta. Mittari ei tunnista kaikkia
-                suomalaisia sanoja, henkilötietoja tai vuotaneita salasanoja. Se
-                ei tiedä, onko salasanaa käytetty muualla.
-              </p>
             </section>
           )}
           {stage === "storage" && (

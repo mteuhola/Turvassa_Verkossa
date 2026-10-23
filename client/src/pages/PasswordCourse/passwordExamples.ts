@@ -41,10 +41,10 @@ export const passwordExamples = [
   {
     name: "Useita sanoja",
     value: "majakka sieni viulu pilvi",
-    question: "Mikä tekee tästä esimerkistä vaikeamman arvata?",
+    question: "Mikä tekee tästä esimerkistä VAIKEAMMAN arvata?",
     choices: [
       "Se on pitkä.",
-      "Saman salasanan käyttäminen kaikkialla vahvistaa sitä.",
+      "Salasana sisältää vain pieniä kirjaimia.",
       "Se sisältää useita toisistaan riippumattomia sanoja.",
     ],
     correctAnswers: [0, 2],

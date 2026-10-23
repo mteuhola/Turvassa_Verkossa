@@ -36,17 +36,17 @@ export const sannaBestPractices = [
   },
   {
     id: "title",
-    text: "Kirjoitetaan salasananhallintaan tallennettujen salasanojen nimiksi itse salasana.",
+    text: "Kirjoitetaan salasanojen hallintaohjelmaan tallennettujen salasanojen nimiksi itse salasana.",
     correct: false,
   },
   {
     id: "names",
-    text: "Annetaan salasananhallintaan tallennetuille salasanoille nimet, joista palvelun tunnistaa helposti.",
+    text: "Annetaan salasanojen hallintaohjelmaan tallennetuille salasanoille nimet, joista palvelun tunnistaa helposti.",
     correct: true,
   },
   {
     id: "manager",
-    text: "Tallennetaan eri salasanat salasananhallintaan, jotta niitä ei tarvitse muistaa ulkoa.",
+    text: "Tallennetaan eri salasanat salasanojen hallintaohjelmaan, jotta niitä ei tarvitse muistaa ulkoa.",
     correct: true,
   },
   {

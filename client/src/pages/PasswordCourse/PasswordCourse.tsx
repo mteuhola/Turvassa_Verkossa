@@ -186,13 +186,15 @@ export default function PasswordCourse({
               <p>
                 Tässä näet erilaisia esimerkkisalasanoja ja niiden arvioidun vahvuuden. 
                 Arvio perustuu johdantokappaleessa esiteltyihin salasanan ominaisuuksiin.
-                Klikkaamalla salasanaa näet arvion sekä kysymyksiä salasanan vahvuuteen liittyen.
-                <br></br>
+                Klikkaamalla salasanaa näet sen vahvuusarvion sekä kysymyksiä salasanan vahvuuteen liittyen.
+                <br />
+                <br />
                 Valitse kaikki oikeat vaihtoehdot. Oikeita voi olla yksi, useita
                 tai ei yhtään. Paina ”Tarkista vastaus”-painiketta, kun haluat tarkistaa vastauksesi. Pääset eteenpäin, kun
                 vastaat kaikkiin viiteen salasanaan liittyviin kysymyksiin oikein ja painat alhaalta löytyvää Valmis-painiketta. Kysymyksiä voi yrittää uudelleen. 
-
-                Huom: Nämä esimerkit ovat julkisia, eivätkä ne sovi oikeiksi salasanoiksi. Älä käytä niitä omissa palveluissasi.
+                <br />
+                <br />
+                Huom: Nämä esimerkit ovat julkisia, eivätkä sovi oikeiksi salasanoiksi. Älä käytä niitä omilla käyttäjilläsi.
               </p>
               <div className={styles.examples}>
                 {examples.map((item, index) => (
@@ -203,7 +205,7 @@ export default function PasswordCourse({
                       {isExampleCorrect(
                         checkedAnswers[index],
                         item.correctAnswers,
-                      ) && <span>Vastattu oikein</span>}
+                      ) && <span><strong>Vastattu oikein</strong></span>}
                     </summary>
                     <div className={styles.exampleResult}>
                       {item.assessment && (
@@ -284,7 +286,7 @@ export default function PasswordCourse({
               </div>
               <p id="review-progress" role="status">
                 Oikeita vastauksia: {correctCount}/{examples.length}.
-                {reviewComplete && " Kaikki oikein! Voit nyt lunastaa merkin."}
+                {reviewComplete && " Kaikki oikein!"}
               </p>
               <div className={styles.actions}>
                 <button
@@ -442,7 +444,7 @@ export default function PasswordCourse({
               </h2>
               <p>
                 Tarvitset salasanaa myöhemmin. Kirjoita se muistiin tai
-                kokeile harjoituksen salasananhallintaa.
+                kokeile harjoituksen salasanojen hallintaohjelmaa.
               </p>
               <p>
                 <strong>
@@ -468,25 +470,25 @@ export default function PasswordCourse({
                     checked={storageMethod === "manager"}
                     onChange={() => setStorageMethod("manager")}
                   />
-                  Kokeilen harjoituksen salasananhallintaa
+                  Kokeilen harjoituksen salasanojen hallintaohjelmaa
                 </label>
               </fieldset>
               {storageMethod && (
                 <>
                   {storageMethod === "manager" && (
                     <>
-                      <h3>Harjoituksen salasananhallinta</h3>
+                      <h3>Harjoituksen salasanojen hallinta</h3>
                       <p>
                         Palvelu: <strong>Turvassa Verkossa -harjoitus</strong>
                       </p>
                       <p>
-                        Tämä ei ole oikea salasananhallintaohjelma, vaan harjoitus siitä, miten hallintasovellukset yleensä toimivat. 
+                        Tämä ei ole oikea salasanojen hallintaohjelma, vaan harjoitus siitä, miten hallintasovellukset yleensä toimivat. 
                         Hallintasovellus antaa sinun hakea salasanan myöhemmin tarvittaessa. Se säilyy tallessa, kunnes vaihdat sen.
                       </p>
                       <div className={styles.entryName}>
                         <p id="storage-name-help">
-                          Salasananhallinnassa salasanoille annetaan yleensä "nimi", jolla se on tunnistettavissa muiden salasanojen joukosta. Tällä nimellä löydät salasanasi harjoituksen
-                          salasananhallinnasta, kun tarvitset sitä myöhemmin:
+                          Salasanojen hallinnassa salasanoille annetaan yleensä "nimi", jolla se on tunnistettavissa muiden salasanojen joukosta. Tällä nimellä löydät salasanasi harjoituksen
+                          salasanojen hallintaohjelmasta, kun tarvitset sitä myöhemmin:
                         </p>
                         <label className={styles.label} htmlFor="storage-name">
                           Salasanan nimi
@@ -557,7 +559,7 @@ export default function PasswordCourse({
                     {isSaving
                       ? "Tallennetaan…"
                       : storageMethod === "manager"
-                        ? "Tallenna salasananhallintaan"
+                        ? "Tallenna salasanojen hallintaohjelmaan"
                         : "Valmis, olen säilyttänyt salasanan"}
                   </button>
                 </>
@@ -591,8 +593,8 @@ export default function PasswordCourse({
               )}
               <p>
                 {mode === "introduction"
-                  ? "Seuraavaksi opit lisää hyvän salasanan ominaisuuksista ja luot oman harjoitussalasanan."
-                  : "Tarvitset harjoitussalasanaasi kurssin lopussa. Voit nyt jatkaa muihin aiheisiin."}
+                  ? "Seuraavaksi voit kokeilla vahvan salasanan luomista ja parantamista, sekä harjoitella salasanojen hallintaohjelman käyttöä."
+                  : "Tarvitset harjoitussalasanaasi kurssin lopussa. Voit nyt jatkaa eteenpäin."}
               </p>
               <div className={styles.actions}>
                 <Link
@@ -625,7 +627,7 @@ export default function PasswordCourse({
                   <h2 id="remember-title">Muista oikeilla tileilläsi</h2>
                   <p>
                     Käytä pitkää ja yksilöllistä salasanaa jokaisessa
-                    palvelussa. Salasananhallintaohjelma auttaa! Ota myös
+                    palvelussa. Salasanojen hallintaohjelma auttaa! Ota myös
                     monivaiheinen tunnistautuminen käyttöön: silloin
                     kirjautuminen vahvistetaan salasanan lisäksi esimerkiksi
                     puhelimella.

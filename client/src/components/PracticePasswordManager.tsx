@@ -13,9 +13,9 @@ export default function PracticePasswordManager({
   const password = readPracticePassword()?.managerPassword;
   return (
     <details className={styles.root} onToggle={() => setVisible(false)}>
-      <summary>Avaa harjoituksen salasananhallinta</summary>
+      <summary>Avaa harjoituksen salasanojen hallintaohjelma</summary>
       <p>
-        Tämä on harjoitus, ei oikea salasananhallintaohjelma. Tänne tallennettua
+        Tämä on harjoitus, ei oikea salasanojen hallintaohjelma. Tänne tallennettua
         salasanaa ei saa käyttää missään oikeassa palvelussa. Se säilyy tässä
         selaimessa luettavassa muodossa, kunnes vaihdat sen tai nollaat
         edistymisen.
@@ -54,7 +54,7 @@ export default function PracticePasswordManager({
         </>
       ) : (
         <p>
-          Salasananhallintaan ei ole tallennettu harjoitussalasanaa. Käytä
+          Salasanojen hallintaan ei ole tallennettu harjoitussalasanaa. Käytä
           muistiinpanoasi tai luo uusi salasana salasanaharjoituksessa.
         </p>
       )}

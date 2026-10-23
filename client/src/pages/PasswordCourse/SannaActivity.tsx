@@ -184,7 +184,7 @@ export default function SannaActivity({
               </ul>
               <p>
                 Vaihdat salasanat yksi kerrallaan ja tallennat ne Sannan
-                harjoitussalasananhallintaan. Lopuksi autat häntä kirjautumaan
+                salasanojen hallintaohjelmaan. Lopuksi autat häntä kirjautumaan
                 yhteen palveluista.
               </p>
               <p className={styles.small}>
@@ -286,8 +286,8 @@ export default function SannaActivity({
               </h2>
               <p>
                 {index === 0
-                  ? "Sanna: Aloitetaan sähköpostista. Voisitko keksiä minulle uuden salasanan tai luoda sen salasananhallinnalla? Voisitko myös auttaa minua keksimään nimen, josta tunnistan palvelun salasananhallinnassa?"
-                  : index === 1 ? "Sanna: Tehdään vaatekauppaan eri salasana kuin sähköpostiin. Saisiko tämänkin sanan salasananhallintaan?" : "Sanna: Tehdään kirjakerhoonkin eri salasana kuin muihin. Nyt uskon jo, että salasananhallinta pitää sen tallessa."}
+                  ? "Sanna: Aloitetaan sähköpostista. Voisitko keksiä minulle uuden salasanan tai luoda sen salasanojen hallintaohjelmalla? Voisitko myös auttaa minua keksimään nimen, josta tunnistan palvelun salasanojen hallintaohjelmassa?"
+                  : index === 1 ? "Sanna: Tehdään vaatekauppaan eri salasana kuin sähköpostiin. Saisiko tämänkin sanan salasanojen hallintaohjelmaan?" : "Sanna: Tehdään kirjakerhoonkin eri salasana kuin muihin. Nyt uskon jo, että salasanojen hallintaohjelma pitää sen tallessa."}
               </p>
               <form
                 onSubmit={(event) => {
@@ -300,7 +300,7 @@ export default function SannaActivity({
                 </label>
                 <div className={own.generator}>
                   <p id="sanna-generator-help">
-                    Kirjoita salasana itse tai anna salasananhallinnan luoda se
+                    Kirjoita salasana itse tai anna salasanojen hallintaohjelman luoda se
                     tyhjään kenttään.
                   </p>
                   <button
@@ -370,10 +370,10 @@ export default function SannaActivity({
                   className={`${styles.label} ${own.entryNameLabel}`}
                   htmlFor="sanna-entry-name"
                 >
-                  Merkinnän nimi salasananhallinnassa
+                  Merkinnän nimi salasanojen hallintaohjelmassa
                 </label>
                 <p id="sanna-name-help">
-                  Keksi salasanalle nimi, josta Sanna tunnistaa palvelun myöhemmin salasananhallinnassa. Voit
+                  Keksi salasanalle nimi, josta Sanna tunnistaa palvelun myöhemmin salasanojen hallintaohjelmassa. Voit
                   käyttää palvelun nimeä tai muuta kuvaavaa nimeä. <strong>Älä kirjoita
                   tähän salasanaa.</strong>
                 </p>
@@ -421,7 +421,7 @@ export default function SannaActivity({
                   ? "Sanna: En kyllä muistaisi tätä ulkoa. Hyvä, että annoimme merkinnälle nimen. Sen avulla löydän salasanan myöhemmin."
                   : "Sanna: Kiitos! Tämänkin palvelun oma salasana on nyt tallessa."}
               </p>
-              <h3>Sannan harjoitussalasananhallinta</h3>
+              <h3>Sannan salasanojen hallintaohjelma</h3>
               <p>
                 <strong>{entryNames[account.id]}</strong>
               </p>
@@ -472,8 +472,8 @@ export default function SannaActivity({
                 onClick={() => setManagerOpen(!managerOpen)}
               >
                 {managerOpen
-                  ? "Sulje salasananhallinta"
-                  : "Avaa Sannan salasananhallinta"}
+                  ? "Sulje salasanojen hallintaohjelma"
+                  : "Avaa Sannan salasanojen hallintaohjelma"}
               </button>
               <div
                 id="sanna-manager"
@@ -522,7 +522,7 @@ export default function SannaActivity({
                     )
                   ) {
                     setFeedback(
-                      `Sanna: Tämä ei avannut oikeaa tiliä. Avaa salasananhallinta ja etsi palvelulle ${loginTask.target.name} antamasi nimi.`,
+                      `Sanna: Tämä ei avannut oikeaa tiliä. Avaa salasanojen hallintaohjelma ja etsi palvelulle ${loginTask.target.name} antamasi nimi.`,
                     );
                     return;
                   }

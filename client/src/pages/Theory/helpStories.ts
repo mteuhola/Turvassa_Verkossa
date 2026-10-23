@@ -13,7 +13,7 @@ export const helpStories: Record<
     id: "help-sanna",
     title: "Auta Sannaa",
     description:
-      "Auta Sannaa vaihtamaan kolmen tilin salasanat, tallentamaan ne ja kirjautumaan salasananhallinnan avulla.",
+      "Auta Sannaa vaihtamaan kolmen tilin salasanat, tallentamaan ne ja kirjautumaan salasanojen hallintaohjelman avulla.",
     content: {
       characterName: "Sanna",
       sections: [

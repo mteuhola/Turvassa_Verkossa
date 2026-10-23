@@ -216,7 +216,7 @@ function QuizActivity({
                   <h3>{question.prompt}</h3>
                   <p id="password-help">
                     Käytä muistiinpanoasi tai avaa harjoituksen
-                    salasananhallinta. Älä kirjoita oikean tilisi salasanaa.
+                    salasanojen hallintaohjelma. Älä kirjoita oikean tilisi salasanaa.
                     Harjoitussalasanaa ei saa käyttää muualla.
                   </p>
                   {missingPracticePassword ? (

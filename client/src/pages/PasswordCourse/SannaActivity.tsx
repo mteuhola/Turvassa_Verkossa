@@ -33,7 +33,7 @@ function getSannaLoginLine(service: SannaAccountId): string {
       );
     case "shop":
       return (
-        "”Haluaisin kirjautua VAATEKAUPAN sivuille, sillä aion ostaa vaatteita. " +
+        "”Haluaisin kirjautua VAATEKAUPAN sivuille, sillä siellä alkoivat alennusmyynnit! " +
         commonLine
       );
     case "club":
@@ -217,7 +217,7 @@ export default function SannaActivity({
                 Miten Sannaa kannattaa auttaa?
               </h2>
               <p>
-                ”Mitä meidän olisi hyvä tehdä, jotta osaan käyttää salasanojani
+                ”Mitä meidän olisi hyvä tehdä, jotta osaisin käyttää salasanojani
                 turvallisemmin?”
               </p>
               <form
@@ -286,11 +286,8 @@ export default function SannaActivity({
               </h2>
               <p>
                 {index === 0
-                  ? "Sanna: Aloitetaan sähköpostista. Voisitko keksiä minulle uuden salasanan tai luoda sen salasananhallinnalla?"
-                  : "Sanna: Tehdään tähän palveluun eri salasana kuin muihin. Salasananhallinta pitää sen tallessa."}
-              </p>
-              <p className={styles.small}>
-                Harjoituksen salasananhallinta, ei oikea salasanapalvelu. Älä kirjoita olemassaolevaa salasanaa.
+                  ? "Sanna: Aloitetaan sähköpostista. Voisitko keksiä minulle uuden salasanan tai luoda sen salasananhallinnalla? Voisitko myös auttaa minua keksimään nimen, josta tunnistan palvelun salasananhallinnassa?"
+                  : index === 1 ? "Sanna: Tehdään vaatekauppaan eri salasana kuin sähköpostiin. Saisiko tämänkin sanan salasananhallintaan?" : "Sanna: Tehdään kirjakerhoonkin eri salasana kuin muihin. Nyt uskon jo, että salasananhallinta pitää sen tallessa."}
               </p>
               <form
                 onSubmit={(event) => {
@@ -304,8 +301,7 @@ export default function SannaActivity({
                 <div className={own.generator}>
                   <p id="sanna-generator-help">
                     Kirjoita salasana itse tai anna salasananhallinnan luoda se
-                    tyhjään kenttään. Automaattinen luonti ei korvaa
-                    kirjoittamaasi salasanaa.
+                    tyhjään kenttään.
                   </p>
                   <button
                     type="button"
@@ -315,9 +311,6 @@ export default function SannaActivity({
                     onClick={() => {
                       if (password.length > 0) return;
                       setPassword(generateSannaPassword());
-                      setFeedback(
-                        "Salasananhallinta loi harjoitussalasanan. Jatka painamalla Vaihda ja tallenna salasana.",
-                      );
                     }}
                   >
                     Luo salasana automaattisesti
@@ -347,29 +340,6 @@ export default function SannaActivity({
                     {visible ? "Piilota salasana" : "Näytä salasana"}
                   </button>
                 </div>
-                <label
-                  className={`${styles.label} ${own.entryNameLabel}`}
-                  htmlFor="sanna-entry-name"
-                >
-                  Merkinnän nimi salasananhallinnassa
-                </label>
-                <p id="sanna-name-help">
-                  Keksi salasanalle nimi, josta Sanna tunnistaa palvelun myöhemmin salasananhallinnassa. Voit
-                  käyttää palvelun nimeä tai omaa kuvaavaa nimeä. Älä kirjoita
-                  tähän salasanaa.
-                </p>
-                <input
-                  id="sanna-entry-name"
-                  type="text"
-                  value={entryName}
-                  maxLength={60}
-                  autoComplete="off"
-                  aria-describedby="sanna-name-help"
-                  onChange={(event) => {
-                    setEntryName(event.target.value);
-                    setFeedback("");
-                  }}
-                />
                 <div
                   id="sanna-strength"
                   className={styles.result}
@@ -396,7 +366,29 @@ export default function SannaActivity({
                     </p>
                   )}
                 </div>
-                <p role="status">{feedback}</p>
+                <label
+                  className={`${styles.label} ${own.entryNameLabel}`}
+                  htmlFor="sanna-entry-name"
+                >
+                  Merkinnän nimi salasananhallinnassa
+                </label>
+                <p id="sanna-name-help">
+                  Keksi salasanalle nimi, josta Sanna tunnistaa palvelun myöhemmin salasananhallinnassa. Voit
+                  käyttää palvelun nimeä tai muuta kuvaavaa nimeä. <strong>Älä kirjoita
+                  tähän salasanaa.</strong>
+                </p>
+                <input
+                  id="sanna-entry-name"
+                  type="text"
+                  value={entryName}
+                  maxLength={60}
+                  autoComplete="off"
+                  aria-describedby="sanna-name-help"
+                  onChange={(event) => {
+                    setEntryName(event.target.value);
+                    setFeedback("");
+                  }}
+                />
                 <p id="sanna-save-requirement" className={styles.small}>
                   Voit tallentaa salasanan, kun sen arvio on 4/4.
                 </p>
@@ -601,11 +593,7 @@ export default function SannaActivity({
               </p>
               <p>
                 Kolme eri salasanaa vaihdettu ja tallennettu, ja kirjautuminen
-                onnistui.
-              </p>
-              <p>
-                Sannan harjoitussalasanat on nyt tyhjennetty. Oma aiemmin
-                tallentamasi harjoitussalasana on ennallaan.
+                onnistui!
               </p>
               <div className={styles.actions}>
                 <Link

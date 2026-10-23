@@ -55,11 +55,6 @@ export const sannaBestPractices = [
     correct: false,
   },
   {
-    id: "retrieve",
-    text: "Harjoitellaan oikean salasanan löytämistä ja käyttämistä kirjautumisessa.",
-    correct: true,
-  },
-  {
     id: "advice",
     text: "Neuvo Sannaa olemaan kertomatta salasanojaan muille.",
     correct: true,

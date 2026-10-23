@@ -490,9 +490,6 @@ export default function PasswordCourse({
                           Salasanojen hallinnassa salasanoille annetaan yleensä "nimi", jolla se on tunnistettavissa muiden salasanojen joukosta. Tällä nimellä löydät salasanasi harjoituksen
                           salasanojen hallintaohjelmasta, kun tarvitset sitä myöhemmin:
                         </p>
-                        <label className={styles.label} htmlFor="storage-name">
-                          Salasanan nimi
-                        </label>
                         <input
                           id="storage-name"
                           type="text"

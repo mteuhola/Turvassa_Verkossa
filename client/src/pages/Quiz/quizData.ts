@@ -100,7 +100,7 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
         ],
         correctOptionIds: ["false"],
         explanation:
-          "Tarua: selainten salasanojen hallintaohjelmien käyttö on kätevää, mutta se ei ole yhtä turvallinen kuin erillinen salasanojen hallintaohjelma. Selaimen salasanat voivat olla alttiita haittaohjelmille ja selaimen haavoittuvuuksille.",
+          "Selainten salasanojen hallintaohjelmien käyttö on kätevää, mutta se ei ole yhtä turvallista kuin käyttää erillistä salasanojen hallintaohjelmaa. Selaimen salasanat voivat olla alttiita haittaohjelmille ja selaimen haavoittuvuuksille.",
       },
       {
         id: "recall",

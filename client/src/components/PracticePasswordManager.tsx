@@ -17,8 +17,7 @@ export default function PracticePasswordManager({
       <p>
         Tämä on harjoitus, ei oikea salasanojen hallintaohjelma. Tänne tallennettua
         salasanaa ei saa käyttää missään oikeassa palvelussa. Se säilyy tässä
-        selaimessa luettavassa muodossa, kunnes vaihdat sen tai nollaat
-        edistymisen.
+        selaimessa luettavassa muodossa, kunnes vaihdat sen.
       </p>
       {password ? (
         <>

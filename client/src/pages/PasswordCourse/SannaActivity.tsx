@@ -10,9 +10,9 @@ import { assessPassword, MAX_PASSWORD_LENGTH } from "./passwordStrength";
 import {
   canSignInAsSanna,
   createSannaLoginTask,
+  createSannaPlanChoices,
   entryNameProblem,
   isSannaPlanCorrect,
-  sannaBestPractices,
   generateSannaPassword,
   passwordProblem,
   sannaAccounts,
@@ -57,6 +57,7 @@ export default function SannaActivity({
   const [entryNames, setEntryNames] = useState<SannaPasswords>({});
   const [entryName, setEntryName] = useState("");
   const [planChoices, setPlanChoices] = useState<string[]>([]);
+  const [planOptions, setPlanOptions] = useState(() => createSannaPlanChoices());
   const [planCorrect, setPlanCorrect] = useState(false);
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
@@ -239,9 +240,9 @@ export default function SannaActivity({
                 >
                   <legend>Mitkä ovat hyviä toimintatapoja?</legend>
                   <p id="sanna-plan-help">
-                    Valitse kaikki oikeat vaihtoehdot ja tarkista vastauksesi, {sannaBestPractices.filter((item) => item.correct).length} vaihtoehtoa on oikein.
+                    Valitse kaikki oikeat vaihtoehdot ja tarkista vastauksesi, {planOptions.filter((item) => item.correct).length} vaihtoehtoa on oikein.
                   </p>
-                  {sannaBestPractices.map((item) => (
+                  {planOptions.map((item) => (
                     <label key={item.id} className={styles.choice}>
                       <input
                         type="checkbox"
@@ -608,6 +609,7 @@ export default function SannaActivity({
                     setIndex(0);
                     setLoginTask(createSannaLoginTask());
                     setPlanChoices([]);
+                    setPlanOptions(createSannaPlanChoices());
                     setPlanCorrect(false);
                     setFeedback("");
                     setManagerOpen(false);

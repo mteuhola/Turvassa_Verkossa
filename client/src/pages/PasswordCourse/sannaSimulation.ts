@@ -61,6 +61,15 @@ export const sannaBestPractices = [
   },
 ];
 
+export function createSannaPlanChoices(random = Math.random) {
+  const choices = [...sannaBestPractices];
+  for (let index = choices.length - 1; index > 0; index--) {
+    const other = Math.floor(random() * (index + 1));
+    [choices[index], choices[other]] = [choices[other], choices[index]];
+  }
+  return choices;
+}
+
 export function isSannaPlanCorrect(selected: string[]) {
   const expected = sannaBestPractices.filter((item) => item.correct);
   return (

@@ -18,7 +18,7 @@
 }
 .guide {
   display: grid;
-  grid-template-columns: 64px minmax(0, 1fr);
+  grid-template-columns: 5rem minmax(0, 1fr);
   gap: 24px;
   align-items: start;
   margin-block: 24px 36px;
@@ -28,15 +28,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 12px;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 0.75rem;
   background: var(--course-tint);
   color: var(--course-ink);
 }
 .icon svg {
-  width: 32px;
-  height: 32px;
+  width: 2.75rem;
+  height: 2.75rem;
 }
 .overview h2 {
   margin: 0 0 8px;

@@ -40,6 +40,7 @@ export const courseIntroductions: Record<string, TheoryContent> = {
           "Vaihtelevuus: salasana sisältää erilaisia merkkejä, kuten isoja ja pieniä kirjaimia, numeroita ja erikoismerkkejä.",
           "Yksilöllisyys: salasana on ainutlaatuinen, eikä sitä käytetä muissa palvelussa.",
           "Pitkän salasanan ei tarvitse olla vaikea muistaa. Esimerkiksi useamman toisistaan riippumattoman sanan yhdistäminen voi auttaa muodostamaan pitkän ja helposti muistettavan salasanan.",
+          "Huom: jotkin palvelut eivät hyväksy esimerkiksi välilyöntejä salasanoissa. Tällöin voit käyttää esimerkiksi väliviivaa tai muuta merkkiä sanojen erottamiseen.",
         ],
       },
     ],
@@ -74,8 +75,8 @@ export const passwordTheory: TheoryContent = {
     {
       heading: "Salasanojen kirjoittaminen paperille",
       paragraphs: [
-        "Paperille kirjoittaminen voi olla turvallinen tapa säilyttää salasanoja: pitkien ja vahvojen salasanojen kirjoittaminen paperille on useimmiten turvallisempaa kuin lyhyiden ja helposti arvattavien salasanojen käyttäminen uudelleen.",
-        "Jos päätät kirjoittaa salasanasi muistiin, säilytä niitä turvallisessa paikassa kotonasi, esimerkiksi laatikossa tai kaapissa, johon ulkopuolisilla ei ole pääsyä. Älä jätä salasanoja näkyville niihin liittyvän laitteen, esimerkiksi tietokoneen, viereen. Ei myöskään ole suositeltavaa säilyttää salasanoja samassa paikassa sellaisten laitteiden kanssa, jotka voivat helposti joutua vääriin käsiin.",
+        "Paperille kirjoittaminen voi olla turvallinen tapa säilyttää salasanoja: pitkien ja vahvojen salasanojen kirjoittaminen paperille on useimmiten turvallisempaa kuin lyhyiden ja helposti muistettavien (ja sitä kautta arvattavien) salasanojen käyttäminen uudelleen.",
+        "Jos päätät kirjoittaa salasanasi muistiin, säilytä niitä turvallisessa paikassa kotonasi, esimerkiksi laatikossa tai kaapissa, johon ulkopuolisilla ei ole pääsyä. Älä jätä salasanoja näkyville niihin liittyvän laitteen, esimerkiksi tietokoneen, viereen. Ei myöskään ole suositeltavaa säilyttää salasanoja samassa paikassa sellaisten laitteiden kanssa, jotka voivat helposti joutua vääriin käsiin, esimerkiksi kannettavan tietokoneen kansien välissä.",
       ],
     },
     {

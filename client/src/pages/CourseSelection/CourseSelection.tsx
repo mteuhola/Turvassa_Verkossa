@@ -47,7 +47,7 @@ export default function CourseSelection({
         <header className={styles.hero}>
           <h1>Tervetuloa oppimaan!</h1>
           <p>
-            Täällä voit harjoitella turvallista verkon käyttöä tuttujen arjen
+            Tämän oppimisympäristön avulla voit harjoitella turvallista verkon käyttöä tuttujen arjen
             tilanteiden avulla. Et tarvitse ennakkotietoja, ja voit edetä omaan
             tahtiisi.
           </p>
@@ -107,10 +107,6 @@ export default function CourseSelection({
           </ul>
         </section>
         <footer className={styles.footer}>
-          <p>
-            Voit kokeilla tehtäviä niin monta kertaa kuin haluat ja palata
-            kursseihin myöhemmin.
-          </p>
         </footer>
         {import.meta.env.VITE_ENABLE_DEBUG_TOOLS === "true" && (
           <DebugProgressReset onReset={onResetProgress} />

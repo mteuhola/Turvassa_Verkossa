@@ -309,9 +309,16 @@ export default function PasswordCourse({
                 Keksi oma harjoitussalasana
               </h2>
               <p id="privacy" className={styles.privacy}>
-                Tässä näkymässä voit kokeilla erilaisten salasanojen vahvuutta sekä nähdä ehdotuksia niiden vahvistamiseen.
-                <strong>Älä kirjoita tähän olemassaolevaa salasanaasi.</strong> Keksi
+                Tässä näkymässä voit kokeilla erilaisten salasanojen vahvuutta sekä nähdä ehdotuksia niiden vahvistamiseen. Voit kokeilla esimerkiksi:
+                <li>Lyhyitä sanoja, kuten "kissa"</li>
+                <li>Isoja ja pieniä kirjaimia</li>
+                <li>Numeroiden lisäämistä</li>
+                <li>Lisätä erikoismerkkejä kuten "!" tai "#"</li>
+                <li>Monia toisiinsa liittymättömiä lyhyitä sanoja eroteltuna merkeillä, kuten "kissa-kahvi_radio!sohva"</li>
+                <br />
+                Kun olet kokeillut erilaisia salasanoja, keksi
                 salasana vain tätä harjoitusta varten. Sitä ei tallenneta mihinkään.
+                <strong>Huom: Älä kuitenkaan valitse tähän tehtävään olemassaolevaa salasanaasi!</strong> 
               </p>
               <label className={styles.label} htmlFor="practice-password">
                 Harjoitussalasana
@@ -476,6 +483,22 @@ export default function PasswordCourse({
                         Tämä ei ole oikea salasananhallintaohjelma, vaan harjoitus siitä, miten hallintasovellukset yleensä toimivat. 
                         Hallintasovellus antaa sinun hakea salasanan myöhemmin tarvittaessa. Se säilyy tallessa, kunnes vaihdat sen.
                       </p>
+                      <div className={styles.entryName}>
+                        <p id="storage-name-help">
+                          Salasananhallinnassa salasanoille annetaan yleensä "nimi", jolla se on tunnistettavissa muiden salasanojen joukosta. Tällä nimellä löydät salasanasi harjoituksen
+                          salasananhallinnasta, kun tarvitset sitä myöhemmin:
+                        </p>
+                        <label className={styles.label} htmlFor="storage-name">
+                          Salasanan nimi
+                        </label>
+                        <input
+                          id="storage-name"
+                          type="text"
+                          value="Harjoitus"
+                          readOnly
+                          aria-describedby="storage-name-help"
+                        />
+                      </div>
                     </>
                   )}
                   <label className={styles.label} htmlFor="storage-password">

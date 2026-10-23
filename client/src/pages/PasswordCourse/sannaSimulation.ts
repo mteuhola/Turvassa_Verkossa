@@ -36,7 +36,7 @@ export const sannaBestPractices = [
   },
   {
     id: "title",
-    text: "Kirjoitetaan itse salasana merkinnän nimeksi.",
+    text: "Kirjoitetaan salasananhallintaan tallennettujen salasanojen nimiksi itse salasana.",
     correct: false,
   },
   {

@@ -94,7 +94,7 @@ export default function SannaActivity({
       setFeedback(
         nameProblem === "duplicate"
           ? "Sanna: Tämä nimi on jo toisella merkinnällä. Anna tälle oma nimi, jotta erotan palvelut."
-          : "Sanna: Anna merkinnälle nimi, josta tunnistan palvelun. Nimi voi olla enintään 60 merkkiä.",
+          : "Sanna: Anna merkinnälle nimi, josta tunnistan palvelun, esimerkiksi palvelun nimi.",
       );
       return;
     }
@@ -172,7 +172,7 @@ export default function SannaActivity({
                 kaikkialla, koska se on helppo muistaa. Alan kuitenkin epäillä,
                 että se on liian helppo arvata. Haluaisin vaihtaa jokaiselle
                 palvelulle oman salasanan, mutta en oikein tiedä miten se
-                kannattaa tehdä.” Auttaisitko minua?”
+                kannattaa tehdä. Auttaisitko minua?”
               </p>
               <ul className={own.accounts}>
                 {sannaAccounts.map((item) => (
@@ -239,7 +239,7 @@ export default function SannaActivity({
                 >
                   <legend>Mitkä ovat hyviä toimintatapoja?</legend>
                   <p id="sanna-plan-help">
-                    Valitse kaikki oikeat vaihtoehdot ja tarkista vastauksesi.
+                    Valitse kaikki oikeat vaihtoehdot ja tarkista vastauksesi, {sannaBestPractices.filter((item) => item.correct).length} vaihtoehtoa on oikein.
                   </p>
                   {sannaBestPractices.map((item) => (
                     <label key={item.id} className={styles.choice}>
@@ -290,8 +290,7 @@ export default function SannaActivity({
                   : "Sanna: Tehdään tähän palveluun eri salasana kuin muihin. Salasananhallinta pitää sen tallessa."}
               </p>
               <p className={styles.small}>
-                Harjoituksen salasananhallinta, ei oikea salasanapalvelu. Älä
-                kirjoita oikeaa salasanaa.
+                Harjoituksen salasananhallinta, ei oikea salasanapalvelu. Älä kirjoita olemassaolevaa salasanaa.
               </p>
               <form
                 onSubmit={(event) => {
@@ -299,26 +298,9 @@ export default function SannaActivity({
                   save();
                 }}
               >
-                <label className={styles.label} htmlFor="sanna-entry-name">
-                  Merkinnän nimi salasananhallinnassa
+                <label className={styles.label} htmlFor="sanna-password">
+                  Uusi harjoitussalasana
                 </label>
-                <input
-                  id="sanna-entry-name"
-                  type="text"
-                  value={entryName}
-                  maxLength={60}
-                  autoComplete="off"
-                  aria-describedby="sanna-name-help"
-                  onChange={(event) => {
-                    setEntryName(event.target.value);
-                    setFeedback("");
-                  }}
-                />
-                <p id="sanna-name-help" className={styles.small}>
-                  Keksi nimi, josta Sanna tunnistaa palvelun myöhemmin. Voit
-                  käyttää palvelun nimeä tai omaa kuvaavaa nimeä. Älä kirjoita
-                  tähän salasanaa.
-                </p>
                 <div className={own.generator}>
                   <p id="sanna-generator-help">
                     Kirjoita salasana itse tai anna salasananhallinnan luoda se
@@ -341,9 +323,6 @@ export default function SannaActivity({
                     Luo salasana automaattisesti
                   </button>
                 </div>
-                <label className={styles.label} htmlFor="sanna-password">
-                  Uusi harjoitussalasana
-                </label>
                 <input
                   id="sanna-password"
                   type={visible ? "text" : "password"}
@@ -368,6 +347,29 @@ export default function SannaActivity({
                     {visible ? "Piilota salasana" : "Näytä salasana"}
                   </button>
                 </div>
+                <label
+                  className={`${styles.label} ${own.entryNameLabel}`}
+                  htmlFor="sanna-entry-name"
+                >
+                  Merkinnän nimi salasananhallinnassa
+                </label>
+                <p id="sanna-name-help">
+                  Keksi salasanalle nimi, josta Sanna tunnistaa palvelun myöhemmin salasananhallinnassa. Voit
+                  käyttää palvelun nimeä tai omaa kuvaavaa nimeä. Älä kirjoita
+                  tähän salasanaa.
+                </p>
+                <input
+                  id="sanna-entry-name"
+                  type="text"
+                  value={entryName}
+                  maxLength={60}
+                  autoComplete="off"
+                  aria-describedby="sanna-name-help"
+                  onChange={(event) => {
+                    setEntryName(event.target.value);
+                    setFeedback("");
+                  }}
+                />
                 <div
                   id="sanna-strength"
                   className={styles.result}

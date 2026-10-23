@@ -23,6 +23,9 @@ export default function PracticePasswordManager({
       {password ? (
         <>
           <h3>Turvassa Verkossa -harjoitus</h3>
+          <p>
+            Salasanan nimi: <strong>Harjoitus</strong>
+          </p>
           <p className={styles.password}>
             {visible ? password : "***************"}
           </p>

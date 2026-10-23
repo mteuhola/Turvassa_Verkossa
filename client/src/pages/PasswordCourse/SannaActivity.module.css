@@ -1,12 +1,18 @@
 .companion {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 24px;
   margin-bottom: 32px;
 }
 .portrait {
-  width: 88px;
+  width: 8rem;
   flex-shrink: 0;
+}
+.companion > p {
+  flex: 1 1 15rem;
+  min-width: 0;
+  margin: 0;
 }
 .portrait img,
 .portrait svg {
@@ -37,6 +43,9 @@
 .generator p {
   margin-bottom: 8px;
 }
+.entryNameLabel {
+  margin-top: 24px;
+}
 .manager,
 .login {
   margin-top: 24px;
@@ -47,8 +56,5 @@
   .companion {
     align-items: flex-start;
     gap: 16px;
-  }
-  .portrait {
-    width: 64px;
   }
 }

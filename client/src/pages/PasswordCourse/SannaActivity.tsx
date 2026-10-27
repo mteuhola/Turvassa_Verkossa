@@ -601,7 +601,7 @@ export default function SannaActivity({
                   className={styles.primaryLink}
                   to="/course/passwords/quiz"
                 >
-                  Jatka tietovisaan
+                  Jatka eteenpäin
                 </Link>
                 <button
                   type="button"

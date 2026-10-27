@@ -8,6 +8,7 @@ import { CharacterPortrait } from "../../components/CourseGuide";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import { kaarloEmails } from "./kaarloEmails";
 import KaarloInbox from "./KaarloInbox";
+import KaarloRecovery from "./KaarloRecovery";
 import styles from "./PhishingCourse.module.css";
 
 export default function KaarloActivity({
@@ -15,7 +16,7 @@ export default function KaarloActivity({
   onComplete,
   ...textSizeProps
 }: TextSizeProps & ActivityProgressProps) {
-  const [stage, setStage] = useState<"intro" | "email" | "complete">("intro");
+  const [stage, setStage] = useState<"intro" | "email" | "recovery" | "complete">("intro");
   const [index, setIndex] = useState(0);
   const heading = useRef<HTMLHeadingElement>(null);
   const email = kaarloEmails[index];
@@ -43,41 +44,51 @@ export default function KaarloActivity({
           {stage === "complete" ? "Kiitos avusta!" : "Auta Kaarloa"}
         </h1>
         {isComplete && <CompletionBadge />}
+        {(stage === "email" || stage === "recovery") && (
+          <p>{stage === "email" ? "Osa 1/2: Viestien arviointi" : "Osa 2/2: Apua klikkauksen jälkeen"}</p>
+        )}
         <div className={styles.kaarloConcern}>
           <div className={styles.kaarloPortrait}>
             <CharacterPortrait courseId="phishing" />
           </div>
           <p>
             {stage === "intro"
-              ? "”Sain kolme sähköpostia. Olen kuullut niin paljon huijauksista, etten enää oikein uskalla lukea viestejäni. Voisitko katsoa niitä kanssani? En haluaisi jättää tärkeää viestiä huomaamatta.”"
+              ? "”Olen nyt muutaman päivän sisään saanut paljon sähköpostia. Olen kuullut niin paljon huijauksista, että hädintuskin uskallan lukea viestejäni! Voisitko katsoa niitä kanssani? En haluaisi jättää tärkeää viestiä huomaamatta.”"
               : stage === "email"
                 ? email.context
+                : stage === "recovery"
+                  ? "Kaarlo: Minun täytyy tunnustaa jotain. Avasin eilen yhden tällaisen viestin linkin. Sen jälkeen huijausviestejä on tuntunut tulevan enemmän. Johtuuko se klikkauksesta? Mitä minun pitäisi nyt tehdä?"
                 : "Kaarlo: Kiitos, että autoit minua arvioimaan viestejä rauhassa."}
           </p>
         </div>
         {stage === "intro" && (
           <section>
             <p>
-              Lue viestit yksi kerrallaan ja arvioi, onko viesti epäilyttävä.
-              Kaarlo kertoo myös, mitä hän tietää tilanteesta. Yksittäisiä
-              kohtia ei tarvitse etsiä tai merkitä.
+              Lue viestit ja siirrä epäilyttävät viestit roskapostiin.
+              Jätä tavalliset viestit saapuneisiin.
+              Kaarlo kertoo myös, mitä hän tietää tilanteesta.
+              Toisessa osassa autat häntä toimimaan epäilyttävän linkin avaamisen jälkeen.
             </p>
             <p>
               Kaikki palvelut, osoitteet ja viestit ovat kuvitteellisia.
-              Viestien linkit avaavat harjoituksen kohdesivun uuteen
-              välilehteen. Linkkejä ei tarvitse avata tehtävän suorittamiseksi.
+              Linkkejä ei tarvitse avata tehtävän suorittamiseksi.
             </p>
             <button
               className={`${styles.action} ${styles.primaryAction}`}
               onClick={() => setStage("email")}
             >
-              Lue ensimmäinen viesti
+              Jatka viestien tarkasteluun
             </button>
           </section>
         )}
         {stage === "email" && (
           <KaarloInbox
             onSelect={setIndex}
+            onComplete={() => setStage("recovery")}
+          />
+        )}
+        {stage === "recovery" && (
+          <KaarloRecovery
             onComplete={() => {
               onComplete();
               setStage("complete");
@@ -97,12 +108,20 @@ export default function KaarloActivity({
               tarvitse pitää huijauksena. Epäselvän asian voi tarkistaa palvelun
               tutusta sovelluksesta tai itse avatulta sivustolta.
             </p>
+            <p>
+              Klikkauksesta kannattaa kertoa ja selvittää, mitä sivulla tapahtui.
+              Viestien lisääntyminen ei yksin osoita, mistä ne johtuvat.
+              Jos annoit salasanan, vaihda se heti aidossa palvelussa ja kaikissa
+              muissa palveluissa, joissa käytit samaa salasanaa. Tässä harjoituksessa
+              Kaarlo ei antanut maksutietoja. Jos niitä olisi annettu, pankkiin
+              pitäisi ottaa heti yhteyttä sen virallista yhteydenottotapaa käyttäen.
+            </p>
             <div className={styles.actions}>
               <Link
                 className={`${styles.action} ${styles.primaryAction}`}
                 to="/course/phishing/quiz"
               >
-                Jatka tietovisaan
+                Jatka eteenpäin
               </Link>
               <button
                 className={styles.action}

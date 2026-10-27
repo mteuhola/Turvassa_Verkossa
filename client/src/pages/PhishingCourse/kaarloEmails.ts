@@ -9,9 +9,9 @@ export const kaarloEmails = [
       "Kaarlo: En tunne MegaPotti-palvelua enkä ole osallistunut arvontaan.",
     paragraphs: [
       "Hyvä aasiakas!!",
-      "Sinä olet valitu £950 euron voitajaksi. Maksa vaan käsitely maksu $4,90 euro ja saat palkinno heti!!",
-      "Toimi 30 minutin aikana tai voitto poistuu. Anna kortisi tiedot lunastus sivulle.",
-      "Terveisin MegaPotti voitto tiimi",
+      "Sinä olet valittu £950 euron voitajaksi. Maksa vaan käsitely maksu $4,90 euroa ja saat palkinno heti!!",
+      "Toimi 30 minutin aikana tai voitto poistuu. Anna kaikki korttisi tiedot lunastus  sivulle.",
+      "Terveisin MegaPalkinto voitto tiimi",
     ],
     link: {
       text: "LUNASTA PALKKINTO",
@@ -22,14 +22,14 @@ export const kaarloEmails = [
     },
     suspicious: true,
     explanation:
-      "Tämä viesti on epäilyttävä. Kaarlo ei tunne palvelua eikä osallistunut arvontaan. Odottamaton palkinto, kiire, maksupyyntö ja runsaat kirjoitusvirheet vahvistavat epäilyä. Palkintoa varten ei kannata antaa korttitietoja.",
+      "Tämä viesti on epäilyttävä. Kaarlo ei tunne palvelua eikä osallistunut arvontaan. Odottamaton palkinto, kiire, maksupyyntö ja runsaat kirjoitusvirheet vahvistavat epäilyä.",
     response:
       "Kaarlo: En siis ole menettämässä oikeaa palkintoa. Jätän pyynnön toteuttamatta ja ilmoitan viestin huijaukseksi.",
   },
   {
     id: "account",
     sender: "Lukutoukka | Asiakaspalvelu",
-    address: "asiakaspalvelu@lukutoukka-tili.fi",
+    address: "asiakaspalvelu@lukutoukka-kauppa.fi",
     subject: "Vahvista asiakastilisi toimitusta varten",
     time: "Tänään klo 09.04",
     context:
@@ -49,7 +49,7 @@ export const kaarloEmails = [
     },
     suspicious: true,
     explanation:
-      "Tämäkin viesti on epäilyttävä, vaikka kieli on sujuvaa ja Kaarlo odottaa tilausta. Lähettäjän ja linkin kohteen verkkotunnus on lukutoukka-tili.fi, ei kaupan lukutoukka.fi. Linkin näkyvä teksti peittää eri kohteen. Korttitietojen pyytäminen ja toimituksen keskeyttämisellä painostaminen ovat lisäsyitä tarkistaa asia kaupan tutun sivuston kautta.",
+      "Tämäkin viesti on epäilyttävä, vaikka kieli on sujuvaa ja Kaarlo odottaa tilausta. Lähettäjän ja linkin kohteen verkkotunnus on lukutoukka-kauppa.fi, ei kaupan lukutoukka.fi. Linkin näkyvä teksti peittää eri kohteen. Korttitietojen pyytäminen ja toimituksen keskeyttämisellä painostaminen ovat lisäsyitä tarkistaa asia kaupan tutun sivuston kautta.",
     response:
       "Kaarlo: Tuttu nimi ja hyvä kieli eivät yksin riitä. Tarkistan tilaukseni avaamalla itse tuntemani kaupan sivuston.",
   },

@@ -84,7 +84,7 @@ export default function PhishingCourse({
           {discovered && (
             <span className={styles.found} aria-hidden="true">
               {" "}
-              ✓ Löydetty
+              Löydetty
             </span>
           )}
         </span>
@@ -103,7 +103,7 @@ export default function PhishingCourse({
         {discovered && (
           <span className={styles.found} aria-hidden="true">
             {" "}
-            ✓ Löydetty
+            Löydetty
           </span>
         )}
       </button>
@@ -134,8 +134,8 @@ export default function PhishingCourse({
               varoitusmerkin, lue sen selitys ja valitse ”Ymmärsin, jatka” ennen
               seuraavaa havaintoa.
             </p>
-            <p className={styles.notice}>
-              <strong>Tämä on kuvitteellinen harjoitus.</strong> Oikean pankin
+            <p>
+              Oikean pankin
               osoite on tässä esimerkissä{" "}
               <strong>tonttupankki.yksityinen</strong>. Valinnat eivät avaa
               linkkejä tai liitteitä. Voit kokeilla rauhassa ilman aikarajaa.
@@ -156,7 +156,7 @@ export default function PhishingCourse({
                 </h2>
                 <div className={styles.senderRow}>
                   <span className={styles.avatar} aria-hidden="true">
-                    A
+                    T
                   </span>
                   <div className={styles.senderDetails}>
                     <div className={styles.senderLabel}>Lähettäjä</div>
@@ -227,7 +227,7 @@ export default function PhishingCourse({
                   <p>
                     <strong>Turvallinen lähestymistapa:</strong> Epäillessäsi
                     viestin aitoutta, älä vastaa, avaa liitettä tai klikkaa
-                    viestin linkkiä. Tarkista asia pankin omasta sovelluksesta
+                    viestissä olevia linkkejä. Tarkista asia pankin omasta sovelluksesta
                     tai tutusta puhelinnumerosta. Ilmoita viesti roskapostiksi
                     tai tietojenkalasteluksi.
                   </p>

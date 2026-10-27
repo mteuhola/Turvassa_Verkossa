@@ -39,7 +39,7 @@ export const helpStories: Record<
     id: "help-kaarlo",
     title: "Auta Kaarloa",
     description:
-      "Arvioi kolme Kaarlon saamaa sähköpostia. Auta häntä tunnistamaan epäilyttävät pyynnöt ja luottamaan tavalliseen toimitusilmoitukseen.",
+      "Arvioi kolme Kaarlon saamaa sähköpostia. Auta häntä tunnistamaan epäilyttävät pyynnöt ja luottamaan tavallisiin viesteihin.",
     content: {
       characterName: "Kaarlo",
       sections: [

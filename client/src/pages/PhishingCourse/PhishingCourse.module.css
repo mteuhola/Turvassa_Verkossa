@@ -28,6 +28,20 @@
 .clueDialog h2 {
   margin-top: 0;
 }
+.kaarloDialog {
+  inset: 0;
+  margin: auto;
+  width: min(40rem, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+}
+.mailIconAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 48px;
+  min-height: 48px;
+}
 .root .primaryAction {
   display: inline-block;
   background: var(--course-ink);
@@ -37,6 +51,12 @@
 }
 .root .primaryAction:hover {
   background: #0c447c;
+}
+.root .primaryAction:disabled {
+  background: var(--surface);
+  color: var(--text-muted);
+  border-color: var(--border);
+  cursor: default;
 }
 .findingsReview {
   margin-top: 24px;
@@ -49,6 +69,35 @@
 }
 .responsePractice {
   max-width: 65ch;
+}
+.recoveryQuestion {
+  border: 0;
+  padding: 0;
+  margin: 24px 0;
+  min-width: 0;
+}
+.recoveryQuestion legend {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+.recoveryChoice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+.recoveryChoice input {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin-top: 4px;
+  accent-color: var(--course-ink);
+}
+.recoveryChoice:has(input:focus-visible) {
+  outline: 2px solid var(--course-ink);
+  outline-offset: 4px;
 }
 .kaarloMain {
   max-width: 70ch;

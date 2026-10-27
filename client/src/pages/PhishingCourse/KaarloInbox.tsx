@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { kaarloEmails, isKaarloDecisionCorrect } from "./kaarloEmails";
+import KaarloFeedback from "./KaarloFeedback";
 import styles from "./PhishingCourse.module.css";
 
-type Action = "report" | "keep";
+type Action = "report" | "restore";
 export default function KaarloInbox({
   onComplete,
   onSelect,
@@ -13,47 +14,67 @@ export default function KaarloInbox({
   const [selected, setSelected] = useState<number | null>(null);
   const [folder, setFolder] = useState<"inbox" | "junk">("inbox");
   const [actions, setActions] = useState<Record<string, Action>>({});
-  const [notice, setNotice] = useState("");
+  const [feedback, setFeedback] = useState<{
+    title: string;
+    explanation: string;
+    response?: string;
+    closeEmail?: boolean;
+  } | null>(null);
   const subject = useRef<HTMLHeadingElement>(null);
   const listHeading = useRef<HTMLHeadingElement>(null);
   const email = selected === null ? null : kaarloEmails[selected];
   const reported = kaarloEmails.filter(
     (item) => actions[item.id] === "report",
   ).length;
-  const solved = kaarloEmails.filter(
-    (item, index) =>
-      actions[item.id] !== undefined &&
-      isKaarloDecisionCorrect(index, actions[item.id] === "report"),
-  ).length;
+  const sorted = kaarloEmails.every((item, index) =>
+    isKaarloDecisionCorrect(index, actions[item.id] === "report"),
+  );
   const visible = kaarloEmails.filter(
     (item) => (actions[item.id] === "report") === (folder === "junk"),
   );
   useEffect(() => {
-    if (selected !== null) subject.current?.focus();
+    if (selected !== null) subject.current?.focus({ preventScroll: true });
   }, [selected]);
 
   function act(action: Action) {
     if (!email || selected === null) return;
     setActions((current) => ({ ...current, [email.id]: action }));
     const correct = isKaarloDecisionCorrect(selected, action === "report");
-    setNotice(
-      `${action === "report" ? "Viesti ilmoitettu tietojenkalasteluksi ja siirretty roskapostiin." : "Viesti s?ilytetty saapuneissa."} ${correct ? email.response : "Pohditaan viel?."} ${email.explanation}`,
-    );
+    setFeedback({
+      title: correct
+        ? action === "report"
+          ? "Huijausviesti siirretty roskapostiin"
+          : "Viesti palautettu saapuneisiin"
+        : "Pohditaan vielä",
+      explanation: email.explanation,
+      response: correct ? email.response : undefined,
+      closeEmail: true,
+    });
+  }
+
+  function dismissFeedback() {
+    setFeedback(null);
+    if (feedback?.closeEmail) {
+      setSelected(null);
+      requestAnimationFrame(() =>
+        listHeading.current?.focus({ preventScroll: true }),
+      );
+    }
   }
 
   return (
-    <section aria-label="Kaarlon harjoituss?hk?posti">
+    <section aria-label="Kaarlon harjoitussähköposti">
       <p>
         Avaa viestejä haluamassasi järjestyksessä. Ilmoita huijausviestit
-        tietojenkalasteluksi.
+        tietojenkalasteluksi <strong>varoitus- ja roskakoripainikkeella</strong>. Jätä muut viestit saapuneisiin. Kun olet valmis, voit painaa <strong>Valmis</strong> -painiketta.
       </p>
       <div className={styles.mailDesktop}>
         <div className={styles.mailAppBar}>
-          <strong>Kaarlon sähkäposti</strong>
+          <strong>Kaarlon sähköposti</strong>
           <span>kaarlo@kuustonen.fi</span>
         </div>
         <div className={styles.mailWorkspace}>
-          <aside className={styles.mailFolders} aria-label="S?hk?postikansiot">
+          <aside className={styles.mailFolders} aria-label="Sähköpostikansiot">
             {(["inbox", "junk"] as const).map((value) => (
               <button
                 key={value}
@@ -62,7 +83,6 @@ export default function KaarloInbox({
                 onClick={() => {
                   setFolder(value);
                   setSelected(null);
-                  setNotice("");
                 }}
               >
                 {value === "inbox"
@@ -76,7 +96,7 @@ export default function KaarloInbox({
               {folder === "inbox" ? "Saapuneet" : "Roskaposti"}
             </h2>
             {visible.length === 0 ? (
-              <p>T?ss? kansiossa ei ole viestej?.</p>
+              <p>Tässä kansiossa ei ole viestejä.</p>
             ) : (
               <ul className={styles.inboxList}>
                 {visible.map((item) => (
@@ -90,15 +110,11 @@ export default function KaarloInbox({
                         );
                         setSelected(index);
                         onSelect(index);
-                        setNotice("");
                       }}
                     >
                       <span>{item.sender}</span>
                       <strong>{item.subject}</strong>
-                      <span>
-                        {item.time}
-                        {actions[item.id] === "keep" ? " ? S?ilytetty" : ""}
-                      </span>
+                      <span>{item.time}</span>
                     </button>
                   </li>
                 ))}
@@ -110,52 +126,74 @@ export default function KaarloInbox({
                   className={styles.mailCommandBar}
                   aria-label="Viestin toiminnot"
                 >
-                  <button
-                    className={styles.action}
-                    type="button"
-                    disabled={actions[email.id] === "report"}
-                    onClick={() => act("report")}
-                  >
-                    Ilmoita tietojenkalasteluksi
-                  </button>
-                  <button
-                    className={styles.action}
-                    type="button"
-                    onClick={() => act("keep")}
-                  >
-                    {actions[email.id] === "report"
-                      ? "Ei roskapostia, palauta saapuneisiin"
-                      : "Säilytä saapuneissa"}
-                  </button>
+                  {actions[email.id] === "report" ? (
+                    <button
+                      className={styles.action}
+                      type="button"
+                      onClick={() => act("restore")}
+                    >
+                      Ei roskapostia, palauta saapuneisiin
+                    </button>
+                  ) : (
+                    <button
+                      className={`${styles.action} ${styles.mailIconAction}`}
+                      type="button"
+                      aria-label="Ilmoita tietojenkalasteluksi ja siirrä roskapostiin"
+                      title="Ilmoita tietojenkalasteluksi ja siirrä roskapostiin"
+                      onClick={() => act("report")}
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 3 2 21h20L12 3Z" />
+                        <path d="M12 9v5m0 3v.1" />
+                      </svg>
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7" />
+                      </svg>
+                    </button>
+                  )}
                   <button
                     className={styles.action}
                     type="button"
                     onClick={() => {
                       setSelected(null);
-                      setNotice("");
-                      requestAnimationFrame(() => listHeading.current?.focus());
+                      requestAnimationFrame(() =>
+                        listHeading.current?.focus({ preventScroll: true }),
+                      );
                     }}
                   >
                     Sulje viesti
                   </button>
                 </div>
-                {notice && (
-                  <div role="status" className={styles.feedback}>
-                    {notice}
-                  </div>
-                )}
-                {actions[email.id] === "report" && folder === "inbox" && (
-                  <p>
-                    Viesti on nyt Roskaposti-kansiossa. Voit viel? lukea sen
-                    alla tai avata toisen viestin.
-                  </p>
-                )}
                 <article
                   className={styles.email}
                   aria-labelledby="kaarlo-subject"
                 >
                   <div className={styles.mailToolbar}>
-                    <span>Saapuneet</span>
+                    <span>
+                      {actions[email.id] === "report"
+                        ? "Roskaposti"
+                        : "Saapuneet"}
+                    </span>
                     <span>Kaarlon sähköposti</span>
                   </div>
                   <header className={styles.emailHeader}>
@@ -187,15 +225,9 @@ export default function KaarloInbox({
                           href={email.link.destination}
                           target="_blank"
                           rel="noopener noreferrer"
-                          aria-describedby="kaarlo-link-help"
                         >
                           {email.link.text}
                         </a>
-                        <p id="kaarlo-link-help" className={styles.small}>
-                          Linkin kohde: {email.link.destination}
-                          <br />
-                          Avautuu harjoitussivuna uuteen välilehteen.
-                        </p>
                       </>
                     )}
                   </div>
@@ -203,31 +235,34 @@ export default function KaarloInbox({
               </>
             ) : (
               <p>
-                Valitse viesti luettelosta, niin näet sen sisällön ja lähettäjän
-                tiedot.
+                Valitse viesti luettelosta nähdäksesi sen sisällön.
               </p>
             )}
           </div>
         </div>
       </div>
-      <p role="status">
-        Turvallisesti käsitelty: {solved}/{kaarloEmails.length}
+      <p id="kaarlo-completion-help" role="status">
+        {sorted
+          ? "Viestit ovat oikeissa kansioissa. Voit jatkaa toiseen osaan."
+          : "Voit jatkaa, kun huijausviestit ovat roskapostissa ja muut viestit saapuneissa."}
       </p>
-      {solved === kaarloEmails.length && (
-        <div className={styles.feedback}>
-          <h2>Postilaatikko on järjestyksessä!</h2>
-          <p>
-            Huijausviestit ovat roskapostissa ja odotettu toimitusilmoitus
-            saapuneissa.
-          </p>
-          <button
-            type="button"
-            className={`${styles.action} ${styles.primaryAction}`}
-            onClick={onComplete}
-          >
-            P??t? harjoitus
-          </button>
-        </div>
+      <button
+        type="button"
+        className={`${styles.action} ${styles.primaryAction}`}
+        aria-describedby="kaarlo-completion-help"
+        disabled={!sorted}
+        onClick={() => {
+          if (sorted) onComplete();
+        }}
+      >
+        Valmis
+      </button>
+      {feedback && (
+        <KaarloFeedback
+          {...feedback}
+          onDismiss={dismissFeedback}
+          onConfirm={dismissFeedback}
+        />
       )}
     </section>
   );

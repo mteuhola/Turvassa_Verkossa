@@ -148,7 +148,6 @@ export default function PhishingCourse({
             <section className={styles.email} aria-labelledby="email-title">
               <div className={styles.mailToolbar}>
                 <span>Saapuneet</span>
-                <span className={styles.trainingBadge}>Harjoitusviesti</span>
               </div>
               <div className={styles.emailHeader}>
                 <h2 id="email-title" className={styles.subject}>

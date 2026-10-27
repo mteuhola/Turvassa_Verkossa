@@ -53,7 +53,7 @@ const courseCatalog: CourseCatalogEntry[] = [
     title: "Vaaralliset viestit",
     path: "/course/phishing",
     introductionDescription:
-      "Lue huijausviestien varoitusmerkeistä ja etsi niitä kuvitteellisesta sähköpostista.",
+      "Lue tietojenkalastelusta ja huijausviestien varoitusmerkeistä. Etsi huijauksen merkkejä esimerkkiviestistä.",
     topics: [
       {
         id: "safe-responses",

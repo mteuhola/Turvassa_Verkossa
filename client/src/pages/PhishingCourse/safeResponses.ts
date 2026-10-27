@@ -1,28 +1,7 @@
-import type { TheoryContent } from "../Theory/theoryData";
-
-export const safeResponseTheory: TheoryContent = {
-  sections: [
-    {
-      heading: "Pysähdy ja tarkista muuta kautta",
-      paragraphs: [
-        "Epäilyttävän viestin kanssa ei tarvitse kiirehtiä. Älä vastaa siihen tai avaa sen linkkejä tai liitteitä selvittääksesi, onko se aito.",
-        "Avaa palvelun tuttu sovellus tai kirjoita itse sen tuntemasi verkko-osoite. Jos viesti näyttää tulevan tutulta ihmiseltä, varmista pyyntö esimerkiksi soittamalla hänelle ennestään tuntemaasi numeroon. Älä käytä epäilyttävän viestin yhteystietoja varmistamiseen.",
-      ],
-    },
-    {
-      heading: "Harjoittele turvallista seuraavaa askelta",
-      paragraphs: [
-        "Tutulta näyttävä lähettäjä tai pieni maksupyyntö ei yksin takaa viestin aitoutta. Tarkista ensin, liittyykö viesti johonkin odottamaasi asiaan ja vahvista pyyntö erillistä, tuttua yhteyttä pitkin.",
-        "Seuraavassa harjoituksessa valitset turvallisen toimintatavan kolmeen kuvitteelliseen tilanteeseen. Saat jokaisesta valinnasta palautetta. Voit yrittää uudelleen ilman aikarajaa, ja aihe valmistuu, kun olet ratkaissut kaikki tilanteet.",
-      ],
-    },
-  ],
-};
-
 export const safeActionSteps = [
   {
     id: "pause",
-    text: "Pysähdyn. En vastaa viestiin, maksa tai avaa liitett?.",
+    text: "Pysähdyn. En vastaa viestiin, maksa tai avaa liitettä.",
     result: "Kiire ei ohjaa toimintaasi. Viesti ja liite jäävät avaamatta.",
     requires: null,
     hint: "Pysähdy ensin. Älä anna viestin kiireen ohjata toimintaasi.",

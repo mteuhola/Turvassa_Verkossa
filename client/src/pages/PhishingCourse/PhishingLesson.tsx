@@ -9,7 +9,7 @@ import Theory from "../Theory/Theory";
 import { courseIntroductions } from "../Theory/theoryData";
 import { topicCourses } from "../TopicSelection/topicCourses";
 import PhishingCourse from "./PhishingCourse";
-import { safeResponseTheory } from "./safeResponses";
+import { phishingTheory } from "../Theory/theoryData";
 import SafeActionSequence from "./SafeActionSequence";
 import styles from "./PhishingCourse.module.css";
 
@@ -43,7 +43,7 @@ export default function PhishingLesson({
           content:
             mode === "introduction"
               ? courseIntroductions.phishing
-              : safeResponseTheory,
+              : phishingTheory,
         }}
         isComplete={isComplete}
         onComplete={onComplete}

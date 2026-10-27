@@ -50,9 +50,33 @@ export const courseIntroductions: Record<string, TheoryContent> = {
       {
         heading: "Tervetuloa tutkimaan epäilyttäviä viestejä!",
         paragraphs: [
-          "Huijausviesti voi näyttää pankin, pakettipalvelun tai tutun ihmisen lähettämältä. Sen tavoitteena voi olla saada sinut luovuttamaan tietojasi, maksamaan tai avaamaan haitallinen liite. Pelkkä lähettäjän nimi tai tuttu logo ei todista viestin aitoutta.",
-          "Pysähdy erityisesti silloin, kun viesti kiirehtii, uhkailee tai pyytää salasanoja. Tarkista lähettäjän osoite ja mieti, odotitko viestiä. Myös odottamaton liite tai oudolta näyttävä verkko-osoite voi olla varoitusmerkki. Virheetön kieli ei yksin tee viestistä turvallista.",
-          "Seuraavaksi tutkit kuvitteellista sähköpostia. Etsi sen varoitusmerkit omaan tahtiisi. Saat havainnoista palautetta ja voit pyytää vihjeitä. Johdanto valmistuu, kun olet löytänyt kaikki harjoituksen varoitusmerkit.",
+          "Sähköpostiin ja puhelimeen saapuu päivittäin monenlaisia viestejä. Suurin osa niistä on tavallisia sukulaisten ja palveluiden yhteydenottoja. Viestien joukossa voi kuitenkin olla myös sellaisia, joilla yritetään huijata vastaanottajaa.",
+          "Tällä kurssilla opit tunnistamaan epäilyttäviä viestejä ja harjoittelet, miten niiden kanssa kannattaa toimia. Jo muutaman tunnusmerkin tunteminen voi auttaa sinua asioimaan verkossa turvallisemmin.",
+        ],
+      },
+      {
+        heading: "Mitä on tietojenkalastelu?",
+        paragraphs: [
+          "Tietojenkalastelu (englanniksi phishing) on yleinen huijaustapa, jossa rikollinen yrittää huijata ihmisiä antamaan henkilökohtaisia tietojaan, kuten salasanoja tai pankkitunnuksia, esiintymällä luotettavana tahona.",
+          "Tietojenkalastelun nimi tulee siitä, että huijarit ikään kuin käyttävät kalastajien tapaan syöttiä napatakseen kohteensa. Huijaaminen voi tapahtua esimerkiksi sähköpostitse, tekstiviestillä tai sosiaalisen median kautta.",
+          "Tyypillisesti huijausviestissä on linkki, jota painamalla vastaanottaja ohjataan väärennetylle verkkosivustolle. Sivustolla pyydetään tietoja, jotka liittyvät itse huijausviestissä esitettyyn pyyntöön.",
+        ],
+      },
+      {
+        heading: "Epäilyttävän viestin tunnistaminen",
+        paragraphs: [
+          "Huijarit hyödyntävät ihmisten luottamusta, tunteisiin vetoamista, sekä taipumusta tehdä nopeita päätöksiä. Viesti voi esimerkiksi uhata palvelun sulkemisella, jos vastaanottaja ei toimi välittömästi viestin ohjeiden mukaan. Tällaisissa tilanteissa on hyvä muistaa, että kiire ei ole hyvä neuvonantaja: pysähtyminen ja asian huolellinen tarkistaminen voivat estää huijauksen onnistumisen. Oikeat palvelut pyrkivät toimimaan niin, etteivät ne vaadi välitöntä toimintaa ja tunnusten antamista internetissä.",
+          "Tyypillisiä huijausviestin aiheita ovat esimerkiksi ajankohtaiset tapahtumat sekä läheisiin ihmisiin liittyvät viestit. Huijari voi esimerkiksi lähettää viestin, joka vaikuttaa paketin saapumisilmoitukselta. Viesti voi olla uskottava, jos viestin vastaanottaja tosiaan odottaa pakettia. Huijausviesti voi myös näyttää tulevan sukulaiselta, joka kertoo tarvitsevansa kiireellisesti apua esimerkiksi uudesta puhelinnumerosta. Tällaisilla viesteillä pyritään herättämään huolta vastaanottajassa, jotta hän toimisi viestissä pyydetyllä tavalla.",
+          "On huomioitava, että tekoälyn lisääntyvällä käytöllä on suuri vaikutus tietojenkalastelun uskottavuuteen: sen avulla on mahdollista luoda hyvin aidoilta vaikuttavia huijaussivustoja ja uskottavan kuuloisia viestejä monilla kielillä, joten pelkästään kirjoitusvirheistä ei voi enää tunnistaa huijausviestiä. Uskottavan tuntuisen huijauksen tunnistamisessa voi pohtia, mitä viestissä pyydetään tekemään ja millaiseen sävyyn.",
+],
+      },
+      {
+        heading: "Muita huijausviestin merkkejä",
+        paragraphs: [
+          "Odottamaton viesti: Viesti ei liity omaan viimeaikaiseen toimintaan. Viestissä voidaan esitellä arvontavoittona saatavaa rahasummaa, joka ilmestyy tilille linkkiä painaessa ja maksukortin tiedot syötettyään. Tällaisessa tilanteessa on syytä epäillä voiton aitoutta, jos ei ole osallistunut arvontoihin.",
+          "Epätavallinen lähettäjän sähköpostiosoite: Tällainen viesti voi väittää tulevansa esimerkiksi pankilta, mutta lähettäjän sähköpostiosoite ei liity pankkiin mitenkään.",
+          "Linkit vievät eri osoitteeseen kuin mitä viestissä kerrotaan: tietokoneella linkin todellisen osoitteen voi yleensä nähdä viemällä hiiren osoittimen linkin päälle itse linkkiä painamatta.",
+          "Odottamattomat liitteet: viestin mukana voi tulla esimerkiksi tiedosto, jonka avaaminen voi asentaa haittaohjelman laitteelle. Liitteitä ei kannata avata, jos viesti on vähänkään epäilyttävä.",
         ],
       },
     ],
@@ -99,6 +123,25 @@ export const passwordTheory: TheoryContent = {
         "Kaksivaiheinen tunnistautuminen on tapa suojata käyttäjätiliä salasanan lisäksi toisella varmistuksella. Kirjautumisen yhteydessä palvelu, kuten sähköposti, voi esimerkiksi pyytää sinua syöttämään puhelimeesi lähetetyn koodin tai hyväksymään kirjautumisen puhelimen sovelluksessa.",
         "Kaksivaiheinen tunnistautuminen parantaa käyttäjätilisi turvallisuutta, sillä pelkkä salasana ei näin riitä kirjautumiseen. Vaikka kaksivaiheisuus voi tuntua työläältä, se kannattaa ottaa käyttöön erityisesti tärkeissä palveluissa, kuten sähköpostissa.",
         "Jos saat puhelimeesi kirjautumispyynnön, jota et itse ole aloittanut, älä hyväksy sitä. Myös kirjautumisen vahvistuskoodit kannattaa pitää vain omana tietonaan.",
+      ],
+    },
+  ],
+};
+
+export const phishingTheory: TheoryContent = {
+  sections: [
+    {
+      heading: "Pysähdy ja tarkista muuta kautta",
+      paragraphs: [
+        "Epäilyttävän viestin kanssa ei tarvitse kiirehtiä. Älä vastaa siihen tai avaa sen linkkejä tai liitteitä selvittääksesi, onko se aito.",
+        "Avaa palvelun tuttu sovellus tai kirjoita itse sen tuntemasi verkko-osoite. Jos viesti näyttää tulevan tutulta ihmiseltä, varmista pyyntö esimerkiksi soittamalla hänelle ennestään tuntemaasi numeroon. Älä käytä epäilyttävän viestin yhteystietoja varmistamiseen.",
+      ],
+    },
+    {
+      heading: "Harjoittele turvallista seuraavaa askelta",
+      paragraphs: [
+        "Tutulta näyttävä lähettäjä tai pieni maksupyyntö ei yksin takaa viestin aitoutta. Tarkista ensin, liittyykö viesti johonkin odottamaasi asiaan ja vahvista pyyntö erillistä, tuttua yhteyttä pitkin.",
+        "Seuraavassa harjoituksessa valitset turvallisen toimintatavan kolmeen kuvitteelliseen tilanteeseen. Saat jokaisesta valinnasta palautetta. Voit yrittää uudelleen ilman aikarajaa, ja aihe valmistuu, kun olet ratkaissut kaikki tilanteet.",
       ],
     },
   ],

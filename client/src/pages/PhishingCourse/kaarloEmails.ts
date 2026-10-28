@@ -4,7 +4,8 @@ export const kaarloEmails = [
     sender: "MegaPotti asiakas palvelu",
     address: "voitto@mega-palkinot.example",
     subject: "ONNITELUT!! Sinä olet voitaja lunasta NYT",
-    time: "Tänään klo 08.12",
+    time: "Tänään klo 10.31",
+    attachment: null,
     context:
       "Kaarlo: En tunne MegaPotti-palvelua enkä ole osallistunut arvontaan.",
     paragraphs: [
@@ -27,11 +28,59 @@ export const kaarloEmails = [
       "Kaarlo: En siis ole menettämässä oikeaa palkintoa. Jätän pyynnön toteuttamatta ja ilmoitan viestin huijaukseksi.",
   },
   {
+    id: "delivery",
+    sender: "Lukutoukka | Tilausilmoitukset",
+    address: "tilaukset@lukutoukka.fi",
+    subject: "Tilauksesi LP-1042 on noudettavissa",
+    time: "Tänään klo 08.12",
+    attachment: null,
+    context:
+      'Kaarlo: Tilasin lukutoukka.fi-kaupasta kirjan "Linnut ja Metsäretket". Tilausvahvistuksessani on numero LP-1042 ja valitsin noutopaikaksi keskustan pakettipisteen.',
+    paragraphs: [
+      "Hei Kaarlo,",
+      "Tilauksesi LP-1042, Linnut ja Metsäretket (1 kpl), on saapunut valitsemaasi noutopaikkaan: Keskustan pakettipiste, Kauppakatu 12.",
+      "Voit noutaa paketin noutokoodilla 482619 viikon kuluessa. Älä vastaa tähän viestiin, sillä se on automaattisesti luotu.",
+      "Kiitos tilauksestasi! Antoisia lukuhetkiä,",
+      "Lukutoukka Oy",
+    ],
+    link: null,
+    suspicious: false,
+    explanation:
+      "Tässä harjoituksessa viesti on tavallinen toimitusilmoitus. Kaupan osoite, tilausnumero, tuote ja noutopaikka vastaavat Kaarlon omaa tilausta. Viesti ei pyydä maksua, salasanaa tai muuta tietoa, eikä siinä ole linkkejä tai liitteitä. Pelkkä linkkien puuttuminen tai lähettäjän osoite ei silti todista aitoutta: arvio perustuu kokonaisuuteen. Jos jokin jää epäselväksi, tilauksen voi tarkistaa itse avatulta kaupan sivustolta.",
+    response:
+      "Kaarlo: Voin siis ottaa odottamani ilmoituksen vastaan rauhassa. Varovaisuus ei tarkoita, että minun pitäisi epäillä jokaista viestiä tai lopettaa sähköpostin käyttäminen.",
+  },
+  {
+    id: "electricbill",
+    sender: "SuperSähkö Oy",
+    address: "noreply@supersahko.fi",
+    subject: "Lasku 198235895",
+    time: "Eilen klo 12.00",
+    attachment: "Lasku198235895.pdf",
+    context:
+      "Kaarlo: Olen SuperSähkön asiakas, ja olen maksanut samanlaisen laskun joka toinen kuukausi.",
+    paragraphs: [
+      "Hyvä asiakkaamme,",
+      "Pyydämme suorittamaan oheisen laskun alla olevin tiedoin. Laskun kuva löytyy tämän sähköpostin liitteenä",
+      "Maksettava: 69,99€",
+      "Maksun saaja: SuperSähkö Oy",
+      "Ystävällisin terveisin,",
+      "SuperSähkön asiakaspalvelu",
+    ],
+    link: null,
+    suspicious: false,
+    explanation:
+      "Viesti on tavallisen näköinen sähkölasku. Laskujen aitouden pystyy usein varmistamaan palvelun omilta sivuilta.",
+    response:
+      "Kaarlo: Huh, tämä ei sentään ollut huijausyritys. Ajatella, että olisin voinut maksaa huijauslaskuja jo useamman vuoden ajan!",
+  },
+  {
     id: "account",
     sender: "Lukutoukka | Asiakaspalvelu",
-    address: "asiakaspalvelu@lukutoukka-kauppa.fi",
+    address: "asiakaspalvelu@lukut0ukka-kauppa.fi",
     subject: "Vahvista asiakastilisi toimitusta varten",
-    time: "Tänään klo 09.04",
+    time: "Eilen klo 09.04",
+    attachment: null,
     context:
       "Kaarlo: Tilasin kirjan Lukutoukasta osoitteessa lukutoukka.fi. Tämä näyttää samalta kaupalta, ja odotan pakettia.",
     paragraphs: [
@@ -49,31 +98,9 @@ export const kaarloEmails = [
     },
     suspicious: true,
     explanation:
-      "Tämäkin viesti on epäilyttävä, vaikka kieli on sujuvaa ja Kaarlo odottaa tilausta. Lähettäjän ja linkin kohteen verkkotunnus on lukutoukka-kauppa.fi, ei kaupan lukutoukka.fi. Linkin näkyvä teksti peittää eri kohteen. Korttitietojen pyytäminen ja toimituksen keskeyttämisellä painostaminen ovat lisäsyitä tarkistaa asia kaupan tutun sivuston kautta.",
+      "Tämäkin viesti on epäilyttävä, vaikka kieli on sujuvaa ja Kaarlo odottaa tilausta. Lähettäjän ja linkin kohteen verkkotunnus on lukut0ukka-kauppa.fi, ei kaupan lukutoukka.fi. Linkin näkyvä teksti peittää eri kohteen. Korttitietojen pyytäminen ja toimituksen keskeyttämisellä painostaminen ovat lisäsyitä tarkistaa asia kaupan tutun sivuston kautta.",
     response:
       "Kaarlo: Tuttu nimi ja hyvä kieli eivät yksin riitä. Tarkistan tilaukseni avaamalla itse tuntemani kaupan sivuston.",
-  },
-  {
-    id: "delivery",
-    sender: "Lukutoukka | Tilausilmoitukset",
-    address: "tilaukset@lukutoukka.fi",
-    subject: "Tilauksesi LP-1042 on noudettavissa",
-    time: "Tänään klo 10.31",
-    context:
-      'Kaarlo: Tilasin lukutoukka.fi-kaupasta kirjan "Linnut ja Metsäretket". Tilausvahvistuksessani on numero LP-1042 ja valitsin noutopaikaksi keskustan pakettipisteen.',
-    paragraphs: [
-      "Hei Kaarlo,",
-      "Tilauksesi LP-1042, Linnut ja Metsäretket (1 kpl), on saapunut valitsemaasi noutopaikkaan: Keskustan pakettipiste, Kauppakatu 12.",
-      "Voit noutaa paketin noutokoodilla 482619 viikon kuluessa. Älä vastaa tähän viestiin, sillä se on automaattisesti luotu.",
-      "Kiitos tilauksestasi! Antoisia lukuhetkiä,",
-      "Lukutoukka OY",
-    ],
-    link: null,
-    suspicious: false,
-    explanation:
-      "Tässä harjoituksessa viesti on tavallinen toimitusilmoitus. Kaupan osoite, tilausnumero, tuote ja noutopaikka vastaavat Kaarlon omaa tilausta. Viesti ei pyydä maksua, salasanaa tai muuta tietoa, eikä siinä ole linkkejä tai liitteitä. Pelkkä linkkien puuttuminen tai lähettäjän osoite ei silti todista aitoutta: arvio perustuu kokonaisuuteen. Jos jokin jää epäselväksi, tilauksen voi tarkistaa itse avatulta kaupan sivustolta.",
-    response:
-      "Kaarlo: Voin siis ottaa odottamani ilmoituksen vastaan rauhassa. Varovaisuus ei tarkoita, että minun pitäisi epäillä jokaista viestiä tai lopettaa sähköpostin käyttäminen.",
   },
 ] as const;
 

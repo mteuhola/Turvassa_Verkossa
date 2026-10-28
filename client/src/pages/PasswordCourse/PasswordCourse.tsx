@@ -184,17 +184,22 @@ export default function PasswordCourse({
                 Tutustu esimerkkeihin
               </h2>
               <p>
-                Tässä näet erilaisia esimerkkisalasanoja ja niiden arvioidun vahvuuden. 
-                Arvio perustuu johdantokappaleessa esiteltyihin salasanan ominaisuuksiin.
-                Klikkaamalla salasanaa näet sen vahvuusarvion sekä kysymyksiä salasanan vahvuuteen liittyen.
+                Tässä näet erilaisia esimerkkisalasanoja ja niiden arvioidun
+                vahvuuden. Arvio perustuu johdantokappaleessa esiteltyihin
+                salasanan ominaisuuksiin. Klikkaamalla salasanaa näet sen
+                vahvuusarvion sekä kysymyksiä salasanan vahvuuteen liittyen.
                 <br />
                 <br />
                 Valitse kaikki oikeat vaihtoehdot. Oikeita voi olla yksi, useita
-                tai ei yhtään. Paina ”Tarkista vastaus”-painiketta, kun haluat tarkistaa vastauksesi. Pääset eteenpäin, kun
-                vastaat kaikkiin viiteen salasanaan liittyviin kysymyksiin oikein ja painat alhaalta löytyvää Valmis-painiketta. Kysymyksiä voi yrittää uudelleen. 
+                tai ei yhtään. Pääset eteenpäin, kun vastaat kaikkiin viiteen
+                salasanaan liittyviin kysymyksiin oikein ja painat alhaalta
+                löytyvää <strong>Valmis</strong>-painiketta. Kysymyksiä voi
+                yrittää uudelleen.
                 <br />
                 <br />
-                Huom: Nämä esimerkit ovat julkisia, eivätkä sovi oikeiksi salasanoiksi. Älä käytä niitä omilla käyttäjilläsi.
+                <strong>Huom</strong>: Nämä esimerkit ovat julkisia, eivätkä
+                sovi oikeiksi salasanoiksi. Älä käytä niitä omilla
+                käyttäjilläsi.
               </p>
               <div className={styles.examples}>
                 {examples.map((item, index) => (
@@ -205,7 +210,11 @@ export default function PasswordCourse({
                       {isExampleCorrect(
                         checkedAnswers[index],
                         item.correctAnswers,
-                      ) && <span><strong>Vastattu oikein</strong></span>}
+                      ) && (
+                        <span>
+                          <strong>Vastattu oikein</strong>
+                        </span>
+                      )}
                     </summary>
                     <div className={styles.exampleResult}>
                       {item.assessment && (
@@ -311,16 +320,24 @@ export default function PasswordCourse({
                 Keksi oma harjoitussalasana
               </h2>
               <p id="privacy" className={styles.privacy}>
-                Tässä näkymässä voit kokeilla erilaisten salasanojen vahvuutta sekä nähdä ehdotuksia niiden vahvistamiseen. Voit kokeilla esimerkiksi:
+                Tässä näkymässä voit kokeilla erilaisten salasanojen vahvuutta
+                sekä nähdä ehdotuksia niiden vahvistamiseen. Voit kokeilla
+                esimerkiksi:
                 <li>Lyhyitä sanoja, kuten "kissa"</li>
                 <li>Isoja ja pieniä kirjaimia</li>
                 <li>Numeroiden lisäämistä</li>
                 <li>Lisätä erikoismerkkejä kuten "!" tai "#"</li>
-                <li>Monia toisiinsa liittymättömiä lyhyitä sanoja eroteltuna merkeillä, kuten "kissa-kahvi_radio!sohva"</li>
+                <li>
+                  Monia toisiinsa liittymättömiä lyhyitä sanoja eroteltuna
+                  merkeillä, kuten "kissa-kahvi_radio!sohva"
+                </li>
                 <br />
-                Kun olet kokeillut erilaisia salasanoja, keksi
-                salasana vain tätä harjoitusta varten. Sitä ei tallenneta mihinkään.
-                <strong>Huom: Älä kuitenkaan valitse tähän tehtävään olemassaolevaa salasanaasi!</strong> 
+                Kun olet kokeillut erilaisia salasanoja, keksi salasana vain
+                tätä harjoitusta varten. Sitä ei tallenneta mihinkään.
+                <strong>
+                  Huom: Älä kuitenkaan valitse tähän tehtävään olemassaolevaa
+                  salasanaasi!
+                </strong>
               </p>
               <label className={styles.label} htmlFor="practice-password">
                 Harjoitussalasana
@@ -401,7 +418,8 @@ export default function PasswordCourse({
                 </p>
                 {examples.some((item) => item.value === password) && (
                   <p role="status">
-                    Keksi oma salasana. Julkista esimerkkiä ei suositella tallennettavaksi omaksi.
+                    Keksi oma salasana. Julkista esimerkkiä ei suositella
+                    tallennettavaksi omaksi.
                   </p>
                 )}
                 <button
@@ -438,8 +456,8 @@ export default function PasswordCourse({
                 Säilytä harjoitussalasanasi
               </h2>
               <p>
-                Tarvitset salasanaa myöhemmin. Kirjoita se muistiin tai
-                kokeile harjoituksen salasanojen hallintaohjelmaa.
+                Tarvitset salasanaa myöhemmin. Kirjoita se muistiin tai kokeile
+                harjoituksen salasanojen hallintaohjelmaa.
               </p>
               <p>
                 <strong>
@@ -477,13 +495,19 @@ export default function PasswordCourse({
                         Palvelu: <strong>Turvassa Verkossa -harjoitus</strong>
                       </p>
                       <p>
-                        Tämä ei ole oikea salasanojen hallintaohjelma, vaan harjoitus siitä, miten hallintasovellukset yleensä toimivat. 
-                        Hallintasovellus antaa sinun hakea salasanan myöhemmin tarvittaessa. Se säilyy tallessa, kunnes vaihdat sen.
+                        Tämä ei ole oikea salasanojen hallintaohjelma, vaan
+                        harjoitus siitä, miten hallintasovellukset yleensä
+                        toimivat. Hallintasovellus antaa sinun hakea salasanan
+                        myöhemmin tarvittaessa. Se säilyy tallessa, kunnes
+                        vaihdat sen.
                       </p>
                       <div className={styles.entryName}>
                         <p id="storage-name-help">
-                          Salasanojen hallinnassa salasanoille annetaan yleensä "nimi", jolla se on tunnistettavissa muiden salasanojen joukosta. Tällä nimellä löydät salasanasi harjoituksen
-                          salasanojen hallintaohjelmasta, kun tarvitset sitä myöhemmin:
+                          Salasanojen hallinnassa salasanoille annetaan yleensä
+                          "nimi", jolla se on tunnistettavissa muiden
+                          salasanojen joukosta. Tällä nimellä löydät salasanasi
+                          harjoituksen salasanojen hallintaohjelmasta, kun
+                          tarvitset sitä myöhemmin:
                         </p>
                         <input
                           id="storage-name"
@@ -535,9 +559,7 @@ export default function PasswordCourse({
                     </>
                   )}
                   {hasSaved && (
-                    <p>
-                      Uusi tallennus korvaa aiemman harjoitussalasanan.
-                    </p>
+                    <p>Uusi tallennus korvaa aiemman harjoitussalasanan.</p>
                   )}
                   <button
                     type="button"

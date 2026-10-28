@@ -66,7 +66,8 @@ export default function KaarloFeedback({
         className={`${styles.action} ${styles.primaryAction}`}
         onClick={onConfirm}
       >
-        {confirmLabel ?? (complete ? "Päätä harjoitus" : "Jatka viestien tarkastelua")}
+        {confirmLabel ??
+          (complete ? "Päätä harjoitus" : "Jatka viestien tarkastelua")}
       </button>
       {complete && (
         <button type="button" className={styles.action} onClick={onDismiss}>

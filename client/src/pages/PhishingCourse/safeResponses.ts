@@ -1,80 +1,35 @@
-export const safeActionSteps = [
+export type PracticeScreen =
+  "message" | "home" | "app" | "contacts" | "contact" | "result";
+
+export const safeResponseScenarios = [
   {
-    id: "pause",
-    text: "Pysähdyn. En vastaa viestiin, maksa tai avaa liitettä.",
-    result: "Kiire ei ohjaa toimintaasi. Viesti ja liite jäävät avaamatta.",
-    requires: null,
-    hint: "Pysähdy ensin. Älä anna viestin kiireen ohjata toimintaasi.",
-  },
-  {
-    id: "contact",
-    text: "Etsin ystävän ennestään tutun numeron omista yhteystiedoistani.",
+    title: "Tarkista kirjastolainasi",
+    goal: "Sinulla on kirja lainassa. Tarkista lainan tilanne avaamalla itse ennestään käyttämäsi Oma kirjasto -sovellus.",
+    sender: "Oma kirjasto",
+    message:
+      "Kirjastolainasi on myöhässä. Maksa myöhästymismaksu heti alla olevasta linkistä, jotta voit jatkaa kirjaston käyttöä.",
+    messageAction: "Maksa myöhästymismaksu",
+    feedback:
+      "Viestin linkki ei ole riippumaton tapa tarkistaa pyyntöä. Palaa puhelimen aloitusnäyttöön ja avaa tuttu sovellus itse.",
+    hint: "Valitse puhelimen alareunasta Aloitusnäyttö. Avaa sitten Oma kirjasto ja oman lainasi tiedot.",
     result:
-      "Löydät yhteystietoihisi aiemmin tallentamasi numeron. Et käytä viestissä annettuja yhteystietoja.",
-    requires: "pause",
-    hint: "Pysähdy ennen kuin alat selvittää pyyntöä.",
+      "Sovelluksen mukaan kirjasi eräpäivään on vielä viikko. Sinulla ei ole maksettavia maksuja.",
+    explanation:
+      "Tarkistit asian itse avaamastasi tutusta sovelluksesta. Sinun ei tarvinnut avata viestin linkkiä tai päätellä viestin ulkoasusta, oliko se aito.",
   },
   {
-    id: "call",
-    text: "Soitan ystävälle löytämässäni tuttuun numeroon.",
-    result: "Ystävä vastaa puheluun. Voit nyt kysyä häneltä pyyntöä suoraan.",
-    requires: "contact",
-    hint: "Etsi ensin ystävän ennestään tuttu numero omista yhteystiedoistasi.",
-  },
-  {
-    id: "verify",
-    text: "Kysyn puhelussa, lähettikö ystävä rahapyynnön.",
+    title: "Varmista ystävän pyyntö",
+    goal: "Ystäväsi Leenan nimellä tulee odottamaton pyyntö. Selvitä, lähettikö hän sen, käyttämällä aiemmin tallentamaasi yhteystietoa.",
+    sender: "Leena",
+    message:
+      "Hei! Voisitko maksaa yhden laskun puolestani tänään? Minulla on uusi numero. Soita tähän, niin kerron lisää.",
+    messageAction: "Soita viestin numeroon",
+    feedback:
+      "Viestissä annettu uusi numero voi kuulua jollekin muulle. Avaa omat yhteystietosi ja käytä Leenan ennestään tuttua numeroa.",
+    hint: "Palaa Aloitusnäyttöön. Avaa Yhteystiedot, valitse Leena ja soita tallennettuun numeroon.",
     result:
-      "Yst?v? kertoo: En lähettänyt sinulle laskua enkä pyytänyt rahaa. Pyyntö ei siis tullut häneltä.",
-    requires: "call",
-    hint: "Soita ensin ystävälle, jotta voit varmistaa pyynn?n puhelussa.",
-  },
-  {
-    id: "report",
-    text: "Kun ystävä on vahvistanut, ettei lähettänyt pyyntöä, ilmoitan viestin huijaukseksi.",
-    result:
-      "Ilmoitat viestin viestipalvelun ilmoitustoiminnolla. Rahaa tai tietoja ei pääty huijarille.",
-    requires: "verify",
-    hint: "Tässä suunnitelmassa ilmoitus tehdään ystävän vastauksen jälkeen. Varmista pyyntö ensin puhelussa.",
+      "Leena vastaa: En lähettänyt sinulle rahapyyntöä. Hyvä, että soitit tuttuun numerooni ja tarkistit asian.",
+    explanation:
+      "Varmistit pyynnön ennestään tutun yhteystiedon kautta. Viestin lähettäjä ei päässyt valitsemaan, keneltä kysyt varmistusta. Jos ystävä ei vastaa, voit odottaa varmistusta ja jättää pyynnön toteuttamatta.",
   },
 ] as const;
-
-export function createSafeActionOrder(random = Math.random): string[] {
-  const order: string[] = safeActionSteps.map((step) => step.id);
-  for (let i = order.length - 1; i > 0; i--) {
-    const j = Math.floor(random() * (i + 1));
-    [order[i], order[j]] = [order[j], order[i]];
-  }
-  // Start with a puzzle to solve, even if the shuffle returns the solved order.
-  if (order.every((id, index) => id === safeActionSteps[index].id)) {
-    [order[0], order[1]] = [order[1], order[0]];
-  }
-  return order;
-}
-
-export function checkSafeActionOrder(order: string[]) {
-  if (
-    order.length !== safeActionSteps.length ||
-    new Set(order).size !== safeActionSteps.length ||
-    order.some((id) => !safeActionSteps.some((step) => step.id === id))
-  ) {
-    return {
-      correct: false,
-      index: 0,
-      feedback: "K?yt? jokaista toimintoa kerran.",
-    };
-  }
-  const done = new Set<string>();
-  for (const [index, id] of order.entries()) {
-    const step = safeActionSteps.find((step) => step.id === id)!;
-    if (step.requires && !done.has(step.requires)) {
-      return { correct: false, index, feedback: step.hint };
-    }
-    done.add(id);
-  }
-  return {
-    correct: true,
-    index: order.length,
-    feedback: "Turvallinen toimintaketju valmis!",
-  };
-}

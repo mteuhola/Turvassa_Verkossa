@@ -59,9 +59,9 @@ const courseCatalog: CourseCatalogEntry[] = [
         id: "safe-responses",
         kind: "activity",
         isComplete: false,
-        title: "Miten toimit epäilyttävän viestin kanssa?",
+        title: "Kuinka toimia epäilyttävän viestin kanssa?",
         description:
-          "Lue turvallisista toimintatavoista, rakenna oma toimintaketjusi ja kokeile sitä vaihe kerrallaan.",
+          "Harjoittele asian tarkistamista tutun sovelluksen ja tallennetun yhteystiedon kautta.",
         path: "/course/phishing/safe-responses",
       },
     ],

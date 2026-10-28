@@ -16,10 +16,12 @@ export default function KaarloActivity({
   onComplete,
   ...textSizeProps
 }: TextSizeProps & ActivityProgressProps) {
-  const [stage, setStage] = useState<"intro" | "email" | "recovery" | "complete">("intro");
-  const [index, setIndex] = useState(0);
+  const [stage, setStage] = useState<
+    "intro" | "email" | "recovery" | "complete"
+  >("intro");
+  const [index, setIndex] = useState<number | null>(null);
   const heading = useRef<HTMLHeadingElement>(null);
-  const email = kaarloEmails[index];
+  const email = index === null ? null : kaarloEmails[index];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,30 +46,28 @@ export default function KaarloActivity({
           {stage === "complete" ? "Kiitos avusta!" : "Auta Kaarloa"}
         </h1>
         {isComplete && <CompletionBadge />}
-        {(stage === "email" || stage === "recovery") && (
-          <p>{stage === "email" ? "Osa 1/2: Viestien arviointi" : "Osa 2/2: Apua klikkauksen jälkeen"}</p>
-        )}
-        <div className={styles.kaarloConcern}>
-          <div className={styles.kaarloPortrait}>
-            <CharacterPortrait courseId="phishing" />
+        {(stage !== "email" || !email) && (
+          <div className={styles.kaarloConcern}>
+            <div className={styles.kaarloPortrait}>
+              <CharacterPortrait courseId="phishing" />
+            </div>
+            <p>
+              {stage === "intro"
+                ? "”Olen nyt muutaman päivän sisään saanut jostain syystä paljon sähköpostia. Olen kuullut niin paljon huijauksista, että hädin tuskin uskallan lukea viestejäni! Voisitko katsoa niitä kanssani? En haluaisi jättää tärkeitä viestejä huomaamatta.”"
+                : stage === "email"
+                  ? (email?.context ?? "Avataan joku viesteistä.")
+                  : stage === "recovery"
+                    ? "Kaarlo: Minun täytyy tunnustaa jotain. Avasin eilen yhden tällaisen viestin linkin. Sen jälkeen huijausviestejä on tuntunut tulevan enemmän. Johtuuko se klikkauksesta? Mitä minun pitäisi nyt tehdä?"
+                    : "Kaarlo: Kiitos, että autoit minua arvioimaan viestejä rauhassa."}
+            </p>
           </div>
-          <p>
-            {stage === "intro"
-              ? "”Olen nyt muutaman päivän sisään saanut paljon sähköpostia. Olen kuullut niin paljon huijauksista, että hädintuskin uskallan lukea viestejäni! Voisitko katsoa niitä kanssani? En haluaisi jättää tärkeää viestiä huomaamatta.”"
-              : stage === "email"
-                ? email.context
-                : stage === "recovery"
-                  ? "Kaarlo: Minun täytyy tunnustaa jotain. Avasin eilen yhden tällaisen viestin linkin. Sen jälkeen huijausviestejä on tuntunut tulevan enemmän. Johtuuko se klikkauksesta? Mitä minun pitäisi nyt tehdä?"
-                : "Kaarlo: Kiitos, että autoit minua arvioimaan viestejä rauhassa."}
-          </p>
-        </div>
+        )}
         {stage === "intro" && (
           <section>
             <p>
-              Lue viestit ja siirrä epäilyttävät viestit roskapostiin.
-              Jätä tavalliset viestit saapuneisiin.
-              Kaarlo kertoo myös, mitä hän tietää tilanteesta.
-              Toisessa osassa autat häntä toimimaan epäilyttävän linkin avaamisen jälkeen.
+              Lue viestit ja siirrä epäilyttävät viestit roskapostiin. Jätä
+              tavalliset viestit saapuneisiin. Kaarlo kertoo myös, mitä hän
+              tietää tilanteesta.
             </p>
             <p>
               Kaikki palvelut, osoitteet ja viestit ovat kuvitteellisia.
@@ -109,12 +109,13 @@ export default function KaarloActivity({
               tutusta sovelluksesta tai itse avatulta sivustolta.
             </p>
             <p>
-              Klikkauksesta kannattaa kertoa ja selvittää, mitä sivulla tapahtui.
-              Viestien lisääntyminen ei yksin osoita, mistä ne johtuvat.
-              Jos annoit salasanan, vaihda se heti aidossa palvelussa ja kaikissa
-              muissa palveluissa, joissa käytit samaa salasanaa. Tässä harjoituksessa
-              Kaarlo ei antanut maksutietoja. Jos niitä olisi annettu, pankkiin
-              pitäisi ottaa heti yhteyttä sen virallista yhteydenottotapaa käyttäen.
+              Klikkauksesta kannattaa kertoa ja selvittää, mitä sivulla
+              tapahtui. Viestien lisääntyminen ei yksin osoita, mistä ne
+              johtuvat. Jos annoit salasanan, vaihda se heti aidossa palvelussa
+              ja kaikissa muissa palveluissa, joissa käytit samaa salasanaa.
+              Tässä harjoituksessa Kaarlo ei antanut maksutietoja. Jos niitä
+              olisi annettu, pankkiin pitäisi ottaa heti yhteyttä sen virallista
+              yhteydenottotapaa käyttäen.
             </p>
             <div className={styles.actions}>
               <Link
@@ -126,7 +127,7 @@ export default function KaarloActivity({
               <button
                 className={styles.action}
                 onClick={() => {
-                  setIndex(0);
+                  setIndex(null);
                   setStage("intro");
                 }}
               >

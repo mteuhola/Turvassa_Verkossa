@@ -81,7 +81,7 @@ export default function PhishingLesson({
       </nav>
       <main className={`${styles.main} ${styles.responsePractice}`}>
         <h1 ref={heading} tabIndex={-1}>
-          Rakenna turvallinen toimintaketju
+          Tarkista tuttua kautta
         </h1>
         {isComplete && <CompletionBadge />}
         <SafeActionSequence onComplete={onComplete} />

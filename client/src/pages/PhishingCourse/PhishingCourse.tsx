@@ -135,8 +135,7 @@ export default function PhishingCourse({
               seuraavaa havaintoa.
             </p>
             <p>
-              Oikean pankin
-              osoite on tässä esimerkissä{" "}
+              Oikean pankin osoite on tässä esimerkissä{" "}
               <strong>tonttupankki.yksityinen</strong>. Valinnat eivät avaa
               linkkejä tai liitteitä. Voit kokeilla rauhassa ilman aikarajaa.
             </p>
@@ -216,7 +215,7 @@ export default function PhishingCourse({
                     className={`${styles.action} ${styles.primaryAction}`}
                     to="/course/phishing/safe-responses"
                   >
-                    Jatka: Miten toimit epäilyttävän viestin kanssa?
+                    Jatka: Kuinka toimia epäilyttävän viestin kanssa?
                   </Link>
                   <p>
                     Hienoa työtä! Harjoittelit viestin tarkistamista. Oikeassa
@@ -226,9 +225,9 @@ export default function PhishingCourse({
                   <p>
                     <strong>Turvallinen lähestymistapa:</strong> Epäillessäsi
                     viestin aitoutta, älä vastaa, avaa liitettä tai klikkaa
-                    viestissä olevia linkkejä. Tarkista asia pankin omasta sovelluksesta
-                    tai tutusta puhelinnumerosta. Ilmoita viesti roskapostiksi
-                    tai tietojenkalasteluksi.
+                    viestissä olevia linkkejä. Tarkista asia pankin omasta
+                    sovelluksesta tai tutusta puhelinnumerosta. Ilmoita viesti
+                    roskapostiksi tai tietojenkalasteluksi.
                   </p>
                 </CompletionNotice>
               )}

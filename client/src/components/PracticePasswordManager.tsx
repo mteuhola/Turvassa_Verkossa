@@ -15,9 +15,9 @@ export default function PracticePasswordManager({
     <details className={styles.root} onToggle={() => setVisible(false)}>
       <summary>Avaa harjoituksen salasanojen hallintaohjelma</summary>
       <p>
-        Tämä on harjoitus, ei oikea salasanojen hallintaohjelma. Tänne tallennettua
-        salasanaa ei saa käyttää missään oikeassa palvelussa. Se säilyy tässä
-        selaimessa luettavassa muodossa, kunnes vaihdat sen.
+        Tämä on harjoitus, ei oikea salasanojen hallintaohjelma. Tänne
+        tallennettua salasanaa ei saa käyttää missään oikeassa palvelussa. Se
+        säilyy tässä selaimessa luettavassa muodossa, kunnes vaihdat sen.
       </p>
       {password ? (
         <>

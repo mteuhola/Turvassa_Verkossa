@@ -223,6 +223,25 @@
   min-width: 0;
   margin: 0;
 }
+.kaarloEmailContext {
+  align-items: flex-start;
+  scroll-margin-block-start: 24px;
+}
+.kaarloEmailContext .kaarloPortrait {
+  width: 5rem;
+}
+.kaarloContextText {
+  flex: 1 1 15rem;
+  min-width: 0;
+  max-width: 65ch;
+}
+.kaarloContextText h2 {
+  margin: 0 0 8px;
+  font-size: 1.25em;
+}
+.kaarloContextText p {
+  margin: 0;
+}
 .emailMetadata {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -247,29 +266,6 @@
   .emailMetadata dd {
     margin-bottom: 12px;
   }
-}
-.sequenceList {
-  padding-left: 1.5em;
-  margin-block: 24px;
-}
-.sequenceList li {
-  padding: 12px 0 24px 8px;
-  border-bottom: 1px solid var(--border);
-}
-.sequenceList li::marker {
-  color: var(--course-ink);
-  font-weight: 600;
-}
-.sequenceList li:focus {
-  outline: 3px solid var(--course-ink);
-  outline-offset: 4px;
-}
-.sequencePlayback {
-  margin-block: 32px;
-  padding: 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
 }
 .responseScenario {
   margin-block: 32px;
@@ -625,4 +621,62 @@
 .notice,
 .feedback {
   border-radius: 0;
+}
+.practicePhone {
+  width: 100%;
+  max-width: 34rem;
+  margin: 28px auto 20px;
+  border: 3px solid #334b60;
+  border-radius: 16px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.practicePhoneBar {
+  padding: 12px 24px;
+  background: #173c5c;
+  color: #fff;
+}
+.practicePhoneContent {
+  padding: clamp(16px, 4vw, 28px);
+  min-height: 18rem;
+}
+.practicePhoneContent h2:focus,
+.practiceResult h2:focus {
+  outline: 3px solid var(--course-ink);
+  outline-offset: 4px;
+}
+.practiceMessage {
+  margin: 0 0 24px;
+  padding: 20px;
+  background: #e6f1fb;
+  color: #0c447c;
+  border-radius: 12px;
+}
+.practiceApps {
+  display: grid;
+  gap: 16px;
+}
+.practiceApps button {
+  text-align: left;
+  min-height: 64px;
+}
+.practicePhoneNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px;
+  border-top: 1px solid var(--border);
+}
+.practiceHint {
+  max-width: 34rem;
+  margin: 0 auto 28px;
+}
+.practiceHint summary {
+  padding-block: 12px;
+  min-height: 48px;
+  color: var(--course-ink);
+  cursor: pointer;
+}
+.practiceResult {
+  margin-block: 32px;
 }

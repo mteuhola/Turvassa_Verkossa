@@ -47,7 +47,8 @@ export default function CourseSelection({
         <header className={styles.hero}>
           <h1>Tervetuloa oppimaan!</h1>
           <p>
-            Tämän oppimisympäristön avulla voit harjoitella turvallista verkon käyttöä. Et tarvitse ennakkotietoja, ja voit edetä omaan tahtiisi.
+            Tämän oppimisympäristön avulla voit harjoitella turvallista verkon
+            käyttöä. Et tarvitse ennakkotietoja, ja voit edetä omaan tahtiisi.
           </p>
         </header>
         <section aria-labelledby="courses-title">
@@ -104,8 +105,7 @@ export default function CourseSelection({
             })}
           </ul>
         </section>
-        <footer className={styles.footer}>
-        </footer>
+        <footer className={styles.footer}></footer>
         {import.meta.env.VITE_ENABLE_DEBUG_TOOLS === "true" && (
           <DebugProgressReset onReset={onResetProgress} />
         )}

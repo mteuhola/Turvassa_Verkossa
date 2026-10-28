@@ -1,10 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  checkSafeActionOrder,
-  createSafeActionOrder,
-  safeActionSteps,
-} from "./safeResponses";
+import { safeResponseScenarios, type PracticeScreen } from "./safeResponses";
 import styles from "./PhishingCourse.module.css";
 
 export default function SafeActionSequence({
@@ -12,193 +8,245 @@ export default function SafeActionSequence({
 }: {
   onComplete: () => void;
 }) {
-  const [order, setOrder] = useState(createSafeActionOrder);
-  const [stage, setStage] = useState<"arrange" | "play" | "complete">(
-    "arrange",
-  );
-  const [position, setPosition] = useState(0);
-  const [announcement, setAnnouncement] = useState("");
-  const resultHeading = useRef<HTMLHeadingElement>(null);
-  const stepsHeading = useRef<HTMLHeadingElement>(null);
-  const itemRefs = useRef<Record<string, HTMLLIElement | null>>({});
-  const pendingFocus = useRef<string | null>(null);
-  const check = checkSafeActionOrder(order);
-  const step = safeActionSteps.find((item) => item.id === order[position])!;
-  const blocked = !check.correct && position === check.index;
+  const [scenarioIndex, setScenarioIndex] = useState(0);
+  const [screen, setScreen] = useState<PracticeScreen>("message");
+  const [feedback, setFeedback] = useState("");
+  const [complete, setComplete] = useState(false);
+  const heading = useRef<HTMLHeadingElement>(null);
+  const moved = useRef(false);
+  const scenario = safeResponseScenarios[scenarioIndex];
+  const actionClass = styles.action;
 
   useEffect(() => {
-    if (stage !== "arrange") resultHeading.current?.focus();
-  }, [stage, position]);
-  useEffect(() => {
-    if (pendingFocus.current) {
-      itemRefs.current[pendingFocus.current]?.focus();
-      pendingFocus.current = null;
-    }
-  }, [order]);
+    if (moved.current) heading.current?.focus();
+  }, [screen, scenarioIndex, complete]);
 
-  function move(index: number, direction: number) {
-    const next = [...order];
-    const destination = index + direction;
-    if (destination < 0 || destination >= order.length) return;
-    [next[index], next[destination]] = [next[destination], next[index]];
-    pendingFocus.current = order[index];
-    setOrder(next);
-    setAnnouncement(
-      `Siirretty kohtaan ${destination + 1}: ${safeActionSteps.find((item) => item.id === order[index])!.text}`,
-    );
+  function navigate(next: PracticeScreen) {
+    moved.current = true;
+    setFeedback("");
+    setScreen(next);
   }
 
-  return (
-    <>
-      <section aria-labelledby="sequence-situation">
-        <h2 id="sequence-situation">Ystävän kiireellinen rahapyyntö</h2>
+  function finishScenario() {
+    moved.current = true;
+    if (scenarioIndex === safeResponseScenarios.length - 1) {
+      setComplete(true);
+      onComplete();
+    } else {
+      setScenarioIndex(scenarioIndex + 1);
+      navigate("message");
+    }
+  }
+
+  if (complete)
+    return (
+      <section
+        className={styles.practiceResult}
+        aria-labelledby="practice-complete"
+      >
+        <h2 id="practice-complete" ref={heading} tabIndex={-1}>
+          Osaat tarkistaa muuta kautta!
+        </h2>
         <p>
-          Kuvitteellinen tilanne: ystäväsi nimellä tulee viesti, jossa pyydetään
-          maksamaan liitteen lasku heti. Et odottanut laskua. Tavoitteesi on
-          selvittää, lähettikö ystävä pyynnön, avaamatta liitettä tai
-          maksamatta.
+          Avasit tutun sovelluksen itse ja varmistit ystävän pyynnön
+          tallennetusta yhteystiedosta. Molemmat harjoitukset on suoritettu.
         </p>
         <p>
-          Järjestä viisi toimintoa painikkeilla. Kokeile sitten suunnitelmaasi
-          vaihe kerrallaan. Tässä harjoituksessa ystävä vastaa puheluun.
-          Oikeassa tilanteessa voit odottaa varmistusta ja jättää pyynnön
-          toteuttamatta.
+          Kun viesti epäilyttää, siirry itse tuttuun palveluun tai ota yhteyttä
+          ennestään tuntemallasi tavalla.
         </p>
-      </section>
-      <p role="status" aria-atomic="true">
-        {announcement}
-      </p>
-      {stage === "arrange" ? (
-        <section aria-labelledby="sequence-steps">
-          <h2 id="sequence-steps" ref={stepsHeading} tabIndex={-1}>
-            Oma toimintaketjusi
-          </h2>
-          <ol className={styles.sequenceList}>
-            {order.map((id, index) => {
-              const item = safeActionSteps.find((item) => item.id === id)!;
-              return (
-                <li
-                  key={id}
-                  ref={(element) => {
-                    itemRefs.current[id] = element;
-                  }}
-                  tabIndex={-1}
-                >
-                  <p>{item.text}</p>
-                  <div className={styles.actions}>
-                    <button
-                      className={styles.action}
-                      type="button"
-                      disabled={index === 0}
-                      aria-label={`Siirrä aiemmaksi: ${item.text}`}
-                      onClick={() => move(index, -1)}
-                    >
-                      Siirrä aiemmaksi
-                    </button>
-                    <button
-                      className={styles.action}
-                      type="button"
-                      disabled={index === order.length - 1}
-                      aria-label={`Siirrä myöhemmäksi: ${item.text}`}
-                      onClick={() => move(index, 1)}
-                    >
-                      Siirrä myöhemmäksi
-                    </button>
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
-          <button
-            type="button"
-            className={`${styles.action} ${styles.primaryAction}`}
-            onClick={() => {
-              setPosition(0);
-              setStage("play");
-              setAnnouncement("");
-            }}
-          >
-            Kokeile toimintaketjua
-          </button>
-        </section>
-      ) : stage === "play" ? (
-        <section
-          className={styles.sequencePlayback}
-          aria-labelledby="sequence-result"
-        >
-          <h2 ref={resultHeading} tabIndex={-1} id="sequence-result">
-            Vaihe {position + 1}/{order.length}
-          </h2>
-          <p>
-            <strong>{step.text}</strong>
-          </p>
-          <p>{blocked ? check.feedback : step.result}</p>
-          {blocked ? (
-            <button
-              type="button"
-              className={styles.action}
-              onClick={() => {
-                setStage("arrange");
-                setAnnouncement(
-                  `Vaihe ${position + 1} tarvitsee muutoksen. ${check.feedback}`,
-                );
-                requestAnimationFrame(() => stepsHeading.current?.focus());
-              }}
-            >
-              Muokkaa järjestystä
-            </button>
-          ) : (
-            <button
-              type="button"
-              className={`${styles.action} ${styles.primaryAction}`}
-              onClick={() => {
-                if (position < order.length - 1) setPosition(position + 1);
-                else {
-                  setStage("complete");
-                  onComplete();
-                }
-              }}
-            >
-              {position < order.length - 1
-                ? "Seuraava vaihe"
-                : "Päätä harjoitus"}
-            </button>
-          )}
-        </section>
-      ) : (
-        <section
-          className={styles.sequencePlayback}
-          aria-labelledby="sequence-result"
-        >
-          <h2 ref={resultHeading} tabIndex={-1} id="sequence-result">
-            Turvallinen toimintaketju valmis!
-          </h2>
-          <p>
-            Pysähdyit, etsit tutun yhteystiedon ja varmistit pyynnön ennen
-            toimimista. Harjoitus on suoritettu.
-          </p>
+        <div className={styles.actions}>
           <Link
-            className={`${styles.action} ${styles.primaryAction}`}
+            className={`${actionClass} ${styles.primaryAction}`}
             to="/course/phishing/help-kaarlo"
           >
             Jatka: Auta Kaarloa
           </Link>
-          <p>
+          <button
+            type="button"
+            className={actionClass}
+            onClick={() => {
+              setComplete(false);
+              setScenarioIndex(0);
+              navigate("message");
+            }}
+          >
+            Harjoittele uudelleen
+          </button>
+        </div>
+        <p>Aiempi suoritus säilyy, jos harjoittelet uudelleen.</p>
+      </section>
+    );
+
+  const screenTitle = {
+    message: `Viesti: ${scenario.sender}`,
+    home: "Aloitusnäyttö",
+    app: "Oma kirjasto",
+    contacts: "Yhteystiedot",
+    contact: "Leena",
+    result: scenarioIndex === 0 ? "Lainan tiedot" : "Puhelu Leenalle",
+  }[screen];
+
+  return (
+    <>
+      <section aria-labelledby="practice-goal">
+        <h2 id="practice-goal">{scenario.title}</h2>
+        <p>
+          Harjoitus {scenarioIndex + 1}/{safeResponseScenarios.length}
+        </p>
+        <p>{scenario.goal}</p>
+        <p className={styles.small}>
+          Tämä on harjoituspuhelin. Palvelu, viestit ja yhteystiedot ovat
+          kuvitteellisia. Painikkeet eivät avaa oikeita sivuja tai soita
+          puheluita.
+        </p>
+      </section>
+      <section className={styles.practicePhone} aria-label="Harjoituspuhelin">
+        <div className={styles.practicePhoneBar}>Harjoituspuhelin</div>
+        <div className={styles.practicePhoneContent}>
+          <h2 ref={heading} tabIndex={-1}>
+            {screenTitle}
+          </h2>
+          {screen === "message" && (
+            <>
+              <p className={styles.practiceMessage}>{scenario.message}</p>
+              <button
+                type="button"
+                className={actionClass}
+                onClick={() => setFeedback(scenario.feedback)}
+              >
+                {scenario.messageAction}
+              </button>
+            </>
+          )}
+          {screen === "home" && (
+            <div className={styles.practiceApps}>
+              <button
+                type="button"
+                className={actionClass}
+                onClick={() => navigate("message")}
+              >
+                Viestit
+              </button>
+              <button
+                type="button"
+                className={actionClass}
+                onClick={() => navigate("app")}
+              >
+                Oma kirjasto
+              </button>
+              <button
+                type="button"
+                className={actionClass}
+                onClick={() => navigate("contacts")}
+              >
+                Yhteystiedot
+              </button>
+            </div>
+          )}
+          {screen === "app" && (
+            <>
+              <p>Omat lainat</p>
+              {scenarioIndex === 0 ? (
+                <button
+                  type="button"
+                  className={actionClass}
+                  onClick={() => navigate("result")}
+                >
+                  Lainattu kirja: näytä lainan tiedot
+                </button>
+              ) : (
+                <p>
+                  Täällä näet kirjastolainojesi tiedot. Leenan pyynnön voit
+                  varmistaa ottamalla häneen yhteyttä omista yhteystiedoistasi.
+                </p>
+              )}
+            </>
+          )}
+          {screen === "contacts" && (
+            <>
+              <p>Aiemmin tallentamasi yhteystiedot</p>
+              <button
+                type="button"
+                className={actionClass}
+                onClick={() => navigate("contact")}
+              >
+                Leena
+              </button>
+            </>
+          )}
+          {screen === "contact" && (
+            <>
+              <p>Ystäväsi Leena</p>
+              <p>
+                Ennestään tuttu numero, tallennettu ennen tämän päivän viestiä.
+              </p>
+              <button
+                type="button"
+                className={actionClass}
+                onClick={() => {
+                  if (scenarioIndex === 1) navigate("result");
+                  else
+                    setFeedback(
+                      "Leena ei näe kirjastolainasi tietoja. Löydät ne tutusta Oma kirjasto -sovelluksesta.",
+                    );
+                }}
+              >
+                Soita tallennettuun numeroon
+              </button>
+            </>
+          )}
+          {screen === "result" && (
+            <>
+              <p className={styles.practiceMessage}>{scenario.result}</p>
+              <p>{scenario.explanation}</p>
+              <button
+                type="button"
+                className={`${actionClass} ${styles.primaryAction}`}
+                onClick={finishScenario}
+              >
+                {scenarioIndex === 0
+                  ? "Jatka: ystävän pyyntö"
+                  : "Päätä harjoitus"}
+              </button>
+            </>
+          )}
+          <div role="status" aria-atomic="true">
+            {feedback && <p className={styles.feedback}>{feedback}</p>}
+          </div>
+        </div>
+        {screen !== "result" && (
+          <nav
+            className={styles.practicePhoneNav}
+            aria-label="Harjoituspuhelimen navigointi"
+          >
             <button
               type="button"
-              className={styles.action}
-              onClick={() => {
-                setOrder(createSafeActionOrder());
-                setPosition(0);
-                setStage("arrange");
-                setAnnouncement("Uusi järjestys. Aiempi suoritus säilyy.");
-                requestAnimationFrame(() => stepsHeading.current?.focus());
-              }}
+              className={actionClass}
+              disabled={screen === "home"}
+              onClick={() => navigate("home")}
             >
-              Rakenna uudelleen
+              Aloitusnäyttö
             </button>
-          </p>
-        </section>
+            {screen !== "message" && screen !== "home" && (
+              <button
+                type="button"
+                className={actionClass}
+                onClick={() =>
+                  navigate(screen === "contact" ? "contacts" : "home")
+                }
+              >
+                Takaisin
+              </button>
+            )}
+          </nav>
+        )}
+      </section>
+      {screen !== "result" && (
+        <details key={scenarioIndex} className={styles.practiceHint}>
+          <summary>Näytä vihje</summary>
+          <p>{scenario.hint}</p>
+        </details>
       )}
     </>
   );

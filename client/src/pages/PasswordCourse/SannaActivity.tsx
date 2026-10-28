@@ -57,7 +57,9 @@ export default function SannaActivity({
   const [entryNames, setEntryNames] = useState<SannaPasswords>({});
   const [entryName, setEntryName] = useState("");
   const [planChoices, setPlanChoices] = useState<string[]>([]);
-  const [planOptions, setPlanOptions] = useState(() => createSannaPlanChoices());
+  const [planOptions, setPlanOptions] = useState(() =>
+    createSannaPlanChoices(),
+  );
   const [planCorrect, setPlanCorrect] = useState(false);
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
@@ -218,8 +220,8 @@ export default function SannaActivity({
                 Miten Sannaa kannattaa auttaa?
               </h2>
               <p>
-                ”Mitä meidän olisi hyvä tehdä, jotta osaisin käyttää salasanojani
-                turvallisemmin?”
+                ”Mitä meidän olisi hyvä tehdä, jotta osaisin käyttää
+                salasanojani turvallisemmin?”
               </p>
               <form
                 onSubmit={(event) => {
@@ -240,7 +242,9 @@ export default function SannaActivity({
                 >
                   <legend>Mitkä ovat hyviä toimintatapoja?</legend>
                   <p id="sanna-plan-help">
-                    Valitse kaikki oikeat vaihtoehdot ja tarkista vastauksesi, {planOptions.filter((item) => item.correct).length} vaihtoehtoa on oikein.
+                    Valitse kaikki oikeat vaihtoehdot ja tarkista vastauksesi,{" "}
+                    {planOptions.filter((item) => item.correct).length}{" "}
+                    vaihtoehtoa on oikein.
                   </p>
                   {planOptions.map((item) => (
                     <label key={item.id} className={styles.choice}>
@@ -288,7 +292,9 @@ export default function SannaActivity({
               <p>
                 {index === 0
                   ? "Sanna: Aloitetaan sähköpostista. Voisitko keksiä minulle uuden salasanan tai luoda sen salasanojen hallintaohjelmalla? Voisitko myös auttaa minua keksimään nimen, josta tunnistan palvelun salasanojen hallintaohjelmassa?"
-                  : index === 1 ? "Sanna: Tehdään vaatekauppaan eri salasana kuin sähköpostiin. Saisiko tämänkin sanan salasanojen hallintaohjelmaan?" : "Sanna: Tehdään kirjakerhoonkin eri salasana kuin muihin. Nyt uskon jo, että salasanojen hallintaohjelma pitää sen tallessa."}
+                  : index === 1
+                    ? "Sanna: Tehdään vaatekauppaan eri salasana kuin sähköpostiin. Saisiko tämänkin sanan salasanojen hallintaohjelmaan?"
+                    : "Sanna: Tehdään kirjakerhoonkin eri salasana kuin muihin. Nyt uskon jo, että salasanojen hallintaohjelma pitää sen tallessa."}
               </p>
               <form
                 onSubmit={(event) => {
@@ -301,8 +307,8 @@ export default function SannaActivity({
                 </label>
                 <div className={own.generator}>
                   <p id="sanna-generator-help">
-                    Kirjoita salasana itse tai anna salasanojen hallintaohjelman luoda se
-                    tyhjään kenttään.
+                    Kirjoita salasana itse tai anna salasanojen hallintaohjelman
+                    luoda se tyhjään kenttään.
                   </p>
                   <button
                     type="button"
@@ -374,9 +380,10 @@ export default function SannaActivity({
                   Merkinnän nimi salasanojen hallintaohjelmassa
                 </label>
                 <p id="sanna-name-help">
-                  Keksi salasanalle nimi, josta Sanna tunnistaa palvelun myöhemmin salasanojen hallintaohjelmassa. Voit
-                  käyttää palvelun nimeä tai muuta kuvaavaa nimeä. <strong>Älä kirjoita
-                  tähän salasanaa.</strong>
+                  Keksi salasanalle nimi, josta Sanna tunnistaa palvelun
+                  myöhemmin salasanojen hallintaohjelmassa. Voit käyttää
+                  palvelun nimeä tai muuta kuvaavaa nimeä.{" "}
+                  <strong>Älä kirjoita tähän salasanaa.</strong>
                 </p>
                 <input
                   id="sanna-entry-name"

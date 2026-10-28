@@ -64,8 +64,9 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
         type: "single",
         prompt: "Mikä seuraavista on ohjepituus salasanalle?",
         options: [
-          { id: "none", 
-            text: "Pituudella ei ole merkitystä, kunhan salasana on vaikeasti arvattava."
+          {
+            id: "none",
+            text: "Pituudella ei ole merkitystä, kunhan salasana on vaikeasti arvattava.",
           },
           {
             id: "15",
@@ -87,7 +88,8 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
       {
         id: "strong",
         type: "single",
-        prompt: "Totta vai tarua: Selainten salasanojen hallintaohjelmien käyttö on turvallinen tapa tallentaa salasanoja.",
+        prompt:
+          "Totta vai tarua: Selainten salasanojen hallintaohjelmien käyttö on turvallinen tapa tallentaa salasanoja.",
         options: [
           {
             id: "true",

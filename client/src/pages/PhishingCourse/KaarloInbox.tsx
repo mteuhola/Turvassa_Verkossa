@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { CharacterPortrait } from "../../components/CourseGuide";
 import { kaarloEmails, isKaarloDecisionCorrect } from "./kaarloEmails";
 import KaarloFeedback from "./KaarloFeedback";
 import styles from "./PhishingCourse.module.css";
@@ -9,7 +10,7 @@ export default function KaarloInbox({
   onSelect,
 }: {
   onComplete: () => void;
-  onSelect: (index: number) => void;
+  onSelect: (index: number | null) => void;
 }) {
   const [selected, setSelected] = useState<number | null>(null);
   const [folder, setFolder] = useState<"inbox" | "junk">("inbox");
@@ -20,7 +21,6 @@ export default function KaarloInbox({
     response?: string;
     closeEmail?: boolean;
   } | null>(null);
-  const subject = useRef<HTMLHeadingElement>(null);
   const listHeading = useRef<HTMLHeadingElement>(null);
   const email = selected === null ? null : kaarloEmails[selected];
   const reported = kaarloEmails.filter(
@@ -32,9 +32,6 @@ export default function KaarloInbox({
   const visible = kaarloEmails.filter(
     (item) => (actions[item.id] === "report") === (folder === "junk"),
   );
-  useEffect(() => {
-    if (selected !== null) subject.current?.focus({ preventScroll: true });
-  }, [selected]);
 
   function act(action: Action) {
     if (!email || selected === null) return;
@@ -56,9 +53,8 @@ export default function KaarloInbox({
     setFeedback(null);
     if (feedback?.closeEmail) {
       setSelected(null);
-      requestAnimationFrame(() =>
-        listHeading.current?.focus({ preventScroll: true }),
-      );
+      onSelect(null);
+      requestAnimationFrame(() => listHeading.current?.focus());
     }
   }
 
@@ -66,7 +62,9 @@ export default function KaarloInbox({
     <section aria-label="Kaarlon harjoitussähköposti">
       <p>
         Avaa viestejä haluamassasi järjestyksessä. Ilmoita huijausviestit
-        tietojenkalasteluksi <strong>varoitus- ja roskakoripainikkeella</strong>. Jätä muut viestit saapuneisiin. Kun olet valmis, voit painaa <strong>Valmis</strong> -painiketta.
+        tietojenkalasteluksi <strong>varoitus- ja roskakoripainikkeella</strong>
+        . Jätä muut viestit saapuneisiin. Kun olet valmis, voit painaa{" "}
+        <strong>Valmis</strong> -painiketta.
       </p>
       <div className={styles.mailDesktop}>
         <div className={styles.mailAppBar}>
@@ -83,6 +81,7 @@ export default function KaarloInbox({
                 onClick={() => {
                   setFolder(value);
                   setSelected(null);
+                  onSelect(null);
                 }}
               >
                 {value === "inbox"
@@ -122,6 +121,20 @@ export default function KaarloInbox({
             )}
             {email ? (
               <>
+                <div
+                  className={`${styles.kaarloConcern} ${styles.kaarloEmailContext}`}
+                  role="region"
+                  aria-labelledby="kaarlo-context-heading"
+                  aria-describedby="kaarlo-context-text"
+                >
+                  <div className={styles.kaarloPortrait}>
+                    <CharacterPortrait courseId="phishing" />
+                  </div>
+                  <div className={styles.kaarloContextText}>
+                    <h2 id="kaarlo-context-heading">Kaarlo kertoo viestistä</h2>
+                    <p id="kaarlo-context-text">{email.context}</p>
+                  </div>
+                </div>
                 <div
                   className={styles.mailCommandBar}
                   aria-label="Viestin toiminnot"
@@ -176,9 +189,8 @@ export default function KaarloInbox({
                     type="button"
                     onClick={() => {
                       setSelected(null);
-                      requestAnimationFrame(() =>
-                        listHeading.current?.focus({ preventScroll: true }),
-                      );
+                      onSelect(null);
+                      requestAnimationFrame(() => listHeading.current?.focus());
                     }}
                   >
                     Sulje viesti
@@ -197,9 +209,7 @@ export default function KaarloInbox({
                     <span>Kaarlon sähköposti</span>
                   </div>
                   <header className={styles.emailHeader}>
-                    <h2 id="kaarlo-subject" ref={subject} tabIndex={-1}>
-                      {email.subject}
-                    </h2>
+                    <h2 id="kaarlo-subject">{email.subject}</h2>
                     <dl className={styles.emailMetadata}>
                       <dt>Lähettäjä</dt>
                       <dd>
@@ -212,7 +222,7 @@ export default function KaarloInbox({
                       <dt>Saapunut</dt>
                       <dd>{email.time}</dd>
                       <dt>Liitteet</dt>
-                      <dd>Ei liitteitä</dd>
+                      <dd>{email.attachment ?? "Ei liitteitä"}</dd>
                     </dl>
                   </header>
                   <div className={styles.emailBody}>
@@ -234,16 +244,14 @@ export default function KaarloInbox({
                 </article>
               </>
             ) : (
-              <p>
-                Valitse viesti luettelosta nähdäksesi sen sisällön.
-              </p>
+              <p>Valitse viesti luettelosta nähdäksesi sen sisällön.</p>
             )}
           </div>
         </div>
       </div>
       <p id="kaarlo-completion-help" role="status">
         {sorted
-          ? "Viestit ovat oikeissa kansioissa. Voit jatkaa toiseen osaan."
+          ? "Viestit ovat oikeissa kansioissa!"
           : "Voit jatkaa, kun huijausviestit ovat roskapostissa ja muut viestit saapuneissa."}
       </p>
       <button

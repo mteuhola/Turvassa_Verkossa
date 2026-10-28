@@ -62,7 +62,7 @@ export const passwordExamples = [
     ],
     correctAnswers: [1, 2],
     lesson:
-      "Erilaiset numerot, isot ja pienet kirjaimet sekä erikoismerkit vaikeuttavat arvaamista, minkä lisäksi salasanan sisältö ei ole helposti pääteltävissä: tuollaisen \"sanan\" kirjoittamiseen huijari tarvitsee melkoista tuuria.",
+      'Erilaiset numerot, isot ja pienet kirjaimet sekä erikoismerkit vaikeuttavat arvaamista, minkä lisäksi salasanan sisältö ei ole helposti pääteltävissä: tuollaisen "sanan" kirjoittamiseen huijari tarvitsee melkoista tuuria.',
   },
 ];
 

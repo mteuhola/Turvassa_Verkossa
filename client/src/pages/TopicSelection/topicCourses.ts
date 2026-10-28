@@ -10,7 +10,7 @@ interface TopicDetails {
   title: string;
   description: string;
   path: string;
-  flow?: "password-introduction";
+  flow?: "password-introduction" | "phishing-introduction";
 }
 
 export type CourseTopic = TopicDetails &
@@ -24,19 +24,25 @@ export interface TopicCourse {
   topics: CourseTopic[];
 }
 
-const courseCatalog: TopicCourse[] = [
+type CourseCatalogEntry = TopicCourse & {
+  introductionDescription: string;
+};
+
+const courseCatalog: CourseCatalogEntry[] = [
   {
     id: "passwords",
     isComplete: false,
     title: "Salasanojen turvallisuus",
     path: "/course/passwords",
+    introductionDescription:
+      "Lue, millainen on hyvä salasana, ja tutki esimerkkisalasanoja.",
     topics: [
       {
         id: "password-strength",
         isComplete: false,
-        title: "Kokeile salasanan vahvuutta",
+        title: "Kuinka kaikki salasanat voi muistaa?",
         description:
-          "Lue, millainen on hyvä salasana, ja luo oma harjoitussalasanasi.",
+          "Opi millaisia keinoja salasanojen tallettamiseen on. Luo oma harjoitussalasanasi ja harjoittele sen tallettamista.",
         path: "/course/passwords/password-strength",
       },
     ],
@@ -46,14 +52,17 @@ const courseCatalog: TopicCourse[] = [
     isComplete: false,
     title: "Vaaralliset viestit",
     path: "/course/phishing",
+    introductionDescription:
+      "Lue tietojenkalastelusta ja huijausviestien varoitusmerkeistä. Etsi huijauksen merkkejä esimerkkiviestistä.",
     topics: [
       {
-        id: "suspicious-email",
+        id: "safe-responses",
+        kind: "activity",
         isComplete: false,
-        title: "Tunnista huijausviestin merkit",
+        title: "Kuinka toimia epäilyttävän viestin kanssa?",
         description:
-          "Tutki kuvitteellista sähköpostia ja etsi sen epäilyttävät kohdat. Saat jokaisesta havainnosta selityksen ja tarvittaessa vihjeen.",
-        path: "/course/phishing/suspicious-email",
+          "Lue mitä tehdä kohdatessaan huijausviestin, ja kuinka toimia, jos huijaus on jo tapahtunut. Harjoittele viestien aitouden tarkistamista tutun sovelluksen ja tallennetun yhteystiedon kautta.",
+        path: "/course/phishing/safe-responses",
       },
     ],
   },
@@ -62,6 +71,8 @@ const courseCatalog: TopicCourse[] = [
     isComplete: false,
     title: "Liian hyvää ollakseen totta",
     path: "/course/financial-fraud",
+    introductionDescription:
+      "Tutustu kurssin aiheeseen ja siihen, mitä pääset harjoittelemaan.",
     topics: [
       {
         id: "investment-offers",
@@ -77,53 +88,56 @@ const courseCatalog: TopicCourse[] = [
 ];
 
 // Introductions and quizzes count toward progress just like activities.
-export const topicCourses: TopicCourse[] = courseCatalog.map((course) => ({
-  ...course,
-  topics: [
-    {
-      id: "introduction",
-      kind: "theory",
-      ...(course.id === "passwords"
-        ? { flow: "password-introduction" as const }
-        : {}),
-      isComplete: false,
-      title: "Johdanto",
-      description:
-        "Tutustu kurssin aiheeseen ja siihen, mitä pääset harjoittelemaan.",
-      path: `${course.path}/introduction`,
-      content: courseIntroductions[course.id],
-    },
-    ...course.topics,
-    ...(course.id === "passwords"
-      ? []
-      : [
-          {
-            id: "theory",
-            kind: "theory" as const,
-            isComplete: false,
-            title: "Teoria",
-            description: "",
-            path: `${course.path}/theory`,
-            content: { sections: [] },
-          },
-        ]),
-    {
-      id: helpStories[course.id].id,
-      kind: "theory",
-      isComplete: false,
-      title: helpStories[course.id].title,
-      description: helpStories[course.id].description,
-      path: `${course.path}/${helpStories[course.id].id}`,
-      content: helpStories[course.id].content,
-    },
-    {
-      id: "quiz",
-      kind: "quiz",
-      isComplete: false,
-      title: "Kurssin tietovisa",
-      description:
-        "Kokeile, mitä olet oppinut. Saat vastauksista palautetta ja voit yrittää uudelleen.",
-      path: `${course.path}/quiz`,
-    },
-  ],
-}));
+export const topicCourses: TopicCourse[] = courseCatalog.map(
+  ({ introductionDescription, ...course }) => ({
+    ...course,
+    topics: [
+      {
+        id: "introduction",
+        kind: "theory",
+        ...(course.id === "passwords"
+          ? { flow: "password-introduction" as const }
+          : course.id === "phishing"
+            ? { flow: "phishing-introduction" as const }
+            : {}),
+        isComplete: false,
+        title: "Johdanto",
+        description: introductionDescription,
+        path: `${course.path}/introduction`,
+        content: courseIntroductions[course.id],
+      },
+      ...course.topics,
+      ...(course.id === "passwords" || course.id === "phishing"
+        ? []
+        : [
+            {
+              id: "theory",
+              kind: "theory" as const,
+              isComplete: false,
+              title: "Teoria",
+              description: "",
+              path: `${course.path}/theory`,
+              content: { sections: [] },
+            },
+          ]),
+      {
+        id: helpStories[course.id].id,
+        kind: "theory",
+        isComplete: false,
+        title: helpStories[course.id].title,
+        description: helpStories[course.id].description,
+        path: `${course.path}/${helpStories[course.id].id}`,
+        content: helpStories[course.id].content,
+      },
+      {
+        id: "quiz",
+        kind: "quiz",
+        isComplete: false,
+        title: "Kurssin tietovisa",
+        description:
+          "Kokeile, mitä olet oppinut. Saat vastauksista palautetta ja voit yrittää uudelleen.",
+        path: `${course.path}/quiz`,
+      },
+    ],
+  }),
+);

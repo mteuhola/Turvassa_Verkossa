@@ -13,17 +13,17 @@ const courseDetails: Record<string, { description: string; duration: string }> =
     passwords: {
       description:
         "Kokeile, millainen salasana on helppo muistaa mutta vaikea arvata.",
-      duration: "Noin 10 minuuttia",
+      duration: "Noin 15 minuuttia",
     },
     phishing: {
       description:
         "Harjoittele tunnistamaan huijausviestit ja epäilyttävät linkit.",
-      duration: "Noin 12 minuuttia",
+      duration: "Noin 15 minuuttia",
     },
     "financial-fraud": {
       description:
         "Harjoittele tunnistamaan epäilyttävät sijoitustarjoukset ja verkossa esitetyt rahapyynnöt.",
-      duration: "Noin 15 minuuttia",
+      duration: "Noin 20 minuuttia",
     },
   };
 
@@ -47,9 +47,8 @@ export default function CourseSelection({
         <header className={styles.hero}>
           <h1>Tervetuloa oppimaan!</h1>
           <p>
-            Tämän oppimisympäristön avulla voit harjoitella turvallista verkon käyttöä tuttujen arjen
-            tilanteiden avulla. Et tarvitse ennakkotietoja, ja voit edetä omaan
-            tahtiisi.
+            Tämän oppimisympäristön avulla voit harjoitella turvallista verkon
+            käyttöä. Et tarvitse ennakkotietoja, ja voit edetä omaan tahtiisi.
           </p>
         </header>
         <section aria-labelledby="courses-title">
@@ -106,8 +105,7 @@ export default function CourseSelection({
             })}
           </ul>
         </section>
-        <footer className={styles.footer}>
-        </footer>
+        <footer className={styles.footer}></footer>
         {import.meta.env.VITE_ENABLE_DEBUG_TOOLS === "true" && (
           <DebugProgressReset onReset={onResetProgress} />
         )}

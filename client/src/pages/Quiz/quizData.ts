@@ -64,8 +64,9 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
         type: "single",
         prompt: "Mikä seuraavista on ohjepituus salasanalle?",
         options: [
-          { id: "none", 
-            text: "Pituudella ei ole merkitystä, kunhan salasana on vaikeasti arvattava."
+          {
+            id: "none",
+            text: "Pituudella ei ole merkitystä, kunhan salasana on vaikeasti arvattava.",
           },
           {
             id: "15",
@@ -87,7 +88,8 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
       {
         id: "strong",
         type: "single",
-        prompt: "Totta vai tarua: Selainten salasanojen hallintaohjelmien käyttö on turvallinen tapa tallentaa salasanoja.",
+        prompt:
+          "Totta vai tarua: Selainten salasanojen hallintaohjelmien käyttö on turvallinen tapa tallentaa salasanoja.",
         options: [
           {
             id: "true",
@@ -143,7 +145,7 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
         options: [
           {
             id: "code",
-            text: "Viestissä pyydetään salasanaani ja vahvistuskoodiani.",
+            text: "Viestissä pyydetään antamaan salaisia tietojani.",
           },
           {
             id: "secrecy",
@@ -151,7 +153,7 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
           },
           {
             id: "attachment",
-            text: "Odottamattomassa viestissä on Turvapaivitys.exe-liite.",
+            text: "Odottamattomassa viestissä on liitteenä tiedosto.",
           },
           {
             id: "polite",
@@ -160,7 +162,37 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
         ],
         correctOptionIds: ["code", "secrecy", "attachment"],
         explanation:
-          "Salaisten tietojen pyytäminen, tarkistamisen estäminen ja odottamaton ohjelmaliite ovat varoitusmerkkejä. Kohtelias allekirjoitus ei yksin kerro aitoudesta: sen voi kopioida.",
+          "Salaisten tietojen pyytäminen, tarkistamisen estäminen ja odottamaton ohjelmaliite ovat varoitusmerkkejä.",
+      },
+      {
+        id: "scammed",
+        type: "multiple",
+        prompt: "Kuvitellaan, että ystäväsi kertoo sinulle antaneensa pankkitunnuksensa huijaussivustolle. Hän on huolissaan ja sanoo, ettei halua kertoa asiasta kenellekään muulle, koska häntä hävettää. Miten voit auttaa häntä?",
+        options: [
+          {
+            id: "cheer",
+            text: "Kiitä häntä tilanteesta kertomisesta ja kerro, että sama olisi voinut tapahtua kelle tahansa.",
+          },
+          {
+            id: "dontBother",
+            text: "Sano, etteivät rikolliset kuitenkaan tee mitään hänen tunnuksillaan, ja annat asian olla.",
+          },
+          {
+            id: "police",
+            text: "Neuvo ystävääsi tekemään rikosilmoitus.",
+          },
+          {
+            id: "bank",
+            text: "Neuvo ystävääsi soittamaan pankilleen.",
+          },
+          {
+            id: "ask",
+            text: "Kysy, antoiko hän muita tietojaan, kuten salasanojansa huijaussivustolle. Jos antoi, vaihdatte salasanat.",
+          },
+        ],
+        correctOptionIds: ["cheer", "police", "bank", "ask"],
+        explanation:
+          "Ystävän tukena oleminen, sekä rikosilmoituksen tekeminen ja pankille ilmoittaminen ovat tärkeitä asioita.",
       },
     ],
   },

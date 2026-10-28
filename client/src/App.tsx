@@ -16,8 +16,8 @@ const PasswordCourse = lazy(
   () => import("./pages/PasswordCourse/PasswordCourse"),
 );
 
-const PhishingCourse = lazy(
-  () => import("./pages/PhishingCourse/PhishingCourse"),
+const PhishingLesson = lazy(
+  () => import("./pages/PhishingCourse/PhishingLesson"),
 );
 
 function LegacyFinancialRoute() {
@@ -47,6 +47,9 @@ const SannaActivity = lazy(
 );
 
 const Quiz = lazy(() => import("./pages/Quiz/Quiz"));
+const KaarloActivity = lazy(
+  () => import("./pages/PhishingCourse/KaarloActivity"),
+);
 
 function App() {
   const textSizeProps = useTextSize();
@@ -139,21 +142,34 @@ function App() {
         />
         <Route
           path="/course/phishing/suspicious-email"
-          element={
-            <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
-              <PhishingCourse
-                {...textSizeProps}
-                isComplete={isComplete("/course/phishing/suspicious-email")}
-                onComplete={() =>
-                  markComplete("/course/phishing/suspicious-email")
-                }
-              />
-            </Suspense>
-          }
+          element={<Navigate replace to="/course/phishing/introduction" />}
         />
+        <Route
+          path="/course/phishing/theory"
+          element={<Navigate replace to="/course/phishing/safe-responses" />}
+        />
+        {(["introduction", "safe-responses"] as const).map((mode) => (
+          <Route
+            key={mode}
+            path={`/course/phishing/${mode}`}
+            element={
+              <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
+                <PhishingLesson
+                  key={mode}
+                  mode={mode}
+                  {...textSizeProps}
+                  isComplete={isComplete(`/course/phishing/${mode}`)}
+                  onComplete={() => markComplete(`/course/phishing/${mode}`)}
+                />
+              </Suspense>
+            }
+          />
+        ))}
         {courses.flatMap((course) =>
           course.topics.map((topic) =>
             topic.kind === "theory" &&
+            topic.path !== "/course/phishing/help-kaarlo" &&
+            topic.path !== "/course/phishing/introduction" &&
             topic.path !== "/course/passwords/introduction" &&
             topic.path !== "/course/passwords/help-sanna" ? (
               <Route
@@ -182,6 +198,18 @@ function App() {
             element={<TopicSelection course={course} {...textSizeProps} />}
           />
         ))}
+        <Route
+          path="/course/phishing/help-kaarlo"
+          element={
+            <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
+              <KaarloActivity
+                {...textSizeProps}
+                isComplete={isComplete("/course/phishing/help-kaarlo")}
+                onComplete={() => markComplete("/course/phishing/help-kaarlo")}
+              />
+            </Suspense>
+          }
+        />
         {courses.map((course) => (
           <Route
             key={`${course.id}-quiz`}

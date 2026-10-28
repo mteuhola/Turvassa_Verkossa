@@ -19,6 +19,7 @@ import {
 import type { TopicCourse } from "../TopicSelection/topicCourses";
 import { type CourseQuiz, isChoiceAnswerCorrect } from "./quizData";
 import styles from "./Quiz.module.css";
+import QuizNotifications from "./QuizNotifications";
 
 interface QuizProps extends TextSizeProps, ActivityProgressProps {
   course: TopicCourse;
@@ -82,6 +83,7 @@ function QuizActivity({
     question?.type === "practice-password" && !readPracticePassword();
   const total = quiz.questions.length;
   const answered = finished ? total : index + (correct ? 1 : 0);
+  const showNotifications = course.id === "phishing" && !finished;
 
   function choose(id: string) {
     setSelected((previous) =>
@@ -155,13 +157,21 @@ function QuizActivity({
 
   return (
     <div className={styles.root} data-course={course.id}>
-      <nav className={styles.nav} aria-label="Päänavigaatio">
+      <nav
+        className={`${styles.nav} ${showNotifications ? styles.quizNav : ""}`}
+        aria-label="Päänavigaatio"
+      >
         <Link to="/" className={styles.brand}>
           Turvassa Verkossa
         </Link>
         <div className="nav-actions">
           <Link to={course.path}>← Takaisin aiheisiin</Link>
           <TextSizeControl {...textSizeProps} />
+          {showNotifications && (
+            <QuizNotifications
+              isLastQuestion={total > 0 && index === total - 1}
+            />
+          )}
         </div>
       </nav>
       <main className={styles.main}>
@@ -215,8 +225,8 @@ function QuizActivity({
                 <div>
                   <h3>{question.prompt}</h3>
                   <p id="password-help">
-                    Käytä muistiinpanoasi tai avaa harjoituksen
-                    salasanojen hallintaohjelma. Älä kirjoita oikean tilisi salasanaa.
+                    Käytä muistiinpanoasi tai avaa harjoituksen salasanojen
+                    hallintaohjelma. Älä kirjoita oikean tilisi salasanaa.
                     Harjoitussalasanaa ei saa käyttää muualla.
                   </p>
                   {missingPracticePassword ? (

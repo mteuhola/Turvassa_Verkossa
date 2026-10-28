@@ -56,7 +56,7 @@ export const emailParts = [
     suspicious: true,
     title: "Väärään osoitteeseen vievä linkki",
     explanation:
-      "Linkin osoite ei ole harjoituksen pankin tonttupankki.yksityinen. Pankin nimi osoitteen osana tai https-alku ei takaa aitoutta. Avaa pankin sovellus tai kirjoita tuntemasi osoite itse.",
+      "Linkin osoite ei ole harjoituksen pankin tonttupankki.yksityinen. Pankin nimi osoitteen osana ei takaa aitoutta. Avaa pankin sovellus tai kirjoita tuntemasi osoite itse.",
     hint: "Vertaa linkin verkkotunnusta harjoituksen pankin osoitteeseen.",
   },
   {
@@ -66,7 +66,7 @@ export const emailParts = [
     href: "https://omituinen-osoite.netlify.app/",
     suspicious: true,
     title:
-      "Näennäisesti oikeaan osoitteeseen vievä linkki, mutta ohjaa kuitenkin väärään kohteeseen",
+      "Linkki vie eri kohteeseen kuin väittää",
     explanation:
       "Itse linkki näyttää vievän oikeaan osoitteeseen, mutta liikuttaessa hiiren osoittimella linkin päälle selaimen alareunassa näkyy väärä osoite. Tarkista linkin kohde ennen kuin klikkaat sitä.",
     hint: "Vertaa jälkimmäisen linkin kohdetta selaimen alareunassa näkyvään osoitteeseen.",
@@ -78,8 +78,8 @@ export const emailParts = [
     suspicious: true,
     title: "Odottamaton ohjelmaliite",
     explanation:
-      "Pääte .exe tarkoittaa Windowsissa suoritettavaa ohjelmaa. Odottamaton turvapäivitykseksi nimetty liite voi asentaa haittaohjelman. Älä avaa sitä.",
-    hint: "Katso liitteen nimeä ja sen .exe-päätettä.",
+      "Odottamaton turvapäivitykseksi nimetty liite voi asentaa haittaohjelman. Älä avaa sitä.",
+    hint: "Katso liitteen nimeä.",
   },
   {
     id: "secrecy",

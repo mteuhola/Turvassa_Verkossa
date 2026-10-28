@@ -1,5 +1,5 @@
 import { CharacterPortrait } from "../../components/CourseGuide";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CompletionBadge from "../../components/CompletionBadge";
 import TextSizeControl, {
@@ -15,7 +15,11 @@ interface TheoryProps extends TextSizeProps, ActivityProgressProps {
   continuation?: { label: string; onContinue: () => void };
 }
 
-export default function Theory({
+export default function Theory(props: TheoryProps) {
+  return <TheoryPages key={props.topic.path} {...props} />;
+}
+
+function TheoryPages({
   course,
   topic,
   isComplete,
@@ -25,13 +29,18 @@ export default function Theory({
 }: TheoryProps) {
   const navigate = useNavigate();
   const heading = useRef<HTMLHeadingElement>(null);
+  const pageHeading = useRef<HTMLParagraphElement>(null);
+  const [pageIndex, setPageIndex] = useState(0);
+  const pages = topic.content.sections;
+  const page = pages[pageIndex];
+  const isLastPage = pageIndex >= pages.length - 1;
   const index = course.topics.findIndex((item) => item.path === topic.path);
   const nextTopic = course.topics[index + 1];
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    heading.current?.focus({ preventScroll: true });
-  }, [topic.path]);
+    (pageHeading.current ?? heading.current)?.focus({ preventScroll: true });
+  }, [topic.path, pageIndex]);
 
   function continueCourse() {
     if (continuation) {
@@ -74,47 +83,63 @@ export default function Theory({
           </div>
         )}
         <article className={styles.content} aria-label={topic.title}>
-          {topic.content.sections.map((section, sectionIndex) => (
-            <section className={styles.section} key={sectionIndex}>
-              {section.heading && <h2>{section.heading}</h2>}
-              {section.paragraphs.map((paragraph, paragraphIndex) => (
+          <p ref={pageHeading} tabIndex={-1} className={styles.pageCount}>
+            Sivu {pageIndex + 1} / {Math.max(1, pages.length)}
+          </p>
+          {page && (
+            <section className={styles.section}>
+              {page.heading && <h2>{page.heading}</h2>}
+              {page.paragraphs.map((paragraph, paragraphIndex) => (
                 <p key={paragraphIndex}>{paragraph}</p>
               ))}
-              {section.image && (
+              {page.image && (
                 <figure className={styles.figure}>
-                  <img src={section.image.src} alt={section.image.alt} />
-                  {section.image.caption && (
-                    <figcaption>{section.image.caption}</figcaption>
+                  <img src={page.image.src} alt={page.image.alt} />
+                  {page.image.caption && (
+                    <figcaption>{page.image.caption}</figcaption>
                   )}
                 </figure>
               )}
             </section>
-          ))}
+          )}
         </article>
         <footer className={styles.continue}>
-          <div>
-            {!continuation && nextTopic && (
-              <p>
-                Seuraavaksi: <strong>{nextTopic.title}</strong>
-              </p>
-            )}
-            {!continuation && (
-              <p id="completion-help" className={styles.help}>
-                {isComplete
-                  ? "Olet jo suorittanut tämän aiheen. Voit jatkaa eteenpäin."
-                  : "Kun jatkat, tämä aihe merkitään suoritetuksi."}
-              </p>
-            )}
-          </div>
-          <button
-            type="button"
-            onClick={continueCourse}
-            aria-describedby={continuation ? undefined : "completion-help"}
-          >
-            {continuation?.label ??
-              (nextTopic ? "Seuraava aihe" : "Valmis - palaa aiheisiin")}
-            <span aria-hidden="true"> →</span>
-          </button>
+          {pageIndex > 0 && (
+            <button type="button" onClick={() => setPageIndex(pageIndex - 1)}>
+              <span aria-hidden="true">← </span>Edellinen sivu
+            </button>
+          )}
+          {isLastPage ? (
+            <>
+              <div>
+                {!continuation && nextTopic && (
+                  <p>
+                    Seuraavaksi: <strong>{nextTopic.title}</strong>
+                  </p>
+                )}
+                {!continuation && (
+                  <p id="completion-help" className={styles.help}>
+                    {isComplete
+                      ? "Olet jo suorittanut tämän aiheen. Voit jatkaa eteenpäin."
+                      : "Kun jatkat, tämä aihe merkitään suoritetuksi."}
+                  </p>
+                )}
+              </div>
+              <button
+                type="button"
+                onClick={continueCourse}
+                aria-describedby={continuation ? undefined : "completion-help"}
+              >
+                {continuation?.label ??
+                  (nextTopic ? "Seuraava aihe" : "Valmis - palaa aiheisiin")}
+                <span aria-hidden="true"> →</span>
+              </button>
+            </>
+          ) : (
+            <button type="button" onClick={() => setPageIndex(pageIndex + 1)}>
+              Seuraava sivu<span aria-hidden="true"> →</span>
+            </button>
+          )}
         </footer>
       </main>
     </div>

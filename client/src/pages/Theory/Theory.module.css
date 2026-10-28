@@ -72,8 +72,13 @@
 .content {
   max-width: 70ch;
 }
-.section + .section {
-  margin-top: 36px;
+.pageCount {
+  margin: 0 0 16px;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+.pageCount:focus {
+  outline: none;
 }
 .section p {
   margin: 0 0 20px;

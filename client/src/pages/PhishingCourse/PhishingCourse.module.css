@@ -99,8 +99,8 @@
   outline: 2px solid var(--course-ink);
   outline-offset: 4px;
 }
-.kaarloMain {
-  max-width: 70ch;
+.main.kaarloMain {
+  max-width: 52rem;
 }
 .kaarloInboxMain {
   max-width: 90rem;

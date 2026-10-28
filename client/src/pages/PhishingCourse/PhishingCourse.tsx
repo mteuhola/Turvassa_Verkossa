@@ -217,18 +217,6 @@ export default function PhishingCourse({
                   >
                     Jatka: Kuinka toimia epäilyttävän viestin kanssa?
                   </Link>
-                  <p>
-                    Hienoa työtä! Harjoittelit viestin tarkistamista. Oikeassa
-                    huijausviestissä voi olla vain yksi näistä merkeistä tai
-                    aivan erilaisia merkkejä.
-                  </p>
-                  <p>
-                    <strong>Turvallinen lähestymistapa:</strong> Epäillessäsi
-                    viestin aitoutta, älä vastaa, avaa liitettä tai klikkaa
-                    viestissä olevia linkkejä. Tarkista asia pankin omasta
-                    sovelluksesta tai tutusta puhelinnumerosta. Ilmoita viesti
-                    roskapostiksi tai tietojenkalasteluksi.
-                  </p>
                 </CompletionNotice>
               )}
               <h2 id="progress-title">Sinun havaintosi</h2>
@@ -245,14 +233,16 @@ export default function PhishingCourse({
                 max={clues.length}
                 aria-label="Löydetyt varoitusmerkit"
               />
-              <div
-                className={styles.feedback}
-                role="status"
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                {feedback}
-              </div>
+              {!complete && (
+                <div
+                  className={styles.feedback}
+                  role="status"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  {feedback}
+                </div>
+              )}
               <div className={styles.actions}>
                 <button
                   type="button"
@@ -290,10 +280,6 @@ export default function PhishingCourse({
                   </ul>
                 </details>
               )}
-              <p className={styles.small}>
-                Kun löydät kaikki varoitusmerkit, johdanto merkitään
-                suoritetuksi. Uusi yritys ei poista johdannon suoritusta.
-              </p>
             </aside>
           </div>
         </div>
@@ -310,7 +296,6 @@ export default function PhishingCourse({
             if (!found.includes(id)) {
               const next = [...found, id];
               setFound(next);
-              setFeedback(`Havainto kirjattu: ${activeClue.part.title}.`);
               if (next.length === clues.length) onComplete();
             }
             setActiveClue(null);

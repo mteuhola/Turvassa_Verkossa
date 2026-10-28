@@ -66,7 +66,7 @@ export const emailParts = [
     href: "https://omituinen-osoite.netlify.app/",
     suspicious: true,
     title:
-      "Näennäisesti oikeaan osoitteeseen vievä linkki, mutta ohjaa kuitenkin väärään kohteeseen",
+      "Linkki vie eri kohteeseen kuin väittää",
     explanation:
       "Itse linkki näyttää vievän oikeaan osoitteeseen, mutta liikuttaessa hiiren osoittimella linkin päälle selaimen alareunassa näkyy väärä osoite. Tarkista linkin kohde ennen kuin klikkaat sitä.",
     hint: "Vertaa jälkimmäisen linkin kohdetta selaimen alareunassa näkyvään osoitteeseen.",

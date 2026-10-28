@@ -48,14 +48,16 @@ export default function KaarloActivity({
         {isComplete && <CompletionBadge />}
         {(stage !== "email" || !email) && (
           <div className={styles.kaarloConcern}>
-            <div className={styles.kaarloPortrait}>
-              <CharacterPortrait courseId="phishing" />
-            </div>
+            {stage !== "email" && (
+              <div className={styles.kaarloPortrait}>
+                <CharacterPortrait courseId="phishing" />
+              </div>
+            )}
             <p>
               {stage === "intro"
                 ? "”Olen nyt muutaman päivän sisään saanut jostain syystä paljon sähköpostia. Olen kuullut niin paljon huijauksista, että hädin tuskin uskallan lukea viestejäni! Voisitko katsoa niitä kanssani? En haluaisi jättää tärkeitä viestejä huomaamatta.”"
                 : stage === "email"
-                  ? (email?.context ?? "Avataan joku viime päivien viesteistä.")
+                  ? (email?.context ?? "")
                   : stage === "recovery"
                     ? "Kaarlo: Minua hieman nolottaa, mutta minun täytyy tunnustaa jotakin. Avasin kolme päivää sitten yhden viestin linkin. En osannut epäillä viestin aitoutta ollenkaan, ja annoin sivustolle tietojani. Sen jälkeen huijausviestejä on tuntunut tulevan enemmän. Mitä minun pitäisi nyt tehdä?"
                     : "Kaarlo: Kiitos, että autoit minua arvioimaan viestejä rauhassa."}

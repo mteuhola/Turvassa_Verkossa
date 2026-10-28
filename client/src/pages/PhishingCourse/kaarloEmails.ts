@@ -15,7 +15,7 @@ export const kaarloEmails = [
       "Terveisin MegaPalkinto voitto tiimi",
     ],
     link: {
-      text: "LUNASTA PALKKINTO",
+      text: "LUNASTA PALKINTO",
       destination: "https://omituinen-osoite.netlify.app/",
       title: "MegaPotti: lunasta vo1tto",
       request:
@@ -98,9 +98,55 @@ export const kaarloEmails = [
     },
     suspicious: true,
     explanation:
-      "Tämäkin viesti on epäilyttävä, vaikka kieli on sujuvaa ja Kaarlo odottaa tilausta. Lähettäjän ja linkin kohteen verkkotunnus on lukut0ukka-kauppa.fi, ei kaupan lukutoukka.fi. Linkin näkyvä teksti peittää eri kohteen. Korttitietojen pyytäminen ja toimituksen keskeyttämisellä painostaminen ovat lisäsyitä tarkistaa asia kaupan tutun sivuston kautta.",
+      "Tämäkin viesti on epäilyttävä, vaikka kieli on sujuvaa, Kaarlo odottaa tilausta, ja viestin lähettäjä on kirjoittanut Kaarlon nimen. Lähettäjän ja linkin kohteen verkkotunnus on lukut0ukka-kauppa.fi, ei kaupan lukutoukka.fi. Korttitietojen pyytäminen ja toimituksen keskeyttämisellä painostaminen ovat lisäsyitä tarkistaa asia kaupan tutun sivuston kautta.",
     response:
-      "Kaarlo: Tuttu nimi ja hyvä kieli eivät yksin riitä. Tarkistan tilaukseni avaamalla itse tuntemani kaupan sivuston.",
+      "Kaarlo: Melkein uskoin jo, sillä viestin lähettäjä tuntui tietävän nimeni. Tarkistan tilaukseni avaamalla itse tuntemani kaupan sivuston.",
+  },
+  {
+    id: "relative",
+    sender: "Anna",
+    address: "anna@kuustonen.com",
+    subject: "Sunnuntain kahvihetki",
+    time: "Toissapäivänä klo 23.22",
+    attachment: null,
+    context:
+      "Kaarlo: Sovimme alkuviikosta puhelimessa lapsenlapseni Annan kanssa, että hän tulee sunnuntaina kahville kello 14. Hän lupasi vielä lähettää viestin siitä, mitä tarjoiluja hän toisi. Osoite on sama, jota olemme käyttäneet aiemminkin.",
+    paragraphs: [
+      "Hei pappa!",
+      "Tulen sunnuntaina kahville kello 14, kuten puhelimessa sovimme.. Tuon mukanani munkkeja, joten sinun ei tarvitse leipoa.",
+      "Otan myös viime kesän islannin retkikuvat mukaan, niin voimme katsella niitä yhdessä.",
+      "Nähdäään sunnuntaina",
+      "Terveisin, Anna",
+    ],
+    link: null,
+    suspicious: false,
+    explanation:
+      "Viesti on tavallinen läheisen yhteydenotto. Se vastaa Kaarlon ja Annan puhelimessa sopimaa vierailua ja luvattua viestiä tarjoiluista. Viesti ei painosta toimimaan eikä pyydä rahaa tai salaisia tietoja. Pienet kirjoitusvirheet ovat inhimillisiä, eivätkä ne tarkoita viestin olevan huijausta. Jos jokin herättäisi epäilyksen, Kaarlo voisi tarkistaa asian soittamalla Annan ennestään tuttuun numeroon.",
+    response:
+      "Kaarlo: Tämä vastaa sitä, mitä sovimme Annan kanssa. Odottelenkin sunnuntain kahvihetkeä hyvillä mielin! Epäselvät asiat voisin aina tarkistaa tutusta numerosta.",
+  },
+  {
+    id: "mailbox",
+    sender: "OmaPosti",
+    address: "tiliturva@omaposti-tarkistus.fi",
+    subject: "Sähköpostitilisi suljetaan ilman vahvistusta",
+    time: "Toissapäivänä klo 11.48",
+    attachment: "Tilin_turvapaivitys.exe",
+    context:
+      "Kaarlo: Käytän OmaPosti-nimistä sähköpostipalvelua. En ole pyytänyt tililleni muutoksia tai tilannut turvapäivitystä, eikä tuo sähköpostiosoite ole aivan samanlainen kuin ennen.",
+    paragraphs: [
+      "Hei Kaarlo,",
+      "Tilisi turvallisuustarkistus on kesken. Jos et vahvista tietojasi tänään, sähköpostitilisi suljetaan ja menetät pääsyn viesteihisi.",
+      "Avaa liitteenä oleva turvapäivitys ja suorita sen asennus. Vastaa sen jälkeen tähän viestiin lähettämällä sähköpostisi salasana ja puhelimeesi saapuva kirjautumisen vahvistuskoodi.",
+      "Näin voimme varmistaa tilisi omistajuuden ja pitää sähköpostisi käytössä.",
+      "Ystävällisin terveisin, OmaPostin tiliturvatiimi",
+    ],
+    link: null,
+    suspicious: true,
+    explanation:
+      "Tilin sulkemisella uhkaaminen painostaa toimimaan kiireessä. Lähettäjän verkkotunnus eroaa palvelun osoitteesta, ja Kaarlokin on sitä mieltä, ettei osoite ole tuttu. Viesti lisäksi sisältää liitteen, jota Kaarlo ei ole odottanut.",
+    response:
+      "Kaarlo: Jopa minä ehdin hieman epäilemään tämän viestin aitoutta. En avaa liitettä enkä lähetä tunnuksiani. Jos olisin jo antanut salasanani, pyytäisin tarvittaessa läheiseltä apua sen vaihtamiseen oikeassa palvelussa.",
   },
 ] as const;
 

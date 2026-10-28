@@ -61,7 +61,7 @@ const courseCatalog: CourseCatalogEntry[] = [
         isComplete: false,
         title: "Kuinka toimia epäilyttävän viestin kanssa?",
         description:
-          "Harjoittele asian tarkistamista tutun sovelluksen ja tallennetun yhteystiedon kautta.",
+          "Lue mitä tehdä kohdatessaan huijausviestin, ja kuinka toimia jos huijaus on jo tapahtunut. Harjoittele viestien aitouden tarkistamista tutun sovelluksen ja tallennetun yhteystiedon kautta.",
         path: "/course/phishing/safe-responses",
       },
     ],

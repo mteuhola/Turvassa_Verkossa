@@ -74,35 +74,34 @@ export default function QuizNotifications({
         >
           <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" />
         </svg>
-        <span>Ilmoitukset</span>
+        <span>Viestit</span>
         {unread && (
           <span className={styles.notificationBadge}>1 uusi viesti</span>
         )}
       </button>
       <span className={styles.srOnly} role="status" aria-live="polite">
-        {received ? "Uusi viesti saapui. Avaa Ilmoitukset lukeaksesi sen." : ""}
+        {received ? "Uusi viesti saapui. Avaa Viestit lukeaksesi sen." : ""}
       </span>
       {open && (
         <section
           id={panelId}
           className={styles.notificationPanel}
-          aria-label="Ilmoitukset"
+          aria-label="Viestit"
         >
           {received ? (
             <>
               <p>
-                <strong>Tonttupankki</strong>
+                <strong>turvassa verkossa kehittäjä</strong>
               </p>
               <p>
-                Tililläsi on havaittu poikkeavaa toimintaa. Vahvista tietosi
-                heti, jotta tilisi pysyy käytössä.
+                Hei! Pyydän sinua luomaan tilin välittömästi, jotta voit jatkaa harjoitusta. Muuten harjoitus ei mene läpi.
               </p>
               <a
                 href={notificationLink.href}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Vahvista tietosi
+                Luo tili
               </a>
             </>
           ) : (

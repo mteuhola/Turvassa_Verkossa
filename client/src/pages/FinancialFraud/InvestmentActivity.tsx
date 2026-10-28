@@ -56,10 +56,6 @@ export default function InvestmentActivity({
             herättävät epäilyksiä. Jokaisessa tarjouksessa on kolme
             varoitusmerkkiä ja yksi kohta, joka ei yksin osoita huijausta.
           </p>
-          <p>
-            Valinnat eivät avaa linkkejä tai siirrä rahaa. Voit kokeilla
-            rauhassa. Kun löydät kaikki yhdeksän merkkiä, saat suoritusmerkin.
-          </p>
           {isComplete && <CompletionBadge />}
         </header>
         <p>

@@ -59,7 +59,8 @@ export const courseIntroductions: Record<string, TheoryContent> = {
         paragraphs: [
           "Tietojenkalastelu (englanniksi phishing) on yleistä huijaustoimintaa, jossa rikollinen yrittää huijata ihmisiä antamaan henkilökohtaisia tietojaan, kuten salasanoja tai pankkitunnuksia, esiintymällä luotettavana tahona.",
           "Tietojenkalastelun nimi tulee siitä, että huijarit ikään kuin käyttävät kalastajien tapaan syöttiä napatakseen kohteensa. Huijaaminen voi tapahtua esimerkiksi sähköpostitse, tekstiviestillä tai sosiaalisen median kautta tulevalla viestillä, jossa pyydetään toimimaan tietyllä tavalla.",
-          "Tyypillisesti huijausviestissä on linkki, jota painamalla vastaanottaja ohjataan väärennetylle verkkosivustolle. Sivustolla pyydetään tietoja, jotka liittyvät itse huijausviestissä esitettyyn pyyntöön.",
+          "Tyypillisesti huijausviestissä on linkki, jota painamalla vastaanottaja ohjataan väärennetylle verkkosivustolle. Sivustolla pyydetään tietoja, jotka liittyvät itse huijausviestissä esitettyyn pyyntöön, kuten salasanoja tai muita tunnuksia.",
+          "Vaikka oma salasana olisi pitkä ja vaikeasti arvattava, se ei suojaa käyttäjätiliä, jos salasana päätyy huijarin tietoon.",
         ],
       },
       {
@@ -75,6 +76,7 @@ export const courseIntroductions: Record<string, TheoryContent> = {
         paragraphs: [
           "Odottamaton viesti: Viesti ei liity omaan viimeaikaiseen toimintaan. Viestissä voidaan esitellä arvontavoittona saatavaa rahasummaa, joka ilmestyy tilille linkkiä painaessa ja maksukortin tiedot syötettyään. Tällaisessa tilanteessa on syytä epäillä voiton aitoutta, jos ei ole osallistunut arvontoihin.",
           "Epätavallinen lähettäjän sähköpostiosoite: Tällainen viesti voi väittää tulevansa esimerkiksi pankilta, mutta lähettäjän sähköpostiosoite ei liity pankkipalveluihin.",
+          "Avun pyytämisen estäminen: Huijari voi esittää syitä, miksi viestistä kertominen jollekin muulle olisi huono ajatus. Huijari yrittää näin jättää kohteensa toimimaan omien tietojensa varassa, sekä pyrkii vähentämään huijauksen paljastumisen mahdollisuutta.",
           "Linkit vievät eri osoitteeseen kuin mitä viestissä kerrotaan: tietokoneella linkin todellisen osoitteen voi yleensä nähdä viemällä hiiren osoittimen linkin päälle itse linkkiä painamatta.",
           "Odottamattomat liitteet: viestin mukana voi tulla esimerkiksi tiedosto, jonka avaaminen voi asentaa haittaohjelman laitteelle. Liitteitä ei kannata avata, jos viesti on vähänkään epäilyttävä.",
         ],
@@ -143,7 +145,7 @@ export const phishingTheory: TheoryContent = {
       paragraphs: [
         "Jos olet antanut väärennetylle sivustolle salasanasi, vaihda se mahdollisimman pian kyseisen palvelun oikealla verkkosivustolla tai sovelluksessa. Jos olet käyttänyt samaa salasanaa muilla sivustoilla, vaihda salasana myös niissä.",
         "Jos olet antanut pankkitunnuksesi tai maksukorttisi tiedot tai lähettänyt rahaa huijarille, ota mahdollisimman nopeasti yhteyttä pankkiisi sen virallisen puhelinnumeron kautta. Pankki voi auttaa estämään tunnusten tai korttien väärinkäytön ja mahdollisesti estämään huijaukseen liittyvät tilitapahtumat.",
-        "Huijauksesta kannattaa tehdä rikosilmoitus poliisille. Lisäksi tapahtuneesta voi ilmoittaa Traficomin Kyberturvallisuuskeskukselle, jotta he osaavat tiedottaa ajankohtaisista huijausilmiöistä. Rikosuhripäivystys (RIKU) tarjoaa huijauksen kohteeksi joutuneille tukea ja käytännön neuvoja.",
+        "Huijauksesta kannattaa tehdä rikosilmoitus poliisille. Lisäksi tapahtuneesta voi ilmoittaa Traficomin Kyberturvallisuuskeskukselle, jotta he osaavat tiedottaa ajankohtaisista huijausilmiöistä. Rikosuhripäivystys (RIKU) tarjoaa myös verkkohuijausten kohteiksi joutuneille tukea ja käytännön neuvoja.",
       ],
     },
     {

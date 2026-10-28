@@ -56,7 +56,7 @@ export const emailParts = [
     suspicious: true,
     title: "Väärään osoitteeseen vievä linkki",
     explanation:
-      "Linkin osoite ei ole harjoituksen pankin tonttupankki.yksityinen. Pankin nimi osoitteen osana tai https-alku ei takaa aitoutta. Avaa pankin sovellus tai kirjoita tuntemasi osoite itse.",
+      "Linkin osoite ei ole harjoituksen pankin tonttupankki.yksityinen. Pankin nimi osoitteen osana ei takaa aitoutta. Avaa pankin sovellus tai kirjoita tuntemasi osoite itse.",
     hint: "Vertaa linkin verkkotunnusta harjoituksen pankin osoitteeseen.",
   },
   {
@@ -78,8 +78,8 @@ export const emailParts = [
     suspicious: true,
     title: "Odottamaton ohjelmaliite",
     explanation:
-      "Pääte .exe tarkoittaa Windowsissa suoritettavaa ohjelmaa. Odottamaton turvapäivitykseksi nimetty liite voi asentaa haittaohjelman. Älä avaa sitä.",
-    hint: "Katso liitteen nimeä ja sen .exe-päätettä.",
+      "Odottamaton turvapäivitykseksi nimetty liite voi asentaa haittaohjelman. Älä avaa sitä.",
+    hint: "Katso liitteen nimeä.",
   },
   {
     id: "secrecy",

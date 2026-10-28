@@ -2,8 +2,8 @@ export const kaarloEmails = [
   {
     id: "prize",
     sender: "MegaPotti asiakas palvelu",
-    address: "voitto@mega-palkinot.example",
-    subject: "ONNITELUT!! Sinä olet voitaja lunasta NYT",
+    address: "voitto@mega-palkinnot.tv",
+    subject: "ONNITELUT!! Sinä olet voittaja lunasta NYT",
     time: "Tänään klo 10.31",
     attachment: null,
     context:
@@ -104,7 +104,7 @@ export const kaarloEmails = [
   },
   {
     id: "relative",
-    sender: "Anna",
+    sender: "Anna Kuustonen",
     address: "anna@kuustonen.com",
     subject: "Sunnuntain kahvihetki",
     time: "Toissapäivänä klo 23.22",
@@ -146,7 +146,7 @@ export const kaarloEmails = [
     explanation:
       "Tilin sulkemisella uhkaaminen painostaa toimimaan kiireessä. Lähettäjän verkkotunnus eroaa palvelun osoitteesta, ja Kaarlokin on sitä mieltä, ettei osoite ole tuttu. Viesti lisäksi sisältää liitteen, jota Kaarlo ei ole odottanut.",
     response:
-      "Kaarlo: Jopa minä ehdin hieman epäilemään tämän viestin aitoutta. En avaa liitettä enkä lähetä tunnuksiani. Jos olisin jo antanut salasanani, pyytäisin tarvittaessa läheiseltä apua sen vaihtamiseen oikeassa palvelussa.",
+      "Kaarlo: Jopa minä ehdin hieman epäilä tämän viestin aitoutta. En avaa liitettä enkä lähetä tunnuksiani. Jos olisin jo antanut salasanani, pyytäisin tarvittaessa läheiseltä apua sen vaihtamiseen oikeassa palvelussa.",
   },
 ] as const;
 

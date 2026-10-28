@@ -85,7 +85,7 @@ export default function PhishingLesson({
         </h1>
         {isComplete && <CompletionBadge />}
         <SafeActionSequence onComplete={onComplete} />
-        <div className={styles.actions}>
+        <div className={`${styles.actions} ${styles.theoryReturn}`}>
           <button
             type="button"
             className={styles.action}

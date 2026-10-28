@@ -67,8 +67,8 @@
   color: var(--course-ink);
   cursor: pointer;
 }
-.responsePractice {
-  max-width: 65ch;
+.main.responsePractice {
+  max-width: 90rem;
 }
 .recoveryQuestion {
   border: 0;
@@ -179,10 +179,6 @@
   background: #e6f1fb;
   color: #0c447c;
 }
-.inboxList button[aria-pressed="true"] {
-  outline: 2px solid var(--course-ink);
-  outline-offset: -2px;
-}
 .mailCommandBar {
   display: flex;
   flex-wrap: wrap;
@@ -290,6 +286,10 @@
   color: var(--course-ink);
   text-underline-offset: 4px;
 }
+.root :is(h1, h2, h3)[tabindex="-1"]:focus:not(:focus-visible) {
+  outline: none;
+}
+.root :is(h1, h2, h3)[tabindex="-1"]:focus-visible,
 .root a:focus-visible,
 .root button:focus-visible,
 .root summary:focus-visible {
@@ -540,6 +540,9 @@
   flex-wrap: wrap;
   gap: 12px;
 }
+.theoryReturn {
+  justify-content: flex-end;
+}
 .action {
   min-height: 48px;
   padding: 10px 16px;
@@ -622,61 +625,77 @@
 .feedback {
   border-radius: 0;
 }
-.practicePhone {
-  width: 100%;
-  max-width: 34rem;
-  margin: 28px auto 20px;
-  border: 3px solid #334b60;
-  border-radius: 16px;
-  background: var(--surface);
-  overflow: hidden;
+.practiceBrief {
+  max-width: 70ch;
 }
-.practicePhoneBar {
-  padding: 12px 24px;
-  background: #173c5c;
-  color: #fff;
-}
-.practicePhoneContent {
-  padding: clamp(16px, 4vw, 28px);
-  min-height: 18rem;
-}
-.practicePhoneContent h2:focus,
-.practiceResult h2:focus {
-  outline: 3px solid var(--course-ink);
-  outline-offset: 4px;
-}
-.practiceMessage {
-  margin: 0 0 24px;
-  padding: 20px;
-  background: #e6f1fb;
-  color: #0c447c;
+.practiceBrowser {
+  margin-block: 28px;
+  border: 1px solid #334b60;
   border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface);
 }
-.practiceApps {
-  display: grid;
-  gap: 16px;
-}
-.practiceApps button {
-  text-align: left;
-  min-height: 64px;
-}
-.practicePhoneNav {
+.practiceBrowserTabs {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   padding: 16px;
-  border-top: 1px solid var(--border);
+  background: #e6f1fb;
+  border-bottom: 1px solid #334b60;
 }
-.practiceHint {
-  max-width: 34rem;
-  margin: 0 auto 28px;
+.practiceBrowserTabs button[aria-pressed="true"] {
+  background: #173c5c;
+  color: #fff;
 }
-.practiceHint summary {
-  padding-block: 12px;
-  min-height: 48px;
-  color: var(--course-ink);
-  cursor: pointer;
+.practiceBrowser .mailDesktop {
+  border: 0;
+  border-radius: 0;
+}
+.practiceBrowserPage {
+  padding: clamp(16px, 4vw, 32px);
+  min-height: 20rem;
+}
+.practiceBrowserPage > .small {
+  margin-top: 0;
+}
+.practiceDecision {
+  margin-top: 32px;
+  max-width: 70ch;
+}
+.practiceEvidence {
+  margin-top: 24px;
+  padding-block: 16px;
+  border-block: 1px solid var(--border);
+}
+.practiceEvidence h3 {
+  margin-top: 0;
+}
+.practiceEvidence li + li {
+  margin-top: 12px;
 }
 .practiceResult {
   margin-block: 32px;
+  max-width: 70ch;
+}
+.practiceLoans {
+  list-style: none;
+  padding: 0;
+  margin-block: 24px;
+  border-top: 1px solid var(--border);
+}
+.practiceLoans li {
+  border-bottom: 1px solid var(--border);
+}
+.practiceLoans summary {
+  padding-block: 16px;
+  min-height: 48px;
+  color: var(--course-ink);
+  cursor: pointer;
+  font-weight: 500;
+}
+.practiceLoans dl {
+  margin: 0 0 24px;
+}
+.practiceBrowser > [role="status"] > p {
+  margin: 16px;
 }

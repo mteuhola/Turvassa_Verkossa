@@ -1,10 +1,10 @@
 export const kaarloRecoveryChoices = [
   {
-    id: "close",
-    text: "Suljetaan epäilyttävä sivu eikä anneta sille enää tietoja.",
+    id: "bank",
+    text: "Ilmoitetaan kortin tietojen väärinkäytöstä pankille.",
     correct: true,
     explanation:
-      "Sivulla asiointi kannattaa lopettaa. Sivun sulkeminen ei kuitenkaan peruuta jo annettujen tietojen päätymistä huijarille.",
+      "Pankille ilmoittaminen voi vielä estää tilitapahtumien etenemisen.",
   },
   {
     id: "delete",
@@ -12,6 +12,13 @@ export const kaarloRecoveryChoices = [
     correct: false,
     explanation:
       "Viestin poistaminen ei poista huijarin jo saamia tietoja. Annettu salasana täytyy vaihtaa.",
+  },
+  {
+    id: "police",
+    text: "Tehdään rikosilmoitus poliisille.",
+    correct: true,
+    explanation:
+      "Poliisille ilmoittaminen voi auttaa jatkossa vastaavien rikosten jäljittämistä.",
   },
   {
     id: "passwords",

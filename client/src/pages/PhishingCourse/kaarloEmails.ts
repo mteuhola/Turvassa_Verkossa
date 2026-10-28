@@ -61,7 +61,7 @@ export const kaarloEmails = [
       "Kaarlo: Olen SuperSähkön asiakas, ja olen maksanut samanlaisen laskun joka toinen kuukausi.",
     paragraphs: [
       "Hyvä asiakkaamme,",
-      "Pyydämme suorittamaan oheisen laskun alla olevin tiedoin. Laskun kuva löytyy tämän sähköpostin liitteenä",
+      "Pyydämme suorittamaan oheisen laskun alla olevin tiedoin. Lasku löytyy tämän sähköpostin liitteenä.",
       "Maksettava: 69,99€",
       "Maksun saaja: SuperSähkö Oy",
       "Ystävällisin terveisin,",

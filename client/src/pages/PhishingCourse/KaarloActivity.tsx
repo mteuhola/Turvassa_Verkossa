@@ -55,9 +55,9 @@ export default function KaarloActivity({
               {stage === "intro"
                 ? "”Olen nyt muutaman päivän sisään saanut jostain syystä paljon sähköpostia. Olen kuullut niin paljon huijauksista, että hädin tuskin uskallan lukea viestejäni! Voisitko katsoa niitä kanssani? En haluaisi jättää tärkeitä viestejä huomaamatta.”"
                 : stage === "email"
-                  ? (email?.context ?? "Avataan joku viesteistä.")
+                  ? (email?.context ?? "Avataan joku viime päivien viesteistä.")
                   : stage === "recovery"
-                    ? "Kaarlo: Minun täytyy tunnustaa jotain. Avasin eilen yhden tällaisen viestin linkin. Sen jälkeen huijausviestejä on tuntunut tulevan enemmän. Johtuuko se klikkauksesta? Mitä minun pitäisi nyt tehdä?"
+                    ? "Kaarlo: Minua hieman nolottaa, mutta minun täytyy tunnustaa jotakin. Avasin kolme päivää sitten yhden viestin linkin. En osannut epäillä viestin aitoutta ollenkaan, ja annoin sivustolle tietojani. Sen jälkeen huijausviestejä on tuntunut tulevan enemmän. Mitä minun pitäisi nyt tehdä?"
                     : "Kaarlo: Kiitos, että autoit minua arvioimaan viestejä rauhassa."}
             </p>
           </div>
@@ -98,24 +98,10 @@ export default function KaarloActivity({
         {stage === "complete" && (
           <section>
             <p>
-              ”Nyt uskallan taas lukea viestini. Voin pysähtyä epäilyttävän
-              pyynnön kohdalla ja silti ottaa odottamani toimitusilmoituksen
-              vastaan.”
+              ”Nyt uskallan taas lukea viestini. Kiitos paljon avustasi!”
             </p>
             <p>
-              Varovaisuus tarkoittaa tilanteen arvioimista. Tuttu nimi tai
-              siisti ulkoasu ei yksin takaa aitoutta, mutta jokaista viestiä ei
-              tarvitse pitää huijauksena. Epäselvän asian voi tarkistaa palvelun
-              tutusta sovelluksesta tai itse avatulta sivustolta.
-            </p>
-            <p>
-              Klikkauksesta kannattaa kertoa ja selvittää, mitä sivulla
-              tapahtui. Viestien lisääntyminen ei yksin osoita, mistä ne
-              johtuvat. Jos annoit salasanan, vaihda se heti aidossa palvelussa
-              ja kaikissa muissa palveluissa, joissa käytit samaa salasanaa.
-              Tässä harjoituksessa Kaarlo ei antanut maksutietoja. Jos niitä
-              olisi annettu, pankkiin pitäisi ottaa heti yhteyttä sen virallista
-              yhteydenottotapaa käyttäen.
+              Onneksi Kaarlo kertoi tapahtuneesta, jolloin pystyitte yhdessä selvittämään tilannetta.
             </p>
             <div className={styles.actions}>
               <Link

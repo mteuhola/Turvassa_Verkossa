@@ -1,10 +1,10 @@
+import CourseBook from "../../components/CourseBook";
+import Navbar from "../../components/Navbar";
 import { CharacterPortrait } from "../../components/CourseGuide";
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CompletionBadge from "../../components/CompletionBadge";
-import TextSizeControl, {
-  type TextSizeProps,
-} from "../../components/TextSizeControl";
+import type { TextSizeProps } from "../../components/TextSizeControl";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import type { CourseTopic, TopicCourse } from "../TopicSelection/topicCourses";
 import styles from "./Theory.module.css";
@@ -54,16 +54,12 @@ function TheoryPages({
 
   return (
     <div className={styles.root} data-course={course.id}>
-      <nav className={styles.nav} aria-label="Päänavigaatio">
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to={course.path}>← Takaisin aiheisiin</Link>
-          <TextSizeControl {...textSizeProps} />
-        </div>
-      </nav>
-      <main className={styles.main}>
+      <Navbar
+        {...textSizeProps}
+        backTo={course.path}
+        backLabel="Takaisin aiheisiin"
+      />
+      <CourseBook className={styles.main}>
         <header className={styles.header}>
           <p className={styles.course}>{course.title}</p>
           <h1 ref={heading} tabIndex={-1}>
@@ -141,7 +137,7 @@ function TheoryPages({
             </button>
           )}
         </footer>
-      </main>
+      </CourseBook>
     </div>
   );
 }

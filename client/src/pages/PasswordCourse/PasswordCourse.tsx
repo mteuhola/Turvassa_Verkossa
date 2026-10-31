@@ -1,3 +1,5 @@
+import CourseBook from "../../components/CourseBook";
+import Navbar from "../../components/Navbar";
 import {
   canSavePracticePassword,
   readPracticePassword,
@@ -13,9 +15,7 @@ import styles from "./PasswordCourse.module.css";
 import Theory from "../Theory/Theory";
 import { courseIntroductions, passwordTheory } from "../Theory/theoryData";
 import { topicCourses } from "../TopicSelection/topicCourses";
-import TextSizeControl, {
-  type TextSizeProps,
-} from "../../components/TextSizeControl";
+import type { TextSizeProps } from "../../components/TextSizeControl";
 
 import {
   passwordExamples,
@@ -160,16 +160,12 @@ export default function PasswordCourse({
 
   return (
     <div className={styles.root} data-course="passwords">
-      <nav className={styles.nav} aria-label="Päänavigaatio">
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to="/course/passwords">← Takaisin aiheisiin</Link>
-          <TextSizeControl {...textSizeProps} />
-        </div>
-      </nav>
-      <main className={styles.main}>
+      <Navbar
+        {...textSizeProps}
+        backTo="/course/passwords"
+        backLabel="Takaisin aiheisiin"
+      />
+      <CourseBook className={styles.main}>
         <header>
           <h1>
             {mode === "introduction"
@@ -184,16 +180,17 @@ export default function PasswordCourse({
                 Tutustu esimerkkeihin
               </h2>
               <p>
-                Alla on listattuna erilaisia esimerkkisalasanoja ja niiden arvioitu
-                vahvuus. Arvio perustuu johdantokappaleessa esiteltyihin
-                salasanan ominaisuuksiin. Klikkaamalla salasanaa näet sen
-                vahvuusarvion sekä kysymyksiä salasanan vahvuuteen liittyen.
+                Alla on listattuna erilaisia esimerkkisalasanoja ja niiden
+                arvioitu vahvuus. Arvio perustuu johdantokappaleessa
+                esiteltyihin salasanan ominaisuuksiin. Klikkaamalla salasanaa
+                näet sen vahvuusarvion sekä kysymyksiä salasanan vahvuuteen
+                liittyen.
                 <br />
                 <br />
-                Valitse kaikki oikeat vaihtoehdot. Oikeita vastauksia voi olla yksi tai useita.
-                Pääset eteenpäin, vastattuasi kysymyksiin oikein ja painamalla alhaalta
-                löytyvää <strong>Valmis</strong>-painiketta. Kysymyksiä voi
-                yrittää uudelleen.
+                Valitse kaikki oikeat vaihtoehdot. Oikeita vastauksia voi olla
+                yksi tai useita. Pääset eteenpäin, vastattuasi kysymyksiin
+                oikein ja painamalla alhaalta löytyvää <strong>Valmis</strong>
+                -painiketta. Kysymyksiä voi yrittää uudelleen.
               </p>
               <div className={styles.examples}>
                 {examples.map((item, index) => (
@@ -325,8 +322,8 @@ export default function PasswordCourse({
                   merkeillä, kuten "kissa-kahvi_radio!sohva"
                 </li>
                 <br />
-                Kun olet kokeillut erilaisia salasanoja, keksi salasana
-                tätä kurssia varten. Sitä ei tallenneta mihinkään.
+                Kun olet kokeillut erilaisia salasanoja, keksi salasana tätä
+                kurssia varten. Sitä ei tallenneta mihinkään.
                 <strong>
                   Huom: Älä kuitenkaan valitse tähän tehtävään olemassaolevaa
                   salasanaasi!
@@ -527,8 +524,7 @@ export default function PasswordCourse({
                   </div>
                   {storageMethod === "written" && (
                     <>
-                      <p>
-                      </p>
+                      <p></p>
                       <label className={styles.choice}>
                         <input
                           type="checkbox"
@@ -621,13 +617,12 @@ export default function PasswordCourse({
                 <section
                   className={styles.takeaway}
                   aria-labelledby="remember-title"
-                >
-                </section>
+                ></section>
               )}
             </section>
           )}
         </div>
-      </main>
+      </CourseBook>
     </div>
   );
 }

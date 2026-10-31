@@ -1,11 +1,11 @@
+import CourseBook from "../../components/CourseBook";
+import Navbar from "../../components/Navbar";
 import CompletionNotice from "../../components/CompletionNotice";
 import CompletionBadge from "../../components/CompletionBadge";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import TextSizeControl, {
-  type TextSizeProps,
-} from "../../components/TextSizeControl";
+import type { TextSizeProps } from "../../components/TextSizeControl";
 import { clues, emailParts } from "./phishingEmail";
 import styles from "./PhishingCourse.module.css";
 import ClueExplanation from "./ClueExplanation";
@@ -111,16 +111,12 @@ export default function PhishingCourse({
   }
   return (
     <div className={styles.root} data-course="phishing">
-      <nav className={styles.nav} aria-label="Päänavigaatio">
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to="/course/phishing">← Takaisin aiheisiin</Link>
-          <TextSizeControl {...textSizeProps} />
-        </div>
-      </nav>
-      <main className={styles.main}>
+      <Navbar
+        {...textSizeProps}
+        backTo="/course/phishing"
+        backLabel="Takaisin aiheisiin"
+      />
+      <CourseBook className={styles.main}>
         <div className={styles.workspace}>
           <header className={styles.intro}>
             <h1 ref={heading} tabIndex={-1}>
@@ -283,7 +279,7 @@ export default function PhishingCourse({
             </aside>
           </div>
         </div>
-      </main>
+      </CourseBook>
       {activeClue && (
         <ClueExplanation
           title={activeClue.part.title}

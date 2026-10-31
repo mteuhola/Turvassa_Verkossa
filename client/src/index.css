@@ -4,7 +4,8 @@
   --reading-width: 60rem;
   --layout-gap: 32px;
   --panel-padding: 24px;
-  --page-bg: #faf5ec;
+  --paper: #faf5ec;
+  --page-bg: var(--paper);
   --surface: #fffdf8;
   --text: #352d26;
   --text-muted: #685c50;
@@ -124,5 +125,6 @@ nav button.text-size-control:focus-visible {
 }
 
 div[data-course] {
+  display: flow-root;
   background-color: var(--page-bg);
 }

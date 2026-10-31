@@ -1,8 +1,8 @@
+import CourseBook from "../../components/CourseBook";
+import Navbar from "../../components/Navbar";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import TextSizeControl, {
-  type TextSizeProps,
-} from "../../components/TextSizeControl";
+import type { TextSizeProps } from "../../components/TextSizeControl";
 import CompletionBadge from "../../components/CompletionBadge";
 import PracticePasswordManager from "../../components/PracticePasswordManager";
 import CompletionNotice from "../../components/CompletionNotice";
@@ -30,19 +30,12 @@ export default function Quiz(props: QuizProps) {
   if (canEnterQuiz(props.course)) return <QuizActivity {...props} />;
   return (
     <div className={styles.root} data-course={props.course.id}>
-      <nav className={styles.nav} aria-label="Päänavigaatio">
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to={props.course.path}>← Takaisin aiheisiin</Link>
-          <TextSizeControl
-            textSize={props.textSize}
-            onTextSizeChange={props.onTextSizeChange}
-          />
-        </div>
-      </nav>
-      <main className={styles.main}>
+      <Navbar
+        {...props}
+        backTo={props.course.path}
+        backLabel="Takaisin aiheisiin"
+      />
+      <CourseBook className={styles.main}>
         <h1>{props.course.title}: tietovisa</h1>
         <h2>Suorita ensin muut aiheet</h2>
         <p>
@@ -57,7 +50,7 @@ export default function Quiz(props: QuizProps) {
           ))}
         </ul>
         <Link to={props.course.path}>Palaa kurssin aiheisiin</Link>
-      </main>
+      </CourseBook>
     </div>
   );
 }
@@ -157,24 +150,19 @@ function QuizActivity({
 
   return (
     <div className={styles.root} data-course={course.id}>
-      <nav
-        className={`${styles.nav} ${showNotifications ? styles.quizNav : ""}`}
-        aria-label="Päänavigaatio"
+      <Navbar
+        {...textSizeProps}
+        backTo={course.path}
+        backLabel="Takaisin aiheisiin"
+        className={showNotifications ? styles.quizNav : undefined}
       >
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to={course.path}>← Takaisin aiheisiin</Link>
-          <TextSizeControl {...textSizeProps} />
-          {showNotifications && (
-            <QuizNotifications
-              isLastQuestion={total > 0 && index === total - 1}
-            />
-          )}
-        </div>
-      </nav>
-      <main className={styles.main}>
+        {showNotifications && (
+          <QuizNotifications
+            isLastQuestion={total > 0 && index === total - 1}
+          />
+        )}
+      </Navbar>
+      <CourseBook className={styles.main}>
         <header>
           <h1>{course.title}: tietovisa</h1>
           <p>
@@ -363,7 +351,7 @@ function QuizActivity({
           Keskeneräiset vastaukset eivät tallennu. Suoritusmerkki säilyy tässä
           selaimessa, jos tallennus on sallittu.
         </p>
-      </main>
+      </CourseBook>
     </div>
   );
 }

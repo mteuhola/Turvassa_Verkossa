@@ -1,8 +1,7 @@
+import CourseBook from "../../components/CourseBook";
+import Navbar from "../../components/Navbar";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import TextSizeControl, {
-  type TextSizeProps,
-} from "../../components/TextSizeControl";
+import type { TextSizeProps } from "../../components/TextSizeControl";
 import CompletionBadge from "../../components/CompletionBadge";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import Theory from "../Theory/Theory";
@@ -70,16 +69,12 @@ export default function PhishingLesson({
 
   return (
     <div className={styles.root} data-course="phishing">
-      <nav className={styles.nav} aria-label="Päänavigaatio">
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to="/course/phishing">← Takaisin aiheisiin</Link>
-          <TextSizeControl {...textSizeProps} />
-        </div>
-      </nav>
-      <main className={`${styles.main} ${styles.responsePractice}`}>
+      <Navbar
+        {...textSizeProps}
+        backTo="/course/phishing"
+        backLabel="Takaisin aiheisiin"
+      />
+      <CourseBook className={`${styles.main} ${styles.responsePractice}`}>
         <h1 ref={heading} tabIndex={-1}>
           Tarkista tuttua kautta
         </h1>
@@ -94,7 +89,7 @@ export default function PhishingLesson({
             Palaa teoriaan
           </button>
         </div>
-      </main>
+      </CourseBook>
     </div>
   );
 }

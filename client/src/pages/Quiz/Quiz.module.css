@@ -21,21 +21,6 @@
   outline: 3px solid var(--course-ink);
   outline-offset: 4px;
 }
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px var(--page-gutter);
-
-  border-bottom: 1px solid var(--border);
-}
-.nav a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-}
 .quizNav {
   position: sticky;
   top: 0;
@@ -96,10 +81,6 @@
   clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
-}
-.brand {
-  font-family: "DM Serif Display", Georgia, serif;
-  font-size: 1.75rem;
 }
 .main {
   width: 100%;
@@ -252,19 +233,9 @@
   color: var(--text-muted);
 }
 @media (max-width: 600px) {
-  .nav {
-    padding: 16px;
-  }
 }
 
 /* A readable question sheet, with boundaries reserved for answer choices. */
-.nav .brand {
-  color: var(--text);
-  text-decoration: none;
-}
-.nav .brand:hover {
-  text-decoration: underline;
-}
 .main header {
   max-width: 70ch;
 }

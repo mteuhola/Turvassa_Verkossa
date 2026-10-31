@@ -1,8 +1,8 @@
+import CourseBook from "../../components/CourseBook";
+import Navbar from "../../components/Navbar";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import TextSizeControl, {
-  type TextSizeProps,
-} from "../../components/TextSizeControl";
+import type { TextSizeProps } from "../../components/TextSizeControl";
 import CompletionBadge from "../../components/CompletionBadge";
 import { CharacterPortrait } from "../../components/CourseGuide";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
@@ -30,16 +30,12 @@ export default function KaarloActivity({
 
   return (
     <div className={styles.root} data-course="phishing">
-      <nav className={styles.nav} aria-label="Päänavigaatio">
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to="/course/phishing">← Takaisin aiheisiin</Link>
-          <TextSizeControl {...textSizeProps} />
-        </div>
-      </nav>
-      <main
+      <Navbar
+        {...textSizeProps}
+        backTo="/course/phishing"
+        backLabel="Takaisin aiheisiin"
+      />
+      <CourseBook
         className={`${styles.main} ${stage === "email" ? styles.kaarloInboxMain : styles.kaarloMain}`}
       >
         <h1 ref={heading} tabIndex={-1}>
@@ -99,11 +95,10 @@ export default function KaarloActivity({
         )}
         {stage === "complete" && (
           <section>
+            <p>”Nyt uskallan taas lukea viestini. Kiitos paljon avustasi!”</p>
             <p>
-              ”Nyt uskallan taas lukea viestini. Kiitos paljon avustasi!”
-            </p>
-            <p>
-              Onneksi Kaarlo kertoi tapahtuneesta, jolloin pystyitte yhdessä selvittämään tilannetta.
+              Onneksi Kaarlo kertoi tapahtuneesta, jolloin pystyitte yhdessä
+              selvittämään tilannetta.
             </p>
             <div className={styles.actions}>
               <Link
@@ -124,7 +119,7 @@ export default function KaarloActivity({
             </div>
           </section>
         )}
-      </main>
+      </CourseBook>
     </div>
   );
 }

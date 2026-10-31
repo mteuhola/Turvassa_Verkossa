@@ -1,8 +1,8 @@
+import CourseBook from "../../components/CourseBook";
+import Navbar from "../../components/Navbar";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import TextSizeControl, {
-  type TextSizeProps,
-} from "../../components/TextSizeControl";
+import type { TextSizeProps } from "../../components/TextSizeControl";
 import CompletionBadge from "../../components/CompletionBadge";
 import { CharacterPortrait } from "../../components/CourseGuide";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
@@ -136,16 +136,12 @@ export default function SannaActivity({
 
   return (
     <div className={styles.root} data-course="passwords">
-      <nav className={styles.nav} aria-label="Päänavigaatio">
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to="/course/passwords">← Takaisin aiheisiin</Link>
-          <TextSizeControl {...textSizeProps} />
-        </div>
-      </nav>
-      <main className={styles.main}>
+      <Navbar
+        {...textSizeProps}
+        backTo="/course/passwords"
+        backLabel="Takaisin aiheisiin"
+      />
+      <CourseBook className={styles.main}>
         <header>
           <h1>Auta Sannaa</h1>
         </header>
@@ -629,7 +625,7 @@ export default function SannaActivity({
             </section>
           )}
         </div>
-      </main>
+      </CourseBook>
     </div>
   );
 }

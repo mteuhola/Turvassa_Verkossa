@@ -14,29 +14,6 @@
   outline: 3px solid var(--course-ink);
   outline-offset: 4px;
 }
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px var(--page-gutter);
-  border-bottom: 1px solid var(--border);
-}
-.nav a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 48px;
-}
-.nav .brand {
-  font-family: "DM Serif Display", Georgia, serif;
-  font-size: 1.75rem;
-  color: var(--text);
-  text-decoration: none;
-}
-.nav .brand:hover {
-  text-decoration: underline;
-}
 .main {
   width: 100%;
   max-width: var(--reading-width);

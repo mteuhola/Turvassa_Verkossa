@@ -99,27 +99,3 @@ export const MaskIcon = ({ color }: { color: string }) => (
     />
   </svg>
 );
-
-export const ArrowIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-    <path
-      d="M2 6h8M7 3l3 3-3 3"
-      stroke="#fff"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-export const ClockIcon = ({ color = "#888780" }: { color?: string }) => (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-    <circle cx="6" cy="6" r="5" stroke={color} />
-    <path
-      d="M6 3.5V6l2 1.5"
-      stroke={color}
-      strokeWidth="1"
-      strokeLinecap="round"
-    />
-  </svg>
-);

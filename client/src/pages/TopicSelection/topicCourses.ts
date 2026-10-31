@@ -10,7 +10,6 @@ interface TopicDetails {
   title: string;
   description: string;
   path: string;
-  flow?: "password-introduction" | "phishing-introduction";
 }
 
 export type CourseTopic = TopicDetails &
@@ -95,11 +94,6 @@ export const topicCourses: TopicCourse[] = courseCatalog.map(
       {
         id: "introduction",
         kind: "theory",
-        ...(course.id === "passwords"
-          ? { flow: "password-introduction" as const }
-          : course.id === "phishing"
-            ? { flow: "phishing-introduction" as const }
-            : {}),
         isComplete: false,
         title: "Johdanto",
         description: introductionDescription,

@@ -19,7 +19,6 @@ import type { TextSizeProps } from "../../components/TextSizeControl";
 
 import {
   passwordExamples,
-  allExamplesCorrect,
   isExampleCorrect,
 } from "./passwordExamples";
 
@@ -67,10 +66,10 @@ export default function PasswordCourse({
   const [checkedAnswers, setCheckedAnswers] = useState<
     Record<number, number[]>
   >({});
-  const reviewComplete = allExamplesCorrect(checkedAnswers);
   const correctCount = examples.filter((item, index) =>
     isExampleCorrect(checkedAnswers[index], item.correctAnswers),
   ).length;
+  const reviewComplete = correctCount === examples.length;
   const [visible, setVisible] = useState(false);
   const [hasTyped, setHasTyped] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -574,11 +573,6 @@ export default function PasswordCourse({
               {mode === "practice" && storageMethod === "manager" && (
                 <PracticePasswordManager />
               )}
-              <p>
-                {mode === "introduction"
-                  ? "Seuraavaksi voit kokeilla vahvan salasanan luomista ja parantamista, sekä harjoitella salasanojen hallintaohjelman käyttöä."
-                  : "Tarvitset harjoitussalasanaasi kurssin lopussa. Voit nyt jatkaa eteenpäin."}
-              </p>
               <div className={styles.actions}>
                 <Link
                   className={styles.primaryLink}

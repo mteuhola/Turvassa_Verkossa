@@ -249,12 +249,6 @@
 .emailMetadata dd {
   margin: 0;
 }
-.destinationAddress {
-  padding: 16px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  overflow-wrap: anywhere;
-}
 @media (max-width: 480px) {
   .emailMetadata {
     grid-template-columns: minmax(0, 1fr);
@@ -262,22 +256,6 @@
   .emailMetadata dd {
     margin-bottom: 12px;
   }
-}
-.responseScenario {
-  margin-block: 32px;
-}
-.responseOptions {
-  display: grid;
-  gap: 12px;
-}
-.responseOptions button {
-  text-align: left;
-  overflow-wrap: anywhere;
-}
-.responseOptions button[aria-pressed="true"] {
-  border-color: var(--course-ink);
-  background: #e6f1fb;
-  color: var(--course-ink);
 }
 .root * {
   box-sizing: border-box;
@@ -307,11 +285,6 @@
   margin-bottom: 32px;
   max-width: none;
 }
-.eyebrow {
-  color: var(--course-ink);
-  font-weight: 500;
-  display: none;
-}
 .root h1,
 .root h2 {
   font-family: "DM Serif Display", Georgia, serif;
@@ -330,13 +303,6 @@
 .root h3 {
   font-size: 1.125rem;
   line-height: 1.5;
-}
-.notice {
-  padding: 16px 20px;
-
-  background: #e6f1fb;
-  border-radius: 8px;
-  color: #0c447c;
 }
 .layout {
   display: grid;
@@ -362,12 +328,6 @@
   border-bottom: 1px solid var(--border);
   color: var(--text-muted);
   font-size: 1rem;
-}
-.trainingBadge {
-  padding: 2px 10px;
-  border-radius: 20px;
-  background: #e6f1fb;
-  color: #0c447c;
 }
 .emailHeader {
   padding: var(--panel-padding);
@@ -592,7 +552,6 @@
 }
 
 /* Keep the simulated email distinct from its supporting guidance. */
-.notice,
 .feedback {
   border-radius: 0;
 }

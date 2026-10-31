@@ -77,9 +77,3 @@ export function isExampleCorrect(
     expected.every((choice) => selected.includes(choice))
   );
 }
-
-export function allExamplesCorrect(answers: Record<number, number[]>) {
-  return passwordExamples.every((item, index) =>
-    isExampleCorrect(answers[index], item.correctAnswers),
-  );
-}

@@ -61,13 +61,17 @@ export const sannaBestPractices = [
   },
 ];
 
-export function createSannaPlanChoices(random = Math.random) {
-  const choices = [...sannaBestPractices];
+function shuffled<T>(items: readonly T[], random: () => number): T[] {
+  const choices = [...items];
   for (let index = choices.length - 1; index > 0; index--) {
     const other = Math.floor(random() * (index + 1));
     [choices[index], choices[other]] = [choices[other], choices[index]];
   }
   return choices;
+}
+
+export function createSannaPlanChoices(random = Math.random) {
+  return shuffled(sannaBestPractices, random);
 }
 
 export function isSannaPlanCorrect(selected: string[]) {
@@ -112,12 +116,7 @@ export function passwordProblem(
 
 export function createSannaLoginTask(random = Math.random) {
   const target = sannaAccounts[Math.floor(random() * sannaAccounts.length)];
-  const entries = [...sannaAccounts];
-  for (let index = entries.length - 1; index > 0; index--) {
-    const other = Math.floor(random() * (index + 1));
-    [entries[index], entries[other]] = [entries[other], entries[index]];
-  }
-  return { target, entries };
+  return { target, entries: shuffled(sannaAccounts, random) };
 }
 
 export function canSignInAsSanna(

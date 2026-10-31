@@ -113,7 +113,7 @@ export default function SannaActivity({
     const problem = passwordProblem(
       account.id,
       password,
-      assessPassword(password)?.score,
+      assessment?.score,
       saved,
     );
     if (problem) {

@@ -168,7 +168,7 @@ function QuizActivity({
           <p>
             Kokeillaan, mitä jäi mieleen. Saat jokaisesta vastauksesta
             palautetta, ja voit yrittää uudelleen. Kun kaikki vastaukset ovat
-            oikein, saat tietovisasta merkin.
+            oikein, kurssi merkitään suoritetuksi!
           </p>
           {isComplete && <CompletionBadge label="Tietovisa suoritettu" />}
         </header>
@@ -188,10 +188,12 @@ function QuizActivity({
               <h2>Valmista tuli, kaikki oikein!</h2>
               <p>
                 Voit jatkaa muihin aiheisiin tai kokeilla tietovisaa uudelleen.
-                Ansaitsemasi merkki säilyy.
               </p>
               <div className={styles.actions}>
-                <Link to={course.path}>Palaa aiheisiin →</Link>
+                <button>
+                  <Link to={course.path}>Palaa aiheisiin
+                  </Link>
+                </button>
                 <button type="button" onClick={restart}>
                   Kertaa tietovisa
                 </button>

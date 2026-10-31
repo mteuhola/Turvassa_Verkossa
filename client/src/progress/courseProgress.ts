@@ -30,28 +30,18 @@ export function parseProgress(stored: string | null): string[] {
   try {
     const parsed: unknown = JSON.parse(stored ?? "null");
     if (!Array.isArray(parsed)) return [];
-    return [
-      ...new Set(
-        parsed
-          .map((path: unknown) =>
-            typeof path === "string"
-              ? path
-                  .replace(
-                    /^\/course\/romance-fraud(?=\/|$)/,
-                    "/course/financial-fraud",
-                  )
-                  .replace(
-                    /^\/course\/phishing\/suspicious-email$/,
-                    "/course/phishing/introduction",
-                  )
-              : path,
-          )
-          .filter(
-            (path): path is string =>
-              typeof path === "string" && topicPaths.has(path),
-          ),
-      ),
-    ];
+    const completed = new Set<string>();
+    for (const value of parsed) {
+      if (typeof value !== "string") continue;
+      const path = value
+        .replace(/^\/course\/romance-fraud(?=\/|$)/, "/course/financial-fraud")
+        .replace(
+          /^\/course\/phishing\/suspicious-email$/,
+          "/course/phishing/introduction",
+        );
+      if (topicPaths.has(path)) completed.add(path);
+    }
+    return [...completed];
   } catch {
     return [];
   }

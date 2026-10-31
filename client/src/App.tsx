@@ -51,35 +51,46 @@ const KaarloActivity = lazy(
   () => import("./pages/PhishingCourse/KaarloActivity"),
 );
 
+const activityRoutes = [
+  {
+    path: "/course/financial-fraud/investment-offers",
+    Component: InvestmentActivity,
+  },
+  { path: "/course/passwords/password-strength", Component: PasswordCourse },
+  { path: "/course/passwords/help-sanna", Component: SannaActivity },
+  { path: "/course/phishing/help-kaarlo", Component: KaarloActivity },
+];
+
 function App() {
   const textSizeProps = useTextSize();
   const { courses, markComplete, resetProgress } = useCourseProgress();
-  const isComplete = (path: string) =>
-    courses.some((course) =>
+  const progressProps = (path: string) => ({
+    isComplete: courses.some((course) =>
       course.topics.some((topic) => topic.path === path && topic.isComplete),
-    );
+    ),
+    onComplete: () => markComplete(path),
+  });
   return (
     <BrowserRouter>
       <Routes>
+        {activityRoutes.map(({ path, Component }) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
+                <Component
+                  key={path}
+                  {...textSizeProps}
+                  {...progressProps(path)}
+                />
+              </Suspense>
+            }
+          />
+        ))}
         <Route
           path="/course/romance-fraud/*"
           element={<LegacyFinancialRoute />}
-        />
-        <Route
-          path="/course/financial-fraud/investment-offers"
-          element={
-            <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
-              <InvestmentActivity
-                {...textSizeProps}
-                isComplete={isComplete(
-                  "/course/financial-fraud/investment-offers",
-                )}
-                onComplete={() =>
-                  markComplete("/course/financial-fraud/investment-offers")
-                }
-              />
-            </Suspense>
-          }
         />
         <Route
           path="/"
@@ -99,25 +110,7 @@ function App() {
                 key="password-introduction"
                 mode="introduction"
                 {...textSizeProps}
-                isComplete={isComplete("/course/passwords/introduction")}
-                onComplete={() =>
-                  markComplete("/course/passwords/introduction")
-                }
-              />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/course/passwords/password-strength"
-          element={
-            <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
-              <PasswordCourse
-                key="password-practice"
-                {...textSizeProps}
-                isComplete={isComplete("/course/passwords/password-strength")}
-                onComplete={() =>
-                  markComplete("/course/passwords/password-strength")
-                }
+                {...progressProps("/course/passwords/introduction")}
               />
             </Suspense>
           }
@@ -126,18 +119,6 @@ function App() {
           path="/course/passwords/theory"
           element={
             <Navigate replace to="/course/passwords/password-strength" />
-          }
-        />
-        <Route
-          path="/course/passwords/help-sanna"
-          element={
-            <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
-              <SannaActivity
-                {...textSizeProps}
-                isComplete={isComplete("/course/passwords/help-sanna")}
-                onComplete={() => markComplete("/course/passwords/help-sanna")}
-              />
-            </Suspense>
           }
         />
         <Route
@@ -158,8 +139,7 @@ function App() {
                   key={mode}
                   mode={mode}
                   {...textSizeProps}
-                  isComplete={isComplete(`/course/phishing/${mode}`)}
-                  onComplete={() => markComplete(`/course/phishing/${mode}`)}
+                  {...progressProps(`/course/phishing/${mode}`)}
                 />
               </Suspense>
             }
@@ -198,18 +178,6 @@ function App() {
             element={<TopicSelection course={course} {...textSizeProps} />}
           />
         ))}
-        <Route
-          path="/course/phishing/help-kaarlo"
-          element={
-            <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
-              <KaarloActivity
-                {...textSizeProps}
-                isComplete={isComplete("/course/phishing/help-kaarlo")}
-                onComplete={() => markComplete("/course/phishing/help-kaarlo")}
-              />
-            </Suspense>
-          }
-        />
         {courses.map((course) => (
           <Route
             key={`${course.id}-quiz`}
@@ -221,8 +189,7 @@ function App() {
                   course={course}
                   quiz={courseQuizzes[course.id]}
                   {...textSizeProps}
-                  isComplete={isComplete(`${course.path}/quiz`)}
-                  onComplete={() => markComplete(`${course.path}/quiz`)}
+                  {...progressProps(`${course.path}/quiz`)}
                 />
               </Suspense>
             }

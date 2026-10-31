@@ -49,6 +49,50 @@
 .content {
   max-width: 70ch;
 }
+.bookViewport {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.measurements {
+  display: grid;
+  visibility: hidden;
+  pointer-events: none;
+}
+.measurements > article {
+  grid-area: 1 / 1;
+  align-self: start;
+}
+.flipLayer {
+  position: absolute;
+  inset: 0;
+}
+.flipLayer:not([data-turning="true"]) :global(.stf__outerShadow),
+.flipLayer:not([data-turning="true"]) :global(.stf__innerShadow),
+.flipLayer:not([data-turning="true"]) :global(.stf__hardShadow),
+.flipLayer:not([data-turning="true"]) :global(.stf__hardInnerShadow) {
+  visibility: hidden;
+}
+.flipBook {
+  touch-action: pan-y;
+}
+.sheet {
+  background: var(--paper);
+  overflow: hidden;
+}
+.sheetContent {
+  display: flow-root;
+  padding: 8px 12px 16px;
+}
+.screenReaderPage {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 .pageCount {
   margin: 0 0 16px;
   color: var(--text-muted);
@@ -75,18 +119,76 @@
   font-size: 1rem;
 }
 .continue {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px 32px;
+  gap: 24px;
   margin-top: 40px;
   padding-top: 24px;
   border-top: 1px solid var(--border);
 }
-.continue > div {
-  flex: 1 1 20rem;
+.pageNavigation {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.pageNavigation .pageCount {
+  margin: 0 0 0 8px;
+}
+.continue .pageNavigation button {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  padding: 12px;
+}
+.pageNavigation svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.continue button[aria-disabled="true"] {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-muted);
+  cursor: default;
+}
+.completion {
+  visibility: hidden;
+  display: contents;
+}
+.completion[data-visible="true"] {
+  visibility: visible;
+}
+.completion > div {
+  grid-column: 1 / -1;
+  grid-row: 2;
   min-width: 0;
+}
+.completion > div:empty {
+  display: none;
+}
+.completion > button {
+  grid-column: 2;
+  grid-row: 1;
+}
+@media (max-width: 600px) {
+  .continue {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .completion > button {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .completion > div {
+    grid-row: 3;
+  }
 }
 .continue p {
   margin: 0 0 8px;

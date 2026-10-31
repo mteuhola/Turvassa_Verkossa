@@ -1,3 +1,4 @@
+import TheoryBook, { type TheoryBookHandle } from "./TheoryBook";
 import CourseBook from "../../components/CourseBook";
 import Navbar from "../../components/Navbar";
 import { CharacterPortrait } from "../../components/CourseGuide";
@@ -29,18 +30,22 @@ function TheoryPages({
 }: TheoryProps) {
   const navigate = useNavigate();
   const heading = useRef<HTMLHeadingElement>(null);
-  const pageHeading = useRef<HTMLParagraphElement>(null);
   const [pageIndex, setPageIndex] = useState(0);
   const pages = topic.content.sections;
-  const page = pages[pageIndex];
+  const book = useRef<TheoryBookHandle>(null);
+  const [turning, setTurning] = useState(false);
   const isLastPage = pageIndex >= pages.length - 1;
   const index = course.topics.findIndex((item) => item.path === topic.path);
   const nextTopic = course.topics[index + 1];
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    (pageHeading.current ?? heading.current)?.focus({ preventScroll: true });
-  }, [topic.path, pageIndex]);
+    heading.current?.focus({ preventScroll: true });
+  }, [topic.path]);
+
+  function turnPage(nextIndex: number) {
+    if (turning || nextIndex < 0 || nextIndex >= pages.length) return;
+    book.current?.turnTo(nextIndex);
+  }
 
   function continueCourse() {
     if (continuation) {
@@ -78,64 +83,76 @@ function TheoryPages({
             </p>
           </div>
         )}
-        <article className={styles.content} aria-label={topic.title}>
-          <p ref={pageHeading} tabIndex={-1} className={styles.pageCount}>
-            Sivu {pageIndex + 1} / {Math.max(1, pages.length)}
-          </p>
-          {page && (
-            <section className={styles.section}>
-              {page.heading && <h2>{page.heading}</h2>}
-              {page.paragraphs.map((paragraph, paragraphIndex) => (
-                <p key={paragraphIndex}>{paragraph}</p>
-              ))}
-              {page.image && (
-                <figure className={styles.figure}>
-                  <img src={page.image.src} alt={page.image.alt} />
-                  {page.image.caption && (
-                    <figcaption>{page.image.caption}</figcaption>
-                  )}
-                </figure>
-              )}
-            </section>
-          )}
-        </article>
+        <TheoryBook
+          ref={book}
+          content={topic.content}
+          title={topic.title}
+          pageIndex={pageIndex}
+          onPageChange={setPageIndex}
+          onTurningChange={setTurning}
+        />
         <footer className={styles.continue}>
-          {pageIndex > 0 && (
-            <button type="button" onClick={() => setPageIndex(pageIndex - 1)}>
-              <span aria-hidden="true">← </span>Edellinen sivu
+          <div
+            className={styles.pageNavigation}
+            role="group"
+            aria-label="Teorian sivut"
+          >
+            <button
+              type="button"
+              aria-label="Edellinen sivu"
+              title="Edellinen sivu"
+              aria-disabled={pageIndex === 0 || turning}
+              onClick={() => turnPage(pageIndex - 1)}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 12H5m7-7-7 7 7 7" />
+              </svg>
             </button>
-          )}
-          {isLastPage ? (
-            <>
-              <div>
-                {!continuation && nextTopic && (
-                  <p>
-                    Seuraavaksi: <strong>{nextTopic.title}</strong>
-                  </p>
-                )}
-                {!continuation && (
-                  <p id="completion-help" className={styles.help}>
-                    {isComplete
-                      ? "Olet jo suorittanut tämän aiheen. Voit jatkaa eteenpäin."
-                      : "Kun jatkat, tämä aihe merkitään suoritetuksi."}
-                  </p>
-                )}
-              </div>
-              <button
-                type="button"
-                onClick={continueCourse}
-                aria-describedby={continuation ? undefined : "completion-help"}
-              >
-                {continuation?.label ??
-                  (nextTopic ? "Seuraava aihe" : "Valmis - palaa aiheisiin")}
-                <span aria-hidden="true"> →</span>
-              </button>
-            </>
-          ) : (
-            <button type="button" onClick={() => setPageIndex(pageIndex + 1)}>
-              Seuraava sivu<span aria-hidden="true"> →</span>
+            <button
+              type="button"
+              aria-label="Seuraava sivu"
+              title="Seuraava sivu"
+              aria-disabled={isLastPage || turning}
+              onClick={() => turnPage(pageIndex + 1)}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14m-7-7 7 7-7 7" />
+              </svg>
             </button>
-          )}
+            <span className={styles.pageCount} role="status" aria-live="polite">
+              Sivu {pageIndex + 1} / {Math.max(1, pages.length)}
+            </span>
+          </div>
+          <div
+            className={styles.completion}
+            data-visible={isLastPage}
+            aria-hidden={!isLastPage}
+            inert={!isLastPage}
+          >
+            <div>
+              {!continuation && nextTopic && (
+                <p>
+                  Seuraavaksi: <strong>{nextTopic.title}</strong>
+                </p>
+              )}
+              {!continuation && (
+                <p id={"completion-help"} className={styles.help}>
+                  {isComplete
+                    ? "Olet jo suorittanut tämän aiheen. Voit jatkaa eteenpäin."
+                    : "Kun jatkat, tämä aihe merkitään suoritetuksi."}
+                </p>
+              )}
+            </div>
+            <button
+              type="button"
+              onClick={continueCourse}
+              aria-describedby={continuation ? undefined : "completion-help"}
+            >
+              {continuation?.label ??
+                (nextTopic ? "Seuraava aihe" : "Valmis - palaa aiheisiin")}
+              <span aria-hidden="true"> →</span>
+            </button>
+          </div>
         </footer>
       </CourseBook>
     </div>

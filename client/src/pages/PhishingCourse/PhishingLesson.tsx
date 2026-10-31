@@ -63,6 +63,7 @@ export default function PhishingLesson({
         {...textSizeProps}
         isComplete={isComplete}
         onComplete={onComplete}
+        onReturnTheory={() => setStage("reading")}
       />
     );
   }

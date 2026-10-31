@@ -13,8 +13,9 @@ import ClueExplanation from "./ClueExplanation";
 export default function PhishingCourse({
   isComplete,
   onComplete,
+  onReturnTheory,
   ...textSizeProps
-}: TextSizeProps & ActivityProgressProps) {
+}: TextSizeProps & ActivityProgressProps & { onReturnTheory?: () => void }) {
   const [found, setFound] = useState<string[]>([]);
   const [activeClue, setActiveClue] = useState<{
     part: (typeof emailParts)[number];
@@ -279,6 +280,17 @@ export default function PhishingCourse({
             </aside>
           </div>
         </div>
+        {onReturnTheory && (
+          <div className={`${styles.actions} ${styles.theoryReturn}`}>
+            <button
+              type="button"
+              className={styles.action}
+              onClick={onReturnTheory}
+            >
+              Palaa teoriaan
+            </button>
+          </div>
+        )}
       </CourseBook>
       {activeClue && (
         <ClueExplanation

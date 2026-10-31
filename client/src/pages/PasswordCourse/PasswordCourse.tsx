@@ -427,17 +427,6 @@ export default function PasswordCourse({
                   Jatka salasanan säilyttämiseen
                 </button>
               </div>
-              <button
-                type="button"
-                className={styles.secondary}
-                disabled={isSaving}
-                onClick={() => {
-                  setVisible(false);
-                  setStage("reading");
-                }}
-              >
-                Palaa teoriaan
-              </button>
             </section>
           )}
           {stage === "storage" && (
@@ -622,6 +611,20 @@ export default function PasswordCourse({
             </section>
           )}
         </div>
+        {(stage === "examples" || stage === "practice") && (
+          <div className={styles.theoryReturn}>
+            <button
+              type="button"
+              disabled={isSaving}
+              onClick={() => {
+                setVisible(false);
+                setStage("reading");
+              }}
+            >
+              Palaa teoriaan
+            </button>
+          </div>
+        )}
       </CourseBook>
     </div>
   );

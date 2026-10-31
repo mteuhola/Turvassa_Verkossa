@@ -47,13 +47,12 @@ export default function CourseSelection({
         <header className={styles.hero}>
           <h1>Tervetuloa oppimaan!</h1>
           <p>
-            Tämän oppimisympäristön avulla voit harjoitella turvallista verkon
-            käyttöä. Et tarvitse ennakkotietoja, ja voit edetä omaan tahtiisi.
+            Täällä voit harjoitella turvallista verkon
+            käyttöä. Voit edetä omaan tahtiisi.
           </p>
         </header>
         <section aria-labelledby="courses-title">
           <div className={styles.sectionHeading}>
-            <h2 id="courses-title">Valitse kurssi, josta haluat aloittaa.</h2>
           </div>
           <ul className={styles.courses}>
             {progressCourses.map((course) => {

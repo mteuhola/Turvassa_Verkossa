@@ -42,7 +42,7 @@ const courseCatalog: CourseCatalogEntry[] = [
         isComplete: false,
         title: "Kuinka kaikki salasanat voi muistaa?",
         description:
-          "Opi millaisia keinoja salasanojen tallettamiseen on. Luo oma harjoitussalasanasi ja harjoittele sen tallettamista.",
+          "Opi keinoja salasanojen muistamiseen. ",
         path: "/course/passwords/password-strength",
       },
     ],

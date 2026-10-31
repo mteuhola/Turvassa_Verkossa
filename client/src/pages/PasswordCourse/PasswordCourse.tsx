@@ -184,29 +184,22 @@ export default function PasswordCourse({
                 Tutustu esimerkkeihin
               </h2>
               <p>
-                Tässä näet erilaisia esimerkkisalasanoja ja niiden arvioidun
-                vahvuuden. Arvio perustuu johdantokappaleessa esiteltyihin
+                Alla on listattuna erilaisia esimerkkisalasanoja ja niiden arvioitu
+                vahvuus. Arvio perustuu johdantokappaleessa esiteltyihin
                 salasanan ominaisuuksiin. Klikkaamalla salasanaa näet sen
                 vahvuusarvion sekä kysymyksiä salasanan vahvuuteen liittyen.
                 <br />
                 <br />
-                Valitse kaikki oikeat vaihtoehdot. Oikeita voi olla yksi, useita
-                tai ei yhtään. Pääset eteenpäin, kun vastaat kaikkiin viiteen
-                salasanaan liittyviin kysymyksiin oikein ja painat alhaalta
+                Valitse kaikki oikeat vaihtoehdot. Oikeita vastauksia voi olla yksi tai useita.
+                Pääset eteenpäin, vastattuasi kysymyksiin oikein ja painamalla alhaalta
                 löytyvää <strong>Valmis</strong>-painiketta. Kysymyksiä voi
                 yrittää uudelleen.
-                <br />
-                <br />
-                <strong>Huom</strong>: Nämä esimerkit ovat julkisia, eivätkä
-                sovi oikeiksi salasanoiksi. Älä käytä niitä omilla
-                käyttäjilläsi.
               </p>
               <div className={styles.examples}>
                 {examples.map((item, index) => (
                   <details key={item.name}>
                     <summary>
                       {item.name}
-                      <span>{item.value}</span>
                       {isExampleCorrect(
                         checkedAnswers[index],
                         item.correctAnswers,
@@ -321,7 +314,7 @@ export default function PasswordCourse({
               </h2>
               <p id="privacy" className={styles.privacy}>
                 Tässä näkymässä voit kokeilla erilaisten salasanojen vahvuutta
-                sekä nähdä ehdotuksia niiden vahvistamiseen. Voit kokeilla
+                sekä nähdä ehdotuksia salasanojen vahvistamiseen. Voit kokeilla
                 esimerkiksi:
                 <li>Lyhyitä sanoja, kuten "kissa"</li>
                 <li>Isoja ja pieniä kirjaimia</li>
@@ -332,8 +325,8 @@ export default function PasswordCourse({
                   merkeillä, kuten "kissa-kahvi_radio!sohva"
                 </li>
                 <br />
-                Kun olet kokeillut erilaisia salasanoja, keksi salasana vain
-                tätä harjoitusta varten. Sitä ei tallenneta mihinkään.
+                Kun olet kokeillut erilaisia salasanoja, keksi salasana
+                tätä kurssia varten. Sitä ei tallenneta mihinkään.
                 <strong>
                   Huom: Älä kuitenkaan valitse tähän tehtävään olemassaolevaa
                   salasanaasi!
@@ -459,12 +452,6 @@ export default function PasswordCourse({
                 Tarvitset salasanaa myöhemmin. Kirjoita se muistiin tai kokeile
                 harjoituksen salasanojen hallintaohjelmaa.
               </p>
-              <p>
-                <strong>
-                  Käytä vain tätä harjoitusta varten keksittyä salasanaa. Älä
-                  käytä sitä missään oikeassa palvelussa.
-                </strong>
-              </p>
               <fieldset className={styles.question} disabled={isSaving}>
                 <legend>Miten haluat säilyttää salasanan?</legend>
                 <label className={styles.choice}>
@@ -541,9 +528,6 @@ export default function PasswordCourse({
                   {storageMethod === "written" && (
                     <>
                       <p>
-                        Kirjoita salasana muistiin täsmälleen tässä muodossa.
-                        Selaimeen tallennetaan vain tarkistustieto, ei luettavaa
-                        salasanaa.
                       </p>
                       <label className={styles.choice}>
                         <input
@@ -638,14 +622,6 @@ export default function PasswordCourse({
                   className={styles.takeaway}
                   aria-labelledby="remember-title"
                 >
-                  <h2 id="remember-title">Muista oikeilla tileilläsi</h2>
-                  <p>
-                    Käytä pitkää ja yksilöllistä salasanaa jokaisessa
-                    palvelussa. Salasanojen hallintaohjelma auttaa! Ota myös
-                    monivaiheinen tunnistautuminen käyttöön: silloin
-                    kirjautuminen vahvistetaan salasanan lisäksi esimerkiksi
-                    puhelimella.
-                  </p>
                 </section>
               )}
             </section>

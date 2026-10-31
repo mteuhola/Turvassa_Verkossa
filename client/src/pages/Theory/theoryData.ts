@@ -19,15 +19,15 @@ export const courseIntroductions: Record<string, TheoryContent> = {
       {
         heading: "Tervetuloa tutustumaan salasanoihin!",
         paragraphs: [
-          "Käyttäessäsi internetiä, salasanoja tarvitaan monissa paikoissa, kuten sähköpostissa, verkkopankissa, ja sosiaalisen median sekä verkkokauppojen käyttäjätunnuksissa. Salasanojen avulla pyritään varmistamaan, että vain sinä pääset käsiksi omiin tietoihisi. Salasanat ovat siis tärkeä osa yksityisyyttäsi ja turvallisuuttasi verkossa.",
+          "Käyttäessäsi internetiä, salasanoja tarvitaan monissa paikoissa, kuten sähköpostissa, verkkopankissa, ja sosiaalisen median sekä verkkokauppojen käyttäjätunnuksissa. Salasanojen avulla pyritään varmistamaan, että vain sinä pääset käsiksi omiin tietoihisi.",
           "Salasanan valinta saattaa olla työlästä, ja on luonnollista päätyä sellaiseen, joka on itselle tuttu ja helppo muistaa. Lyhyet, tutut ja helposti pääteltävät salasanat voivat kuitenkin olla myös muiden arvattavissa. Onneksi salasanojen turvallisuutta voi parantaa melko pienillä muutoksilla.",
         ],
       },
       {
         heading: "Miksi sähköpostin salasana on erityisen tärkeä?",
         paragraphs: [
-          "Sähköposti on yksi tärkeimmistä palveluista digitaalisessa arjessa. Sähköpostiin saapuu esimerkiksi viestejä läheisiltä tai viranomaisilta, verkkokauppojen tilausvahvistuksia ja eri palveluiden ilmoituksia. Sähköpostia käytetään myös muiden palveluiden salasanojen palauttamiseen: jos unohdat esimerkiksi verkkokaupan salasanan, voit yleensä tilata sähköpostiisi linkin, jonka avulla voit vaihtaa salasanasi.",
-          "Sähköpostin kautta pystyy myös kirjautumaan suoraan moniin muihin palveluihin luomatta erillistä tunnusta. Tällainen kirjautuminen eroaa uuden käyttäjän luomisesta siten, että kirjautuminen tapahtuu toisen palvelun, eli sähköpostin, tunnuksilla. Tämä voi tehdä kirjautumisesta helpompaa, mutta jos sähköpostitilisi salasana on heikko, voi se vaarantaa myös muiden palveluiden turvallisuuden.",
+          "Sähköposti on yksi tärkeimmistä digitaalisista työkaluista. Sähköpostiin voi saapua viestejä esimerkiksi läheisiltä, viranomaisilta tai verkkokauppojen tilauksista. Sähköpostiosoitetta käytetään monien muiden palveluiden tunnuksena. Jos unohdat jonkin palvelun salasanan, voit saada sähköpostiisi ohjeet salasanan vaihtamiseen.",
+          "Sähköpostin avulla pystyy myös kirjautumaan suoraan moniin muihin palveluihin luomatta erillistä tunnusta. Tällainen kirjautuminen eroaa uuden käyttäjän luomisesta siten, että kirjautuminen tapahtuu toisen palvelun, eli sähköpostin, tunnuksilla. Tämä voi tehdä kirjautumisesta helpompaa, mutta jos sähköpostitilisi salasana on heikko, voi se vaarantaa myös muiden palveluiden turvallisuuden.",
           "Jos joku pääsee sähköpostitiliisi käsiksi, hänellä on mahdollisuus vaihtaa myös muiden käyttämiesi palveluiden salasanoja. Siksi sähköpostin salasanan tulee olla vahva ja sellainen, jota ei käytetä missään muussa palvelussa.",
         ],
       },
@@ -116,7 +116,7 @@ export const passwordTheory: TheoryContent = {
         "Hallintaohjelmat voivat myös luoda puolestasi pitkiä ja vaikeasti arvattavia salasanoja sekä täyttää niitä automaattisesti kirjautumisen yhteydessä. Useimpia hallintaohjelmia voi käyttää sekä tietokoneella että puhelimella.",
         "Hallintaohjelmaan pääsee yleensä yhdellä pääsalasanalla, jonka avulla muut tallennetut salasanat pysyvät suojattuina. Siksi pääsalasanaksi suositellaan erityisen vahvaa salasanaa, jota ei käytetä missään muualla.",
         "On suositeltavaa käyttää vain tunnettuja salasanojen hallintaohjelmia, jotka ovat todistetusti luotettavia ja turvallisia. Tunnetuimmat sovellukset löytyvät verkosta helposti, ja niistä on saatavilla arvosteluja ja ohjeita.",
-        "Myös verkkoselaimissa, kuten Google Chromessa ja Microsoft Edgessä, on usein omat salasanojen hallintaohjelmansa. Ne voivat olla käteviä, sillä ne tallentavat salasanat yhdellä klikkauksella. Selainten salasananhallinta ei kuitenkaan ole yhtä turvallisia kuin erilliset hallintaohjelmat. Selaimeen tallennetut salasanat voivat olla alttiita haittaohjelmille ja selaimen haavoittuvuuksille.",
+        "Myös verkkoselaimissa, kuten Google Chromessa ja Microsoft Edgessä, on usein omat salasanojen hallintaohjelmansa. Ne voivat olla käteviä, sillä ne tallentavat salasanat yhdellä klikkauksella. Selainten salasananhallinta on kuitenkin riippuvaista verkkoselaimesta.",
       ],
     },
     {

@@ -1,6 +1,6 @@
 export const passwordExamples = [
   {
-    name: "Yleinen salasana",
+    name: "salasana",
     value: "salasana",
     question: "Miksi tämä salasana on heikko?",
     choices: [
@@ -13,7 +13,7 @@ export const passwordExamples = [
       "Tuttu sana on helppo arvata. Myös suomalaiset sanat voivat löytyä hyökkääjän sanalistalta.",
   },
   {
-    name: "Pieni muutos 1",
+    name: "sal4sana1pekka",
     value: "sal4sana1pekka",
     question: "Mitkä väitteet tästä salasanasta pitävät paikkansa?",
     choices: [
@@ -26,7 +26,7 @@ export const passwordExamples = [
       "Oman nimen lisääminen ja yksittäisten kirjainten korvaaminen numeroilla ovat tavallisia muutoksia. Ne eivät yksin tee salasanasta vahvaa, ja voivat paljastaa tietoja käyttäjästä.",
   },
   {
-    name: "Pieni muutos 2",
+    name: "Salasana123!",
     value: "Salasana123!",
     question: "Mitkä väitteet tästä salasanasta EIVÄT pidä paikkansa?",
     choices: [
@@ -39,7 +39,7 @@ export const passwordExamples = [
       "Iso alkukirjain, numerosarja ja huutomerkki ovat tavallisia muutoksia. Merkkien vaihtelu vahvistaa salasanaa, mutta se ei yksin tee salasanasta vahvaa.",
   },
   {
-    name: "Useita sanoja",
+    name: "majakka sieni viulu pilvi",
     value: "majakka sieni viulu pilvi",
     question: "Mikä tekee tästä esimerkistä VAIKEAMMAN arvata?",
     choices: [
@@ -52,7 +52,7 @@ export const passwordExamples = [
       "Pituus ja toisistaan riippumattomat sanat vaikeuttavat arvaamista.",
   },
   {
-    name: "Monimutkainen salasana",
+    name: "k65I(g50*tw39x1&.}8QplsU4R0546A1",
     value: "k65I(g50*tw39x1&.}8QplsU4R0546A1",
     question: "Mikä tekee tästä esimerkistä vaikean arvata?",
     choices: [

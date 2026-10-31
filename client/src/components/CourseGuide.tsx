@@ -3,7 +3,7 @@ import styles from "./CourseGuide.module.css";
 
 const courseOverviews: Record<string, string> = {
   passwords:
-    "Tutustu salasanojen turvallisuuteen, kokeile salasanan vahvuutta ja pohdi, miten opittua voi käyttää arjessa. Lopuksi kertaa asiat tietovisassa.",
+    "Tutustu salasanojen turvallisuuteen, kokeile salasanan vahvuutta ja opettele, kuinka salasanat pysyvät tallessa.",
   phishing:
     "Opi tunnistamaan huijausviestejä sekä harjoittele, miten toimia epäilyttävän viestin kanssa. Lopuksi kertaa oppimasi tietovisassa.",
   "financial-fraud":

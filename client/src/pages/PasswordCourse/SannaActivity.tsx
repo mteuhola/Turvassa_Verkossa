@@ -186,8 +186,8 @@ export default function SannaActivity({
                 ))}
               </ul>
               <p>
-                Vaihdat salasanat yksi kerrallaan ja tallennat ne Sannan
-                salasanojen hallintaohjelmaan. Lopuksi autat häntä kirjautumaan
+                Vaihda Sannan salasanat yksi kerrallaan ja säilytä ne
+                salasanojen hallintaohjelmaan. Auta lopuksi Sannaa kirjautumaan
                 yhteen palveluista.
               </p>
               <p className={styles.small}>

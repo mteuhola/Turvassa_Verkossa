@@ -110,9 +110,9 @@ export const kaarloEmails = [
     time: "Toissapäivänä klo 23.22",
     attachment: null,
     context:
-      "Kaarlo: Sovimme alkuviikosta puhelimessa lapsenlapseni Annan kanssa, että hän tulee sunnuntaina kahville kello 14. Hän lupasi vielä lähettää viestin siitä, mitä tarjoiluja hän toisi. Osoite on sama, jota olemme käyttäneet aiemminkin.",
+      "Kaarlo: Sovimme alkuviikosta puhelimessa tyttäreni Annan kanssa, että hän tulee sunnuntaina kahville kello 14. Hän lupasi vielä lähettää viestin siitä, mitä tarjoiluja hän toisi. Osoite on sama, jota olemme käyttäneet aiemminkin.",
     paragraphs: [
-      "Hei pappa!",
+      "Hei, isä!",
       "Tulen sunnuntaina kahville kello 14, kuten puhelimessa sovimme.. Tuon mukanani munkkeja, joten sinun ei tarvitse leipoa.",
       "Otan myös viime kesän islannin retkikuvat mukaan, niin voimme katsella niitä yhdessä.",
       "Nähdäään sunnuntaina",

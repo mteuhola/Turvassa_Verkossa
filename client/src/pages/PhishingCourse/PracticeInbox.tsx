@@ -32,6 +32,7 @@ export function PracticeMessageList({
   messages,
   selectedId,
   onSelect,
+  selectedContent,
 }: {
   messages: readonly {
     id: string;
@@ -41,6 +42,7 @@ export function PracticeMessageList({
   }[];
   selectedId?: string;
   onSelect: (id: string) => void;
+  selectedContent?: ReactNode;
 }) {
   return (
     <ul className={styles.inboxList}>
@@ -49,12 +51,16 @@ export function PracticeMessageList({
           <button
             type="button"
             aria-pressed={selectedId === item.id}
+            aria-expanded={selectedContent ? selectedId === item.id : undefined}
             onClick={() => onSelect(item.id)}
           >
             <span>{item.sender}</span>
             <strong>{item.subject}</strong>
             <span>{item.time}</span>
           </button>
+          {selectedId === item.id && selectedContent && (
+            <div className={styles.inboxMessageContent}>{selectedContent}</div>
+          )}
         </li>
       ))}
     </ul>

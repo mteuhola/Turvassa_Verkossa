@@ -1,6 +1,5 @@
 import CourseBook from "../../components/CourseBook";
 import Navbar from "../../components/Navbar";
-import CompletionNotice from "../../components/CompletionNotice";
 import CompletionBadge from "../../components/CompletionBadge";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import { useEffect, useRef, useState } from "react";
@@ -21,22 +20,15 @@ export default function PhishingCourse({
     part: (typeof emailParts)[number];
     anchor: HTMLElement;
   } | null>(null);
-  const nextTopic = useRef<HTMLAnchorElement>(null);
   const [feedback, setFeedback] = useState(
     "Valitse viestistä kohta, jota pidät epäilyttävänä.",
   );
   const firstPart = useRef<HTMLButtonElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
+  const complete = found.length === clues.length;
   useEffect(() => {
     window.scrollTo(0, 0);
     heading.current?.focus({ preventScroll: true });
-  }, []);
-  const complete = found.length === clues.length;
-  useEffect(() => {
-    if (complete) {
-      nextTopic.current?.focus();
-      nextTopic.current?.scrollIntoView({ block: "center" });
-    }
   }, [complete]);
 
   function inspect(part: (typeof emailParts)[number], anchor: HTMLElement) {
@@ -110,6 +102,56 @@ export default function PhishingCourse({
       </button>
     );
   }
+  if (complete) {
+    return (
+      <div className={styles.root} data-course="phishing">
+        <Navbar
+          {...textSizeProps}
+          backTo="/course/phishing"
+          backLabel="Takaisin aiheisiin"
+        />
+        <CourseBook className={`${styles.main} ${styles.introductionComplete}`}>
+          <header>
+            <h1>Johdanto</h1>
+          </header>
+          <section
+            className={styles.completionContent}
+            aria-labelledby="complete-title"
+          >
+            <h2 id="complete-title" ref={heading} tabIndex={-1}>
+              Johdanto suoritettu
+            </h2>
+            <CompletionBadge label="Aihe suoritettu!" />
+            <div className={styles.actions}>
+              <Link
+                className={`${styles.action} ${styles.primaryAction}`}
+                to="/course/phishing/safe-responses"
+              >
+                Seuraava aihe
+              </Link>
+              {onReturnTheory ? (
+                <button
+                  type="button"
+                  className={`${styles.action} ${styles.secondaryAction}`}
+                  onClick={onReturnTheory}
+                >
+                  Kertaa johdanto
+                </button>
+              ) : (
+                <Link
+                  className={`${styles.action} ${styles.secondaryAction}`}
+                  to="/course/phishing/introduction"
+                >
+                  Kertaa johdanto
+                </Link>
+              )}
+            </div>
+          </section>
+        </CourseBook>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.root} data-course="phishing">
       <Navbar
@@ -203,19 +245,6 @@ export default function PhishingCourse({
               </div>
             </section>
             <aside className={styles.panel} aria-labelledby="progress-title">
-              {complete && (
-                <CompletionNotice labelledBy="complete-title">
-                  <h3 id="complete-title">Kaikki merkit löytyivät!</h3>
-                  <p>Johdanto suoritettu.</p>
-                  <Link
-                    ref={nextTopic}
-                    className={`${styles.action} ${styles.primaryAction}`}
-                    to="/course/phishing/safe-responses"
-                  >
-                    Jatka: Kuinka toimia epäilyttävän viestin kanssa?
-                  </Link>
-                </CompletionNotice>
-              )}
               <h2 id="progress-title">Sinun havaintosi</h2>
               <p className={styles.count}>
                 Löydetty{" "}

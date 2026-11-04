@@ -20,7 +20,7 @@ export const safeResponseScenarios = [
     id: "library",
     bookId: "english",
     title: "Onko kirjastomaksu aiheellinen?",
-    goal: "Sinulla on kirjoja lainassa. Kirjaston nimellä on tullut maksumuistutus. Selvitä, pitääkö sinun maksaa se.",
+    goal: "Tässä esimerkissä sinulla on kirjoja lainassa, ja kirjaston nimellä on tullut maksumuistutus. Selvitä, onko kirjaston nimissä tullut viesti aiheellinen.",
     context:
       "Olet käyttänyt selaimen Oma kirjasto -kirjanmerkkiä aiemminkin lainojesi tarkistamiseen.",
     sender: "Oma kirjasto",

@@ -89,7 +89,7 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
         id: "strong",
         type: "single",
         prompt:
-          "Totta vai tarua: Selainten salasanojen hallintaohjelmien käyttö on turvallinen tapa tallentaa salasanoja.",
+          "Totta vai tarua: Verkkoselainten salasanojen hallintaohjelmat ovat turvallisempia kuin erilliset salasanojen hallintaohjelmat.",
         options: [
           {
             id: "true",
@@ -102,7 +102,7 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
         ],
         correctOptionIds: ["false"],
         explanation:
-          "Selainten salasanojen hallintaohjelmien käyttö on kätevää, mutta se ei ole yhtä turvallista kuin käyttää erillistä salasanojen hallintaohjelmaa. Selaimen salasanat voivat olla alttiita haittaohjelmille ja selaimen haavoittuvuuksille.",
+          "Selainten salasanojen hallintaohjelmien käyttö on kätevää, mutta se ei ole yhtä turvallista kuin erillisten salasanojen hallintaohjelmien käyttäminen: selaimen salasanoihin pääsee helpommin käsiksi, ja selaimeen tallennetut salasanat voivat olla alttiita haittaohjelmille ja selaimen haavoittuvuuksille.",
       },
       {
         id: "recall",

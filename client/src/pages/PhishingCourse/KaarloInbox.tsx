@@ -100,135 +100,146 @@ export default function KaarloInbox({
           <PracticeMessageList
             messages={visible}
             selectedId={email?.id}
+            selectedContent={
+              email ? (
+                <>
+                  <div
+                    className={`${styles.kaarloConcern} ${styles.kaarloEmailContext}`}
+                    role="region"
+                    aria-labelledby="kaarlo-context-heading"
+                    aria-describedby="kaarlo-context-text"
+                  >
+                    <div className={styles.kaarloPortrait}>
+                      <CharacterPortrait courseId="phishing" />
+                    </div>
+                    <div className={styles.kaarloContextText}>
+                      <h2 id="kaarlo-context-heading">
+                        Kaarlo kertoo viestistä
+                      </h2>
+                      <p id="kaarlo-context-text">{email.context}</p>
+                    </div>
+                  </div>
+                  <div
+                    className={styles.mailCommandBar}
+                    aria-label="Viestin toiminnot"
+                  >
+                    {actions[email.id] === "report" ? (
+                      <button
+                        className={styles.action}
+                        type="button"
+                        onClick={() => act("restore")}
+                      >
+                        Ei roskapostia, palauta saapuneisiin
+                      </button>
+                    ) : (
+                      <button
+                        className={`${styles.action} ${styles.mailIconAction}`}
+                        type="button"
+                        aria-label="Ilmoita tietojenkalasteluksi ja siirrä roskapostiin"
+                        title="Ilmoita tietojenkalasteluksi ja siirrä roskapostiin"
+                        onClick={() => act("report")}
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          width="24"
+                          height="24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M12 3 2 21h20L12 3Z" />
+                          <path d="M12 9v5m0 3v.1" />
+                        </svg>
+                        <svg
+                          viewBox="0 0 24 24"
+                          width="24"
+                          height="24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7" />
+                        </svg>
+                      </button>
+                    )}
+                    <button
+                      className={styles.action}
+                      type="button"
+                      onClick={() => {
+                        setSelected(null);
+                        onSelect(null);
+                        requestAnimationFrame(() =>
+                          listHeading.current?.focus(),
+                        );
+                      }}
+                    >
+                      Sulje viesti
+                    </button>
+                  </div>
+                  <article
+                    className={styles.email}
+                    aria-labelledby="kaarlo-subject"
+                  >
+                    <div className={styles.mailToolbar}>
+                      <span>
+                        {actions[email.id] === "report"
+                          ? "Roskaposti"
+                          : "Saapuneet"}
+                      </span>
+                      <span>Kaarlon sähköposti</span>
+                    </div>
+                    <header className={styles.emailHeader}>
+                      <h2 id="kaarlo-subject">{email.subject}</h2>
+                      <dl className={styles.emailMetadata}>
+                        <dt>Lähettäjä</dt>
+                        <dd>
+                          {email.sender}
+                          <br />
+                          {email.address}
+                        </dd>
+                        <dt>Vastaanottaja</dt>
+                        <dd>kaarlo@kuustonen.fi</dd>
+                        <dt>Saapunut</dt>
+                        <dd>{email.time}</dd>
+                        <dt>Liitteet</dt>
+                        <dd>{email.attachment ?? "Ei liitteitä"}</dd>
+                      </dl>
+                    </header>
+                    <div className={styles.emailBody}>
+                      {email.paragraphs.map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
+                      {email.link && (
+                        <>
+                          <a
+                            href={email.link.destination}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {email.link.text}
+                          </a>
+                        </>
+                      )}
+                    </div>
+                  </article>
+                </>
+              ) : null
+            }
             onSelect={(id) => {
               const index = kaarloEmails.findIndex((item) => item.id === id);
-              setSelected(index);
-              onSelect(index);
+              const nextSelected = selected === index ? null : index;
+              setSelected(nextSelected);
+              onSelect(nextSelected);
             }}
           />
         )}
-        {email ? (
-          <>
-            <div
-              className={`${styles.kaarloConcern} ${styles.kaarloEmailContext}`}
-              role="region"
-              aria-labelledby="kaarlo-context-heading"
-              aria-describedby="kaarlo-context-text"
-            >
-              <div className={styles.kaarloPortrait}>
-                <CharacterPortrait courseId="phishing" />
-              </div>
-              <div className={styles.kaarloContextText}>
-                <h2 id="kaarlo-context-heading">Kaarlo kertoo viestistä</h2>
-                <p id="kaarlo-context-text">{email.context}</p>
-              </div>
-            </div>
-            <div
-              className={styles.mailCommandBar}
-              aria-label="Viestin toiminnot"
-            >
-              {actions[email.id] === "report" ? (
-                <button
-                  className={styles.action}
-                  type="button"
-                  onClick={() => act("restore")}
-                >
-                  Ei roskapostia, palauta saapuneisiin
-                </button>
-              ) : (
-                <button
-                  className={`${styles.action} ${styles.mailIconAction}`}
-                  type="button"
-                  aria-label="Ilmoita tietojenkalasteluksi ja siirrä roskapostiin"
-                  title="Ilmoita tietojenkalasteluksi ja siirrä roskapostiin"
-                  onClick={() => act("report")}
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 3 2 21h20L12 3Z" />
-                    <path d="M12 9v5m0 3v.1" />
-                  </svg>
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7" />
-                  </svg>
-                </button>
-              )}
-              <button
-                className={styles.action}
-                type="button"
-                onClick={() => {
-                  setSelected(null);
-                  onSelect(null);
-                  requestAnimationFrame(() => listHeading.current?.focus());
-                }}
-              >
-                Sulje viesti
-              </button>
-            </div>
-            <article className={styles.email} aria-labelledby="kaarlo-subject">
-              <div className={styles.mailToolbar}>
-                <span>
-                  {actions[email.id] === "report" ? "Roskaposti" : "Saapuneet"}
-                </span>
-                <span>Kaarlon sähköposti</span>
-              </div>
-              <header className={styles.emailHeader}>
-                <h2 id="kaarlo-subject">{email.subject}</h2>
-                <dl className={styles.emailMetadata}>
-                  <dt>Lähettäjä</dt>
-                  <dd>
-                    {email.sender}
-                    <br />
-                    {email.address}
-                  </dd>
-                  <dt>Vastaanottaja</dt>
-                  <dd>kaarlo@kuustonen.fi</dd>
-                  <dt>Saapunut</dt>
-                  <dd>{email.time}</dd>
-                  <dt>Liitteet</dt>
-                  <dd>{email.attachment ?? "Ei liitteitä"}</dd>
-                </dl>
-              </header>
-              <div className={styles.emailBody}>
-                {email.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-                {email.link && (
-                  <>
-                    <a
-                      href={email.link.destination}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {email.link.text}
-                    </a>
-                  </>
-                )}
-              </div>
-            </article>
-          </>
-        ) : (
-          <p>Valitse viesti luettelosta nähdäksesi sen sisällön.</p>
-        )}
+        {!email && <p>Valitse viesti luettelosta nähdäksesi sen sisällön.</p>}
       </PracticeInbox>
       <p id="kaarlo-completion-help" role="status">
         {sorted

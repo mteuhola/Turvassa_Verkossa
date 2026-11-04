@@ -116,7 +116,7 @@ export const passwordTheory: TheoryContent = {
         "Hallintaohjelmat voivat myös luoda puolestasi pitkiä ja vaikeasti arvattavia salasanoja sekä täyttää niitä automaattisesti kirjautumisen yhteydessä. Useimpia hallintaohjelmia voi käyttää sekä tietokoneella että puhelimella.",
         "Hallintaohjelmaan pääsee yleensä yhdellä pääsalasanalla, jonka avulla muut tallennetut salasanat pysyvät suojattuina. Siksi pääsalasanaksi suositellaan erityisen vahvaa salasanaa, jota ei käytetä missään muualla.",
         "On suositeltavaa käyttää vain tunnettuja salasanojen hallintaohjelmia, jotka ovat todistetusti luotettavia ja turvallisia. Tunnetuimmat sovellukset löytyvät verkosta helposti, ja niistä on saatavilla arvosteluja ja ohjeita.",
-        "Myös verkkoselaimissa, kuten Google Chromessa ja Microsoft Edgessä, on usein omat salasanojen hallintaohjelmansa. Ne voivat olla käteviä, sillä ne tallentavat salasanat yhdellä klikkauksella. Selainten salasananhallinta on kuitenkin riippuvaista verkkoselaimesta.",
+        "Myös verkkoselaimissa, kuten Google Chromessa ja Microsoft Edgessä, on usein omat salasanojen hallintaohjelmansa. Ne voivat olla käteviä, sillä ne tallentavat salasanat yhdellä klikkauksella. Selainten salasananhallinta on kuitenkin riippuvaista verkkoselaimesta: jos vaihdat verkkoselainta, toisessa selaimessa tallennetut salasanat eivät ole käytössä. Verkkoselainten salasananhallinta ei myöskään ole yhtä turvallista kuin erilliset hallintaohjelmat, sillä selaimen salasanoihin pääsee helpommin käsiksi.",
       ],
     },
     {
@@ -135,7 +135,7 @@ export const phishingTheory: TheoryContent = {
     {
       heading: "Epäilyttävän viestin vastaanottaminen",
       paragraphs: [
-        "Jos saat viestin, joka herättää epäilystä, älä kiirehdi toimimaan viestin pyyntöjen mukaisesti. Vältä viestissä olevien linkkien ja liitetiedostojen avaamista äläkä vastaa viestiin.",
+        "Jos saat viestin, joka herättää epäilystä, älä kiirehdi toimimaan viestin pyyntöjen mukaisesti. Vältä viestissä olevien linkkien ja liitetiedostojen avaamista äläkä vastaa viestiin. Monessa sähköpostissa on mahdollisuus merkitä viesti roskapostiksi ja/tai tietojenkalasteluksi, jolloin viesti siirtyy roskapostikansioon, ja sähköposti voi siirtää vastaavat viestit jatkossa roskapostiin itsestään.",
         "Linkkien avaamisen sijaan voit hyödyntää verkkoselaimesi kirjanmerkkejä tai älypuhelimen sovelluksia: jos olet tallentanut palvelun oikean verkko-osoitteen kirjanmerkiksi selaimeen tai asentanut palvelun puhelinsovelluksen, voit siirtyä palveluun tätä kautta ja varmistaa viestin aiheellisuuden.",
         "Jos saat läheiseltäsi poikkeuksellisen viestin oudosta puhelinnumerosta, voit varmistaa viestin aitouden ottamalla häneen yhteyttä esimerkiksi ennestään tuttuun puhelinnumeroon. Jos et tavoita läheistäsi, voit kysyä asiasta myös muilta yhteisiltä tutuilta. Älä noudata viestin ohjeita ennen kuin olet varmistanut, että viesti todella on läheiseltäsi.",
       ],

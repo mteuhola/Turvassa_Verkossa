@@ -70,6 +70,30 @@
 .main.responsePractice {
   max-width: 90rem;
 }
+.main.introductionComplete {
+  max-width: 52rem;
+}
+.introductionComplete header {
+  margin-bottom: 32px;
+}
+.completionContent {
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+}
+.completionContent .actions {
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+.root .secondaryAction {
+  border-color: transparent;
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.root .secondaryAction:hover {
+  background: var(--surface);
+}
 .recoveryQuestion {
   border: 0;
   padding: 0;
@@ -160,7 +184,7 @@
   margin: 0 0 24px;
   border-top: 1px solid var(--border);
 }
-.inboxList button {
+.inboxList > li > button {
   display: grid;
   gap: 4px;
   width: 100%;
@@ -174,10 +198,17 @@
   overflow-wrap: anywhere;
   cursor: pointer;
 }
-.inboxList button:hover,
-.inboxList button[aria-pressed="true"] {
+.inboxList > li > button:hover,
+.inboxList > li > button[aria-pressed="true"] {
   background: #e6f1fb;
   color: #0c447c;
+}
+.inboxMessageContent {
+  padding-block: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.inboxMessageContent .email {
+  border: 4px solid #0c447c;
 }
 .mailCommandBar {
   display: flex;

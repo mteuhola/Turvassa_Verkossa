@@ -25,20 +25,20 @@ export const kaarloEmails = [
     explanation:
       "Tämä viesti on epäilyttävä. Kaarlo ei tunne palvelua eikä osallistunut arvontaan. Odottamaton palkinto, kiire, maksupyyntö ja runsaat kirjoitusvirheet vahvistavat epäilyä.",
     response:
-      "Kaarlo: En siis ole menettämässä oikeaa palkintoa. Jätän pyynnön toteuttamatta ja ilmoitan viestin huijaukseksi.",
+      "Kaarlo: En siis ole menettämässä oikeaa palkintoa, vaikken sellaista odottanutkaan. Ilmoitan viestin huijaukseksi.",
   },
   {
     id: "delivery",
     sender: "Lukutoukka | Tilausilmoitukset",
     address: "tilaukset@lukutoukka.fi",
-    subject: "Tilauksesi LP-1042 on noudettavissa",
+    subject: "Tilauksesi LT-1042 on noudettavissa",
     time: "Tänään klo 08.12",
     attachment: null,
     context:
-      'Kaarlo: Tilasin lukutoukka.fi-kaupasta kirjan "Linnut ja Metsäretket". Tilausvahvistuksessani on numero LP-1042 ja valitsin noutopaikaksi keskustan pakettipisteen.',
+      'Kaarlo: Tilasin lukutoukka.fi-kaupasta kirjan "Linnut ja Metsäretket". Tilausvahvistuksessani on numero LT-1042 ja valitsin noutopaikaksi keskustan pakettipisteen.',
     paragraphs: [
       "Hei Kaarlo,",
-      "Tilauksesi LP-1042, Linnut ja Metsäretket (1 kpl), on saapunut valitsemaasi noutopaikkaan: Keskustan pakettipiste, Kauppakatu 12.",
+      "Tilauksesi LT-1042, Linnut ja Metsäretket (1 kpl), on saapunut valitsemaasi noutopaikkaan: Keskustan pakettipiste, Kauppakatu 12.",
       "Voit noutaa paketin noutokoodilla 482619 viikon kuluessa. Älä vastaa tähän viestiin, sillä se on automaattisesti luotu.",
       "Kiitos tilauksestasi! Antoisia lukuhetkiä,",
       "Lukutoukka Oy",
@@ -105,12 +105,12 @@ export const kaarloEmails = [
   {
     id: "relative",
     sender: "Anna Kuustonen",
-    address: "anna@kuustonen.com",
+    address: "anna@kuustonen.fi",
     subject: "Sunnuntain kahvihetki",
     time: "Toissapäivänä klo 23.22",
     attachment: null,
     context:
-      "Kaarlo: Sovimme alkuviikosta puhelimessa tyttäreni Annan kanssa, että hän tulee sunnuntaina kahville kello 14. Hän lupasi vielä lähettää viestin siitä, mitä tarjoiluja hän toisi. Osoite on sama, jota olemme käyttäneet aiemminkin.",
+      "Kaarlo: Sovimme alkuviikosta puhelimessa tyttäreni Annan kanssa, että hän tulee sunnuntaina kahville kello 14. Hän lupasi vielä lähettää viestin siitä, mitä tarjoiluja hän toisi. Annan sähköpostiosoite on sama, josta hän on lähettänyt viestejä aiemminkin.",
     paragraphs: [
       "Hei, isä!",
       "Tulen sunnuntaina kahville kello 14, kuten puhelimessa sovimme.. Tuon mukanani munkkeja, joten sinun ei tarvitse leipoa.",
@@ -121,7 +121,7 @@ export const kaarloEmails = [
     link: null,
     suspicious: false,
     explanation:
-      "Viesti on tavallinen läheisen yhteydenotto. Se vastaa Kaarlon ja Annan puhelimessa sopimaa vierailua ja luvattua viestiä tarjoiluista. Viesti ei painosta toimimaan eikä pyydä rahaa tai salaisia tietoja. Pienet kirjoitusvirheet ovat inhimillisiä, eivätkä ne tarkoita viestin olevan huijausta. Jos jokin herättäisi epäilyksen, Kaarlo voisi tarkistaa asian soittamalla Annan ennestään tuttuun numeroon.",
+      "Viesti on tavallinen läheisen yhteydenotto. Se vastaa Kaarlon ja Annan puhelimessa sopimaa vierailua ja luvattua viestiä tarjoiluista. Viesti ei painosta toimimaan eikä pyydä rahaa tai salaisia tietoja. Pienet kirjoitusvirheet ovat inhimillisiä, eivätkä ne heti tarkoita viestin olevan huijausta. Jos jokin herättäisi epäilyksen, Kaarlo voisi tarkistaa asian soittamalla Annan ennestään tuttuun numeroon.",
     response:
       "Kaarlo: Tämä vastaa sitä, mitä sovimme Annan kanssa. Odottelenkin sunnuntain kahvihetkeä hyvillä mielin! Epäselvät asiat voisin aina tarkistaa tutusta numerosta.",
   },
@@ -144,9 +144,9 @@ export const kaarloEmails = [
     link: null,
     suspicious: true,
     explanation:
-      "Tilin sulkemisella uhkaaminen painostaa toimimaan kiireessä. Lähettäjän verkkotunnus eroaa palvelun osoitteesta, ja Kaarlokin on sitä mieltä, ettei osoite ole tuttu. Viesti lisäksi sisältää liitteen, jota Kaarlo ei ole odottanut.",
+      "Tilin sulkemisella uhkaaminen painostaa toimimaan kiireessä. Lähettäjän verkkotunnus eroaa palvelun osoitteesta, ja Kaarlokin on sitä mieltä, ettei osoite ole tuttu. Viestissä pyydetään salasanaa ja vahvistuskoodia, joiden lähettäminen ei ole turvallista. Viesti lisäksi sisältää liitteen, jota Kaarlo ei ole odottanut.",
     response:
-      "Kaarlo: Jopa minä ehdin hieman epäilä tämän viestin aitoutta. En avaa liitettä enkä lähetä tunnuksiani. Jos olisin jo antanut salasanani, pyytäisin tarvittaessa läheiseltä apua sen vaihtamiseen oikeassa palvelussa.",
+      "Kaarlo: Jopa minä ehdin hieman epäilä tämän viestin aitoutta. En avaa liitettä enkä lähetä tunnuksiani. Jos olisinkin antanut salasanani, voisin varmaankin pyytää joltakin läheiseltä apua salasanani vaihtamiseen.",
   },
 ] as const;
 

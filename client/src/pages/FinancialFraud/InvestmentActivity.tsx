@@ -130,15 +130,14 @@ export default function InvestmentActivity({
           onClick={() => {
             setFound([]);
             setFeedback(
-              "Harjoitus aloitettu alusta. Aiemmin ansaittu suoritusmerkki säilyy.",
+              "Harjoitus aloitettu alusta. Aiemmin ansaittu suoritus säilyy.",
             );
           }}
         >
           Kokeile uudelleen
         </button>
         <p>
-          Keskeneräiset löydöt eivät tallennu. Ansaittu suoritusmerkki säilyy
-          tässä selaimessa.
+          Keskeneräiset löydöt eivät tallennu. Aikaisemmin suoritettu tehtävä säilyy, vaikka aloittaisit harjoituksen uudelleen.
         </p>
       </CourseBook>
     </div>

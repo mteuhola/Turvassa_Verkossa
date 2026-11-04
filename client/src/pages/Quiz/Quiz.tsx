@@ -3,7 +3,6 @@ import Navbar from "../../components/Navbar";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import type { TextSizeProps } from "../../components/TextSizeControl";
-import CompletionBadge from "../../components/CompletionBadge";
 import PracticePasswordManager from "../../components/PracticePasswordManager";
 import CompletionNotice from "../../components/CompletionNotice";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
@@ -170,7 +169,6 @@ function QuizActivity({
             palautetta, ja voit yrittää uudelleen. Kun kaikki vastaukset ovat
             oikein, kurssi merkitään suoritetuksi!
           </p>
-          {isComplete && <CompletionBadge label="Tietovisa suoritettu" />}
         </header>
         <div className={styles.progress}>
           <p>
@@ -214,9 +212,8 @@ function QuizActivity({
                 <div>
                   <h3>{question.prompt}</h3>
                   <p id="password-help">
-                    Käytä muistiinpanoasi tai avaa harjoituksen salasanojen
-                    hallintaohjelma. Älä kirjoita oikean tilisi salasanaa.
-                    Harjoitussalasanaa ei saa käyttää muualla.
+                    Käytä kirjoittamaasi muistiinpanoa tai avaa harjoituksen salasanojen
+                    hallintaohjelma.
                   </p>
                   {missingPracticePassword ? (
                     <p className={styles.feedback}>
@@ -349,8 +346,7 @@ function QuizActivity({
           <p>Tähän tietovisaan ei ole vielä lisätty kysymyksiä.</p>
         )}
         <p className={styles.small}>
-          Keskeneräiset vastaukset eivät tallennu. Suoritusmerkki säilyy tässä
-          selaimessa, jos tallennus on sallittu.
+          Keskeneräiset vastaukset eivät tallennu.
         </p>
       </CourseBook>
     </div>

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   assessPracticeDecision,
+  overduePracticeLoan,
   practiceLibraryLoans,
   safeResponseScenarios,
   type PracticeDecision,
@@ -26,6 +27,15 @@ export default function SafeActionSequence({
   const moved = useRef(false);
   const answered = useRef(false);
   const scenario = safeResponseScenarios[scenarioIndex];
+  const isLibraryScenario = "bookId" in scenario;
+  const loans = [
+    ...practiceLibraryLoans.map((loan) => ({
+      ...loan,
+      status: "Ei myöhässä",
+      fee: "0,00 €",
+    })),
+    ...(scenario.id === "library-real" ? [overduePracticeLoan] : []),
+  ];
 
   useEffect(() => {
     if (moved.current) heading.current?.focus();
@@ -58,7 +68,8 @@ export default function SafeActionSequence({
     setFeedback(result.feedback);
     if (!result.correct) return;
     answered.current = true;
-    if (scenarioIndex === 0) reset(1);
+    if (scenarioIndex < safeResponseScenarios.length - 1)
+      reset(scenarioIndex + 1);
     else {
       moved.current = true;
       onComplete();
@@ -163,7 +174,9 @@ export default function SafeActionSequence({
           <button
             className={guided("mail")}
             aria-describedby={
-              nextTarget === "mail" ? "practice-guide" : undefined
+              guideEnabled && nextTarget === "mail"
+                ? "practice-guide"
+                : undefined
             }
             aria-pressed={screen === "mail"}
             onClick={() => navigate("mail")}
@@ -179,11 +192,13 @@ export default function SafeActionSequence({
               Oma kirjasto
             </button>
           )}
-          {scenarioIndex === 0 && (
+          {isLibraryScenario && (
             <button
               className={guided("new-tab")}
               aria-describedby={
-                nextTarget === "new-tab" ? "practice-guide" : undefined
+                guideEnabled && nextTarget === "new-tab"
+                  ? "practice-guide"
+                  : undefined
               }
               aria-pressed={screen === "new-tab"}
               onClick={() => navigate("new-tab")}
@@ -237,7 +252,7 @@ export default function SafeActionSequence({
                   >
                     {scenario.link}
                   </a>
-                ) : (
+                ) : "link" in scenario ? (
                   <button
                     className={`${styles.action} ${styles.emailLink}`}
                     onClick={() =>
@@ -250,7 +265,7 @@ export default function SafeActionSequence({
                   >
                     {scenario.link}
                   </button>
-                )}
+                ) : null}
               </div>
             </article>
           </div>
@@ -263,7 +278,7 @@ export default function SafeActionSequence({
             <h3>Aiemmin tallennetut kirjanmerkit</h3>
             <button
               className={guided("bookmark")}
-              aria-describedby="practice-guide"
+              aria-describedby={guideEnabled ? "practice-guide" : undefined}
               onClick={() => {
                 setLibraryOpen(true);
                 navigate("library");
@@ -280,25 +295,30 @@ export default function SafeActionSequence({
               Omat lainat ja maksut
             </h2>
             <p>
-              Lainassa {practiceLibraryLoans.length} kirjaa. Avaa kirjan tiedot
-              valitsemalla sen nimi.
+              Lainassa {loans.length} kirjaa. Avaa kirjan tiedot valitsemalla
+              sen nimi.
             </p>
             <ul
               className={[
                 styles.practiceLoans,
-                nextTarget === "loans" ? styles.practiceHighlight : "",
+                guideEnabled && nextTarget === "loans"
+                  ? styles.practiceHighlight
+                  : "",
               ].join(" ")}
               aria-describedby={
-                nextTarget === "loans" ? "practice-guide" : undefined
+                guideEnabled && nextTarget === "loans"
+                  ? "practice-guide"
+                  : undefined
               }
             >
-              {practiceLibraryLoans.map((loan) => (
+              {loans.map((loan) => (
                 <li key={loan.id}>
                   <details
                     onToggle={(event) => {
                       if (
                         event.currentTarget.open &&
-                        loan.id === safeResponseScenarios[0].bookId
+                        "bookId" in scenario &&
+                        loan.id === scenario.bookId
                       )
                         setVerified(true);
                     }}
@@ -308,9 +328,9 @@ export default function SafeActionSequence({
                       <dt>Eräpäivä</dt>
                       <dd>{loan.due}</dd>
                       <dt>Lainan tila</dt>
-                      <dd>Ei myöhässä</dd>
+                      <dd>{loan.status}</dd>
                       <dt>Kirjan maksut</dt>
-                      <dd>0,00 €</dd>
+                      <dd>{loan.fee}</dd>
                     </dl>
                   </details>
                 </li>

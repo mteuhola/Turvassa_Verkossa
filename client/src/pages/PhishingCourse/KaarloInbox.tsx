@@ -65,7 +65,7 @@ export default function KaarloInbox({
         Avaa viestejä haluamassasi järjestyksessä. Ilmoita huijausviestit
         tietojenkalasteluksi <strong>varoitus- ja roskakoripainikkeella</strong>
         . Jätä muut viestit saapuneisiin. Kun olet valmis, voit painaa{" "}
-        <strong>Valmis</strong> -painiketta.
+        <strong>Valmis</strong> -painiketta. Linkkejä ei tarvitse avata tehtävän suorittamiseksi.
       </p>
       <PracticeInbox
         title="Kaarlon sähköposti"

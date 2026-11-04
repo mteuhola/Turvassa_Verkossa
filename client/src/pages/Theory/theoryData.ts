@@ -74,8 +74,9 @@ export const courseIntroductions: Record<string, TheoryContent> = {
       {
         heading: "Muita huijausviestin merkkejä",
         paragraphs: [
+          "Tässä on muita merkkejä mahdollisesta huijausviestistä, joita kannattaa pohtia vastaanottaessaan viestiä:",
           "Odottamaton viesti: Viesti ei liity omaan viimeaikaiseen toimintaan. Viestissä voidaan esitellä arvontavoittona saatavaa rahasummaa, joka ilmestyy tilille linkkiä painaessa ja maksukortin tiedot syötettyään. Tällaisessa tilanteessa on syytä epäillä voiton aitoutta, jos ei ole osallistunut arvontoihin.",
-          "Epätavallinen lähettäjän sähköpostiosoite: Tällainen viesti voi väittää tulevansa esimerkiksi pankilta, mutta lähettäjän sähköpostiosoite ei liity pankkipalveluihin.",
+          "Epätavallinen lähettäjän sähköpostiosoite: Tällainen viesti voi väittää tulevansa esimerkiksi pankilta, mutta lähettäjän sähköpostiosoite ei liity pankkipalveluihin. Osoite voi myös olla hyvin samankaltainen kuin oikea osoite, mutta pieni ero voi paljastaa huijauksen, esimerkiksi \"microsoft.com\" ja \"rnicrosoft.com\".",
           "Avun pyytämisen estäminen: Huijari voi esittää syitä, miksi viestistä kertominen jollekin muulle olisi huono ajatus. Huijari yrittää näin jättää kohteensa toimimaan omien tietojensa varassa, sekä pyrkii vähentämään huijauksen paljastumisen mahdollisuutta.",
           "Linkit vievät eri osoitteeseen kuin mitä viestissä kerrotaan: tietokoneella linkin todellisen osoitteen voi yleensä nähdä viemällä hiiren osoittimen linkin päälle itse linkkiä painamatta.",
           "Odottamattomat liitteet: viestin mukana voi tulla esimerkiksi tiedosto, jonka avaaminen voi asentaa haittaohjelman laitteelle. Liitteitä ei kannata avata, jos viesti on vähänkään epäilyttävä.",
@@ -85,6 +86,10 @@ export const courseIntroductions: Record<string, TheoryContent> = {
   },
   "financial-fraud": {
     sections: [
+      {
+        heading: "Tervetuloa pohtimaan luottamusta verkossa!",
+        paragraphs: [],
+      },
       {
         heading: "Tervetuloa pohtimaan luottamusta verkossa!",
         paragraphs: [],
@@ -131,6 +136,64 @@ export const passwordTheory: TheoryContent = {
 };
 
 export const phishingTheory: TheoryContent = {
+  sections: [
+    {
+      heading: "Epäilyttävän viestin vastaanottaminen",
+      paragraphs: [
+        "Jos saat viestin, joka herättää epäilystä, älä kiirehdi toimimaan viestin pyyntöjen mukaisesti. Vältä viestissä olevien linkkien ja liitetiedostojen avaamista äläkä vastaa viestiin. Monessa sähköpostissa on mahdollisuus merkitä viesti roskapostiksi ja/tai tietojenkalasteluksi, jolloin viesti siirtyy roskapostikansioon, ja sähköposti voi siirtää vastaavat viestit jatkossa roskapostiin itsestään.",
+        "Linkkien avaamisen sijaan voit hyödyntää verkkoselaimesi kirjanmerkkejä tai älypuhelimen sovelluksia: jos olet tallentanut palvelun oikean verkko-osoitteen kirjanmerkiksi selaimeen tai asentanut palvelun puhelinsovelluksen, voit siirtyä palveluun tätä kautta ja varmistaa viestin aiheellisuuden.",
+        "Jos saat läheiseltäsi poikkeuksellisen viestin oudosta puhelinnumerosta, voit varmistaa viestin aitouden ottamalla häneen yhteyttä esimerkiksi ennestään tuttuun puhelinnumeroon. Jos et tavoita läheistäsi, voit kysyä asiasta myös muilta yhteisiltä tutuilta. Älä noudata viestin ohjeita ennen kuin olet varmistanut, että viesti todella on läheiseltäsi.",
+      ],
+    },
+    {
+      heading: "Entä jos olen jo antanut tietojani?",
+      paragraphs: [
+        "Jos olet antanut väärennetylle sivustolle salasanasi, vaihda se mahdollisimman pian kyseisen palvelun oikealla verkkosivustolla tai sovelluksessa. Jos olet käyttänyt samaa salasanaa muilla sivustoilla, vaihda salasana myös niissä.",
+        "Jos olet antanut pankkitunnuksesi tai maksukorttisi tiedot tai lähettänyt rahaa huijarille, ota mahdollisimman nopeasti yhteyttä pankkiisi sen virallisen puhelinnumeron kautta. Pankki voi auttaa estämään tunnusten tai korttien väärinkäytön ja mahdollisesti estämään huijaukseen liittyvät tilitapahtumat.",
+        "Huijauksesta kannattaa tehdä rikosilmoitus poliisille. Lisäksi tapahtuneesta voi ilmoittaa Traficomin Kyberturvallisuuskeskukselle, jotta he osaavat tiedottaa ajankohtaisista huijausilmiöistä. Rikosuhripäivystys (RIKU) tarjoaa myös verkkohuijausten kohteiksi joutuneille tukea ja käytännön neuvoja.",
+      ],
+    },
+    {
+      heading: "Huijauksen kohteeksi joutumista ei tarvitse hävetä",
+      paragraphs: [
+        "Huijausviestit voivat olla nykyisin hyvinkin uskottavia, ja kuka tahansa voi erehtyä luottamaan sellaiseen. Jos huomaat joutuneesi huijatuksi, tapahtunutta ei tarvitse hävetä, eikä asian kanssa tarvitse jäädä yksin.",
+        "Tapahtumasta voi kertoa esimerkiksi läheiselle tai muulle luotettavalle henkilölle. Voitte yhdessä selvittää tapahtunutta, ja toinen henkilö voi auttaa sinua tarvittavissa asioissa, kuten salasanojen vaihtamisessa. Avun pyytäminen on järkevä tapa toimia!",
+        "Huijauksesta ilmoittaminen auttaa myös muita: jos poliisi saa tietoa tapahtuneista huijauksista, se voi edistää verkkorikosten selvittämistä ja samanlaisten huijausten tunnistamista jatkossa.",
+      ],
+    },
+  ],
+};
+
+export const financialTheoryOne: TheoryContent = {
+  sections: [
+    {
+      heading: "Epäilyttävän viestin vastaanottaminen",
+      paragraphs: [
+        "Jos saat viestin, joka herättää epäilystä, älä kiirehdi toimimaan viestin pyyntöjen mukaisesti. Vältä viestissä olevien linkkien ja liitetiedostojen avaamista äläkä vastaa viestiin. Monessa sähköpostissa on mahdollisuus merkitä viesti roskapostiksi ja/tai tietojenkalasteluksi, jolloin viesti siirtyy roskapostikansioon, ja sähköposti voi siirtää vastaavat viestit jatkossa roskapostiin itsestään.",
+        "Linkkien avaamisen sijaan voit hyödyntää verkkoselaimesi kirjanmerkkejä tai älypuhelimen sovelluksia: jos olet tallentanut palvelun oikean verkko-osoitteen kirjanmerkiksi selaimeen tai asentanut palvelun puhelinsovelluksen, voit siirtyä palveluun tätä kautta ja varmistaa viestin aiheellisuuden.",
+        "Jos saat läheiseltäsi poikkeuksellisen viestin oudosta puhelinnumerosta, voit varmistaa viestin aitouden ottamalla häneen yhteyttä esimerkiksi ennestään tuttuun puhelinnumeroon. Jos et tavoita läheistäsi, voit kysyä asiasta myös muilta yhteisiltä tutuilta. Älä noudata viestin ohjeita ennen kuin olet varmistanut, että viesti todella on läheiseltäsi.",
+      ],
+    },
+    {
+      heading: "Entä jos olen jo antanut tietojani?",
+      paragraphs: [
+        "Jos olet antanut väärennetylle sivustolle salasanasi, vaihda se mahdollisimman pian kyseisen palvelun oikealla verkkosivustolla tai sovelluksessa. Jos olet käyttänyt samaa salasanaa muilla sivustoilla, vaihda salasana myös niissä.",
+        "Jos olet antanut pankkitunnuksesi tai maksukorttisi tiedot tai lähettänyt rahaa huijarille, ota mahdollisimman nopeasti yhteyttä pankkiisi sen virallisen puhelinnumeron kautta. Pankki voi auttaa estämään tunnusten tai korttien väärinkäytön ja mahdollisesti estämään huijaukseen liittyvät tilitapahtumat.",
+        "Huijauksesta kannattaa tehdä rikosilmoitus poliisille. Lisäksi tapahtuneesta voi ilmoittaa Traficomin Kyberturvallisuuskeskukselle, jotta he osaavat tiedottaa ajankohtaisista huijausilmiöistä. Rikosuhripäivystys (RIKU) tarjoaa myös verkkohuijausten kohteiksi joutuneille tukea ja käytännön neuvoja.",
+      ],
+    },
+    {
+      heading: "Huijauksen kohteeksi joutumista ei tarvitse hävetä",
+      paragraphs: [
+        "Huijausviestit voivat olla nykyisin hyvinkin uskottavia, ja kuka tahansa voi erehtyä luottamaan sellaiseen. Jos huomaat joutuneesi huijatuksi, tapahtunutta ei tarvitse hävetä, eikä asian kanssa tarvitse jäädä yksin.",
+        "Tapahtumasta voi kertoa esimerkiksi läheiselle tai muulle luotettavalle henkilölle. Voitte yhdessä selvittää tapahtunutta, ja toinen henkilö voi auttaa sinua tarvittavissa asioissa, kuten salasanojen vaihtamisessa. Avun pyytäminen on järkevä tapa toimia!",
+        "Huijauksesta ilmoittaminen auttaa myös muita: jos poliisi saa tietoa tapahtuneista huijauksista, se voi edistää verkkorikosten selvittämistä ja samanlaisten huijausten tunnistamista jatkossa.",
+      ],
+    },
+  ],
+};
+
+export const financialTheoryTwo: TheoryContent = {
   sections: [
     {
       heading: "Epäilyttävän viestin vastaanottaminen",

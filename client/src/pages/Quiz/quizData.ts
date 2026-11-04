@@ -97,7 +97,7 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
           },
           {
             id: "false",
-            text: "Tarua.",
+            text: "Tarua",
           },
         ],
         correctOptionIds: ["false"],

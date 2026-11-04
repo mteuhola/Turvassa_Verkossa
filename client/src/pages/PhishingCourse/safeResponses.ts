@@ -15,6 +15,14 @@ export const practiceLibraryLoans = [
   },
 ] as const;
 
+export const overduePracticeLoan = {
+  id: "birds",
+  title: "Linnut ja Metsäretket",
+  due: "Kolme päivää sitten",
+  status: "Myöhässä",
+  fee: "2,00 €",
+} as const;
+
 export const safeResponseScenarios = [
   {
     id: "library",
@@ -96,6 +104,47 @@ export const safeResponseScenarios = [
     result:
       "Pyyntö jäi odottamaan varmistusta. Vastaamaton puhelu ei osoita viestiä aidoksi eikä huijaukseksi. Voit yrittää myöhemmin uudelleen tutusta numerosta ja jättää laskun maksamatta siihen asti.",
   },
+  {
+    id: "library-real",
+    bookId: overduePracticeLoan.id,
+    title: "Kirjanmerkkien hyödyntäminen 2",
+    goal: "Kuvitellaan, että saat kirjastosta uuden maksumuistutuksen. Selvitä, onko maksu aiheellinen ja miten toimit.",
+    context: "Tässä esimerkissä sinulla on lainassa kirja Linnut ja Metsäretket.",
+    sender: "Oma kirjasto",
+    address: "lainat@kirjaston-asiointi.fi",
+    subject: "Muistutus myöhässä olevasta lainasta",
+    time: "Tänään klo 12.30",
+    paragraphs: [
+      "Hei,",
+      'Lainaamasi kirjan "Linnut ja Metsäretket" palautus on myöhässä. Avoin myöhästymismaksu on 2,00 euroa.',
+      "Voit tarkistaa lainasi ja maksusi kirjaston verkkopalvelussa.",
+      "Ystävällisin terveisin, kirjaston asiakaspalvelu",
+    ],
+    claim:
+      "Sähköposti: Linnut ja Metsäretket on myöhässä ja maksettavaa on 2,00 €.",
+    evidence:
+      "Oma kirjasto: Linnut ja Metsäretket -kirjan eräpäivä oli kolme päivää sitten. Kirja on myöhässä ja sen maksuja on 2,00 €.",
+    question: "Miten toimit näiden tietojen perusteella?",
+    choices: [
+      {
+        id: "report",
+        label:
+          "Ilmoitan viestin tietojenkalasteluksi, koska siinä pyydetään maksua.",
+      },
+      {
+        id: "pay",
+        label:
+          "Maksan 2,00 € tutun kirjastopalvelun kautta, sillä lainan tiedot vahvistavat maksun aiheelliseksi. Jos silti epäilen, voin ottaa yhteyttä kirjastoon ennen maksamista.",
+      },
+      {
+        id: "wait",
+        label:
+          "Jätän maksun huomiotta, vaikka se näkyy myös kirjastopalvelussa.",
+      },
+    ],
+    result:
+      "Kirjastopalvelun tiedot vahvistivat maksun aiheelliseksi. Voit hoitaa maksun tutun palvelun kautta.",
+  },
 ] as const;
 
 export const ordinaryPracticeMessages = [
@@ -136,7 +185,8 @@ export function assessPracticeDecision(
     };
   if (
     (scenario === 0 && decision === "report") ||
-    (scenario === 1 && decision === "wait")
+    (scenario === 1 && decision === "wait") ||
+    (scenario === 2 && decision === "pay")
   )
     return { correct: true, feedback: "" };
   if (scenario === 0)
@@ -146,6 +196,12 @@ export function assessPracticeDecision(
         decision === "wait"
           ? "Maksamatta jättäminen on varovainen ratkaisu. Sinulla on nyt myös tietoa maksupyynnön arvioimiseen: vertaa viestiä kirjaston lainatietoihin."
           : "Oikea kirjan nimi ei vahvista maksupyyntöä. Vertaa viestin summaa ja eräpäivää kirjaston tietoihin.",
+    };
+  if (scenario === 2)
+    return {
+      correct: false,
+      feedback:
+        "Tutusta kirjastopalvelusta löytyvät sama kirja, myöhästynyt laina ja 2,00 € maksu. Maksupyyntö ei yksin tarkoita huijausta. Voit hoitaa aiheellisen maksun tutun palvelun kautta.",
     };
   return {
     correct: false,

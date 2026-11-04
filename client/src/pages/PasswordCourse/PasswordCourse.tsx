@@ -17,10 +17,7 @@ import { courseIntroductions, passwordTheory } from "../Theory/theoryData";
 import { topicCourses } from "../TopicSelection/topicCourses";
 import type { TextSizeProps } from "../../components/TextSizeControl";
 
-import {
-  passwordExamples,
-  isExampleCorrect,
-} from "./passwordExamples";
+import { passwordExamples, isExampleCorrect } from "./passwordExamples";
 
 const examples = passwordExamples.map((item) => ({
   ...item,

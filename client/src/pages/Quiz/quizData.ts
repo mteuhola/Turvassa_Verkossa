@@ -167,7 +167,8 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
       {
         id: "scammed",
         type: "multiple",
-        prompt: "Kuvitellaan, että ystäväsi kertoo sinulle antaneensa pankkitunnuksensa huijaussivustolle. Hän on huolissaan ja sanoo, ettei halua kertoa asiasta kenellekään muulle, koska häntä hävettää. Miten voit auttaa häntä?",
+        prompt:
+          "Kuvitellaan, että ystäväsi kertoo sinulle antaneensa pankkitunnuksensa huijaussivustolle. Hän on huolissaan ja sanoo, ettei halua kertoa asiasta kenellekään muulle, koska häntä hävettää. Miten voit auttaa häntä?",
         options: [
           {
             id: "cheer",

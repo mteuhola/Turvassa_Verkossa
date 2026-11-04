@@ -19,10 +19,10 @@ export const safeResponseScenarios = [
   {
     id: "library",
     bookId: "english",
-    title: "Onko kirjastomaksu aiheellinen?",
+    title: "Kirjanmerkkien hyödyntäminen",
     goal: "Tässä esimerkissä sinulla on kirjoja lainassa, ja kirjaston nimellä on tullut maksumuistutus. Selvitä, onko kirjaston nimissä tullut viesti aiheellinen.",
     context:
-      "Olet käyttänyt selaimen Oma kirjasto -kirjanmerkkiä aiemminkin lainojesi tarkistamiseen.",
+      "Kuvitellaan, että olet käyttänyt harjoitusselaimen Oma kirjasto -kirjanmerkkiä aiemminkin lainojesi tarkistamiseen.",
     sender: "Oma kirjasto",
     address: "lainat@kirjaston-asiointi.fi",
     subject: "Muistutus avoimesta kirjastomaksusta",
@@ -34,13 +34,18 @@ export const safeResponseScenarios = [
       "Ystävällisin terveisin, kirjaston asiakaspalvelu",
     ],
     link: "Maksa",
+    destination: "https://omituinen-osoite.netlify.app/",
     claim:
       "Sähköposti: English for Beginners on myöhässä ja maksettavaa on 4,80 €.",
     evidence:
       "Oma kirjasto: English for Beginners -kirjan eräpäivään on viikko. Kirjan maksuja on 0,00 €.",
     question: "Miten toimit näiden tietojen perusteella?",
     choices: [
-      { id: "pay", label: "Maksan, sillä viestissä mainitaan oikea kirja, ja summa on pieni." },
+      {
+        id: "pay",
+        label:
+          "Maksan, sillä viestissä mainitaan oikea kirja, ja summa on pieni.",
+      },
       {
         id: "report",
         label:
@@ -53,10 +58,10 @@ export const safeResponseScenarios = [
   },
   {
     id: "friend",
-    title: "Leena pyytää apua",
-    goal: "Ystäväsi Leenan nimellä on tullut pyyntö. Selvitä, miten sinun kannattaa toimia.",
+    title: "Yhteystietojen hyödyntäminen",
+    goal: "Tässä esimerkissä ystäväsi Leenan nimellä on tullut pyyntö. Selvitä, miten sinun kannattaa toimia.",
     context:
-      "Olet soittanut Leenalle aiemmin sähköpostin Yhteystiedot-kohdassa olevaan numeroon.",
+      "Kuvitellaan, että sinulla on tallennettuna ennestään tuttu Leenan numero, joka löytyy sivun alareunasta.",
     sender: "Leena",
     address: "leena@hirvonen.fi",
     subject: "Voisitko auttaa laskun kanssa?",
@@ -71,7 +76,7 @@ export const safeResponseScenarios = [
     claim:
       "Sähköposti: Leena pyytää maksamaan laskun ja käyttämään uutta numeroa.",
     evidence:
-      "Puhelu Leenan ennestään tuttuun numeroon: ei vastausta. Pyyntöä ei ole vielä varmistettu.",
+      "Puhelu Leenan ennestään tuttuun numeroon: ei vastausta. Pyynnön aitous ei ole vielä selvillä.",
     question: "Mitä voit päätellä ja tehdä nyt?",
     choices: [
       {

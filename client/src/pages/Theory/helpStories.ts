@@ -12,8 +12,7 @@ export const helpStories: Record<
   passwords: {
     id: "help-sanna",
     title: "Auta Sannaa",
-    description:
-      "Sanna tarvitsee apuasi salasanoihin liittyvissä huolissa.",
+    description: "Sanna tarvitsee apuasi salasanoihin liittyvissä huolissa.",
     content: {
       characterName: "Sanna",
       sections: [

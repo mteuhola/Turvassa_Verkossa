@@ -191,8 +191,7 @@ function QuizActivity({
               </p>
               <div className={styles.actions}>
                 <button>
-                  <Link to={course.path}>Palaa aiheisiin
-                  </Link>
+                  <Link to={course.path}>Palaa aiheisiin</Link>
                 </button>
                 <button type="button" onClick={restart}>
                   Kertaa tietovisa

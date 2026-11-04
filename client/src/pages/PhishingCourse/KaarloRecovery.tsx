@@ -38,8 +38,8 @@ export default function KaarloRecovery({
         <>
           <p role="status">
             Kaarlo: Kirjoitin sivulle sähköpostiosoitteeni ja kaupan salasanan.
-            Käytän samaa salasanaa myös sähköpostissani. En ladannut tai asentanut mitään,
-            mutta pankkikortin tietoni menin antamaan.
+            Käytän samaa salasanaa myös sähköpostissani. En ladannut tai
+            asentanut mitään, mutta pankkikortin tietoni menin antamaan.
           </p>
           <form
             onSubmit={(event) => {

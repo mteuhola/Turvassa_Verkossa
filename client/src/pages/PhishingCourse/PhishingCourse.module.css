@@ -589,6 +589,67 @@
 .practiceBrief {
   max-width: 70ch;
 }
+.practiceGuide {
+  padding: 16px 20px;
+  background: #fff3c4;
+  color: #173c5c;
+  border: 1px solid #986500;
+  max-width: 70ch;
+}
+.practiceBrowserLabel {
+  padding: 16px;
+  background: #173c5c;
+  color: #fff;
+}
+.practiceBrowserLabel p {
+  margin: 8px 0 0;
+}
+.practiceHighlight {
+  outline: 4px solid #986500;
+  outline-offset: 4px;
+  background: #fff3c4;
+}
+.action.practiceHighlight,
+.practiceBrowserTabs button.practiceHighlight[aria-pressed] {
+  background: #ffe28a;
+  color: #173c5c;
+  border-color: #986500;
+  font-weight: 700;
+}
+.action.practiceHighlight:hover {
+  background: #ffd45c;
+  color: #173c5c;
+}
+.practicePhone {
+  margin-block: 28px;
+  padding: clamp(16px, 4vw, 32px);
+  border: 1px solid #334b60;
+  border-radius: 12px;
+  max-width: 40rem;
+  background: var(--surface);
+}
+.practicePhone h2 {
+  margin-top: 0;
+}
+.practiceDecision.practiceHighlight {
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.practiceAnswerChoices {
+  display: grid;
+  gap: 12px;
+}
+.practiceAnswerChoices button {
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  min-height: 48px;
+}
+.practiceHighlight:focus-visible,
+.practiceHighlight :focus-visible {
+  outline: 3px solid #173c5c;
+  outline-offset: 2px;
+}
 .practiceBrowser {
   margin-block: 28px;
   border: 1px solid #334b60;

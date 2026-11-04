@@ -40,8 +40,7 @@ const courseCatalog: CourseCatalogEntry[] = [
         id: "password-strength",
         isComplete: false,
         title: "Kuinka kaikki salasanat voi muistaa?",
-        description:
-          "Opi keinoja salasanojen muistamiseen. ",
+        description: "Opi keinoja salasanojen muistamiseen. ",
         path: "/course/passwords/password-strength",
       },
     ],

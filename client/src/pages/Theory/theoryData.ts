@@ -93,6 +93,18 @@ export const courseIntroductions: Record<string, TheoryContent> = {
         ],
       },
       {
+        heading: "Mitä ovat sijoitushuijaukset?",
+        paragraphs: [
+          "",
+        ],
+      },
+      {
+        heading: "Mitä ovat romanssihuijaukset?",
+        paragraphs: [
+          "",
+        ],
+      },
+      {
         heading: "Kurssin rakenne",
         paragraphs: [
           "",

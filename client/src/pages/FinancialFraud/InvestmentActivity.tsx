@@ -1,43 +1,79 @@
+﻿import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import CourseBook from "../../components/CourseBook";
 import TopicCompletionProgress from "../../components/TopicCompletionProgress";
 import Navbar from "../../components/Navbar";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import type { TextSizeProps } from "../../components/TextSizeControl";
 import CompletionBadge from "../../components/CompletionBadge";
 import CompletionNotice from "../../components/CompletionNotice";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
-import {
-  investmentOffers,
-  clueIds,
-  discoverClue,
-  allCluesFound,
-  type InvestmentOffer,
-  type OfferPart,
-} from "./investmentOffers";
+import { investmentOffers } from "./investmentOffers";
 import styles from "./InvestmentActivity.module.css";
+
+const totalParts = investmentOffers.reduce(
+  (sum, offer) => sum + offer.parts.length,
+  0,
+);
+const categories = [
+  {
+    suspicious: true,
+    label: "Epäilyttävä",
+    description: "Tämä herättää epäilyksiä.",
+  },
+  {
+    suspicious: false,
+    label: "Ei epäilyttävä",
+    description: "Tämä ei yksin ole varoitusmerkki.",
+  },
+];
 
 export default function InvestmentActivity({
   isComplete,
   onComplete,
   ...textSizeProps
 }: TextSizeProps & ActivityProgressProps) {
-  const [found, setFound] = useState<string[]>([]);
+  const [round, setRound] = useState(0);
+  const [sorted, setSorted] = useState<string[]>([]);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [dragging, setDragging] = useState<string | null>(null);
+  const [over, setOver] = useState<boolean | null>(null);
   const [feedback, setFeedback] = useState("");
-  const complete = allCluesFound(found);
-  function inspect(offer: InvestmentOffer, part: OfferPart) {
-    const id = offer.id + "/" + part.id;
-    const next = discoverClue(found, id);
-    setFound(next);
+  const cardRefs = useRef(new Map<string, HTMLButtonElement>());
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
+  const offer = investmentOffers[round];
+  const partKey = (id: string) => `${offer.id}/${id}`;
+  const remaining = offer.parts.filter(
+    (part) => !sorted.includes(partKey(part.id)),
+  );
+  const complete = sorted.length === totalParts;
+
+  function sort(id: string | null, suspicious: boolean) {
+    const part = offer.parts.find((item) => item.id === id);
+    if (!part || sorted.includes(partKey(part.id))) return;
+    const correct = part.suspicious === suspicious;
     setFeedback(
-      (part.suspicious
-        ? found.includes(id)
-          ? "Löysit tämän jo. "
-          : "Hyvä havainto! "
-        : "Tämä kohta ei yksin ole varoitusmerkki. ") + part.explanation,
+      `${correct ? "Hyvä havainto!" : "Mieti vielä ja kokeile toista laatikkoa."} ${part.explanation}`,
     );
-    if (!complete && allCluesFound(next)) onComplete();
+    setDragging(null);
+    setOver(null);
+    if (!correct) {
+      setSelected(part.id);
+      cardRefs.current.get(part.id)?.focus();
+      return;
+    }
+    const next = [...sorted, partKey(part.id)];
+    setSorted(next);
+    setSelected(null);
+    if (next.length === totalParts) onComplete();
+    const nextPart = remaining.find((item) => item.id !== part.id);
+    requestAnimationFrame(() => {
+      if (nextPart) cardRefs.current.get(nextPart.id)?.focus();
+      else if (next.length === totalParts) headingRef.current?.focus();
+      else nextRef.current?.focus();
+    });
   }
+
   return (
     <div className={styles.root} data-course="financial-fraud">
       <Navbar
@@ -46,102 +82,217 @@ export default function InvestmentActivity({
         backLabel="Takaisin aiheisiin"
       />
       <CourseBook className={styles.main}>
-        <header>
-          <h1>Tunnista epäilyttävät sijoitustarjoukset</h1>
+        <header className={styles.header}>
+          <h1>Auta Raijaa arvioimaan sijoitustarjouksia</h1>
           <p>
-            Tutki kolmea kuvitteellista tarjousta. Valitse tekstikohdat, jotka
-            herättävät epäilyksiä. Jokaisessa tarjouksessa on kolme
-            varoitusmerkkiä ja yksi kohta, joka ei yksin osoita huijausta.
+            Raijan ystävä on kertonut hänelle saamastaan sijoitustarjouksesta.
+            Raija muistaa siitä muutamia yksityiskohtia. Auta häntä pohtimaan,
+            mitkä niistä herättävät epäilyksiä.
           </p>
           {isComplete && <CompletionBadge />}
         </header>
-        <p>
-          Löydetty {found.length}/{clueIds.length} varoitusmerkkiä
-        </p>
+        <div className={styles.progress}>
+          <span>
+            Tarjous {round + 1}/{investmentOffers.length}
+          </span>
+          <span>
+            {sorted.length}/{totalParts} kohtaa lajiteltu
+          </span>
+        </div>
         <progress
-          value={found.length}
-          max={clueIds.length}
-          aria-label="Löydetyt varoitusmerkit"
+          value={sorted.length}
+          max={totalParts}
+          aria-label="Oikein lajitellut kohdat"
         />
-        <div
-          className={styles.feedback}
-          role="status"
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          {feedback}
-        </div>
-        <div className={styles.offers}>
-          {investmentOffers.map((offer, index) => (
-            <section
-              className={styles.offer}
-              key={offer.id}
-              aria-labelledby={offer.id}
-            >
-              <h2 id={offer.id}>
-                {index + 1}. {offer.title}
-              </h2>
-              <p>{offer.intro}</p>
-              <p className={styles.count}>
-                Löydetty{" "}
-                {
-                  offer.parts.filter((part) =>
-                    found.includes(offer.id + "/" + part.id),
-                  ).length
+        <section aria-labelledby="offer-heading">
+          <h2 id="offer-heading" ref={headingRef} tabIndex={-1}>
+            {offer.title}
+          </h2>
+          <p className={styles.context}>{offer.intro}</p>
+          <h3>Raija muistaa nämä kohdat</h3>
+          <p id="sorting-help" className={styles.instructions}>
+            Vedä kukin kohta sopivaan laatikkoon. Voit myös klikata kohtaa ja sen
+            jälkeen laatikkoa.
+          </p>
+          <div className={styles.memories} aria-label="Lajiteltavat kohdat">
+            {remaining.map((part) => (
+              <button
+                key={part.id}
+                ref={(node) => {
+                  if (node) cardRefs.current.set(part.id, node);
+                  else cardRefs.current.delete(part.id);
+                }}
+                type="button"
+                className={styles.memory}
+                draggable
+                aria-pressed={selected === part.id}
+                aria-describedby="sorting-help"
+                data-dragging={dragging === part.id}
+                onClick={() =>
+                  setSelected(selected === part.id ? null : part.id)
                 }
-                /3
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") setSelected(null);
+                }}
+                onDragStart={(event) => {
+                  event.dataTransfer.setData("text/plain", part.id);
+                  event.dataTransfer.effectAllowed = "move";
+                  setDragging(part.id);
+                  setSelected(part.id);
+                }}
+                onDragEnd={() => {
+                  setDragging(null);
+                  setOver(null);
+                }}
+              >
+                <span>{part.text}</span>
+                <span className={styles.cardAction}>
+                  {selected === part.id
+                    ? "Valittu. Valitse laatikko."
+                    : "Vedä tai valitse"}
+                </span>
+              </button>
+            ))}
+            {remaining.length === 0 && (
+              <p className={styles.empty}>
+                Kaikki tämän tarjouksen kohdat on lajiteltu.
               </p>
-              {offer.parts.map((part) => {
-                const discovered = found.includes(offer.id + "/" + part.id);
-                return (
-                  <div key={part.id} className={styles.part}>
-                    <button
-                      type="button"
-                      onClick={() => inspect(offer, part)}
-                      data-found={discovered}
-                    >
-                      {part.text}
-                      {discovered && <strong> ✓ Löydetty</strong>}
-                    </button>
-                    {discovered && (
-                      <p className={styles.explanation}>{part.explanation}</p>
-                    )}
-                  </div>
+            )}
+          </div>
+          <div className={styles.destinations}>
+            {categories.map(({ suspicious, label, description }) => {
+              const placed = offer.parts.filter(
+                (part) =>
+                  part.suspicious === suspicious &&
+                  sorted.includes(partKey(part.id)),
+              );
+              return (
+                <section
+                  key={label}
+                  className={styles.destination}
+                  data-over={over === suspicious}
+                  aria-label={label}
+                  onDragOver={(event) => {
+                    if (!dragging) return;
+                    event.preventDefault();
+                    event.dataTransfer.dropEffect = "move";
+                    setOver(suspicious);
+                  }}
+                  onDragLeave={(event) => {
+                    if (
+                      !event.currentTarget.contains(
+                        event.relatedTarget as Node | null,
+                      )
+                    )
+                      setOver(null);
+                  }}
+                  onDrop={(event) => {
+                    event.preventDefault();
+                    if (dragging) sort(dragging, suspicious);
+                  }}
+                >
+                  <button
+                    className={styles.target}
+                    type="button"
+                    aria-disabled={!selected}
+                    onClick={() => sort(selected, suspicious)}
+                    onKeyDown={(event) => {
+                      if (event.key === "Escape") setSelected(null);
+                    }}
+                  >
+                    <span className={styles.targetLabel}>{label}</span>
+                    <span>{description}</span>
+                    <span className={styles.targetHint}>
+                      {selected
+                        ? "Siirrä valittu kohta tähän"
+                        : "Pudota tähän tai valitse ensin kohta"}
+                    </span>
+                  </button>
+                  {placed.length > 0 && (
+                    <ul className={styles.placed}>
+                      {placed.map((part) => (
+                        <li key={part.id}>
+                          <p>{part.text}</p>
+                          <details>
+                            <summary>Miksi tämä kuuluu tähän?</summary>
+                            <p>{part.explanation}</p>
+                          </details>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              );
+            })}
+          </div>
+          <div
+            className={styles.feedback}
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            {feedback ||
+              (selected
+                ? "Kohta valittu. Valitse Epäilyttävä tai Ei epäilyttävä."
+                : "Mitkä kohdat herättävät sinussa epäilyksiä?")}
+          </div>
+          <p className={styles.note}>
+            Ei epäilyttävä tarkoittaa vain, ettei kyseinen kohta yksin ole
+            varoitusmerkki. Se ei tee koko tarjouksesta luotettavaa.
+          </p>
+          {remaining.length === 0 && !complete && (
+            <button
+              ref={nextRef}
+              className={styles.next}
+              type="button"
+              onClick={() => {
+                setRound(round + 1);
+                setSelected(null);
+                setFeedback(
+                  "Raijan ystävä on saanut myös tällaisen tarjouksen. Arvioi sen kohdat.",
                 );
-              })}
-            </section>
-          ))}
-        </div>
+                requestAnimationFrame(() => headingRef.current?.focus());
+              }}
+            >
+              Tutki seuraavaa tarjousta
+            </button>
+          )}
+        </section>
         {complete && (
           <CompletionNotice>
-            <h2>Kaikki varoitusmerkit löytyivät!</h2>
+            <h2>Autoit Raijaa tunnistamaan varoitusmerkit!</h2>
             <TopicCompletionProgress />
             <p>
-              Huomasit, miten tuottolupauksilla, kiireellä ja luottamuksen
-              herättämisellä voidaan houkutella maksamaan. Jatka seuraavaksi
-              teoriaan.
+              Lajittelit kaikki {totalParts} kohtaa. Raija osaa nyt keskustella
+              ystävänsä kanssa siitä, mikä tarjouksissa herättää epäilyksiä.
             </p>
             <Link to="/course/financial-fraud/theory">
               Seuraava aihe: Teoria →
             </Link>
           </CompletionNotice>
         )}
-        <button
-          className={styles.restart}
-          type="button"
-          onClick={() => {
-            setFound([]);
-            setFeedback(
-              "Harjoitus aloitettu alusta. Aiemmin ansaittu suoritus säilyy.",
-            );
-          }}
-        >
-          Kokeile uudelleen
-        </button>
-        <p>
-          Keskeneräiset löydöt eivät tallennu. Aikaisemmin suoritettu tehtävä
-          säilyy, vaikka aloittaisit harjoituksen uudelleen.
-        </p>
+        <footer className={styles.footer}>
+          <button
+            type="button"
+            onClick={() => {
+              setRound(0);
+              setSorted([]);
+              setSelected(null);
+              setDragging(null);
+              setOver(null);
+              setFeedback(
+                "Harjoitus aloitettu alusta. Aiemmin ansaittu suoritus säilyy.",
+              );
+              requestAnimationFrame(() => headingRef.current?.focus());
+            }}
+          >
+            Aloita alusta
+          </button>
+          <p>
+            Keskeneräiset lajittelut eivät tallennu. Aiemmin ansaittu suoritus
+            säilyy.
+          </p>
+        </footer>
       </CourseBook>
     </div>
   );

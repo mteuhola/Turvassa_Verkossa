@@ -30,7 +30,7 @@ export const safeResponseScenarios = [
     title: "Kirjanmerkkien hyödyntäminen",
     goal: "Tässä esimerkissä sinulla on kirjoja lainassa, ja kirjaston nimellä on tullut maksumuistutus. Selvitä, onko kirjaston nimissä tullut viesti aiheellinen.",
     context:
-      "Kuvitellaan, että olet käyttänyt harjoitusselaimen Oma kirjasto -kirjanmerkkiä aiemminkin lainojesi tarkistamiseen.",
+      "Kuvitellaan, että olet käyttänyt harjoitusselaimen Oma kirjasto -kirjanmerkkiä aiemminkin lainojesi tarkistamiseen. Keltainen laatikko kertoo ensimmäisessä osassa ohjeet tehtävän suorittamiseen.",
     sender: "Oma kirjasto",
     address: "lainat@kirjaston-asiointi.fi",
     subject: "Muistutus avoimesta kirjastomaksusta",

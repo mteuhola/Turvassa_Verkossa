@@ -88,11 +88,17 @@ export const courseIntroductions: Record<string, TheoryContent> = {
     sections: [
       {
         heading: "Tervetuloa pohtimaan luottamusta verkossa!",
-        paragraphs: [],
+        paragraphs: [
+
+        ],
       },
       {
-        heading: "Tervetuloa pohtimaan luottamusta verkossa!",
-        paragraphs: [],
+        heading: "Kurssin rakenne",
+        paragraphs: [
+          "",
+          "",
+          "",
+        ],
       },
     ],
   },

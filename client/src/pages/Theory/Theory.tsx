@@ -2,7 +2,8 @@ import CourseBook from "../../components/CourseBook";
 import Navbar from "../../components/Navbar";
 import { CharacterPortrait } from "../../components/CourseGuide";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import TopicCompletionProgress from "../../components/TopicCompletionProgress";
 import CompletionBadge from "../../components/CompletionBadge";
 import type { TextSizeProps } from "../../components/TextSizeControl";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
@@ -27,7 +28,7 @@ function TheoryPages({
   continuation,
   ...textSizeProps
 }: TheoryProps) {
-  const navigate = useNavigate();
+  const [finished, setFinished] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null);
   const [pageIndex, setPageIndex] = useState(0);
   const pages = topic.content.sections;
@@ -37,7 +38,7 @@ function TheoryPages({
 
   useEffect(() => {
     heading.current?.focus({ preventScroll: true });
-  }, [topic.path]);
+  }, [topic.path, finished]);
 
   function changePage(nextIndex: number) {
     if (nextIndex < 0 || nextIndex >= pages.length) return;
@@ -50,8 +51,46 @@ function TheoryPages({
       return;
     }
     onComplete();
-    navigate(nextTopic?.path ?? course.path);
+    setFinished(true);
     window.scrollTo(0, 0);
+  }
+
+  if (finished) {
+    return (
+      <div className={styles.root} data-course={course.id}>
+        <Navbar
+          {...textSizeProps}
+          backTo={course.path}
+          backLabel="Takaisin aiheisiin"
+        />
+        <CourseBook className={styles.main}>
+          <header className={styles.header}>
+            <h1 ref={heading} tabIndex={-1}>
+              {topic.title}: suoritettu
+            </h1>
+            <CompletionBadge />
+          </header>
+          <TopicCompletionProgress />
+          <div className={styles.continue}>
+            <Link to={nextTopic?.path ?? course.path}>
+              {nextTopic
+                ? `Seuraava aihe: ${nextTopic.title}`
+                : "Palaa aiheisiin"}{" "}
+              →
+            </Link>
+            <button
+              type="button"
+              onClick={() => {
+                setPageIndex(0);
+                setFinished(false);
+              }}
+            >
+              Kertaa aihe
+            </button>
+          </div>
+        </CourseBook>
+      </div>
+    );
   }
 
   return (
@@ -160,7 +199,7 @@ function TheoryPages({
                 <p id={"completion-help"} className={styles.help}>
                   {isComplete
                     ? "Olet jo suorittanut tämän aiheen. Voit jatkaa eteenpäin."
-                    : "Kun jatkat, tämä aihe merkitään suoritetuksi."}
+                    : "Kun valitset Valmis, tämä aihe merkitään suoritetuksi."}
                 </p>
               )}
             </div>
@@ -169,8 +208,7 @@ function TheoryPages({
               onClick={continueCourse}
               aria-describedby={continuation ? undefined : "completion-help"}
             >
-              {continuation?.label ??
-                (nextTopic ? "Seuraava aihe" : "Valmis - palaa aiheisiin")}
+              {continuation?.label ?? "Valmis"}
               <span aria-hidden="true"> →</span>
             </button>
           </div>

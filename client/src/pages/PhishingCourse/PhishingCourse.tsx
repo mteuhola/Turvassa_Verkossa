@@ -1,4 +1,5 @@
 import CourseBook from "../../components/CourseBook";
+import TopicCompletionProgress from "../../components/TopicCompletionProgress";
 import Navbar from "../../components/Navbar";
 import CompletionBadge from "../../components/CompletionBadge";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
@@ -122,6 +123,7 @@ export default function PhishingCourse({
               Johdanto suoritettu
             </h2>
             <CompletionBadge label="Aihe suoritettu!" />
+            <TopicCompletionProgress />
             <div className={styles.actions}>
               <Link
                 className={`${styles.action} ${styles.primaryAction}`}

@@ -1,3 +1,4 @@
+import TopicCompletionProgress from "../../components/TopicCompletionProgress";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -118,6 +119,7 @@ export default function SafeActionSequence({
           Tarkistit ennen kuin toimit
         </h2>
         <p>Hyvää työtä! Pyrit tarkastamaan viestien aitouden toista kautta.</p>
+        <TopicCompletionProgress />
         <div className={styles.actions}>
           <Link
             className={`${styles.action} ${styles.primaryAction}`}

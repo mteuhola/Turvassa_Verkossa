@@ -1,0 +1,15 @@
+.summary {
+  margin-block: 24px;
+  padding-block: 20px;
+  border-block: 1px solid var(--border);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.title {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+}

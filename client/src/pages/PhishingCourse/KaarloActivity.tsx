@@ -1,4 +1,5 @@
 import CourseBook from "../../components/CourseBook";
+import TopicCompletionProgress from "../../components/TopicCompletionProgress";
 import Navbar from "../../components/Navbar";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -95,6 +96,7 @@ export default function KaarloActivity({
         )}
         {stage === "complete" && (
           <section>
+            <TopicCompletionProgress />
             <p>”Nyt uskallan taas lukea viestini. Kiitos paljon avustasi!”</p>
             <p>
               Onneksi Kaarlo kertoi tapahtuneesta, jolloin pystyitte yhdessä

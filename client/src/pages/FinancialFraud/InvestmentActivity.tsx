@@ -1,4 +1,5 @@
 import CourseBook from "../../components/CourseBook";
+import TopicCompletionProgress from "../../components/TopicCompletionProgress";
 import Navbar from "../../components/Navbar";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -114,6 +115,7 @@ export default function InvestmentActivity({
         {complete && (
           <CompletionNotice>
             <h2>Kaikki varoitusmerkit löytyivät!</h2>
+            <TopicCompletionProgress />
             <p>
               Huomasit, miten tuottolupauksilla, kiireellä ja luottamuksen
               herättämisellä voidaan houkutella maksamaan. Jatka seuraavaksi
@@ -137,7 +139,8 @@ export default function InvestmentActivity({
           Kokeile uudelleen
         </button>
         <p>
-          Keskeneräiset löydöt eivät tallennu. Aikaisemmin suoritettu tehtävä säilyy, vaikka aloittaisit harjoituksen uudelleen.
+          Keskeneräiset löydöt eivät tallennu. Aikaisemmin suoritettu tehtävä
+          säilyy, vaikka aloittaisit harjoituksen uudelleen.
         </p>
       </CourseBook>
     </div>

@@ -1,4 +1,5 @@
 import CourseBook from "../../components/CourseBook";
+import TopicCompletionProgress from "../../components/TopicCompletionProgress";
 import Navbar from "../../components/Navbar";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -591,6 +592,7 @@ export default function SannaActivity({
                 Kirjautuminen onnistui: {loginTask.target.name}
               </h2>
               <CompletionBadge label="Auta Sannaa suoritettu" />
+              <TopicCompletionProgress />
               <p>
                 ”Nyt jokaisella palvelulla on oma salasana, ja osaan löytää ne.
                 Kiitos avusta!”

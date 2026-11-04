@@ -1,4 +1,5 @@
 import CourseBook from "../../components/CourseBook";
+import TopicCompletionProgress from "../../components/TopicCompletionProgress";
 import Navbar from "../../components/Navbar";
 import {
   canSavePracticePassword,
@@ -567,6 +568,7 @@ export default function PasswordCourse({
                   : "Harjoitussalasana tallennettu"}
               </h2>
               <CompletionBadge label="Aihe suoritettu!" />
+              <TopicCompletionProgress />
               {mode === "practice" && storageMethod === "manager" && (
                 <PracticePasswordManager />
               )}

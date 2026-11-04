@@ -2,6 +2,7 @@ import {
   topicCourses,
   type TopicCourse,
 } from "../pages/TopicSelection/topicCourses.ts";
+import { debugToolsEnabled } from "./debug";
 
 export const progressStorageKey = "turvassa-verkossa-progress-v1";
 const topicPaths = new Set(
@@ -20,9 +21,16 @@ export function unfinishedQuizPrerequisites(course: TopicCourse) {
 }
 
 export function canEnterQuiz(course: TopicCourse) {
+  const quiz = course.topics.find((topic) => topic.kind === "quiz");
+  return !!quiz && canEnterTopic(course, quiz.path);
+}
+
+export function canEnterTopic(course: TopicCourse, path: string) {
+  const index = course.topics.findIndex((topic) => topic.path === path);
   return (
-    course.topics.some((topic) => topic.kind === "quiz") &&
-    unfinishedQuizPrerequisites(course).length === 0
+    index >= 0 &&
+    (debugToolsEnabled ||
+      course.topics.slice(0, index).every((topic) => topic.isComplete))
   );
 }
 

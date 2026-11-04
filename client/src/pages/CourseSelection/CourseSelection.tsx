@@ -1,5 +1,6 @@
 import Navbar from "../../components/Navbar";
 import DebugProgressReset from "../../components/DebugProgressReset";
+import { debugToolsEnabled } from "../../progress/debug";
 import { Link } from "react-router-dom";
 import CourseProgress from "../../components/CourseProgress";
 import { LockIcon, EmailIcon, MaskIcon } from "../../components/icons";
@@ -98,9 +99,7 @@ export default function CourseSelection({
           </ul>
         </section>
         <footer className={styles.footer}></footer>
-        {import.meta.env.VITE_ENABLE_DEBUG_TOOLS === "true" && (
-          <DebugProgressReset onReset={onResetProgress} />
-        )}
+        {debugToolsEnabled && <DebugProgressReset onReset={onResetProgress} />}
       </main>
     </div>
   );

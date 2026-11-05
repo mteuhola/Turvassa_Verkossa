@@ -108,7 +108,7 @@ export const safeResponseScenarios = [
     id: "library-real",
     bookId: overduePracticeLoan.id,
     title: "Kirjanmerkkien hyödyntäminen 2",
-    goal: "Kuvitellaan, että saat kirjastosta uuden maksumuistutuksen. Selvitä, onko maksu aiheellinen ja miten toimit.",
+    goal: "Kuvitellaan, että saat kirjastosta uuden maksumuistutuksen. Selvitä, onko maksu aiheellinen samalla lailla kuin ensimmäisessä osassa.",
     context: "Tässä esimerkissä sinulla on lainassa kirja Linnut ja Metsäretket.",
     sender: "Oma kirjasto",
     address: "lainat@kirjaston-asiointi.fi",

@@ -8,15 +8,52 @@
 .main {
   max-width: var(--content-width);
 }
-.root a {
+.introduction {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  margin-block: 24px 32px;
+}
+.portrait {
+  width: 100%;
+  max-width: 5rem;
+}
+.introQuote {
+  margin: 0;
+}
+.introQuote p {
+  margin: 0 0 12px;
+}
+.introQuote footer {
   color: var(--course-ink);
-  text-underline-offset: 4px;
+  font-size: 0.875rem;
+}
+.nextMessage {
+  margin-top: 24px;
+}
+.result {
+  max-width: 65ch;
+}
+.answer strong {
+  display: block;
+  margin-top: 8px;
+}
+.root .continueLink {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--course-ink);
+  color: var(--surface);
 }
 .root h1,
-.root h2 {
+.root h2,
+.root h3,
+.target {
   font-family: "DM Serif Display", Georgia, serif;
   font-weight: 400;
-  line-height: 1.25;
+  line-height: 1.3;
 }
 .root h1 {
   font-size: clamp(2rem, 1.75rem + 1vw, 2.875rem);
@@ -24,174 +61,193 @@
 }
 .root h2 {
   font-size: 1.6rem;
-  margin: 0 0 12px;
+  margin-block: 24px 16px;
 }
 .root h3 {
-  font-size: 1.125rem;
-  margin: 28px 0 8px;
+  font-size: 1.3rem;
+  margin: 0;
 }
-.header {
-  max-width: 65ch;
+.root p {
+  max-width: 70ch;
+}
+.root a,
+.root summary {
+  color: var(--course-ink);
+  text-underline-offset: 4px;
 }
 .progress {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 8px 24px;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
   margin-top: 32px;
+  color: var(--course-ink);
   font-size: 1rem;
 }
-.root progress {
+.message {
+  margin: 0 0 24px;
+  padding: 24px;
+  border-radius: 12px;
+  background: var(--course-tint);
+  color: var(--course-notice-ink);
+}
+.message p {
+  margin: 0 0 12px;
+}
+.message footer,
+.footer p,
+.imageSlot figcaption {
+  font-size: 0.875rem;
+}
+.imageSlot {
+  margin: 0 0 24px;
+  max-width: 30rem;
+}
+.imageSlot img {
   display: block;
   width: 100%;
-  height: 10px;
-  margin-block: 12px 32px;
-  accent-color: var(--course-ink);
+  height: auto;
+  border-radius: 12px;
 }
-.context {
-  margin: 0;
-  color: var(--text-muted);
-}
-.instructions {
-  margin: 0 0 20px;
-  max-width: 70ch;
-  font-size: 1rem;
-}
-.memories {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.imagePlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 12px;
-  margin-bottom: 28px;
+  min-height: 180px;
+  padding: 24px;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  text-align: center;
+}
+.imageSlot figcaption {
+  margin-top: 12px;
+  color: var(--text-muted);
 }
 .root button {
   font: inherit;
-  cursor: pointer;
   min-height: 48px;
+  padding: 16px;
   max-width: 100%;
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 12px 16px;
   background: var(--surface);
   color: var(--text);
+  cursor: pointer;
   text-align: left;
   overflow-wrap: anywhere;
 }
-.root .memory {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 20px;
-  cursor: grab;
-}
-.cardAction {
-  font-size: 0.875rem;
-  color: var(--course-ink);
-}
-.root button:hover {
+.root button:hover:not(:disabled) {
   border-color: var(--course-ink);
 }
-.root .memory[aria-pressed="true"] {
-  background: var(--course-tint);
-  border-color: var(--course-ink);
+.root button:disabled {
+  cursor: default;
+  color: var(--text-muted);
+  background: var(--paper);
+}
+.root button[aria-pressed="true"] {
   outline: 2px solid var(--course-ink);
   outline-offset: 2px;
+  background: var(--course-tint);
 }
-.memory[data-dragging="true"] {
-  opacity: 0.55;
-  cursor: grabbing;
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-block: 24px;
 }
-.destinations {
+.cards button {
+  cursor: grab;
+  width: 100%;
+  height: 100%;
+}
+.bin li button {
+  width: 100%;
+  cursor: grab;
+}
+.bins {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
   align-items: start;
 }
-.destination {
+.bin {
   min-width: 0;
-  min-height: 220px;
+  min-height: 180px;
+  padding: 20px;
   border: 2px dashed var(--course-ink);
   border-radius: 12px;
-  background: var(--surface);
 }
-.destination[data-over="true"] {
+.bin[data-over="true"] {
   background: var(--course-tint);
   border-style: solid;
-  outline: 3px solid var(--course-ink);
-  outline-offset: 3px;
 }
 .root .target {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 1.3rem;
   width: 100%;
-  min-height: 216px;
-  padding: 24px;
+  min-height: 136px;
   border: 0;
   background: transparent;
-  font-size: 1rem;
-}
-.targetLabel {
-  font-family: "DM Serif Display", Georgia, serif;
-  font-size: 1.5rem;
   color: var(--course-notice-ink);
 }
-.targetHint {
-  margin-top: auto;
-  padding-top: 12px;
-  font-size: 0.875rem;
-  color: var(--course-ink);
-}
-.root .target[aria-disabled="true"] {
+.target[aria-disabled="true"] {
   cursor: default;
 }
-.placed {
+.bin ul {
   list-style: none;
-  margin: 0;
-  padding: 0 24px;
+  margin: 16px 0 0;
+  padding: 0;
 }
-.placed li {
-  border-top: 1px solid var(--border);
+.bin li {
   padding-block: 16px;
+  border-top: 1px solid var(--border);
 }
-.placed p {
-  margin: 0 0 8px;
-}
-.placed details {
+.bin details {
   font-size: 0.875rem;
 }
-.placed details p {
-  margin-top: 12px;
-}
-.placed summary {
+.root summary {
   cursor: pointer;
-  color: var(--course-ink);
   min-height: 44px;
   padding-block: 8px;
 }
-.empty {
-  grid-column: 1 / -1;
-  margin: 0;
-  padding-block: 16px;
-  color: var(--course-notice-ink);
-}
 .feedback {
-  margin-top: 24px;
-  padding: 20px;
-  background: var(--course-tint);
   color: var(--course-notice-ink);
-  border-radius: 12px;
 }
-.note {
-  font-size: 0.875rem;
-  max-width: 75ch;
-  color: var(--text-muted);
+.feedback:empty {
+  margin: 0;
 }
-.root .next {
+.root .primary:not(:disabled) {
   background: var(--course-ink);
   color: var(--surface);
   border-color: var(--course-ink);
-  margin-block: 12px 24px;
+}
+.decision {
+  margin-top: 32px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+.decision fieldset {
+  border: 0;
+  padding: 0;
+  margin: 24px 0;
+  min-width: 0;
+}
+.decision legend {
+  font-weight: 500;
+}
+.decision label {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-block: 12px;
+  cursor: pointer;
+}
+.decision input {
+  accent-color: var(--course-ink);
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 .footer {
   border-top: 1px solid var(--border);
@@ -199,26 +255,30 @@
   padding-top: 24px;
 }
 .footer p {
-  font-size: 0.875rem;
   color: var(--text-muted);
 }
-.root button:focus-visible,
-.root a:focus-visible,
-.root summary:focus-visible,
-.root h2:focus-visible {
+.root :is(button, a, summary, input):focus-visible {
   outline: 3px solid var(--course-ink);
   outline-offset: 4px;
 }
+.root h2[tabindex="-1"]:focus {
+  outline: none;
+}
 @media (max-width: 900px) {
-  .memories,
-  .destinations {
+  .cards,
+  .bins {
     grid-template-columns: 1fr;
   }
-  .destination {
-    min-height: 0;
-  }
-  .root .target {
-    min-height: 160px;
+  .message {
     padding: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .introduction {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .portrait {
+    max-width: 4rem;
   }
 }

@@ -89,19 +89,25 @@ export const courseIntroductions: Record<string, TheoryContent> = {
       {
         heading: "Tervetuloa pohtimaan luottamusta verkossa!",
         paragraphs: [
-
+          "Verkon välityksellä on entistä helpompaa tutustua uusiin ihmisiin, ja tutustua itselleen uusiin aiheisiin, kuten sijoittamiseen. Uudet tuttavuudet ja houkuttelevat tarjoukset voivat herättää innostusta, mutta verkossa voi myös kohdata henkilöitä, jotka yrittävät hyödyntää muiden luottamusta saadakseen itselleen rahallista hyötyä.",
+          "Huijarit voivat esimerkiksi kehua ja imarrella vastaanottajaa tai osoittaa erityistä kiinnostusta häntä kohtaan luottamuksen saavuttamiseksi. Tällaiset keinot voivat saada huijarin vaikuttamaan ystävälliseltä ja luotettavalta.",
+          "Onneksi jo muutaman huijauksille tyypillisen toimintatavan tunteminen voi auttaa tunnistamaan epäilyttäviä tilanteita. Uusiin ihmisiin ja mahdollisuuksiin voi suhtautua avoimesti, mutta samalla on hyvä muistaa vanha sanonta: jos jokin vaikuttaa liian hyvältä ollakseen totta, se tuskin on totta.",
         ],
       },
       {
         heading: "Mitä ovat sijoitushuijaukset?",
         paragraphs: [
-          "",
+          "Sijoitushuijaukset ovat huijauksia, joissa huijari tavoittelee taloudellista hyötyä houkuttelemalla ihmisiä sijoittamaan rahaa kohteeseen, jota ei välttämättä ole olemassa. Todellisuudessa rahat päätyvät huijarin taskuihin, eivätkä sijoittajat saa rahojaan enää takaisin.",
+          "Huijari voi esittää olevansa sijoitusalan ammattilainen, ja hän voi käyttää hyväkseen kohteensa luottamusta ja tietämättömyyttä sijoittamisesta. Huijari voi käyttää \"sijoittajien\" houkuttelemiseen esimerkiksi epärealistisen suuruisia tuottoja ja riskittömyyttä, väittää sijoituksen olevan juuri kohteelle suunnattu ainutkertainen mahdollisuus, tai esitellä väärennettyjä tietoja sijoituksen arvon kasvusta. Näin sijoitusmahdollisuus voidaan saada vaikuttamaan turvalliselta ja kannattavalta.",
+          "Sijoitushuijauksia voidaan levittää esimerkiksi sosiaalisessa mediassa, verkkomainoksissa tai henkilökohtaisten yhteydenottojen kautta. Huijausten kohteeksi voi joutua kuka tahansa iästä tai sijoituskokemuksesta riippumatta. Huijarit voivat hyödyntää esimerkiksi ihmisten kiinnostusta sijoittamiseen tai halua parantaa omaa taloudellista tilannettaan.",
         ],
       },
       {
         heading: "Mitä ovat romanssihuijaukset?",
         paragraphs: [
-          "",
+          "Romanssihuijaukset ovat huijausten muoto, jossa huijari tavoittelee taloudellista hyötyä hyväksikäyttämällä näennäisesti romanttista suhdettaan kohteensa kanssa. Huijari voi tutustumisvaiheessa esiintyä romanttisesta suhteesta kiinnostuneena henkilönä, vaikka hänen todellinen tarkoituksensa on hyötyä kohteestaan ainoastaan rahallisesti.",
+          "Romanssihuijaukset alkavat nykyään usein internetissä, esimerkiksi seuranhakupalveluissa tai sosiaalisessa mediassa, ja kuten sijoitushuijaukset, romanssihuijaukset kohdistuvat kaikkiin ikäluokkiin. Huijari voi käyttää itsestään väärää nimeä, kuvia tai muita tietoja, kuten ammattia, vaikuttaakseen luotettavalta.",
+          "Kun luottamus on syntynyt, huijari voi kertoa tarvitsevansa rahaa esimerkiksi matkustaakseen tavatakseen uutta tuttavuuttaan, tai jouduttuaan yllättävään vaikeuteen, kuten sairastuneensa äkillisesti. Huijari voi myös yrittää saada kohteensa tuntemaan syyllisyyttä tai painostaa kohdettaan, jos tämä ei suostu auttamaan.",
         ],
       },
       {

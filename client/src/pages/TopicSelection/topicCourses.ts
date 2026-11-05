@@ -76,9 +76,9 @@ const courseCatalog: CourseCatalogEntry[] = [
         id: "investment-offers",
         kind: "activity",
         isComplete: false,
-        title: "Auta Raijaa arvioimaan sijoitustarjouksia",
+        title: "Sijoitushuijaukset",
         description:
-          "Lajittele Raijan muistamat kohdat epäilyttäviin ja niihin, jotka eivät yksin herätä epäilyksiä.",
+          "Lajittele Raijan kertomien viestien yksityiskohdat ja arvioi, kannattaisiko Simon sijoittaa.",
         path: "/course/financial-fraud/investment-offers",
       },
     ],

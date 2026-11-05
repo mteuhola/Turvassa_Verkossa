@@ -157,7 +157,7 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
           },
           {
             id: "polite",
-            text: "Viesti päättyy sanoihin Ystävällisin terveisin.",
+            text: "Viestissä on pieniä kirjoitusvirheitä.",
           },
         ],
         correctOptionIds: ["code", "secrecy", "attachment"],

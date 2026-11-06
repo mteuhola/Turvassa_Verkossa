@@ -9,9 +9,14 @@ import {
 import CompletionBadge from "../../components/CompletionBadge";
 import PracticePasswordManager from "../../components/PracticePasswordManager";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { assessPassword, MAX_PASSWORD_LENGTH } from "./passwordStrength";
+import {
+  MAX_PASSWORD_LENGTH,
+  type PasswordAssessment,
+} from "./passwordStrength";
+import { usePasswordAssessment } from "./usePasswordAssessment";
+import AssessmentStatus from "./AssessmentStatus";
 import styles from "./PasswordCourse.module.css";
 import Theory from "../Theory/Theory";
 import { courseIntroductions, passwordTheory } from "../Theory/theoryData";
@@ -20,16 +25,22 @@ import type { TextSizeProps } from "../../components/TextSizeControl";
 
 import { passwordExamples, isExampleCorrect } from "./passwordExamples";
 
-const examples = passwordExamples.map((item) => ({
-  ...item,
-  assessment: assessPassword(item.value),
-}));
+const examples = passwordExamples;
 
-function StrengthMeter({
-  assessment,
-}: {
-  assessment: NonNullable<ReturnType<typeof assessPassword>>;
-}) {
+function ExampleStrength({ password }: { password: string }) {
+  const status = usePasswordAssessment(password);
+  return (
+    <div role="status">
+      {status.assessment ? (
+        <StrengthMeter assessment={status.assessment} />
+      ) : (
+        <AssessmentStatus {...status} />
+      )}
+    </div>
+  );
+}
+
+function StrengthMeter({ assessment }: { assessment: PasswordAssessment }) {
   return (
     <>
       <p className={styles.score}>
@@ -87,7 +98,8 @@ export default function PasswordCourse({
   }, [stage]);
   const [saveError, setSaveError] = useState("");
   const input = useRef<HTMLInputElement>(null);
-  const assessment = useMemo(() => assessPassword(password), [password]);
+  const status = usePasswordAssessment(password);
+  const { assessment } = status;
   const tooLong = password.length > MAX_PASSWORD_LENGTH;
 
   const canSave = canSavePracticePassword({
@@ -116,7 +128,7 @@ export default function PasswordCourse({
       setStage("complete");
     } catch {
       setSaveError(
-        "Tallennus ei onnistunut. Tarkista, että selaimen tallennus on sallittu ja käytössä on suojattu yhteys. Voit yrittää uudelleen. Merkkiä ei myönnetty tästä yrityksestä.",
+        "Tallennus ei onnistunut.",
       );
     } finally {
       setIsSaving(false);
@@ -204,9 +216,7 @@ export default function PasswordCourse({
                       )}
                     </summary>
                     <div className={styles.exampleResult}>
-                      {item.assessment && (
-                        <StrengthMeter assessment={item.assessment} />
-                      )}
+                      <ExampleStrength password={item.value} />
                       <fieldset
                         className={styles.question}
                         disabled={isExampleCorrect(
@@ -320,7 +330,7 @@ export default function PasswordCourse({
                 </li>
                 <br />
                 Kun olet kokeillut erilaisia salasanoja, keksi salasana tätä
-                kurssia varten. Sitä ei tallenneta mihinkään.
+                kurssia varten. 
                 <strong>
                   Huom: Älä kuitenkaan valitse tähän tehtävään olemassaolevaa
                   salasanaasi!
@@ -385,6 +395,8 @@ export default function PasswordCourse({
                     Teksti on liian pitkä arvioitavaksi. Lyhennä sitä
                     kokeillaksesi uudelleen.
                   </p>
+                ) : status.loading || status.error ? (
+                  <AssessmentStatus {...status} />
                 ) : assessment ? (
                   <>
                     <StrengthMeter assessment={assessment} />

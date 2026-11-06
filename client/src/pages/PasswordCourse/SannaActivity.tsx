@@ -1,13 +1,13 @@
 import CourseBook from "../../components/CourseBook";
 import TopicCompletionProgress from "../../components/TopicCompletionProgress";
 import Navbar from "../../components/Navbar";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import type { TextSizeProps } from "../../components/TextSizeControl";
 import CompletionBadge from "../../components/CompletionBadge";
 import { CharacterPortrait } from "../../components/CourseGuide";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
-import { assessPassword, MAX_PASSWORD_LENGTH } from "./passwordStrength";
+import { MAX_PASSWORD_LENGTH } from "./passwordStrength";
 import {
   canSignInAsSanna,
   createSannaLoginTask,
@@ -21,6 +21,8 @@ import {
   type SannaPasswords,
   type SannaAccountId,
 } from "./sannaSimulation";
+import { usePasswordAssessment } from "./usePasswordAssessment";
+import AssessmentStatus from "./AssessmentStatus";
 import styles from "./PasswordCourse.module.css";
 import own from "./SannaActivity.module.css";
 
@@ -55,6 +57,7 @@ export default function SannaActivity({
   >("intro");
   const [index, setIndex] = useState(0);
   const [saved, setSaved] = useState<SannaPasswords>({});
+  const savedScores = useRef(new Map<string, number>());
   const [entryNames, setEntryNames] = useState<SannaPasswords>({});
   const [entryName, setEntryName] = useState("");
   const [planChoices, setPlanChoices] = useState<string[]>([]);
@@ -72,7 +75,8 @@ export default function SannaActivity({
   const loginInput = useRef<HTMLInputElement>(null);
   const previous = useRef(`${stage}:${index}`);
   const account = sannaAccounts[index];
-  const assessment = useMemo(() => assessPassword(password), [password]);
+  const status = usePasswordAssessment(password);
+  const { assessment } = status;
   const count = Object.keys(saved).length;
   useEffect(() => {
     if (previous.current !== `${stage}:${index}`) {
@@ -125,6 +129,8 @@ export default function SannaActivity({
       );
       return;
     }
+    if (!assessment) return;
+    savedScores.current.set(password, assessment.score);
     setSaved((current) => ({ ...current, [account.id]: password }));
     setEntryNames((current) => ({
       ...current,
@@ -189,7 +195,9 @@ export default function SannaActivity({
               </p>
               <p className={styles.small}>
                 Käytä vain keksittyjä salasanoja, joita et käytä muualla. Sannan
-                tiedot säilyvät vain tämän harjoituskerran ajan. Oma aiemmin
+                tiedot säilyvät vain tämän harjoituskerran ajan.
+                Harjoitussalasanat lähetetään palvelimelle vahvuuden arviointia
+                varten. Palvelin ei tallenna salasanoja. Oma aiemmin
                 tallentamasi harjoitussalasana pysyy erillään.
               </p>
               {isComplete && (
@@ -350,7 +358,9 @@ export default function SannaActivity({
                   role="status"
                   aria-atomic="true"
                 >
-                  {assessment ? (
+                  {status.loading || status.error ? (
+                    <AssessmentStatus {...status} />
+                  ) : assessment ? (
                     <>
                       <p className={styles.score}>
                         Arvio: <strong>{assessment.label}</strong> (
@@ -523,7 +533,7 @@ export default function SannaActivity({
                       saved,
                       login,
                       loginTask.target.id,
-                      (value) => assessPassword(value)?.score,
+                      (value) => savedScores.current.get(value),
                     )
                   ) {
                     setFeedback(
@@ -536,6 +546,7 @@ export default function SannaActivity({
                   setLogin("");
                   setPassword("");
                   setSaved({});
+                  savedScores.current.clear();
                   setEntryNames({});
                   setEntryName("");
                   setStage("complete");

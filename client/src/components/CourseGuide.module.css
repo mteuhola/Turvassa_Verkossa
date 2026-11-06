@@ -2,10 +2,13 @@
   display: block;
   width: 100%;
   aspect-ratio: 1;
-  background-image: url("/images/course-characters.png");
+  background-image: url("/images/course-characters-sad.png");
   background-size: 300% 100%;
   background-repeat: no-repeat;
   border-radius: 50%;
+}
+.portrait[data-complete="true"] {
+  background-image: url("/images/course-characters.png");
 }
 .portrait[data-character="passwords"] {
   background-position: left center;

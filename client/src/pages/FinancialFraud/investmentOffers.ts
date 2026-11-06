@@ -8,7 +8,7 @@ export const villageImage: { src: string | null; alt: string } = {
 export const investmentMessages = [
   {
     message:
-      "Sijoituksen tarjoaja soitti puhelun lomakylää perustavasta yrityksestä, jonka tiedot löytyvät verkosta. Pankille tai läheisille tarjouksesta ei kuulemma saisi kertoa tarjouksesta, sillä se on erikoistarjous vain Simolle. Simo kertoi tarjoajan olleen puhelussa kovin ystävällinen ja vakuuttava.",
+      "Sijoituksen tarjoaja soitti puhelun lomakylää perustavan yrityksen nimissä. Yrityksen tiedot löytyvät verkosta. Pankille tai läheisille tarjouksesta ei kuulemma saisi kertoa tarjouksesta, sillä se on erikoistarjous vain Simolle. Simo kertoi tarjoajan olleen puhelussa kovin ystävällinen ja vakuuttava.",
     hasImage: false,
     parts: [
       {
@@ -26,6 +26,10 @@ export const investmentMessages = [
       {
         id: "salesman",
         text: "Sijoituksen tarjoja vaikutti ystävälliseltä ja vakuuttavalta.",
+      },
+      {
+        id: "searched",
+        text: "Yrityksen tiedot löytyvät verkosta.",
       },
     ],
   },

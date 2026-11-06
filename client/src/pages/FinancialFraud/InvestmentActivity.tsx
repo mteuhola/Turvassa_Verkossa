@@ -150,6 +150,9 @@ export default function InvestmentActivity({
         </header>
         {submitted ? (
           <section className={styles.result} aria-labelledby="result-heading">
+            <div className={styles.portrait}>
+              <CharacterPortrait courseId="financial-fraud" complete />
+            </div>
             <h2 id="result-heading" ref={resultRef} tabIndex={-1}>
               Oma arviosi
             </h2>

@@ -10,11 +10,18 @@ const courseOverviews: Record<string, string> = {
     "Tutustu romanssi- ja sijoitushuijausten varoitusmerkkeihin. Pohdi verkossa syntyvää luottamusta ja rahapyyntöjä.",
 };
 
-export function CharacterPortrait({ courseId }: { courseId: string }) {
+export function CharacterPortrait({
+  courseId,
+  complete = false,
+}: {
+  courseId: string;
+  complete?: boolean;
+}) {
   return (
     <span
       className={styles.portrait}
       data-character={courseId}
+      data-complete={complete}
       aria-hidden="true"
     />
   );

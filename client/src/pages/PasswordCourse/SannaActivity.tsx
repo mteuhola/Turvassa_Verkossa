@@ -154,7 +154,10 @@ export default function SannaActivity({
         </header>
         <div className={own.companion}>
           <div className={own.portrait}>
-            <CharacterPortrait courseId="passwords" />
+            <CharacterPortrait
+              courseId="passwords"
+              complete={stage === "complete"}
+            />
           </div>
           <p>
             Sanna on kuvitteellinen harjoituskaverisi. Tehtäväsi on auttaa häntä

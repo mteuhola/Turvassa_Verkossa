@@ -47,7 +47,10 @@ export default function KaarloActivity({
           <div className={styles.kaarloConcern}>
             {stage !== "email" && (
               <div className={styles.kaarloPortrait}>
-                <CharacterPortrait courseId="phishing" />
+                <CharacterPortrait
+                  courseId="phishing"
+                  complete={stage === "complete"}
+                />
               </div>
             )}
             <p>

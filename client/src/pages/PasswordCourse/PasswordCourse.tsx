@@ -47,7 +47,7 @@ function StrengthMeter({ assessment }: { assessment: PasswordAssessment }) {
         Arvio: <strong>{assessment.label}</strong> ({assessment.score}/4)
       </p>
       <div className={styles.meter} aria-hidden="true">
-        {[0, 1, 2, 3, 4].map((level) => (
+        {[1, 2, 3, 4].map((level) => (
           <span
             key={level}
             data-filled={level <= assessment.score}

@@ -1,4 +1,5 @@
 import Navbar from "../../components/Navbar";
+import FeedbackForm from "../../components/FeedbackForm";
 import DebugProgressReset from "../../components/DebugProgressReset";
 import { debugToolsEnabled } from "../../progress/debug";
 import { Link } from "react-router-dom";
@@ -98,7 +99,7 @@ export default function CourseSelection({
             })}
           </ul>
         </section>
-        <footer className={styles.footer}></footer>
+        <FeedbackForm />
         {debugToolsEnabled && <DebugProgressReset onReset={onResetProgress} />}
       </main>
     </div>

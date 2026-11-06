@@ -34,9 +34,9 @@ export const passwordExamples = [
       "S:n korvaaminen numerolla 5 tekee salasanasta mahdottoman arvata.",
       "Salasana on yli 12 merkkiä pitkä, jolloin se on taatusti turvallinen.",
     ],
-    correctAnswers: [1],
+    correctAnswers: [0],
     lesson:
-      "",
+      "Kirjainten korvaaminen samannäköisellä numerolla (S -> 5) on yleistä. Saman sanan toistaminen ei välttämättä tee salasanasta vahvempaa, vaikka pituus kasvaakin.",
   },
 
   {

@@ -1,10 +1,47 @@
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, HTTPException, Request, Response
+import psycopg
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
-from password_strength import MAX_PASSWORD_LENGTH, assess_password
+from uuid import UUID
+
+if __package__:
+    from .database import save_feedback
+    from .password_strength import MAX_PASSWORD_LENGTH, assess_password
+else:
+    from database import save_feedback
+    from password_strength import MAX_PASSWORD_LENGTH, assess_password
 
 app = FastAPI()
+
+
+class FeedbackRequest(BaseModel):
+    uuid: UUID
+    feedback: str = Field(min_length=1, max_length=5000, strict=True, repr=False)
+
+    @field_validator("feedback")
+    @classmethod
+    def validate_feedback(cls, feedback: str) -> str:
+        feedback = feedback.strip()
+        if not feedback:
+            raise ValueError("Feedback must not be blank")
+        if len(feedback.encode("utf-16-le", errors="surrogatepass")) // 2 > 5000:
+            raise ValueError("Feedback is too long")
+        return feedback
+
+
+@app.post("/api/feedback")
+def receive_feedback(payload: FeedbackRequest, response: Response):
+    response.headers["Cache-Control"] = "no-store"
+    try:
+        save_feedback(payload.uuid, payload.feedback)
+    except (psycopg.Error, RuntimeError):
+        raise HTTPException(
+            status_code=503,
+            detail="Feedback storage is unavailable. Please try again later.",
+            headers={"Cache-Control": "no-store"},
+        ) from None
+    return {"status": "received"}
 
 
 class PasswordRequest(BaseModel):

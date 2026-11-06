@@ -13,7 +13,6 @@ def assess_password(password: str) -> dict:
     result = zxcvbn(password, user_inputs=FINNISH_PASSWORDS, max_length=MAX_PASSWORD_LENGTH)
     patterns = {match["pattern"] for match in result["sequence"]}
     tips = []
-    tips.append(f"Todennäköinen murtamisaika: {format_crack_time(result['crack_times_seconds']['offline_fast_hashing_1e10_per_second'])}.")
     if len(password) < 15:
         tips.append('Pidennä salasanaa. Tavoittele ainakin 15 merkkiä, esimerkiksi useita toisiinsa liittymättömiä sanoja.')
     if "repeat" in patterns and result["score"] < 3:
@@ -26,6 +25,7 @@ def assess_password(password: str) -> dict:
         tips.append('Arviossa löytyi tuttu sana tai yleinen salasana. Pelkkä iso alkukirjain, numeron lisääminen tai kirjaimen korvaaminen merkillä ei yleensä riitä.')
     if not tips:
         tips.append('Mainiota! Käytä oikeissakin palveluissa jokaiseen tiliin omaa salasanaa.' if result["score"] >= 3 else 'Kokeile useita toisiinsa liittymättömiä sanoja tai sisältöä, joka ei koostu oikeista sanoista. Vältä tuttuja sanontoja ja henkilötietoja.')
+    tips.append(f"Arvioitu murtamisaika: {format_crack_time(result['crack_times_seconds']['online_throttling_100_per_hour'])}.")
     return {"score": result["score"], "label": STRENGTH_LABELS[result["score"]], "tips": tips}
 
 

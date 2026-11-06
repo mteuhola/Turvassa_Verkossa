@@ -329,6 +329,10 @@ export default function PasswordCourse({
                   merkeillä, kuten "kissa-kahvi_radio!sohva"
                 </li>
                 <br />
+                Arvioitu murtamisaika kertoo, kuinka kauan salasanan arvaaminen kestäisi,
+                jos salasana päätyisi vääriin käsiin tietomurrossa.
+                <br />
+                <br />
                 Kun olet kokeillut erilaisia salasanoja, keksi salasana tätä
                 kurssia varten. 
                 <strong>

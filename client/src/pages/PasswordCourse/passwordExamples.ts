@@ -13,19 +13,6 @@ export const passwordExamples = [
       "Tuttu sana on helppo arvata. Myös suomalaiset sanat voivat löytyä hyökkääjän sanalistalta.",
   },
   {
-    name: "sal4sana1pekka",
-    value: "sal4sana1pekka",
-    question: "Mitkä väitteet tästä salasanasta pitävät paikkansa?",
-    choices: [
-      "Salasana on vahva: oman nimen lisääminen tekee siitä yksilöllisen.",
-      "A:n korvaaminen numerolla 4 tekee salasanasta arvaamattoman.",
-      "Salasana koostuu tutusta sanasta ja yleisestä nimestä, joten se on helppo arvata.",
-    ],
-    correctAnswers: [2],
-    lesson:
-      "Oman nimen lisääminen ja yksittäisten kirjainten korvaaminen numeroilla ovat tavallisia muutoksia. Ne eivät yksin tee salasanasta vahvaa, ja voivat paljastaa tietoja käyttäjästä.",
-  },
-  {
     name: "Salasana123!",
     value: "Salasana123!",
     question: "Mitkä väitteet tästä salasanasta EIVÄT pidä paikkansa?",
@@ -38,6 +25,20 @@ export const passwordExamples = [
     lesson:
       "Iso alkukirjain, numerosarja ja huutomerkki ovat tavallisia muutoksia. Merkkien vaihtelu vahvistaa salasanaa, mutta se ei yksin tee salasanasta vahvaa.",
   },
+  {
+    name: "5alasana1sana",
+    value: "5alasana1sana",
+    question: "Mitkä väitteet tästä salasanasta pitävät paikkansa?",
+    choices: [
+      "Sanassa toistuu sama sana kahdesti, mikä tekee sanasta helpommin arvattavan.",
+      "S:n korvaaminen numerolla 5 tekee salasanasta mahdottoman arvata.",
+      "Salasana on yli 12 merkkiä pitkä, jolloin se on taatusti turvallinen.",
+    ],
+    correctAnswers: [1],
+    lesson:
+      "",
+  },
+
   {
     name: "majakka sieni viulu pilvi",
     value: "majakka sieni viulu pilvi",

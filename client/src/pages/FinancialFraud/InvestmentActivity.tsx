@@ -389,22 +389,6 @@ function InvestmentActivity({
           </>
         )}
         <footer className={styles.footer}>
-          <button
-            type="button"
-            onClick={() => {
-              setRound(0);
-              setPlacements({});
-              setSelected(null);
-              setDragging(null);
-              setOver(null);
-              setAnswer(null);
-              setSubmitted(false);
-              setFeedback("");
-              requestAnimationFrame(() => headingRef.current?.focus());
-            }}
-          >
-            Aloita alusta
-          </button>
           <p>
             Keskeneräinen tehtävä ei tallennu. Aiempi kurssisuoritus säilyy.
           </p>

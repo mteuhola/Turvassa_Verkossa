@@ -24,7 +24,6 @@ export default function PhishingCourse({
   const [feedback, setFeedback] = useState(
     "Valitse viestistä kohta, jota pidät epäilyttävänä.",
   );
-  const firstPart = useRef<HTMLButtonElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const complete = found.length === clues.length;
   useEffect(() => {
@@ -39,12 +38,6 @@ export default function PhishingCourse({
     } else {
       setActiveClue({ part, anchor });
     }
-  }
-
-  function restart() {
-    setFound([]);
-    setFeedback("Uusi yritys. Valitse viestistä epäilyttävä kohta.");
-    firstPart.current?.focus();
   }
 
   function renderEmailPart(id: (typeof emailParts)[number]["id"]) {
@@ -86,7 +79,6 @@ export default function PhishingCourse({
     }
     return (
       <button
-        ref={id === "subject" ? firstPart : undefined}
         type="button"
         className={`${styles.emailPart} ${id === "link" ? styles.emailLink : ""}`}
         data-found={discovered}
@@ -131,22 +123,6 @@ export default function PhishingCourse({
               >
                 Seuraava aihe
               </Link>
-              {onReturnTheory ? (
-                <button
-                  type="button"
-                  className={`${styles.action} ${styles.secondaryAction}`}
-                  onClick={onReturnTheory}
-                >
-                  Kertaa johdanto
-                </button>
-              ) : (
-                <Link
-                  className={`${styles.action} ${styles.secondaryAction}`}
-                  to="/course/phishing/introduction"
-                >
-                  Kertaa johdanto
-                </Link>
-              )}
             </div>
           </section>
         </CourseBook>
@@ -282,13 +258,6 @@ export default function PhishingCourse({
                   }}
                 >
                   Anna vihje
-                </button>
-                <button
-                  type="button"
-                  className={styles.action}
-                  onClick={restart}
-                >
-                  Aloita alusta
                 </button>
               </div>
               {found.length > 0 && (

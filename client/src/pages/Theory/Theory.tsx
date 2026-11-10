@@ -78,15 +78,6 @@ function TheoryPages({
                 : "Palaa aiheisiin"}{" "}
               →
             </Link>
-            <button
-              type="button"
-              onClick={() => {
-                setPageIndex(0);
-                setFinished(false);
-              }}
-            >
-              Kertaa aihe
-            </button>
           </div>
         </CourseBook>
       </div>

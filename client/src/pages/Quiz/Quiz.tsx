@@ -143,17 +143,6 @@ function QuizActivity({
     }
   }
 
-  function restart() {
-    setIndex(0);
-    setSelected([]);
-    setPassword("");
-    setVisible(false);
-    setCorrect(false);
-    setFeedback("");
-    setFinished(false);
-    setCelebrateCompletion(false);
-  }
-
   return (
     <div className={styles.root} data-course={course.id}>
       <Navbar
@@ -214,9 +203,6 @@ function QuizActivity({
                 <Link className={styles.courseLink} to="/">
                   Takaisin kursseihin →
                 </Link>
-                <button type="button" onClick={restart}>
-                  Kertaa tietovisa
-                </button>
               </div>
             </section>
           ) : (
@@ -224,15 +210,9 @@ function QuizActivity({
               <CompletionNotice badgeLabel="Tietovisa suoritettu">
                 <h2>Valmista tuli, kaikki oikein!</h2>
                 <TopicCompletionProgress />
-                <p>
-                  Voit jatkaa muihin aiheisiin tai kokeilla tietovisaa
-                  uudelleen.
-                </p>
+                <p>Voit jatkaa muihin aiheisiin.</p>
                 <div className={styles.actions}>
                   <Link to={course.path}>Palaa aiheisiin</Link>
-                  <button type="button" onClick={restart}>
-                    Kertaa tietovisa
-                  </button>
                 </div>
               </CompletionNotice>
             </div>

@@ -599,17 +599,15 @@ export default function PasswordCourse({
                 >
                   Seuraava aihe
                 </Link>
-                <button
-                  type="button"
-                  className={styles.secondary}
-                  onClick={() =>
-                    setStage(mode === "introduction" ? "reading" : "practice")
-                  }
-                >
-                  {mode === "introduction"
-                    ? "Kertaa johdanto"
-                    : "Vaihda harjoitussalasana"}
-                </button>
+                {mode === "practice" && (
+                  <button
+                    type="button"
+                    className={styles.secondary}
+                    onClick={() => setStage("practice")}
+                  >
+                    Vaihda harjoitussalasana
+                  </button>
+                )}
               </div>
               {mode === "practice" && (
                 <section

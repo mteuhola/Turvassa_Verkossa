@@ -111,15 +111,6 @@ export default function KaarloActivity({
               >
                 Jatka eteenpäin
               </Link>
-              <button
-                className={styles.action}
-                onClick={() => {
-                  setIndex(null);
-                  setStage("intro");
-                }}
-              >
-                Auta Kaarloa uudelleen
-              </button>
             </div>
           </section>
         )}

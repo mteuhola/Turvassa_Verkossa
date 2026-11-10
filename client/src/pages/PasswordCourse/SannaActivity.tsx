@@ -61,7 +61,7 @@ export default function SannaActivity({
   const [entryNames, setEntryNames] = useState<SannaPasswords>({});
   const [entryName, setEntryName] = useState("");
   const [planChoices, setPlanChoices] = useState<string[]>([]);
-  const [planOptions, setPlanOptions] = useState(() =>
+  const [planOptions] = useState(() =>
     createSannaPlanChoices(),
   );
   const [planCorrect, setPlanCorrect] = useState(false);
@@ -70,7 +70,7 @@ export default function SannaActivity({
   const [feedback, setFeedback] = useState("");
   const [managerOpen, setManagerOpen] = useState(false);
   const [login, setLogin] = useState("");
-  const [loginTask, setLoginTask] = useState(() => createSannaLoginTask());
+  const [loginTask] = useState(() => createSannaLoginTask());
   const heading = useRef<HTMLHeadingElement>(null);
   const loginInput = useRef<HTMLInputElement>(null);
   const previous = useRef(`${stage}:${index}`);
@@ -622,21 +622,6 @@ export default function SannaActivity({
                 >
                   Jatka eteenpäin
                 </Link>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIndex(0);
-                    setLoginTask(createSannaLoginTask());
-                    setPlanChoices([]);
-                    setPlanOptions(createSannaPlanChoices());
-                    setPlanCorrect(false);
-                    setFeedback("");
-                    setManagerOpen(false);
-                    setStage("intro");
-                  }}
-                >
-                  Auta Sannaa uudelleen
-                </button>
               </div>
             </section>
           )}

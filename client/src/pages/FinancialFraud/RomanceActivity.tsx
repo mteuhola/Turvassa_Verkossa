@@ -221,20 +221,6 @@ function RomanceActivity({
           </>
         )}
         <footer className={shared.footer}>
-          {submitted && (
-            <button
-              type="button"
-              onClick={() => {
-                setRound(0);
-                setSelections({});
-                setSubmitted(false);
-                window.scrollTo(0, 0);
-                heading.current?.focus({ preventScroll: true });
-              }}
-            >
-              Aloita tehtävä alusta
-            </button>
-          )}
           <p>
             Keskeneräinen tehtävä ei tallennu. Aiempi kurssisuoritus säilyy.
           </p>

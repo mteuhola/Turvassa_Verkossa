@@ -127,9 +127,6 @@ export default function SafeActionSequence({
           >
             Jatka: Auta Kaarloa
           </Link>
-          <button className={styles.action} onClick={() => reset(0)}>
-            Harjoittele uudelleen
-          </button>
         </div>
       </section>
     );

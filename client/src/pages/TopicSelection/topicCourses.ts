@@ -78,7 +78,7 @@ const courseCatalog: CourseCatalogEntry[] = [
         isComplete: false,
         title: "Sijoitushuijaukset",
         description:
-          "Lajittele Raijan kertomien viestien yksityiskohdat ja arvioi, kannattaisiko Simon sijoittaa.",
+          "Opi sijoitushuijauksista, ja pohdi sijoitustarjousta.",
         path: "/course/financial-fraud/investment-offers",
       },
     ],
@@ -108,7 +108,7 @@ export const topicCourses: TopicCourse[] = courseCatalog.map(
               kind: "activity" as const,
               isComplete: false,
               title: "Romanssihuijaukset",
-              description: "Lue romanssihuijauksista ja etsi varoitusmerkkejä Raijan verkkotuttavan viesteistä.",
+              description: "Lue romanssihuijauksista ja etsi varoitusmerkkejä viesteistä.",
               path: `${course.path}/theory`,
             },
           ]),

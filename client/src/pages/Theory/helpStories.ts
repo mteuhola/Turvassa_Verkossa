@@ -83,7 +83,7 @@ export const helpStories: Record<
     id: "help-raija",
     title: "Auta Raijaa",
     description:
-      "Pohdi Raijan verkkotuttavan rahapyyntöä ja sitä, miten ottaisit asian puheeksi.",
+      "Pohdi, miten Raija ja Simo voivat saada apua jouduttuaan huijauksen uhreiksi, ja kuinka heidän kuuluu toimia.",
     content: {
       characterName: "Raija",
       sections: [

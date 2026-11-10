@@ -10,14 +10,14 @@
 }
 .introduction {
   display: grid;
-  grid-template-columns: 5rem minmax(0, 1fr);
+  grid-template-columns: 8rem minmax(0, 1fr);
   align-items: start;
   gap: 24px;
   margin-block: 24px 32px;
 }
 .portrait {
   width: 100%;
-  max-width: 5rem;
+  max-width: 8rem;
 }
 .introQuote {
   margin: 0;
@@ -277,8 +277,5 @@
   .introduction {
     grid-template-columns: 1fr;
     gap: 16px;
-  }
-  .portrait {
-    max-width: 4rem;
   }
 }

@@ -10,6 +10,7 @@ export interface TheoryContent {
     heading?: string;
     paragraphs: string[];
     image?: TheoryImage;
+    characterPortrait?: boolean;
   }[];
 }
 
@@ -111,11 +112,10 @@ export const courseIntroductions: Record<string, TheoryContent> = {
         ],
       },
       {
-        heading: "Kurssin rakenne",
+        heading: "Kurssin tehtävät",
+        characterPortrait: true,
         paragraphs: [
-          "",
-          "",
-          "",
+          "Tämän kurssin johdanto-osiossa ei ole tehtävää: myöhempien osioiden tehtävät liittyvät kuvitteellisten hahmojen, Raijan (kuva alapuolella) ja hänen ystävänsä Simon, kohtaamiin luottamusta vaativiin tilanteisiin. ",
         ],
       },
     ],
@@ -188,7 +188,7 @@ export const phishingTheory: TheoryContent = {
   ],
 };
 
-export const financialTheoryOne: TheoryContent = {
+export const investmentTheory: TheoryContent = {
   sections: [
     {
       heading: "Epäilyttävän viestin vastaanottaminen",
@@ -217,7 +217,7 @@ export const financialTheoryOne: TheoryContent = {
   ],
 };
 
-export const financialTheoryTwo: TheoryContent = {
+export const romanceTheory: TheoryContent = {
   sections: [
     {
       heading: "Epäilyttävän viestin vastaanottaminen",

@@ -1,5 +1,9 @@
 ﻿import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import Theory from "../Theory/Theory";
+import { investmentTheory } from "../Theory/theoryData";
+import { topicCourses } from "../TopicSelection/topicCourses";
 import CourseBook from "../../components/CourseBook";
 import TopicCompletionProgress from "../../components/TopicCompletionProgress";
 import Navbar from "../../components/Navbar";
@@ -26,7 +30,31 @@ const categories = [
   { suspicious: false, label: "Ei yksin herätä epäilyä" },
 ];
 
-export default function InvestmentActivity({
+export default function InvestmentLesson(
+  props: TextSizeProps & ActivityProgressProps,
+) {
+  const [reading, setReading] = useState(true);
+
+  if (reading) {
+    const course = topicCourses.find((item) => item.id === "financial-fraud")!;
+    const topic = course.topics.find((item) => item.id === "investment-offers")!;
+    return (
+      <Theory
+        {...props}
+        course={course}
+        topic={{ ...topic, kind: "theory", content: investmentTheory }}
+        continuation={{
+          label: "Jatka tehtävään",
+          onContinue: () => setReading(false),
+        }}
+      />
+    );
+  }
+
+  return <InvestmentActivity {...props} />;
+}
+
+function InvestmentActivity({
   isComplete,
   onComplete,
   ...textSizeProps
@@ -49,6 +77,10 @@ export default function InvestmentActivity({
   const nextRef = useRef<HTMLButtonElement>(null);
   const resultRef = useRef<HTMLHeadingElement>(null);
   const cards = useRef(new Map<string, HTMLButtonElement>());
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    (resultRef.current ?? headingRef.current)?.focus({ preventScroll: true });
+  }, []);
   const review = round === investmentMessages.length;
   const message =
     investmentMessages[Math.min(round, investmentMessages.length - 1)];
@@ -175,7 +207,7 @@ export default function InvestmentActivity({
               className={styles.continueLink}
               to="/course/financial-fraud/theory"
             >
-              Jatka teoriaan →
+              Jatka romanssihuijauksiin →
             </Link>
           </section>
         ) : (
@@ -187,12 +219,12 @@ export default function InvestmentActivity({
                 </div>
                 <blockquote className={styles.introQuote}>
                   <p>
-                    Ystäväni Simo kertoi, että häneen otettiin yhteyttä ja
+                    "Ystäväni Simo kertoi, että häneen otettiin yhteyttä ja
                     kannustettiin sijoittamaan erääseen lomakylään. En tiedä,
                     mitä ajatella tästä. Voisitko auttaa minua arvioimaan
-                    tarjouksen luotettavuutta?
+                    tarjouksen luotettavuutta?"
                   </p>
-                  <footer>Raija</footer>
+                  <p>- Raija</p>
                 </blockquote>
               </div>
             )}
@@ -236,7 +268,7 @@ export default function InvestmentActivity({
             )}
             {!submitted && (
               <p id="sorting-help">
-                Vedä kohdat haluamiisi laatikoihin tai valitse kohta ja
+                Klikkaa ja raahaa kohdat haluamiisi laatikoihin tai valitse kohta ja
                 laatikko. Voit siirtää kohtia laatikosta toiseen.
               </p>
             )}

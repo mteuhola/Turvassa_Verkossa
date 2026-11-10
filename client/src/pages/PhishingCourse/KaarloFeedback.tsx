@@ -56,7 +56,7 @@ export default function KaarloFeedback({
       {response && (
         <div className={styles.kaarloConcern}>
           <div className={styles.kaarloPortrait}>
-            <CharacterPortrait courseId="phishing" />
+            <CharacterPortrait courseId="phishing" complete />
           </div>
           <p>{response}</p>
         </div>

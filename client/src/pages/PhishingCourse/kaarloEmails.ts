@@ -25,7 +25,7 @@ export const kaarloEmails = [
     explanation:
       "Tämä viesti on epäilyttävä. Kaarlo ei tunne palvelua eikä osallistunut arvontaan. Odottamaton palkinto, kiire, maksupyyntö ja runsaat kirjoitusvirheet vahvistavat epäilyä.",
     response:
-      "Kaarlo: En siis ole menettämässä oikeaa palkintoa, vaikken sellaista odottanutkaan. Ilmoitan viestin huijaukseksi.",
+      "Kaarlo: En siis ole menettämässä oikeaa palkintoa, vaikken sellaista toisaalta odottanutkaan. Ilmoitan viestin huijaukseksi.",
   },
   {
     id: "delivery",

@@ -105,12 +105,11 @@ export const topicCourses: TopicCourse[] = courseCatalog.map(
         : [
             {
               id: "theory",
-              kind: "theory" as const,
+              kind: "activity" as const,
               isComplete: false,
-              title: "Teoria",
-              description: "",
+              title: "Romanssihuijaukset",
+              description: "Lue romanssihuijauksista ja etsi varoitusmerkkejä Raijan verkkotuttavan viesteistä.",
               path: `${course.path}/theory`,
-              content: { sections: [] },
             },
           ]),
       {

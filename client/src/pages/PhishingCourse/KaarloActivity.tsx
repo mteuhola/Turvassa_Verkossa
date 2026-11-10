@@ -60,7 +60,7 @@ export default function KaarloActivity({
                   ? (email?.context ?? "")
                   : stage === "recovery"
                     ? "Kaarlo: Minua hieman nolottaa, mutta minun täytyy tunnustaa jotakin. Avasin kolme päivää sitten yhden viestin linkin. En osannut epäillä viestin aitoutta ollenkaan, ja annoin sivustolle tietojani. Sen jälkeen huijausviestejä on tuntunut tulevan enemmän. Mitä minun pitäisi nyt tehdä?"
-                    : "Kaarlo: Kiitos, että autoit minua arvioimaan viestejä rauhassa."}
+                    : "Kaarlo: Kiitos, että autoit minua arvioimaan viestejä rauhassa. Nyt uskallan taas lukea viestini. Kiitos paljon avustasi!"}
             </p>
           </div>
         )}
@@ -100,7 +100,6 @@ export default function KaarloActivity({
         {stage === "complete" && (
           <section>
             <TopicCompletionProgress />
-            <p>”Nyt uskallan taas lukea viestini. Kiitos paljon avustasi!”</p>
             <p>
               Onneksi Kaarlo kertoi tapahtuneesta, jolloin pystyitte yhdessä
               selvittämään tilannetta.

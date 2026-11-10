@@ -41,6 +41,9 @@ function LegacyFinancialRoute() {
 const InvestmentActivity = lazy(
   () => import("./pages/FinancialFraud/InvestmentActivity"),
 );
+const RomanceActivity = lazy(
+  () => import("./pages/FinancialFraud/RomanceActivity"),
+);
 
 const Theory = lazy(() => import("./pages/Theory/Theory"));
 const SannaActivity = lazy(
@@ -53,6 +56,7 @@ const KaarloActivity = lazy(
 );
 
 const activityRoutes = [
+  { path: "/course/financial-fraud/theory", Component: RomanceActivity },
   {
     path: "/course/financial-fraud/investment-offers",
     Component: InvestmentActivity,

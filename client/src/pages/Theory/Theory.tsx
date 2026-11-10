@@ -146,6 +146,11 @@ function TheoryPages({
                       )}
                     </figure>
                   )}
+                  {page.characterPortrait && (
+                    <div className={styles.portrait}>
+                      <CharacterPortrait courseId={course.id} />
+                    </div>
+                  )}
                 </section>
               )}
             </article>

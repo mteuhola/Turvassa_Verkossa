@@ -1,0 +1,94 @@
+.message {
+  min-width: 0;
+  max-width: 70ch;
+  margin: 24px 0;
+  padding: 0;
+  border: 0;
+}
+.message legend {
+  font-weight: 600;
+}
+.sender {
+  color: var(--course-notice-ink);
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+.raija,
+.incoming {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 12px;
+}
+.raija {
+  margin-left: clamp(0px, 5vw, 48px);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.raija blockquote {
+  margin: 0;
+}
+.incoming {
+  background: var(--course-tint);
+}
+.messageText {
+  margin: 0;
+  line-height: 2.3;
+}
+.message button.part {
+  display: inline-block;
+  margin: 4px 3px;
+  vertical-align: top;
+  min-height: 0;
+  padding: 5px 2px;
+  border: 2px solid var(--course-ink);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  line-height: 1.8;
+  text-align: left;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: background-color 150ms ease-out;
+}
+.message button.part:hover:not(:disabled) {
+  background: var(--surface);
+  outline: 1px solid var(--course-ink);
+  outline-offset: 1px;
+}
+.message button.part[aria-pressed="true"] {
+  background: var(--surface);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  outline: none;
+}
+.message button.part:focus-visible {
+  outline: 3px solid var(--course-ink);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .message button.part {
+    transition: none;
+  }
+}
+.noConcern {
+  margin-top: 28px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.summary {
+  list-style: none;
+  padding: 0;
+}
+.summary li {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.summary blockquote {
+  margin: 16px 0;
+  font-style: italic;
+}

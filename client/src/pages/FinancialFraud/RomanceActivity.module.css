@@ -92,3 +92,58 @@
   margin: 16px 0;
   font-style: italic;
 }
+.evidenceChoice {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+.passageChoices {
+  display: grid;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin-block: 24px;
+}
+.choiceStatus {
+  display: block;
+  margin-top: 12px;
+  font-weight: 600;
+}
+.reviewContinue {
+  margin-top: 16px;
+}
+.reasons {
+  border: 0;
+  padding: 0;
+  margin-block: 28px;
+  min-width: 0;
+}
+.reasons legend {
+  font-weight: 600;
+}
+.reasons label {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-block: 12px;
+  cursor: pointer;
+}
+.reasons input {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  accent-color: var(--course-ink);
+}
+.excerpt {
+  margin: 0;
+}
+.reflection {
+  margin-block: 28px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.reflection blockquote {
+  margin: 16px 0 0;
+}

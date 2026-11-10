@@ -1,6 +1,6 @@
 export const romanceMessages = [
   {
-    title: "Tutustuminen",
+    title: "Tutustuminen - 1 kuukausi",
     raija:
       "Kävin tänään pitkällä metsäkävelyllä. Oli niin kaunis ilma, että aika kului ihan huomaamatta. Miten sinun päiväsi on sujunut?",
     parts: [
@@ -14,7 +14,7 @@ export const romanceMessages = [
     hint: "Mieti, pyydetäänkö Raijaa tässä tekemään jotain huolestuttavaa. Pelkkä ystävällinen keskustelu ei ole varoitusmerkki.",
   },
   {
-    title: "Salaisuus ja rakkauden tunnustaminen",
+    title: "Salaisuus ja rakkauden tunnustaminen - 2 kuukautta",
     raija:
       "Hei, Hermanni! Ystäväni Simo kävi tänään kylässä ja kyseli kuulumisiani. Ajattelin kertoa hänelle sinusta, kun olemme jo jonkin aikaa jutelleet.",
     parts: [
@@ -28,7 +28,7 @@ export const romanceMessages = [
     hint: "Etsi lause, jossa tuttava yrittää estää Raijaa puhumasta läheistensä kanssa.",
   },
   {
-    title: "Tapaamisen suunnittelu",
+    title: "Tapaamisen suunnittelu - 6 kuukautta",
     raija:
       "Olemme jutelleet jo niin pitkään, että olisi mukava viimein nähdä kasvotusten. Täällä satamassa on viihtyisä kahvila, jossa voisimme käydä. Mitä ajattelet?",
     parts: [
@@ -42,7 +42,7 @@ export const romanceMessages = [
     hint: "Raija ei ole vielä tavannut tuttavaa kasvotusten. Etsi lause, jossa tuttava pyytää häneltä rahaa.",
   },
   {
-    title: "Raija epäröi",
+    title: "Raija epäröi - 6 kuukautta",
     raija:
       "200 euroa on minulle aika iso summa. Pidän kyllä sinusta, mutta tuntuu vähän oudolta lähettää rahaa ihmiselle, jota en ole vielä tavannut. Voisimmeko siirtää tapaamista siihen asti, että saat matkarahat kasaan?",
     parts: [
@@ -56,9 +56,9 @@ export const romanceMessages = [
     hint: "Etsi lause, jossa Raijan pitäisi todistaa välittämisensä lähettämällä rahaa.",
   },
   {
-    title: "Uusi este tapaamiselle",
+    title: "Uusi este tapaamiselle - 8 kuukautta",
     raija:
-      "Lähetin sinulle lopulta ne 200 euroa, kun lupasit maksaa ne takaisin. Oletko nyt saanut lentoliput ostettua? Olisi mukava tietää, milloin olet tulossa.",
+      "Hei! Anteeksi, ettei minusta ole kuulunut hetkeen. Lähetin sinulle lopulta ne 200 euroa, kun lupasit maksaa ne takaisin. Oletko nyt saanut lentoliput ostettua? Olisi mukava tietää, milloin olet tulossa.",
     parts: [
       "Kiitos vielä, rakas, olet minulle todella tärkeä. Minun piti lähteä huomenna, mutta veljeni joutui eilen pahaan onnettomuuteen ja on nyt sairaalassa.",
       "Sairaalasta tuli vielä yllättäviä kuluja, eikä minulla ole enää rahaa niiden maksamiseen.",

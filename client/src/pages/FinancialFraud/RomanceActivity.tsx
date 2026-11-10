@@ -11,6 +11,8 @@ import Theory from "../Theory/Theory";
 import { romanceTheory } from "../Theory/theoryData";
 import { topicCourses } from "../TopicSelection/topicCourses";
 import { romanceMessages } from "./romanceMessages";
+import RomanceReview from "./RomanceReview";
+import type { Evidence } from "./romanceConcerns";
 import shared from "./InvestmentActivity.module.css";
 import styles from "./RomanceActivity.module.css";
 
@@ -43,7 +45,6 @@ function RomanceActivity({
 }: TextSizeProps & ActivityProgressProps) {
   const [round, setRound] = useState(0);
   const [selections, setSelections] = useState<Record<number, number[]>>({});
-  const [answer, setAnswer] = useState<"yes" | "no" | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null);
   const review = round === romanceMessages.length;
@@ -73,13 +74,8 @@ function RomanceActivity({
     setRound(round + 1);
   }
 
-  function finish() {
-    if (
-      !answer ||
-      submitted ||
-      !romanceMessages.every((_, index) => selections[index] !== undefined)
-    )
-      return;
+  function finish(completedEvidence: Evidence[]) {
+    if (submitted || completedEvidence.length === 0) return;
     setSubmitted(true);
     onComplete();
   }
@@ -97,12 +93,8 @@ function RomanceActivity({
         {submitted ? (
           <section className={shared.result}>
             <h2 ref={heading} tabIndex={-1}>
-              Oma arviosi
+              Mitä viesteistä selvisi?
             </h2>
-            <p>
-              Pitäisikö Raijan suhde Hermannin kanssa?{" "}
-              <strong>{answer === "yes" ? "Kyllä." : "Ei."}</strong>
-            </p>
             <p>
               Viesteissä yhdistyvät salailu, toistuvat rahapyynnöt ja
               syyllistäminen. Kokonaisuus antaa syyn epäillä romanssihuijausta,
@@ -118,8 +110,9 @@ function RomanceActivity({
                   Hermanni on tullut minulle tärkeäksi, joten tätä on vaikea
                   katsoa ulkopuolisen silmin. Nyt haluan pysähtyä miettimään,
                   mitä suhteessamme tapahtuu. Tarvitsen vielä apua seuraavien
-                  askelten kanssa: maksoin tuon 300€ hänen veljensä sairaalakuluihin, 
-                  mutta sen jälkeen hänestä ei ole kuulunut mitään. Onkohan hän kunnossa?”
+                  askelten kanssa: maksoin tuon 300€ hänen veljensä
+                  sairaalakuluihin, mutta sen jälkeen hänestä ei ole kuulunut
+                  mitään. Onkohan hän kunnossa?”
                 </p>
                 <p>- Raija</p>
               </blockquote>
@@ -133,73 +126,18 @@ function RomanceActivity({
             </Link>
           </section>
         ) : review ? (
-          <section className={shared.result}>
-            <h2 ref={heading} tabIndex={-1}>
-              Omat havaintosi
-            </h2>
-            <p>
-              Tässä ovat epäilyttäviksi merkitsemäsi kohdat. Tarkastele
-              keskustelua kokonaisuutena ja kerro lopuksi arviosi Raijalle.
-            </p>
-            <ul className={styles.summary}>
-              {romanceMessages.map((item, index) => (
-                <li key={item.title}>
-                  <h3>{item.title}</h3>
-                  {selections[index]?.length ? (
-                    item.parts.map(
-                      (part, partIndex) =>
-                        selections[index].includes(partIndex) && (
-                          <blockquote key={partIndex}>{part}</blockquote>
-                        ),
-                    )
-                  ) : (
-                    <p>
-                      Et merkinnyt tästä viestistä mitään erityisen
-                      epäilyttävää.
-                    </p>
-                  )}
-                  <button
-                    type="button"
-                    onClick={() => setRound(index)}
-                    aria-label={`Muokkaa valintoja: ${item.title}`}
-                  >
-                    Muokkaa valintoja
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <section className={shared.decision}>
-              <fieldset>
-                <legend>Pitäisikö Raijan lopettaa tämä suhde?</legend>
-                <label>
-                  <input
-                    type="radio"
-                    name="romance-decision"
-                    checked={answer === "yes"}
-                    onChange={() => setAnswer("yes")}
-                  />
-                  Kyllä
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="romance-decision"
-                    checked={answer === "no"}
-                    onChange={() => setAnswer("no")}
-                  />
-                  Ei
-                </label>
-              </fieldset>
-              <button
-                type="button"
-                className={shared.primary}
-                disabled={!answer}
-                onClick={finish}
-              >
-                Vastaa ja päätä tehtävä
-              </button>
-            </section>
-          </section>
+          <RomanceReview
+            selections={selections}
+            onRetry={() => {
+              if (
+                !Object.values(selections).some((parts) => parts.length > 0)
+              ) {
+                setSelections({});
+                setRound(0);
+              }
+            }}
+            onFinish={finish}
+          />
         ) : (
           <>
             {round === 0 && (
@@ -213,7 +151,9 @@ function RomanceActivity({
                   kuukauden ajan, ja hänestä on tullut minulle tärkeä. Viime
                   aikoina olemme puhuneet myös tapaamisesta, mutta jotkin asiat
                   keskusteluissamme ovat jääneet mietityttämään minua. Voisitko
-                  lukea viestimme ja kertoa, mitä mieltä olet?"
+                  lukea viestimme ja kertoa, mitä mieltä olet? Näytän sinulle
+                  viestit, ja tiedon, kuinka kauan olemme siinä kohdassa
+                  jutelleet."
                   <br />- Raija
                 </p>
               </div>
@@ -225,8 +165,8 @@ function RomanceActivity({
               Valitse Hermannin viestistä yksi tai useampi kohta, joka herättää
               sinussa epäilyn. Voit poistaa valinnan painamalla kohtaa
               uudelleen. Jos mikään kohta ei herätä epäilyä, valitse viestin
-              alapuolella oleva vaihtoehto. <strong>Valintoja ei arvioida oikeiksi tai
-              vääriksi.</strong>
+              alapuolella oleva vaihtoehto.{" "}
+              <strong>Valintoja ei arvioida oikeiksi tai vääriksi.</strong>
             </p>
             <fieldset
               className={styles.message}
@@ -277,39 +217,24 @@ function RomanceActivity({
                   ? "Katso yhteenveto"
                   : "Seuraava viesti"}
               </button>
-              {round > 0 && (
-                <button type="button" onClick={() => setRound(round - 1)}>
-                  Edellinen viesti
-                </button>
-              )}
-              {romanceMessages.every(
-                (_, index) => selections[index] !== undefined,
-              ) &&
-                round < romanceMessages.length - 1 && (
-                  <button
-                    type="button"
-                    onClick={() => setRound(romanceMessages.length)}
-                  >
-                    Palaa yhteenvetoon
-                  </button>
-                )}
             </div>
           </>
         )}
         <footer className={shared.footer}>
-          <button
-            type="button"
-            onClick={() => {
-              setRound(0);
-              setSelections({});
-              setAnswer(null);
-              setSubmitted(false);
-              window.scrollTo(0, 0);
-              heading.current?.focus({ preventScroll: true });
-            }}
-          >
-            Aloita tehtävä alusta
-          </button>
+          {submitted && (
+            <button
+              type="button"
+              onClick={() => {
+                setRound(0);
+                setSelections({});
+                setSubmitted(false);
+                window.scrollTo(0, 0);
+                heading.current?.focus({ preventScroll: true });
+              }}
+            >
+              Aloita tehtävä alusta
+            </button>
+          )}
           <p>
             Keskeneräinen tehtävä ei tallennu. Aiempi kurssisuoritus säilyy.
           </p>

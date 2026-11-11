@@ -120,9 +120,6 @@ function TheoryPages({
               inert={index !== pageIndex}
               data-active={index === pageIndex}
             >
-              <p className={styles.pageCount}>
-                Sivu {index + 1} / {Math.max(1, pages.length)}
-              </p>
               {page && (
                 <section className={styles.section}>
                   {page.heading && <h2>{page.heading}</h2>}

@@ -108,7 +108,7 @@ export const courseIntroductions: Record<string, TheoryContent> = {
         paragraphs: [
           "Romanssihuijaukset ovat huijausten muoto, jossa huijari tavoittelee taloudellista hyötyä hyväksikäyttämällä näennäisesti romanttista suhdettaan kohteensa kanssa. Huijari voi tutustumisvaiheessa esiintyä romanttisesta suhteesta kiinnostuneena henkilönä, vaikka hänen todellinen tarkoituksensa on hyötyä kohteestaan ainoastaan rahallisesti.",
           "Romanssihuijaukset alkavat nykyään usein internetissä, esimerkiksi seuranhakupalveluissa tai sosiaalisessa mediassa, ja kuten sijoitushuijaukset, romanssihuijaukset kohdistuvat kaikkiin ikäluokkiin. Huijari voi käyttää itsestään väärää nimeä, kuvia tai muita tietoja, kuten ammattia, vaikuttaakseen luotettavalta.",
-          "Kun luottamus on syntynyt, huijari voi kertoa tarvitsevansa rahaa esimerkiksi matkustaakseen tavatakseen uutta tuttavuuttaan, tai jouduttuaan yllättävään vaikeuteen, kuten sairastuneensa äkillisesti. Huijari voi myös yrittää saada kohteensa tuntemaan syyllisyyttä tai painostaa kohdettaan, jos tämä ei suostu auttamaan.",
+          "Kun luottamus on syntynyt, huijari voi kertoa tarvitsevansa rahaa esimerkiksi matkustaakseen tavatakseen uutta tuttavuuttaan, tai jouduttuaan yllättävään vaikeuteen, kuten sairastuneensa äkillisesti. Huijari voi myös yrittää saada kohteensa tuntemaan syyllisyyttä tai painostaa kohdettaan, jos tämä ei suostu auttamaan rahallisesti.",
         ],
       },
       {
@@ -220,27 +220,35 @@ export const investmentTheory: TheoryContent = {
 export const romanceTheory: TheoryContent = {
   sections: [
     {
-      heading: "Epäilyttävän viestin vastaanottaminen",
+      heading: "Miksi romanssihuijaukset onnistuvat?",
       paragraphs: [
-        "Jos saat viestin, joka herättää epäilystä, älä kiirehdi toimimaan viestin pyyntöjen mukaisesti. Vältä viestissä olevien linkkien ja liitetiedostojen avaamista äläkä vastaa viestiin. Monessa sähköpostissa on mahdollisuus merkitä viesti roskapostiksi ja/tai tietojenkalasteluksi, jolloin viesti siirtyy roskapostikansioon, ja sähköposti voi siirtää vastaavat viestit jatkossa roskapostiin itsestään.",
-        "Linkkien avaamisen sijaan voit hyödyntää verkkoselaimesi kirjanmerkkejä tai älypuhelimen sovelluksia: jos olet tallentanut palvelun oikean verkko-osoitteen kirjanmerkiksi selaimeen tai asentanut palvelun puhelinsovelluksen, voit siirtyä palveluun tätä kautta ja varmistaa viestin aiheellisuuden.",
-        "Jos saat läheiseltäsi poikkeuksellisen viestin oudosta puhelinnumerosta, voit varmistaa viestin aitouden ottamalla häneen yhteyttä esimerkiksi ennestään tuttuun puhelinnumeroon. Jos et tavoita läheistäsi, voit kysyä asiasta myös muilta yhteisiltä tutuilta. Älä noudata viestin ohjeita ennen kuin olet varmistanut, että viesti todella on läheiseltäsi.",
+        "Onnistuakseen romanssihuijarit hyödyntävät ihmisten tunteita, kuten ihastumista, luottamusta ja halua auttaa muita. Huijari voi esimerkiksi lähettää päivittäin romanttisia viestejä, kehua uutta tuttavuuttaan ja osoittaa kiinnostusta tämän elämää kohtaan. Tällainen huomio voi saada suhteen tuntumaan läheiseltä ja tärkeältä.",
+        "Huijari voi myös pyrkiä vahvistamaan luottamusta kertomalla omasta elämästään, tekemällä yhteisiä tulevaisuudensuunnitelmia tai lupaamalla lahjoja. Kun suhde tuntuu merkitykselliseltä, toisen henkilön kertomuksia voi olla vaikeampi epäillä. Huijarin tarkoituksena on saada toinen luottamaan häneen niin paljon, että tämä suostuu myöhemmin myös rahallisiin pyyntöihin.",
+        "Uusiin ihmisiin tutustuessa on luonnollista toivoa toisesta hyvää ja luottaa hänen vilpittömyyteensä. Romanssihuijarit käyttävät tätä luottamusta hyväkseen rakentamalla läheiseltä vaikuttavan suhteen ja vetoamalla toisen tunteisiin. Siksi huijauksen kohteeksi voi joutua kuka tahansa.",
       ],
     },
     {
-      heading: "Entä jos olen jo antanut tietojani?",
+      heading: "Millaisista merkeistä romanssihuijauksen voi tunnistaa?",
       paragraphs: [
-        "Jos olet antanut väärennetylle sivustolle salasanasi, vaihda se mahdollisimman pian kyseisen palvelun oikealla verkkosivustolla tai sovelluksessa. Jos olet käyttänyt samaa salasanaa muilla sivustoilla, vaihda salasana myös niissä.",
-        "Jos olet antanut pankkitunnuksesi tai maksukorttisi tiedot tai lähettänyt rahaa huijarille, ota mahdollisimman nopeasti yhteyttä pankkiisi sen virallisen puhelinnumeron kautta. Pankki voi auttaa estämään tunnusten tai korttien väärinkäytön ja mahdollisesti estämään huijaukseen liittyvät tilitapahtumat.",
-        "Huijauksesta kannattaa tehdä rikosilmoitus poliisille. Lisäksi tapahtuneesta voi ilmoittaa Traficomin Kyberturvallisuuskeskukselle, jotta he osaavat tiedottaa ajankohtaisista huijausilmiöistä. Rikosuhripäivystys (RIKU) tarjoaa myös verkkohuijausten kohteiksi joutuneille tukea ja käytännön neuvoja.",
+        "Romanssihuijaukseen voi viitata esimerkiksi se, että uusi tuttavuus alkaa puhua voimakkaista tunteista hyvin nopeasti tai vaatii jatkuvaa yhteydenpitoa. Hänen kertomuksissaan voi myös esiintyä ristiriitaisuuksia, kuten muuttuvia tietoja työpaikasta tai asuinpaikasta. Joskus huijari voi vältellä kasvokkain tapaamista ja keksiä toistuvasti esteitä sovituille tapaamisille.",
+        "Huijari voi myös yrittää vaikuttaa siihen, kenelle suhteesta kerrotaan. Hän saattaa esimerkiksi pyytää pitämään suhteen salassa tai väittää, etteivät läheiset ymmärtäisi sitä. Näin huijari voi pyrkiä estämään muita ihmisiä huomaamasta epäilyttäviä piirteitä suhteessa.",
+        "Yksittäinen merkki ei kuitenkaan automaattisesti tarkoita keskustelun vastapuolen olevan huijari. Tärkeämpää on huomioida useampia merkkejä yhdessä ja tarkastella keskustelua kokonaisuutena, sekä sitä, miten uusi tuttavuus suhtautuu epäilyksiin, kysymyksiin ja omiin päätöksiisi.",
       ],
     },
     {
-      heading: "Huijauksen kohteeksi joutumista ei tarvitse hävetä",
+      heading: "Millaisia rahapyyntöjä romanssihuijauksiin liittyy?",
       paragraphs: [
-        "Huijausviestit voivat olla nykyisin hyvinkin uskottavia, ja kuka tahansa voi erehtyä luottamaan sellaiseen. Jos huomaat joutuneesi huijatuksi, tapahtunutta ei tarvitse hävetä, eikä asian kanssa tarvitse jäädä yksin.",
-        "Tapahtumasta voi kertoa esimerkiksi läheiselle tai muulle luotettavalle henkilölle. Voitte yhdessä selvittää tapahtunutta, ja toinen henkilö voi auttaa sinua tarvittavissa asioissa, kuten salasanojen vaihtamisessa. Avun pyytäminen on järkevä tapa toimia!",
-        "Huijauksesta ilmoittaminen auttaa myös muita: jos poliisi saa tietoa tapahtuneista huijauksista, se voi edistää verkkorikosten selvittämistä ja samanlaisten huijausten tunnistamista jatkossa.",
+        "Romanssihuijauksissa rahaa voidaan pyytää monella eri tavalla. Tavallisen tilisiirron sijaan huijari voi esimerkiksi pyytää ostamaan lahjakortteja ja lähettämään niiden numerot ja koodit. Lahjakortin arvon voi käyttää näiden tietojen avulla ilman, että itse korttia tarvitsee lähettää kenellekään. Näin huijari voi saada rahaa tavalla, jota on vaikea jäljittää.",
+        "Rahapyynnöt liittyvät usein yllättäviin vaikeuksiin, joihin huijari kertoo tarvitsevansa kiireellisesti apua. Jos toinen ei suostu lähettämään rahaa, huijari voi vedota tämän tunteisiin tai yrittää saada hänet tuntemaan syyllisyyttä. Hän voi esimerkiksi väittää, ettei toinen todella välitä hänestä, jos ei suostu auttamaan.",
+        "Joskus huijari voi myös houkutella uutta tuttavuuttaan sijoittamaan rahaa hänen suosittelemaansa palveluun. Tällöin romanssihuijaus yhdistyy sijoitushuijaukseen, jossa luottamusta ja läheistä suhdetta käytetään sijoittamiseen houkuttelemisessa.",
+      ],
+    },
+    {
+      heading: "Mistä apua romanssihuijaukseen?",
+      paragraphs: [
+        "Romanssihuijauksesta voi aiheutua sekä taloudellista että henkistä vahinkoa. Rahojen menettämisen lisäksi voi olla raskasta huomata, ettei läheiseksi ja tärkeäksi muodostunut ihminen ollutkaan se, joka hän väitti olevansa. Vaikka suhde olisi perustunut huijaukseen, sen aikana koetut tunteet ovat voineet olla täysin aitoja.",
+        "Jos epäilet joutuneesi romanssihuijauksen kohteeksi, lopeta yhteydenpito epäiltyyn huijariin ja säilytä keskustelut sekä muut tapahtumaan liittyvät tiedot. Jos olet lähettänyt rahaa, ota mahdollisimman nopeasti yhteyttä pankkiisi ja tee tapahtuneesta rikosilmoitus poliisille. Tapahtuneesta on tärkeää myös keskustella läheisen tai muun luotettavan henkilön kanssa. Hän voi tarjota kuuntelevaa tukea ja auttaa tarvittaessa esimerkiksi rikosilmoituksen tekemisessä.",
+        "Huijaukseen joutumista ei tarvitse hävetä, eikä tapahtuneesta tarvitse selviytyä yksin. Läheisten lisäksi tukea voi saada esimerkiksi Rikosuhripäivystyksestä (RIKU). Myös Nettideittiturvan verkkosivuilta löytyy maksutonta omatukimateriaalia, joka auttaa käsittelemään tapahtunutta ja siihen liittyviä tunteita. Huijauksesta on mahdollista toipua, vaikka se veisi aikaa.",
       ],
     },
   ],

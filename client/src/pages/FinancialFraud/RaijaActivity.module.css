@@ -1,0 +1,221 @@
+.chapters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  padding: 0 0 20px;
+  list-style: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.chapters [aria-current] {
+  color: var(--course-ink);
+  font-weight: 700;
+}
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(13rem, 1fr) minmax(0, 2.3fr);
+  gap: 32px;
+  margin-top: 28px;
+  align-items: start;
+}
+.sidebar {
+  min-width: 0;
+}
+.tools {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.tools button[aria-current] {
+  background: var(--course-tint);
+  border-color: var(--course-ink);
+  color: var(--course-notice-ink);
+  font-weight: 700;
+}
+.desk {
+  min-width: 0;
+  padding: clamp(16px, 3vw, 28px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.desk h4 {
+  margin: 24px 0 8px;
+  font-size: 1em;
+}
+.desk > h3 {
+  margin-bottom: 20px;
+}
+.desk p {
+  margin-block: 12px 20px;
+}
+.quote {
+  margin: 20px 0;
+  padding: 20px;
+  background: var(--course-tint);
+  border-radius: 12px;
+  color: var(--course-notice-ink);
+}
+.quote p {
+  margin-top: 0;
+}
+.quote footer {
+  font-size: 0.875em;
+}
+.stack {
+  display: grid;
+  gap: 12px;
+  margin-block: 20px;
+}
+.workspace .primary,
+.primary.primary {
+  background: var(--course-ink);
+  color: var(--surface);
+  border-color: var(--course-ink);
+  margin-block: 12px;
+}
+.primary:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+.workspace button:focus-visible,
+.primary:focus-visible,
+.document summary:focus-visible,
+.desk a:focus-visible {
+  outline: 3px solid var(--course-ink);
+  outline-offset: 4px;
+}
+.small {
+  font-size: 0.875em;
+  color: var(--text-muted);
+}
+.goals {
+  padding: 0;
+  list-style: none;
+  font-size: 0.875em;
+}
+.goals li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-block: 12px;
+}
+.goals li[data-done="true"] {
+  color: var(--course-ink);
+}
+.marker {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border: 1px solid var(--course-ink);
+  border-radius: 50%;
+}
+[data-done="true"] .marker {
+  background: var(--course-ink);
+}
+.response {
+  color: var(--course-notice-ink);
+  font-weight: 500;
+}
+.document {
+  border-block-end: 1px solid var(--border);
+  padding-block: 16px;
+}
+.document summary {
+  cursor: pointer;
+  padding: 8px 0;
+  min-height: 48px;
+  font-weight: 500;
+}
+.document p {
+  white-space: pre-line;
+}
+.folder {
+  font-weight: 500;
+  color: var(--course-ink);
+}
+.report {
+  background: var(--paper);
+  padding: 16px 20px;
+  margin-block: 20px;
+}
+.report h4:first-child {
+  margin-top: 0;
+}
+.feedback {
+  color: var(--course-notice-ink);
+}
+.feedback:empty {
+  margin: 0;
+}
+.call {
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+}
+.finish {
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+  padding-top: 16px;
+}
+.story {
+  max-width: 65ch;
+}
+.simoPractice {
+  max-width: 32rem;
+}
+.sourceNote {
+  margin-block: 24px;
+  padding-block: 20px;
+  border-block: 1px solid var(--border);
+}
+.sourceNote p {
+  margin-block: 12px;
+}
+.bankAccount {
+  padding: 20px;
+  background: var(--course-tint);
+  color: var(--course-notice-ink);
+  border-radius: 12px;
+}
+.bankAccount p {
+  margin-bottom: 0;
+}
+.noteReason {
+  color: var(--course-notice-ink);
+  font-size: 0.875em;
+}
+.noteReason:empty {
+  display: none;
+}
+.takeaway {
+  font-weight: 700;
+  color: var(--course-notice-ink);
+}
+.simoPractice button:focus-visible,
+.simoPractice a:focus-visible {
+  outline: 3px solid var(--course-ink);
+  outline-offset: 4px;
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media (max-width: 1100px) {
+  .workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tools {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  }
+  .goals {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+  }
+  .goals li {
+    margin-block: 6px;
+  }
+}

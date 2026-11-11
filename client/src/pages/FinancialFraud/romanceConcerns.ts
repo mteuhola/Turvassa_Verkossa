@@ -31,7 +31,7 @@ export const reflections: Record<Concern, string> = {
   delay:
     "Odotin tapaamista, mutta maksamisen jälkeen tulikin uusi este. Kun katson viestejä yhdessä, huomaan, ettei tapaaminen ole edennyt lupauksista huolimatta.",
   love:  
-    "Ajattelin, että sovimme yhteen nopeasti, kun aloimme jo puhua rakkaudesta. Nyt kun ajattelen asiaa, Hermanni puhui rakkaudesta todella aikaisessa vaiheessa jutteluamme.",
+    "Ajattelin, että sovimme yhteen nopeasti, kun aloimme jo puhua rakkaudesta. Nyt kun ajattelen asiaa, Hermanni on puhunut rakkaudesta jo todella aikaisessa vaiheessa jutteluamme...",
   none: "Tämä kohta ei yksin kerro huijauksesta. Ystävällisyys tai vaikeuksista kertominen voi kuulua tavalliseen keskusteluun. Minun pitää katsoa myös, mitä muissa viesteissä pyydetään.",
 };
 

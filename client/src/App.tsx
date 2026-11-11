@@ -44,6 +44,9 @@ const InvestmentActivity = lazy(
 const RomanceActivity = lazy(
   () => import("./pages/FinancialFraud/RomanceActivity"),
 );
+const RaijaActivity = lazy(
+  () => import("./pages/FinancialFraud/RaijaActivity"),
+);
 
 const Theory = lazy(() => import("./pages/Theory/Theory"));
 const SannaActivity = lazy(
@@ -56,6 +59,7 @@ const KaarloActivity = lazy(
 );
 
 const activityRoutes = [
+  { path: "/course/financial-fraud/help-raija", Component: RaijaActivity },
   { path: "/course/financial-fraud/theory", Component: RomanceActivity },
   {
     path: "/course/financial-fraud/investment-offers",
@@ -154,6 +158,7 @@ function App() {
           {courses.flatMap((course) =>
             course.topics.map((topic) =>
               topic.kind === "theory" &&
+              topic.path !== "/course/financial-fraud/help-raija" &&
               topic.path !== "/course/phishing/help-kaarlo" &&
               topic.path !== "/course/phishing/introduction" &&
               topic.path !== "/course/passwords/introduction" &&

@@ -85,19 +85,29 @@ export function RecoverySupportLinks() {
   return (
     <details className={styles.document}>
       <summary>Lisää apua</summary>
-      <p>Säilytä viestit ja maksutiedot. Tee myös rikosilmoitus poliisille.</p>
+      <p>Tilanteen toteutuessa:</p>
+      <p>- Säilytä viestit ja maksutiedot. Tee myös rikosilmoitus poliisille.</p>
+      <p>
+        <a
+          href="https://poliisi.fi/tee-rikosilmoitus"
+          target="_blank"
+          rel="noreferrer"
+        >
+          - Poliisi: rikosilmoituksen tekeminen
+        </a>
+      </p>
       <p>
         <a
           href="https://www.riku.fi/nettihuijaus/"
           target="_blank"
           rel="noreferrer"
         >
-          RIKU: tukea ja neuvoja huijauksen jälkeen
+          - RIKU: tukea ja neuvoja huijauksen jälkeen
         </a>
       </p>
       <p>
         <a href="https://nettideittiturva.fi/" target="_blank" rel="noreferrer">
-          Nettideittiturva: apua romanssihuijauksen kokeneille
+          - Nettideittiturva: apua romanssihuijauksen kokeneille
         </a>
       </p>
       <p className={styles.small}>Linkit avautuvat uuteen välilehteen.</p>

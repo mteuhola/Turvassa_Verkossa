@@ -1,3 +1,7 @@
+.main {
+  max-width: 52rem;
+}
+
 .chapters {
   display: flex;
   flex-wrap: wrap;
@@ -10,44 +14,6 @@
 .chapters [aria-current] {
   color: var(--course-ink);
   font-weight: 700;
-}
-.workspace {
-  display: grid;
-  grid-template-columns: minmax(13rem, 1fr) minmax(0, 2.3fr);
-  gap: 32px;
-  margin-top: 28px;
-  align-items: start;
-}
-.sidebar {
-  min-width: 0;
-}
-.tools {
-  display: grid;
-  gap: 8px;
-  margin-bottom: 28px;
-}
-.tools button[aria-current] {
-  background: var(--course-tint);
-  border-color: var(--course-ink);
-  color: var(--course-notice-ink);
-  font-weight: 700;
-}
-.desk {
-  min-width: 0;
-  padding: clamp(16px, 3vw, 28px);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--surface);
-}
-.desk h4 {
-  margin: 24px 0 8px;
-  font-size: 1em;
-}
-.desk > h3 {
-  margin-bottom: 20px;
-}
-.desk p {
-  margin-block: 12px 20px;
 }
 .quote {
   margin: 20px 0;
@@ -62,12 +28,6 @@
 .quote footer {
   font-size: 0.875em;
 }
-.stack {
-  display: grid;
-  gap: 12px;
-  margin-block: 20px;
-}
-.workspace .primary,
 .primary.primary {
   background: var(--course-ink);
   color: var(--surface);
@@ -77,40 +37,16 @@
 .primary:hover:not(:disabled) {
   filter: brightness(0.92);
 }
-.workspace button:focus-visible,
 .primary:focus-visible,
 .document summary:focus-visible,
-.desk a:focus-visible {
+.recovery button:focus-visible,
+.recovery a:focus-visible {
   outline: 3px solid var(--course-ink);
   outline-offset: 4px;
 }
 .small {
   font-size: 0.875em;
   color: var(--text-muted);
-}
-.goals {
-  padding: 0;
-  list-style: none;
-  font-size: 0.875em;
-}
-.goals li {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-block: 12px;
-}
-.goals li[data-done="true"] {
-  color: var(--course-ink);
-}
-.marker {
-  width: 10px;
-  height: 10px;
-  flex-shrink: 0;
-  border: 1px solid var(--course-ink);
-  border-radius: 50%;
-}
-[data-done="true"] .marker {
-  background: var(--course-ink);
 }
 .response {
   color: var(--course-notice-ink);
@@ -129,32 +65,11 @@
 .document p {
   white-space: pre-line;
 }
-.folder {
-  font-weight: 500;
-  color: var(--course-ink);
-}
-.report {
-  background: var(--paper);
-  padding: 16px 20px;
-  margin-block: 20px;
-}
-.report h4:first-child {
-  margin-top: 0;
-}
 .feedback {
   color: var(--course-notice-ink);
 }
 .feedback:empty {
   margin: 0;
-}
-.call {
-  border-top: 1px solid var(--border);
-  margin-top: 20px;
-}
-.finish {
-  border-top: 1px solid var(--border);
-  margin-top: 32px;
-  padding-top: 16px;
 }
 .story {
   max-width: 65ch;
@@ -189,27 +104,28 @@
   outline: 3px solid var(--course-ink);
   outline-offset: 4px;
 }
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
+.recovery {
+  max-width: 38rem;
 }
-@media (max-width: 1100px) {
-  .workspace {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .tools {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
-  }
-  .goals {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 24px;
-  }
-  .goals li {
-    margin-block: 6px;
-  }
+.messenger {
+  margin-block: 24px;
+  padding: clamp(16px, 3vw, 24px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.messenger h3 {
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.125em;
+}
+.messenger p:last-child {
+  margin-bottom: 0;
+}
+.recovery button {
+  min-height: 48px;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }

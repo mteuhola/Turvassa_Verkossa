@@ -109,7 +109,7 @@ export default function KaarloActivity({
                 className={`${styles.action} ${styles.primaryAction}`}
                 to="/course/phishing/quiz"
               >
-                Jatka eteenpäin
+                Jatka tietovisaan
               </Link>
             </div>
           </section>

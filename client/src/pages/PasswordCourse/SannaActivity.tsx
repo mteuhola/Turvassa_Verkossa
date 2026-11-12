@@ -179,7 +179,7 @@ export default function SannaActivity({
                 ”Olen käyttänyt salasanaa <strong>mustikka3</strong> melkein
                 kaikkialla, koska se on helppo muistaa. Alan kuitenkin epäillä,
                 että se on liian helppo arvata. Haluaisin vaihtaa jokaiselle
-                palvelulle oman salasanan, mutta en oikein tiedä miten se
+                palvelulle oman salasanan, mutten oikein tiedä miten se
                 kannattaa tehdä. Auttaisitko minua?”
               </p>
               <ul className={own.accounts}>
@@ -612,7 +612,7 @@ export default function SannaActivity({
                   className={styles.primaryLink}
                   to="/course/passwords/quiz"
                 >
-                  Jatka eteenpäin
+                  Jatka tietovisaan
                 </Link>
               </div>
             </section>

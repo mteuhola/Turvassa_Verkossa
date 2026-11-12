@@ -134,8 +134,9 @@ export default function RomanceReview({
       {candidates.length > 0 ? (
         <>
           <p>
-            Valitse merkitsemistäsi kohdista 1-3 mielestäsi epäilyttävintä viestiä pohdintaan. Voit poistaa
-            valinnan painamalla samaa kohtaa uudelleen.
+            Valitse merkitsemistäsi kohdista 1-3 mielestäsi epäilyttävintä
+            viestiä pohdintaan. Voit poistaa valinnan painamalla samaa kohtaa
+            uudelleen.
           </p>
           <p role="status">
             Valittu {chosen.length}/3.
@@ -170,9 +171,7 @@ export default function RomanceReview({
                   >
                     {romanceMessages[candidate.message].parts[candidate.part]}
                     {picked && (
-                      <span className={styles.choiceStatus}>
-                        Valittu
-                      </span>
+                      <span className={styles.choiceStatus}>Valittu</span>
                     )}
                   </button>
                 </li>

@@ -4,7 +4,7 @@ import DebugProgressReset from "../../components/DebugProgressReset";
 import { debugToolsEnabled } from "../../progress/debug";
 import { Link } from "react-router-dom";
 import CourseProgress from "../../components/CourseProgress";
-import { LockIcon, EmailIcon, MaskIcon } from "../../components/icons";
+import { CourseIcon } from "../../components/icons";
 import type { TopicCourse } from "../TopicSelection/topicCourses";
 import type { TextSizeProps } from "../../components/TextSizeControl";
 import styles from "./CourseSelection.module.css";
@@ -61,15 +61,7 @@ export default function CourseSelection({
                     aria-labelledby={`${course.id}-title`}
                   >
                     <span className={styles.courseIcon} aria-hidden="true">
-                      {course.id === "passwords" && (
-                        <LockIcon color="currentColor" />
-                      )}
-                      {course.id === "phishing" && (
-                        <EmailIcon color="currentColor" />
-                      )}
-                      {course.id === "financial-fraud" && (
-                        <MaskIcon color="currentColor" />
-                      )}
+                      <CourseIcon courseId={course.id} />
                     </span>
                     <div className={styles.content}>
                       <h3 id={`${course.id}-title`}>{course.title}</h3>

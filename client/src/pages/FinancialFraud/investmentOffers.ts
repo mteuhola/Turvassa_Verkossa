@@ -56,7 +56,7 @@ export const investmentMessages = [
       },
     ],
   },
-    {
+  {
     message:
       "Simo kertoi, ettei nukkunut viime yönä hyvin miettiessään tarjousta. Hänelle nimittäin kerrottiin, että sijoitustarjous on voimassa vain ylihuomiseen, ja muuten tarjous esitetään jollekin toiselle, jos sijoitettujen rahojen kaksinkertaistaminen vuodessa ei kiinnosta. Myyjä pyysi siirtämään rahat yksityishenkilön tilille, jonka nimi ei vastaa yritystä, jonka nimissä sijoituksen tarjoaja alun perin soitti.",
     hasImage: false,

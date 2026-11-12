@@ -86,7 +86,9 @@ export function RecoverySupportLinks() {
     <details className={styles.document}>
       <summary>Lisää apua</summary>
       <p>Tilanteen toteutuessa:</p>
-      <p>- Säilytä viestit ja maksutiedot. Tee myös rikosilmoitus poliisille.</p>
+      <p>
+        - Säilytä viestit ja maksutiedot. Tee myös rikosilmoitus poliisille.
+      </p>
       <p>
         <a
           href="https://poliisi.fi/tee-rikosilmoitus"

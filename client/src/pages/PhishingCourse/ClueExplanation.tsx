@@ -37,15 +37,15 @@ export default function ClueExplanation({
       const target = anchor.getBoundingClientRect();
       const box = element.getBoundingClientRect();
       const right = target.right + 16;
-      const left =
-        right + box.width <= offsetX + width - 16
-          ? right
-          : target.left - box.width - 16 >= offsetX + 16
-            ? target.left - box.width - 16
-            : target.left;
+      const fitsRight = right + box.width <= offsetX + width - 16;
+      const fitsLeft = target.left - box.width - 16 >= offsetX + 16;
+      const left = fitsRight
+        ? right
+        : fitsLeft
+          ? target.left - box.width - 16
+          : target.left;
       const top =
-        right + box.width <= offsetX + width - 16 ||
-        target.left - box.width - 16 >= offsetX + 16
+        fitsRight || fitsLeft
           ? target.top
           : target.bottom + 16 + box.height <= offsetY + height - 16
             ? target.bottom + 16

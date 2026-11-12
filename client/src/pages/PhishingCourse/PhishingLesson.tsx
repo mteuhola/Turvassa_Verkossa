@@ -5,10 +5,9 @@ import type { TextSizeProps } from "../../components/TextSizeControl";
 import CompletionBadge from "../../components/CompletionBadge";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import Theory from "../Theory/Theory";
-import { courseIntroductions } from "../Theory/theoryData";
+import { courseIntroductions, phishingTheory } from "../Theory/theoryData";
 import { topicCourses } from "../TopicSelection/topicCourses";
 import PhishingCourse from "./PhishingCourse";
-import { phishingTheory } from "../Theory/theoryData";
 import SafeActionSequence from "./SafeActionSequence";
 import styles from "./PhishingCourse.module.css";
 

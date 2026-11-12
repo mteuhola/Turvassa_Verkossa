@@ -6,7 +6,6 @@ export default function KaarloFeedback({
   title,
   explanation,
   response,
-  complete,
   onDismiss,
   onConfirm,
   confirmLabel,
@@ -14,7 +13,6 @@ export default function KaarloFeedback({
   title: string;
   explanation: string;
   response?: string;
-  complete?: boolean;
   onDismiss: () => void;
   onConfirm: () => void;
   confirmLabel?: string;
@@ -66,14 +64,8 @@ export default function KaarloFeedback({
         className={`${styles.action} ${styles.primaryAction}`}
         onClick={onConfirm}
       >
-        {confirmLabel ??
-          (complete ? "Päätä harjoitus" : "Jatka viestien tarkastelua")}
+        {confirmLabel ?? "Jatka viestien tarkastelua"}
       </button>
-      {complete && (
-        <button type="button" className={styles.action} onClick={onDismiss}>
-          Palaa postilaatikkoon
-        </button>
-      )}
     </dialog>
   );
 }

@@ -70,6 +70,13 @@ const activityRoutes = [
   { path: "/course/phishing/help-kaarlo", Component: KaarloActivity },
 ];
 
+const phishingModes = ["introduction", "safe-responses"] as const;
+const activityPaths = new Set([
+  ...activityRoutes.map(({ path }) => path),
+  "/course/passwords/introduction",
+  ...phishingModes.map((mode) => `/course/phishing/${mode}`),
+]);
+
 function App() {
   const textSizeProps = useTextSize();
   const { courses, markComplete, resetProgress } = useCourseProgress();
@@ -139,7 +146,7 @@ function App() {
             path="/course/phishing/theory"
             element={<Navigate replace to="/course/phishing/safe-responses" />}
           />
-          {(["introduction", "safe-responses"] as const).map((mode) => (
+          {phishingModes.map((mode) => (
             <Route
               key={mode}
               path={`/course/phishing/${mode}`}
@@ -157,12 +164,7 @@ function App() {
           ))}
           {courses.flatMap((course) =>
             course.topics.map((topic) =>
-              topic.kind === "theory" &&
-              topic.path !== "/course/financial-fraud/help-raija" &&
-              topic.path !== "/course/phishing/help-kaarlo" &&
-              topic.path !== "/course/phishing/introduction" &&
-              topic.path !== "/course/passwords/introduction" &&
-              topic.path !== "/course/passwords/help-sanna" ? (
+              topic.kind === "theory" && !activityPaths.has(topic.path) ? (
                 <Route
                   key={topic.path}
                   path={topic.path}

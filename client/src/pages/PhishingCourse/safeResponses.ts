@@ -1,4 +1,3 @@
-﻿export type PracticeScreen = "mail" | "new-tab" | "library" | "contacts";
 export type PracticeDecision = "report" | "pay" | "wait" | "new-number";
 
 export const practiceLibraryLoans = [
@@ -61,8 +60,6 @@ export const safeResponseScenarios = [
       },
       { id: "wait", label: "En maksa nyt, vaan jätän asian odottamaan." },
     ],
-    result:
-      "Viesti siirrettiin roskapostiin. Yhdistit viestin maksupyynnön tutusta palvelusta löytyneisiin lainatietoihin. Oikea kirjan nimi ei yksin tehnyt maksupyynnöstä luotettavaa.",
   },
   {
     id: "friend",
@@ -101,15 +98,14 @@ export const safeResponseScenarios = [
         label: "Soitan viestin uuteen numeroon varmistaakseni asian.",
       },
     ],
-    result:
-      "Pyyntö jäi odottamaan varmistusta. Vastaamaton puhelu ei osoita viestiä aidoksi eikä huijaukseksi. Voit yrittää myöhemmin uudelleen tutusta numerosta ja jättää laskun maksamatta siihen asti.",
   },
   {
     id: "library-real",
     bookId: overduePracticeLoan.id,
     title: "Kirjanmerkkien hyödyntäminen 2",
     goal: "Kuvitellaan, että saat kirjastosta uuden maksumuistutuksen. Selvitä, onko maksu aiheellinen samalla lailla kuin ensimmäisessä osassa.",
-    context: "Tässä esimerkissä sinulla on lainassa kirja Linnut ja Metsäretket.",
+    context:
+      "Tässä esimerkissä sinulla on lainassa kirja Linnut ja Metsäretket.",
     sender: "Oma kirjasto",
     address: "lainat@kirjaston-asiointi.fi",
     subject: "Muistutus myöhässä olevasta lainasta",
@@ -141,33 +137,6 @@ export const safeResponseScenarios = [
         label:
           "Jätän maksun huomiotta, vaikka se näkyy myös kirjastopalvelussa.",
       },
-    ],
-    result:
-      "Kirjastopalvelun tiedot vahvistivat maksun aiheelliseksi. Voit hoitaa maksun tutun palvelun kautta.",
-  },
-] as const;
-
-export const ordinaryPracticeMessages = [
-  {
-    id: "club",
-    sender: "Lukupiiri",
-    address: "lukupiiri@kerho.fi",
-    subject: "Seuraava tapaaminen torstaina",
-    time: "Eilen klo 14.20",
-    paragraphs: [
-      "Hei!",
-      "Tapaamme jälleen torstaina klo 14 kirjaston tutussa kokoushuoneessa. Ota halutessasi kirja mukaan.",
-    ],
-  },
-  {
-    id: "walk",
-    sender: "Matti Korhonen",
-    address: "matti@korhonen.fi",
-    subject: "Kiitos kävelyseurasta",
-    time: "Eilen klo 12.05",
-    paragraphs: [
-      "Hei,",
-      "Kiitos eilisestä kävelylenkistä! Oli mukava vaihtaa kuulumisia. Nähdään taas ensi viikolla.",
     ],
   },
 ] as const;

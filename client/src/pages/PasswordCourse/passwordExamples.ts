@@ -1,3 +1,5 @@
+import { isExactSelection } from "../../selection";
+
 export const passwordExamples = [
   {
     name: "salasana",
@@ -71,10 +73,5 @@ export function isExampleCorrect(
   selected: number[] | undefined,
   expected: number[],
 ) {
-  return (
-    selected !== undefined &&
-    selected.length === expected.length &&
-    new Set(selected).size === selected.length &&
-    expected.every((choice) => selected.includes(choice))
-  );
+  return selected !== undefined && isExactSelection(selected, expected);
 }

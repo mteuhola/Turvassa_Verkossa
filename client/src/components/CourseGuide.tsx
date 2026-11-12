@@ -1,4 +1,4 @@
-import { LockIcon, EmailIcon, MaskIcon } from "./icons";
+import { CourseIcon } from "./icons";
 import styles from "./CourseGuide.module.css";
 
 const courseOverviews: Record<string, string> = {
@@ -33,9 +33,7 @@ export default function CourseGuide({ courseId }: { courseId: string }) {
   return (
     <section className={styles.guide} aria-labelledby={`${courseId}-guide`}>
       <span className={styles.icon} aria-hidden="true">
-        {courseId === "passwords" && <LockIcon color="currentColor" />}
-        {courseId === "phishing" && <EmailIcon color="currentColor" />}
-        {courseId === "financial-fraud" && <MaskIcon color="currentColor" />}
+        <CourseIcon courseId={courseId} />
       </span>
       <div className={styles.overview}>
         <h2 id={`${courseId}-guide`}>Tällä kurssilla</h2>

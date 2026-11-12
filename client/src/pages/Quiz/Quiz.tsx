@@ -2,6 +2,7 @@ import CourseBook from "../../components/CourseBook";
 import TopicCompletionProgress from "../../components/TopicCompletionProgress";
 import Navbar from "../../components/Navbar";
 import { useRef, useState } from "react";
+import { toggleSelection } from "../../selection";
 import { Link } from "react-router-dom";
 import type { TextSizeProps } from "../../components/TextSizeControl";
 import PracticePasswordManager from "../../components/PracticePasswordManager";
@@ -18,7 +19,11 @@ import {
   passwordTopicPath,
 } from "../../progress/practicePassword";
 import type { TopicCourse } from "../TopicSelection/topicCourses";
-import { type CourseQuiz, isChoiceAnswerCorrect } from "./quizData";
+import {
+  type CourseQuiz,
+  createQuizQuestions,
+  isChoiceAnswerCorrect,
+} from "./quizData";
 import styles from "./Quiz.module.css";
 import QuizNotifications from "./QuizNotifications";
 
@@ -28,7 +33,9 @@ interface QuizProps extends TextSizeProps, ActivityProgressProps {
 }
 
 export default function Quiz(props: QuizProps) {
-  if (canEnterQuiz(props.course)) return <QuizActivity {...props} />;
+  if (canEnterQuiz(props.course)) {
+    return <QuizActivity key={props.course.id} {...props} />;
+  }
   return (
     <div className={styles.root} data-course={props.course.id}>
       <Navbar
@@ -63,6 +70,7 @@ function QuizActivity({
   onComplete,
   ...textSizeProps
 }: QuizProps) {
+  const [questions] = useState(() => createQuizQuestions(quiz));
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string[]>([]);
   const [password, setPassword] = useState("");
@@ -73,20 +81,16 @@ function QuizActivity({
   const [finished, setFinished] = useState(false);
   const [celebrateCompletion, setCelebrateCompletion] = useState(false);
   const questionHeading = useRef<HTMLHeadingElement>(null);
-  const question = quiz.questions[index];
+  const question = questions[index];
   const missingPracticePassword =
     question?.type === "practice-password" && !readPracticePassword();
-  const total = quiz.questions.length;
+  const total = questions.length;
   const answered = finished ? total : index + (correct ? 1 : 0);
   const showNotifications = course.id === "phishing" && !finished;
 
   function choose(id: string) {
     setSelected((previous) =>
-      question.type === "single"
-        ? [id]
-        : previous.includes(id)
-          ? previous.filter((item) => item !== id)
-          : [...previous, id],
+      question.type === "single" ? [id] : toggleSelection(previous, id),
     );
     setFeedback("");
   }
@@ -197,7 +201,8 @@ function QuizActivity({
                 <strong>{course.title}</strong>
               </p>
               <p>
-                Kaikki aiheet ja tietovisa on nyt suoritettu. Voit palata kertaamaan milloin tahansa.
+                Kaikki aiheet ja tietovisa on nyt suoritettu. Voit palata
+                kertaamaan milloin tahansa.
               </p>
               <div className={styles.actions}>
                 <Link className={styles.courseLink} to="/">

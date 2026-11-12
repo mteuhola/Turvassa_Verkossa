@@ -1,4 +1,4 @@
-﻿.root {
+.root {
   min-height: 100vh;
   font-size: 1.125rem;
   line-height: 1.6;
@@ -75,13 +75,6 @@
   color: var(--course-ink);
   text-underline-offset: 4px;
 }
-.progress {
-  border-top: 1px solid var(--border);
-  padding-top: 24px;
-  margin-top: 32px;
-  color: var(--course-ink);
-  font-size: 1rem;
-}
 .message {
   margin: 0 0 24px;
   padding: 24px;
@@ -98,7 +91,7 @@
   font-size: 0.875rem;
 }
 .imageSlot {
-  margin: 0 0 24px;
+  margin: 0 auto 24px;
   max-width: 30rem;
 }
 .imageSlot img {

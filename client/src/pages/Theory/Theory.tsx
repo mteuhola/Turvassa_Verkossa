@@ -99,17 +99,6 @@ function TheoryPages({
           </h1>
           {isComplete && <CompletionBadge />}
         </header>
-        {topic.content.characterName && (
-          <div className={styles.character}>
-            <div className={styles.portrait}>
-              <CharacterPortrait courseId={course.id} />
-            </div>
-            <p>
-              {topic.content.characterName} on kuvitteellinen harjoituskaveri.
-              Pohdi tilannetta omaan tahtiisi.
-            </p>
-          </div>
-        )}
         <div className={styles.pages}>
           {(pages.length ? pages : [undefined]).map((page, index) => (
             <article
@@ -126,14 +115,6 @@ function TheoryPages({
                   {page.paragraphs.map((paragraph, paragraphIndex) => (
                     <p key={paragraphIndex}>{paragraph}</p>
                   ))}
-                  {page.image && (
-                    <figure className={styles.figure}>
-                      <img src={page.image.src} alt={page.image.alt} />
-                      {page.image.caption && (
-                        <figcaption>{page.image.caption}</figcaption>
-                      )}
-                    </figure>
-                  )}
                   {page.characterPortrait && (
                     <div className={styles.portrait}>
                       <CharacterPortrait courseId={course.id} complete />
@@ -189,7 +170,7 @@ function TheoryPages({
                 </p>
               )}
               {!continuation && (
-                <p id={"completion-help"} className={styles.help}>
+                <p id="completion-help" className={styles.help}>
                   {isComplete
                     ? "Olet jo suorittanut tämän aiheen. Voit jatkaa eteenpäin."
                     : "Kun valitset Valmis, tämä aihe merkitään suoritetuksi."}

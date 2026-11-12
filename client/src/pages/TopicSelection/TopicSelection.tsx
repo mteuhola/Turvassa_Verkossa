@@ -45,8 +45,7 @@ export default function TopicSelection({
                       <p>{topic.description}</p>
                       {locked && (
                         <p>
-                          Aihe avautuu, kun olet suorittanut edeltävät
-                          aiheet.
+                          Aihe avautuu, kun olet suorittanut edeltävät aiheet.
                         </p>
                       )}
                     </div>

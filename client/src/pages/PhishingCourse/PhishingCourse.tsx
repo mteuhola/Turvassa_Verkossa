@@ -237,21 +237,18 @@ export default function PhishingCourse({
                 max={clues.length}
                 aria-label="Löydetyt varoitusmerkit"
               />
-              {!complete && (
-                <div
-                  className={styles.feedback}
-                  role="status"
-                  aria-live="polite"
-                  aria-atomic="true"
-                >
-                  {feedback}
-                </div>
-              )}
+              <div
+                className={styles.feedback}
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                {feedback}
+              </div>
               <div className={styles.actions}>
                 <button
                   type="button"
                   className={styles.action}
-                  disabled={complete}
                   onClick={() => {
                     const next = clues.find((clue) => !found.includes(clue.id));
                     if (next) setFeedback(`Vihje: ${next.hint}`);

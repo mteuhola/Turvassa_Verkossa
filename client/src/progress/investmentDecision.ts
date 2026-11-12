@@ -6,7 +6,7 @@
 export const investmentDecisionStorageKey =
   "turvassa-verkossa-investment-decision-v3";
 /** Preserve the learner's own sorting with their final recommendation. */
-export interface InvestmentDecision {
+interface InvestmentDecision {
   version: 3;
   caseId: typeof investmentCaseId;
   recommendation: Recommendation;

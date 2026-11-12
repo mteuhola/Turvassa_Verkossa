@@ -3,17 +3,34 @@ interface QuestionBase {
   prompt: string;
   explanation: string;
 }
-export interface ChoiceQuestion extends QuestionBase {
+interface ChoiceQuestion extends QuestionBase {
   type: "single" | "multiple";
   options: { id: string; text: string }[];
   correctOptionIds: string[];
 }
-export interface PracticePasswordQuestion extends QuestionBase {
+interface PracticePasswordQuestion extends QuestionBase {
   type: "practice-password";
 }
-export type QuizQuestion = ChoiceQuestion | PracticePasswordQuestion;
+type QuizQuestion = ChoiceQuestion | PracticePasswordQuestion;
 export interface CourseQuiz {
   questions: QuizQuestion[];
+}
+
+function shuffled<T>(items: readonly T[]): T[] {
+  const result = [...items];
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    const other = Math.floor(Math.random() * (index + 1));
+    [result[index], result[other]] = [result[other], result[index]];
+  }
+  return result;
+}
+
+export function createQuizQuestions(quiz: CourseQuiz): QuizQuestion[] {
+  return shuffled(quiz.questions).map((question) =>
+    question.type === "practice-password"
+      ? question
+      : { ...question, options: shuffled(question.options) },
+  );
 }
 
 export const courseQuizzes: Record<string, CourseQuiz> = {
@@ -52,7 +69,10 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
             id: "third",
             text: "Käytän salasanojen hallintaohjelmaa erilaisten salasanojen luomiseen ja muistamiseen.",
           },
-          { id: "fourth", text: "Otan monivaiheisen tunnistautumisen käyttöön." },
+          {
+            id: "fourth",
+            text: "Otan monivaiheisen tunnistautumisen käyttöön.",
+          },
         ],
         correctOptionIds: ["first", "third", "fourth"],
         explanation:
@@ -227,7 +247,10 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
         prompt:
           "Huijari voi esimerkiksi kehua henkilön sijoitustaitoja tai osoittaa häntä kohtaan runsaasti kiinnostusta. Mikä voi olla tällaisen toiminnan tarkoitus?",
         options: [
-          { id: "first", text: "Saadakseen vastaanottajan luottamaan häneen ja suhtautumaan tarjoukseen myönteisemmin." },
+          {
+            id: "first",
+            text: "Saadakseen vastaanottajan luottamaan häneen ja suhtautumaan tarjoukseen myönteisemmin.",
+          },
           {
             id: "second",
             text: "Selvittääkseen, kuinka paljon vastaanottaja tietää sijoittamisesta ja osoittaakseen ollakseen oikeasti vaikuttunut.",
@@ -244,7 +267,8 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
       {
         id: "offers",
         type: "single",
-        prompt: "Neljä sijoituspalvelua esittelee mahdollisuuksia sijoittaa säästöjä. Mikä seuraavista lähestymistavoista herättää eniten epäilyksiä?",
+        prompt:
+          "Neljä sijoituspalvelua esittelee mahdollisuuksia sijoittaa säästöjä. Mikä seuraavista lähestymistavoista herättää eniten epäilyksiä?",
         options: [
           {
             id: "first",
@@ -270,7 +294,8 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
       {
         id: "signs",
         type: "multiple",
-        prompt: "Henkilö on tutustunut verkossa uuteen tuttavuuteen. He ovat viestitelleet pitkään ja olleet myös videopuhelussa. Tuttavuus kertoo tarvitsevansa rahaa henkilökohtaiseen ongelmaan. Mitkä seuraavista väitteistä pitävät paikkansa?",
+        prompt:
+          "Henkilö on tutustunut verkossa uuteen tuttavuuteen. He ovat viestitelleet pitkään ja olleet myös videopuhelussa. Tuttavuus kertoo tarvitsevansa rahaa henkilökohtaiseen ongelmaan. Mitkä seuraavista väitteistä pitävät paikkansa?",
         options: [
           {
             id: "first",
@@ -300,7 +325,8 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
       {
         id: "actions",
         type: "multiple",
-        prompt: "Henkilö huomaa, että sijoituspalvelu saattaa olla huijaus. Hän on jo siirtänyt palveluun rahaa ja käyttänyt kirjautumiseen samaa salasanaa kuin sähköpostissaan. Palvelu vaatii nyt ylimääräistä maksua ennen rahojen nostamista. Mitkä seuraavista ovat turvallisia toimintatapoja?",
+        prompt:
+          "Henkilö huomaa, että sijoituspalvelu saattaa olla huijaus. Hän on jo siirtänyt palveluun rahaa ja käyttänyt kirjautumiseen samaa salasanaa kuin sähköpostissaan. Palvelu vaatii nyt ylimääräistä maksua ennen rahojen nostamista. Mitkä seuraavista ovat turvallisia toimintatapoja?",
         options: [
           {
             id: "first",

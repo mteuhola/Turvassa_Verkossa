@@ -17,9 +17,6 @@ export const kaarloEmails = [
     link: {
       text: "LUNASTA PALKINTO",
       destination: "https://omituinen-osoite.netlify.app/",
-      title: "MegaPotti: lunasta vo1tto",
-      request:
-        "Vastaanottaaksesi palkinnon maksa 4,90 euroa. Sivusto pyytää kortin numeroa, voimassaoloaikaa ja turvakoodia.",
     },
     suspicious: true,
     explanation:
@@ -92,9 +89,6 @@ export const kaarloEmails = [
     link: {
       text: "https://lukutoukka.fi/oma-tili",
       destination: "https://omituinen-osoite.netlify.app/",
-      title: "Lukutoukka: tilin vahvistus",
-      request:
-        "Sivusto pyytää kaupan salasanaa sekä maksukortin numeroa ja turvakoodia toimituksen jatkamiseksi.",
     },
     suspicious: true,
     explanation:
@@ -144,7 +138,7 @@ export const kaarloEmails = [
     link: null,
     suspicious: true,
     explanation:
-      "Tilin sulkemisella uhkaaminen painostaa toimimaan kiireessä. Lähettäjän verkkotunnus eroaa palvelun osoitteesta, ja Kaarlokin on sitä mieltä, ettei osoite ole tuttu. Viestissä pyydetään salasanaa ja vahvistuskoodia, joiden lähettäminen ei ole turvallista. Viesti lisäksi sisältää liitteen, jota Kaarlo ei ole odottanut.",
+      "Tilin sulkemisella uhkaaminen painostaa toimimaan kiireessä. Lähettäjän verkkotunnus eroaa palvelun osoitteesta, ja Kaarlokin on sitä mieltä, ettei osoite ole tuttu. Viestissä pyydetään salasanaa ja vahvistuskoodia, joiden lähettäminen ei ole turvallista. Viesti lisäksi sisältää asennettavan liitteen, jota Kaarlo ei ole odottanut.",
     response:
       "Kaarlo: Jopa minä ehdin hieman epäilä tämän viestin aitoutta. En avaa liitettä enkä lähetä tunnuksiani. Jos olisinkin antanut salasanani, voisin varmaankin pyytää joltakin läheiseltä apua salasanani vaihtamiseen.",
   },

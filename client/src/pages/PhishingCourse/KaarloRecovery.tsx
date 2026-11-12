@@ -1,5 +1,6 @@
 ﻿import { useState } from "react";
 import KaarloFeedback from "./KaarloFeedback";
+import { toggleSelection } from "../../selection";
 import {
   isKaarloRecoveryCorrect,
   kaarloRecoveryChoices,
@@ -71,9 +72,7 @@ export default function KaarloRecovery({
                     checked={selected.includes(item.id)}
                     onChange={() =>
                       setSelected((current) =>
-                        current.includes(item.id)
-                          ? current.filter((id) => id !== item.id)
-                          : [...current, item.id],
+                        toggleSelection(current, item.id),
                       )
                     }
                   />

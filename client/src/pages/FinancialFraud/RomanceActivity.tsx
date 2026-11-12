@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { toggleSelection } from "../../selection";
 import CourseBook from "../../components/CourseBook";
 import Navbar from "../../components/Navbar";
 import CompletionBadge from "../../components/CompletionBadge";
@@ -59,9 +60,7 @@ function RomanceActivity({
   function togglePart(index: number) {
     setSelections((previous) => {
       const current = previous[round] ?? [];
-      const next = current.includes(index)
-        ? current.filter((part) => part !== index)
-        : [...current, index];
+      const next = toggleSelection(current, index);
       const updated = { ...previous };
       if (next.length) updated[round] = next;
       else delete updated[round];
@@ -146,14 +145,15 @@ function RomanceActivity({
                   <CharacterPortrait courseId="financial-fraud" />
                 </div>
                 <p>
-                  "Vuosi eroni jälkeen olen tutustunut sosiaalisen median kautta uuteen
-                  mieheen, <strong>Hermanniin</strong>, Espanjassa asuvaan suomalaislääkäriin. 
-                  Olemme jutelleet jo useamman kuukauden ajan, ja hänestä on tullut minulle tärkeä. 
-                  Viime aikoina olemme puhuneet myös tapaamisesta Suomessa, mutta jotkin asiat
-                  keskusteluissamme ovat jääneet mietityttämään minua. Voisitko
-                  lukea viestimme ja kertoa, mitä mieltä olet? Näytän sinulle
-                  viestit, ja tiedon, kuinka kauan olemme siinä kohdassa
-                  jutelleet."
+                  "Vuosi eroni jälkeen olen tutustunut sosiaalisen median kautta
+                  uuteen mieheen, <strong>Hermanniin</strong>, Espanjassa
+                  asuvaan suomalaislääkäriin. Olemme jutelleet jo useamman
+                  kuukauden ajan, ja hänestä on tullut minulle tärkeä. Viime
+                  aikoina olemme puhuneet myös tapaamisesta Suomessa, mutta
+                  jotkin asiat keskusteluissamme ovat jääneet mietityttämään
+                  minua. Voisitko lukea viestimme ja kertoa, mitä mieltä olet?
+                  Näytän sinulle viestit, ja tiedon, kuinka kauan olemme siinä
+                  kohdassa jutelleet."
                   <br />- Raija
                 </p>
               </div>

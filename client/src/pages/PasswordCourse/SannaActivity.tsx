@@ -8,6 +8,7 @@ import CompletionBadge from "../../components/CompletionBadge";
 import { CharacterPortrait } from "../../components/CourseGuide";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import { MAX_PASSWORD_LENGTH } from "./passwordStrength";
+import { toggleSelection } from "../../selection";
 import {
   canSignInAsSanna,
   createSannaLoginTask,
@@ -61,16 +62,14 @@ export default function SannaActivity({
   const [entryNames, setEntryNames] = useState<SannaPasswords>({});
   const [entryName, setEntryName] = useState("");
   const [planChoices, setPlanChoices] = useState<string[]>([]);
-  const [planOptions] = useState(() =>
-    createSannaPlanChoices(),
-  );
+  const [planOptions] = useState(createSannaPlanChoices);
   const [planCorrect, setPlanCorrect] = useState(false);
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [managerOpen, setManagerOpen] = useState(false);
   const [login, setLogin] = useState("");
-  const [loginTask] = useState(() => createSannaLoginTask());
+  const [loginTask] = useState(createSannaLoginTask);
   const heading = useRef<HTMLHeadingElement>(null);
   const loginInput = useRef<HTMLInputElement>(null);
   const previous = useRef(`${stage}:${index}`);
@@ -225,7 +224,8 @@ export default function SannaActivity({
                 Miten Sannaa kannattaa auttaa?
               </h2>
               <p>
-                ”Otin käyttöön salasanojen hallintaohjelman, mutten oikein osaa käyttää sitä vielä. Miten sen kanssa kannattaa toimia?”
+                ”Otin käyttöön salasanojen hallintaohjelman, mutten oikein osaa
+                käyttää sitä vielä. Miten sen kanssa kannattaa toimia?”
               </p>
               <form
                 onSubmit={(event) => {
@@ -257,9 +257,7 @@ export default function SannaActivity({
                         checked={planChoices.includes(item.id)}
                         onChange={() => {
                           setPlanChoices((current) =>
-                            current.includes(item.id)
-                              ? current.filter((id) => id !== item.id)
-                              : [...current, item.id],
+                            toggleSelection(current, item.id),
                           );
                           setFeedback("");
                         }}
@@ -295,7 +293,7 @@ export default function SannaActivity({
               </h2>
               <p>
                 {index === 0
-                  ? "Sanna: Aloitetaan sähköpostista. Avasin tähän salasanojen hallintaohjelmani. Voisitko näyttää minulle, miten salasanan voi luoda sen avulla? Voisitko myös auttaa minua keksimään salasanalle \"nimen\", josta tunnistan palvelun salasanojen hallintaohjelmassa myöhemmin?"
+                  ? 'Sanna: Aloitetaan sähköpostista. Avasin tähän salasanojen hallintaohjelmani. Voisitko näyttää minulle, miten salasanan voi luoda sen avulla? Voisitko myös auttaa minua keksimään salasanalle "nimen", josta tunnistan palvelun salasanojen hallintaohjelmassa myöhemmin?'
                   : index === 1
                     ? "Sanna: Tehdään vaatekauppaan eri salasana kuin sähköpostiin. Saisiko tämänkin talteen salasanojen hallintaohjelmaan?"
                     : "Sanna: Tehdään kirjakerhoonkin eri salasana kuin muihin. Nyt uskon jo, että salasanojen hallintaohjelma pitää sen tallessa."}
@@ -311,7 +309,8 @@ export default function SannaActivity({
                 </label>
                 <div className={own.generator}>
                   <p id="sanna-generator-help">
-                    Luo uusi vahva salasana harjoituksen salasanojen hallintaohjelman avulla.
+                    Luo uusi vahva salasana harjoituksen salasanojen
+                    hallintaohjelman avulla.
                   </p>
                   <button
                     type="button"
@@ -371,7 +370,7 @@ export default function SannaActivity({
                     <p>
                       {password
                         ? "Teksti on liian pitkä. Lyhennä salasanaa."
-                        : "Klikkaa \"Luo salasana automaattisesti\"."}
+                        : 'Klikkaa "Luo salasana automaattisesti".'}
                     </p>
                   )}
                 </div>

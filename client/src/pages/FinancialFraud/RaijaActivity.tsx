@@ -432,9 +432,9 @@ export default function RaijaActivity({
   onComplete,
   ...textSizeProps
 }: TextSizeProps & ActivityProgressProps) {
-  const [stage, setStage] = useState<"simo" | "bridge" | "raija" | "complete">(
-    "simo",
-  );
+  const [stage, setStage] = useState<
+    "intro" | "simo" | "bridge" | "raija" | "complete"
+  >("intro");
   const heading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -453,18 +453,64 @@ export default function RaijaActivity({
           Auta Raijaa
         </h1>
         {(isComplete || stage === "complete") && <CompletionBadge />}
-        <ol className={styles.chapters} aria-label="Harjoituksen kaksi osaa">
-          <li aria-current={stage === "simo" ? "step" : undefined}>
-            1. Autetaan Simoa
-          </li>
-          <li
-            aria-current={
-              stage === "bridge" || stage === "raija" ? "step" : undefined
-            }
-          >
-            2. Nyt autetaan sinua
-          </li>
-        </ol>
+        {stage === "intro" && (
+          <section aria-label="Tehtävän ohjeet">
+            <div className={shared.introduction}>
+              <div className={shared.portrait}>
+                <CharacterPortrait courseId="financial-fraud" />
+              </div>
+              <blockquote className={shared.introQuote}>
+                <p>
+                  ”Muistatko sen lomakylän sijoitustarjouksen? Simo on jo
+                  sijoittanut siihen rahaa. Olen huolissani hänestä, mutta en
+                  oikein tiedä, mitä sanoisin. Auttaisitko minua?”
+                </p>
+                <p>- Raija</p>
+              </blockquote>
+            </div>
+            <div className={styles.story}>
+              <p>
+                Auta ensin Raijaa miettimään, mitä hän voisi sanoa Simolle. Lue
+                Raijan kysymys ja valitse sopiva neuvo. Saat palautetta
+                jokaisesta vastauksesta ja voit yrittää uudelleen.
+              </p>
+              <p>
+                Sen jälkeen autat Raijaa hänen omassa tilanteessaan Hermannin
+                kanssa.
+              </p>
+              <p className={styles.small}>
+                Henkilöt ja tilanteet ovat kuvitteellisia.
+              </p>
+              {isComplete && (
+                <p>
+                  Olet jo suorittanut tämän aiheen. Voit harjoitella uudelleen,
+                  ja ansaittu merkki säilyy.
+                </p>
+              )}
+              <button
+                type="button"
+                className={styles.primary}
+                onClick={() => setStage("simo")}
+              >
+                Auta Raijaa neuvomaan Simoa
+              </button>
+            </div>
+          </section>
+        )}
+        {stage !== "intro" && (
+          <ol className={styles.chapters} aria-label="Harjoituksen kaksi osaa">
+            <li aria-current={stage === "simo" ? "step" : undefined}>
+              1. Raija auttaa Simoa
+            </li>
+            <li
+              aria-current={
+                stage === "bridge" || stage === "raija" ? "step" : undefined
+              }
+            >
+              2. Nyt autetaan sinua
+            </li>
+          </ol>
+        )}
         {stage === "simo" && (
           <SimoRecovery onFinish={() => setStage("bridge")} />
         )}
@@ -516,8 +562,9 @@ export default function RaijaActivity({
                 <p>{scenario.summary}</p>
                 {scenario.id === "simo" ? (
                   <p>
-                    Autoit Simoa ottamaan yhteyttä pankkiin. Soittamista ei
-                    tarvinnut lykätä tietojen keräämisen vuoksi.
+                    Autoit Raijaa ottamaan huolen puheeksi, neuvomaan Simoa
+                    lopettamaan lisämaksut ja ottamaan heti yhteyttä pankkiin
+                    sekä tarjoamaan tukeaan.
                   </p>
                 ) : (
                   <p>

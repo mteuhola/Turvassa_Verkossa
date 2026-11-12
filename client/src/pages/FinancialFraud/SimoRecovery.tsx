@@ -1,31 +1,83 @@
 import { useEffect, useRef, useState } from "react";
+import { CharacterPortrait } from "../../components/CourseGuide";
+import shared from "./InvestmentActivity.module.css";
 import styles from "./RaijaActivity.module.css";
 
-const notes = [
+const moments = [
   {
-    title: "Mitä Simo maksoi?",
-    source: "Maksukuitti",
-    detail: "2 500 € · Lomakyläsijoitus · Maksu lähetetty",
-    sentence: "Siirsin 2 500 euroa lomakyläsijoitukseen.",
-    action: "Lisää maksun tiedot",
-    explanation: "Maksun tiedot auttavat pankkia selvittämään rahansiirtoa.",
+    title: "Miten ottaisin asian puheeksi?",
+    message:
+      "Simo sijoitti jo 2500 euroa siihen lomakylään, josta kerroin aiemmin. Nyt sijoituspalvelusta sanottiin, että hänen pitäisi maksaa vielä yksi käsittelymaksu, jotta hän saisi rahansa takaisin. Simo uskoo edelleen, että kaikki on kunnossa, mutta minua epäilyttää. Miten voisin ottaa asian hänen kanssaan puheeksi?",
+    choices: [
+      {
+        text: "Tuo kuulostaa kyllä huijaukselta. Sinun kannattaisi lopettaa heti, ennen kuin menetät vielä enemmän rahaa.",
+        correct: false,
+        feedback:
+          "Huoli on aiheellinen ja uusien maksujen lopettaminen olisi turvallista. Ilmaisu voi kuitenkin tuntua Simosta liian jyrkältä, koska hän uskoo edelleen sijoitukseen. Se saattaa saada hänet puolustamaan päätöstään.",
+      },
+      {
+        text: "Minua huolestuttaa tuo ylimääräinen maksu. Voisimmeko selvittää yhdessä, miksi sitä pyydetään ja onko sijoituspalvelu luotettava, vaikka yrityksen tiedot löytyvätkin verkosta?",
+        correct: true,
+        feedback:
+          "Huolen voi ottaa puheeksi syyttämättä. Näin Simon on helpompi puhua tilanteestaan avoimesti.",
+      },
+      {
+        text: "Jos sijoituspalvelu on tähän asti vaikuttanut luotettavalta, ehkä kannattaa vielä kysyä heiltä tarkemmin, mistä lisämaksussa on kyse.",
+        correct: false,
+        feedback:
+          "Lisätietojen selvittäminen kuulostaa järkevältä, mutta huijauksesta epäillyn palvelun omiin vastauksiin ei kannata luottaa. Huijari voi keksiä uusia perusteluja maksulle.",
+      },
+    ],
   },
   {
-    title: "Mitä Simolle luvattiin?",
-    source: "Sijoitustarjous",
-    detail: "Saat sijoittamasi rahat takaisin kaksinkertaisina vuodessa.",
-    sentence: "Minulle luvattiin rahat takaisin kaksinkertaisina vuodessa.",
-    action: "Lisää lupaus",
-    explanation:
-      "Poikkeuksellisen suuri tuottolupaus on yksi syy epäillä huijausta.",
+    title: "Mitä neuvoisin Simoa tekemään?",
+    message:
+      "Simo aikoo maksaa vielä yhden käsittelymaksun, koska sijoituspalvelu lupaa palauttaa hänen rahansa sen jälkeen. Hän sanoo, ettei halua menettää jo sijoittamiaan rahoja. Mitä neuvoisin häntä tekemään nyt?",
+    choices: [
+      {
+        text: "Ymmärrän, että haluat rahasi takaisin. Voisit vielä selvittää, onko muilla sijoittajilla ollut samanlaisia ongelmia, ennen kuin päätät maksusta.",
+        correct: false,
+        feedback:
+          "Muiden kokemusten selvittäminen voi auttaa arvioimaan sijoituspalvelun luotettavuutta, mutta tässä tilanteessa on jo vahvoja merkkejä huijauksesta. Lisätietojen etsiminen viivästyttää pankkiin yhteyden ottamista.",
+      },
+      {
+        text: "Pyydä sijoituspalvelulta kirjallinen vahvistus siitä, että saat rahasi takaisin maksun jälkeen. Älä maksa ennen kuin olet saanut sen.",
+        correct: false,
+        feedback:
+          "Kirjallisen vahvistuksen pyytäminen voi vaikuttaa varovaiselta toiminnalta, mutta huijari voi antaa valheellisia lupauksia myös kirjallisesti.",
+      },
+      {
+        text: "Älä maksa enää mitään. Ota mahdollisimman pian yhteyttä omaan pankkiisi ja kerro, mitä on tapahtunut.",
+        correct: true,
+        feedback:
+          "Uusien maksujen lopettaminen on tärkeää, jottei Simo menetä enää lisää rahaa. Pankkiin kannattaa ottaa yhteyttä mahdollisimman nopeasti, sillä pankki voi selvittää rahansiirtoihin liittyviä mahdollisuuksia, kuten niiden perumista tai estämistä.",
+      },
+    ],
   },
   {
-    title: "Miksi Simo ei kertonut aiemmin?",
-    source: "Tarjoajan ohje",
-    detail: "Tästä tarjouksesta ei saa kertoa pankille eikä läheisille.",
-    sentence: "Tarjoaja kielsi kertomasta asiasta pankille tai läheisille.",
-    action: "Lisää salailupyyntö",
-    explanation: "Salailupyyntö esti Simoa kysymästä muiden mielipidettä.",
+    title: "Miten voisin olla tukena?",
+    message:
+      "Simoa harmittaa kovasti, että hän menetti rahaa. Hän sanoo, että hänen olisi pitänyt huomata huijaus aikaisemmin, eikä haluaisi kertoa tapahtuneesta kenellekään häpeän vuoksi. Mitä voisin sanoa hänelle?",
+    choices: [
+      {
+        text: "Huijaukset voivat olla todella uskottavia, eikä sinun tarvitse hävetä tapahtunutta. Voin auttaa sinua tekemään rikosilmoituksen, jos haluat.",
+        correct: true,
+        feedback:
+          "Näin Raija suhtautuu Simoon ymmärtäväisesti eikä syyllistä häntä. Hän myös tarjoaa konkreettista apua rikosilmoituksen tekemiseen, jolloin Simon ei tarvitse selvittää tapahtunutta yksin.",
+      },
+      {
+        text: "Ymmärrän, että sinua harmittaa. Ehkä sinun kannattaisi yrittää unohtaa tapahtunut ja keskittyä muihin asioihin.",
+        correct: false,
+        feedback:
+          "Raija voi näin yrittää lohduttaa Simoa, mutta tapahtuneen unohtamiseen kannustaminen voi vähätellä hänen kokemustaan. Lisäksi huijauksesta ilmoittaminen on tärkeää, vaikka rahat olisivat jo menneet.",
+      },
+      {
+        text: "Älä syytä itseäsi liikaa. Tärkeintä on, että opit tästä kokemuksesta ja osaat jatkossa olla varovaisempi.",
+        correct: false,
+        feedback:
+          "Raija yrittää vähentää Simon itsesyytöksiä, mutta tulevaisuuden varovaisuuden korostaminen voi tuntua Simosta syyllistävältä. Se ei myöskään tarjoa apua tämänhetkiseen tilanteeseen.",
+      },
+    ],
   },
 ];
 
@@ -54,129 +106,89 @@ export function RecoverySupportLinks() {
 }
 
 export default function SimoRecovery({ onFinish }: { onFinish: () => void }) {
-  const [stage, setStage] = useState<"prepare" | "call" | "done">("prepare");
-  const [count, setCount] = useState(0);
+  const [step, setStep] = useState(0);
+  const [selected, setSelected] = useState<number | null>(null);
   const heading = useRef<HTMLHeadingElement>(null);
-  const note = notes[count];
+  const next = useRef<HTMLButtonElement>(null);
+  const moment = moments[step];
+  const answer = selected === null ? null : moment?.choices[selected];
 
   useEffect(() => {
     heading.current?.focus({ preventScroll: true });
     heading.current?.scrollIntoView({ block: "nearest" });
-  }, [stage, count]);
+  }, [step]);
 
-  const account = (
-    <section
-      className={styles.bankAccount}
-      aria-label="Simon kertomus pankille"
-    >
-      <h3>Näin Simo voi kertoa pankille</h3>
-      <p>
-        Epäilen, että olen lähettänyt rahaa huijarille.
-        {notes.slice(0, count).map((item) => (
-          <span key={item.title}> {item.sentence}</span>
-        ))}
-      </p>
-    </section>
-  );
+  useEffect(() => {
+    if (answer?.correct) next.current?.focus({ preventScroll: true });
+  }, [answer]);
 
   return (
-    <section className={styles.simoPractice}>
-      <h2 ref={heading} tabIndex={-1}>
-        {stage === "prepare"
-          ? "Auta Simoa kertomaan pankille"
-          : stage === "call"
-            ? "Soitetaan pankkiin"
-            : "Pankkiin voi soittaa heti"}
+    <section className={styles.simoPractice} aria-labelledby="simo-heading">
+      <h2 id="simo-heading" ref={heading} tabIndex={-1}>
+        {moment ? moment.title : "Nyt tiedän, miten voin auttaa"}
       </h2>
-      {stage === "prepare" && (
+      {moment ? (
         <>
-          {count === 0 && (
-            <>
-              <p>
-                <strong>Simo:</strong> ”Maksoin sen sijoituksen jo ennen kuin
-                katsoitte tarjousta. Nyt epäilyttää. En oikein tiedä, mitä
-                pankille pitäisi sanoa.”
-              </p>
-              <p>
-                Auta Simoa kokoamaan lyhyt kertomus. Saat tiedot yksi
-                kerrallaan.
-              </p>
-            </>
-          )}
-          {note && (
-            <div className={styles.sourceNote}>
-              <h3>{note.title}</h3>
-              <p>
-                <strong>{note.source}:</strong> {note.detail}
-              </p>
-              <button
-                className={styles.primary}
-                onClick={() =>
-                  setCount((current) => Math.min(current + 1, notes.length))
-                }
-              >
-                {note.action}
-              </button>
-            </div>
-          )}
-          {account}
-          <p className={styles.noteReason} role="status">
-            {count > 0 ? notes[count - 1].explanation : ""}
-          </p>
           <p className={styles.small}>
-            Tietoja ei tarvitse kerätä valmiiksi ennen yhteydenottoa.
+            Kysymys {step + 1}/{moments.length}
           </p>
-          <button
-            className={note ? undefined : styles.primary}
-            onClick={() => setStage("call")}
+          <blockquote className={styles.quote}>
+            <p>”{moment.message}”</p>
+            <footer>Raija</footer>
+          </blockquote>
+          <p id="simo-choice-help">Valitse, mitä Raija voisi sanoa Simolle.</p>
+          <div
+            className={styles.conversationChoices}
+            role="group"
+            aria-labelledby="simo-choice-help"
           >
-            {note ? "Soitetaan jo nyt" : "Soitetaan pankkiin"}
-          </button>
-          <p className={styles.small}>
-            Tämä on harjoitus. Oikeaa puhelua ei soiteta.
+            {moment.choices.map((choice, index) => (
+              <button
+                key={`${step}-${index}`}
+                type="button"
+                aria-pressed={selected === index}
+                disabled={!!answer?.correct}
+                onClick={() => setSelected(index)}
+              >
+                {choice.text}
+              </button>
+            ))}
+          </div>
+          <p className={styles.feedback} role="status" aria-atomic="true">
+            {answer?.feedback}
           </p>
-        </>
-      )}
-      {stage === "call" && (
-        <>
-          <p>
-            Simo löytää numeron pankkinsa omasta sovelluksesta. Olet hänen
-            vierellään, kun hän soittaa.
-          </p>
-          <p>
-            <strong>Pankin työntekijä:</strong> Mitä on tapahtunut?
-          </p>
-          {account}
-          {count < notes.length && (
-            <p>
-              Tällä pääsee alkuun. Pankin työntekijä kysyy tarvittavat
-              lisätiedot.
-            </p>
+          {answer?.correct && (
+            <button
+              ref={next}
+              type="button"
+              className={styles.primary}
+              onClick={() => {
+                setSelected(null);
+                setStep((current) => current + 1);
+              }}
+            >
+              {step === moments.length - 1 ? "Jatka" : "Seuraava kysymys"}
+            </button>
           )}
-          <button className={styles.primary} onClick={() => setStage("done")}>
-            Simo kertoo tapahtuneesta
-          </button>
-          <p className={styles.small}>Harjoituspuhelu</p>
         </>
-      )}
-      {stage === "done" && (
+      ) : (
         <>
-          <p>
-            <strong>Simo:</strong> ”Sain kerrottua. Pankki selvittää nyt
-            maksua.”
-          </p>
-          <p className={styles.takeaway}>
-            Kun rahaa on jo lähetetty, ota heti yhteyttä pankkiin. Kaikkia
-            tietoja ei tarvitse tietää valmiiksi.
-          </p>
-          <p>
-            Pankki arvioi, voiko maksuun vielä puuttua. Rahojen palautumista ei
-            voida luvata.
-          </p>
-          <button className={styles.primary} onClick={onFinish}>
+          <div className={shared.introduction}>
+            <div className={shared.portrait}>
+              <CharacterPortrait courseId="financial-fraud" complete />
+            </div>
+            <blockquote className={shared.introQuote}>
+              <p>
+                ”Kerron huolestani rauhallisesti, neuvon Simoa olemaan
+                maksamatta lisää ja ottamaan heti yhteyttä pankkiin. Tarjoan
+                tukeani, jotta hänen ei tarvitse selvittää tätä yksin.”
+              </p>
+              <footer>Raija</footer>
+            </blockquote>
+          </div>
+          <button type="button" className={styles.primary} onClick={onFinish}>
             Jatka Raijan kanssa
           </button>
-          <RecoverySupportLinks />
         </>
       )}
     </section>

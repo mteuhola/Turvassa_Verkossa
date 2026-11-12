@@ -146,10 +146,10 @@ function RomanceActivity({
                   <CharacterPortrait courseId="financial-fraud" />
                 </div>
                 <p>
-                  "Vuosi eroni jälkeen olen tutustunut uuteen mieheen, <strong>Hermanniin</strong>,
-                  sosiaalisen median kautta. Olemme jutelleet jo useamman
-                  kuukauden ajan, ja hänestä on tullut minulle tärkeä. Viime
-                  aikoina olemme puhuneet myös tapaamisesta, mutta jotkin asiat
+                  "Vuosi eroni jälkeen olen tutustunut sosiaalisen median kautta uuteen
+                  mieheen, <strong>Hermanniin</strong>, Espanjassa asuvaan suomalaislääkäriin. 
+                  Olemme jutelleet jo useamman kuukauden ajan, ja hänestä on tullut minulle tärkeä. 
+                  Viime aikoina olemme puhuneet myös tapaamisesta Suomessa, mutta jotkin asiat
                   keskusteluissamme ovat jääneet mietityttämään minua. Voisitko
                   lukea viestimme ja kertoa, mitä mieltä olet? Näytän sinulle
                   viestit, ja tiedon, kuinka kauan olemme siinä kohdassa

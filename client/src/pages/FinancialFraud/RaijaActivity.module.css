@@ -162,33 +162,27 @@
 .simoPractice {
   max-width: 32rem;
 }
-.sourceNote {
-  margin-block: 24px;
-  padding-block: 20px;
-  border-block: 1px solid var(--border);
+.conversationChoices {
+  display: grid;
+  gap: 12px;
+  margin-block: 20px;
 }
-.sourceNote p {
-  margin-block: 12px;
+.conversationChoices button {
+  width: 100%;
+  min-height: 48px;
+  padding: 16px 20px;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
-.bankAccount {
-  padding: 20px;
+.conversationChoices button[aria-pressed="true"] {
   background: var(--course-tint);
+  border-color: var(--course-ink);
   color: var(--course-notice-ink);
-  border-radius: 12px;
 }
-.bankAccount p {
-  margin-bottom: 0;
-}
-.noteReason {
-  color: var(--course-notice-ink);
-  font-size: 0.875em;
-}
-.noteReason:empty {
-  display: none;
-}
-.takeaway {
-  font-weight: 700;
-  color: var(--course-notice-ink);
+.conversationChoices button:disabled {
+  opacity: 1;
+  cursor: default;
 }
 .simoPractice button:focus-visible,
 .simoPractice a:focus-visible {

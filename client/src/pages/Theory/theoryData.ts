@@ -106,7 +106,7 @@ export const courseIntroductions: Record<string, TheoryContent> = {
       {
         heading: "Mitä ovat romanssihuijaukset?",
         paragraphs: [
-          "Romanssihuijaukset ovat huijausten muoto, jossa huijari tavoittelee taloudellista hyötyä hyväksikäyttämällä näennäisesti romanttista suhdettaan kohteensa kanssa. Huijari voi tutustumisvaiheessa esiintyä romanttisesta suhteesta kiinnostuneena henkilönä, vaikka hänen todellinen tarkoituksensa on hyötyä kohteestaan ainoastaan rahallisesti.",
+          "Romanssihuijaukset ovat huijausten muoto, jossa huijari tavoittelee taloudellista hyötyä hyväksikäyttämällä näennäisesti romanttista suhdettaan kohteensa kanssa. Huijari voi tutustumisvaiheessa esiintyä romanttisesta suhteesta kiinnostuneena henkilönä, vaikka hänen todellinen tavoitteensa on hyötyä kohteestaan rahallisesti.",
           "Romanssihuijaukset alkavat nykyään usein internetissä, esimerkiksi seuranhakupalveluissa tai sosiaalisessa mediassa, ja kuten sijoitushuijaukset, romanssihuijaukset kohdistuvat kaikkiin ikäluokkiin. Huijari voi käyttää itsestään väärää nimeä, kuvia tai muita tietoja, kuten ammattia, vaikuttaakseen luotettavalta.",
           "Kun luottamus on syntynyt, huijari voi kertoa tarvitsevansa rahaa esimerkiksi matkustaakseen tavatakseen uutta tuttavuuttaan, tai jouduttuaan yllättävään vaikeuteen, kuten sairastuneensa äkillisesti. Huijari voi myös yrittää saada kohteensa tuntemaan syyllisyyttä tai painostaa kohdettaan, jos tämä ei suostu auttamaan rahallisesti.",
         ],
@@ -115,7 +115,7 @@ export const courseIntroductions: Record<string, TheoryContent> = {
         heading: "Kurssin tehtävät",
         characterPortrait: true,
         paragraphs: [
-          "Tämän kurssin johdanto-osiossa ei ole tehtävää: myöhempien osioiden tehtävät liittyvät kuvitteellisten hahmojen, Raijan (kuva alapuolella) ja hänen ystävänsä Simon, kohtaamiin luottamusta vaativiin tilanteisiin. ",
+          "Tässä johdannossa tutustutaan sijoitus- ja romanssihuijauksiin, ja varsinainen harjoittelu alkaa kurssin seuraavissa osioissa. Harjoituksissa pääset seuraamaan Raijan (kuva alapuolella) ja hänen ystävänsä Simon tilanteita: Raija on tutustunut uuteen kiinnostavaan ihmiseen, kun taas Simo on saanut houkuttelevan sijoitustarjouksen. Kurssin edetessä pääset auttamaan heitä pohtimaan, miten erilaisissa tilanteissa kannattaisi toimia. ",
         ],
       },
     ],
@@ -191,27 +191,37 @@ export const phishingTheory: TheoryContent = {
 export const investmentTheory: TheoryContent = {
   sections: [
     {
-      heading: "Epäilyttävän viestin vastaanottaminen",
+      heading: "Miksi sijoitushuijaukset voivat onnistua?",
       paragraphs: [
-        "Jos saat viestin, joka herättää epäilystä, älä kiirehdi toimimaan viestin pyyntöjen mukaisesti. Vältä viestissä olevien linkkien ja liitetiedostojen avaamista äläkä vastaa viestiin. Monessa sähköpostissa on mahdollisuus merkitä viesti roskapostiksi ja/tai tietojenkalasteluksi, jolloin viesti siirtyy roskapostikansioon, ja sähköposti voi siirtää vastaavat viestit jatkossa roskapostiin itsestään.",
-        "Linkkien avaamisen sijaan voit hyödyntää verkkoselaimesi kirjanmerkkejä tai älypuhelimen sovelluksia: jos olet tallentanut palvelun oikean verkko-osoitteen kirjanmerkiksi selaimeen tai asentanut palvelun puhelinsovelluksen, voit siirtyä palveluun tätä kautta ja varmistaa viestin aiheellisuuden.",
-        "Jos saat läheiseltäsi poikkeuksellisen viestin oudosta puhelinnumerosta, voit varmistaa viestin aitouden ottamalla häneen yhteyttä esimerkiksi ennestään tuttuun puhelinnumeroon. Jos et tavoita läheistäsi, voit kysyä asiasta myös muilta yhteisiltä tutuilta. Älä noudata viestin ohjeita ennen kuin olet varmistanut, että viesti todella on läheiseltäsi.",
+        "Sijoittamisessa on luonnollista toivoa, että omille säästöilleen saisi hyvää tuottoa. Jos tarjolla vaikuttaa olevan erityisen kannattava mahdollisuus, siihen voi olla houkuttelevaa tarttua. Huijarit voivat hyödyntää tätä innostusta ja luoda tunteen siitä, että hyvään tilaisuuteen kannattaa tarttua nopeasti.",
+        "Huijari voi myös pyrkiä rakentamaan henkilökohtaista luottamusta esimerkiksi ystävällisellä käytöksellä, kehumisella ja tarjoamalla apua sijoittamisen aloittamiseen. Hän saattaa olla yhteydessä säännöllisesti ja vastata kysymyksiin vakuuttavasti, jolloin hänestä voi vähitellen muodostua kuva luotettavana neuvonantajana.",
+        "Kun sijoitustarjous tuntuu lupaavalta ja sen esittäjä luotettavalta, mahdollisia varoitusmerkkejä ei välttämättä tule huomanneeksi. Sijoitushuijarit käyttävät hyväkseen inhimillistä luottamusta, minkä vuoksi myös sijoittamiseen perehtynyt henkilö voi joutua huijauksen kohteeksi.",
+        "Huijausten tunnistamista voi vaikeuttaa myös liiallinen luottamus omiin taitoihin: Jos uskoo pystyvänsä tunnistamaan huijauksen helposti, epäilyttäviin merkkeihin ei välttämättä tule kiinnittäneeksi yhtä paljon huomiota. Huijaukset voivat kuitenkin olla hyvin uskottavia, eikä aiempi kokemus tai hyvä tietämys välttämättä riitä niiden tunnistamiseen.",
       ],
     },
     {
-      heading: "Entä jos olen jo antanut tietojani?",
+      heading: "Millaisista merkeistä sijoitushuijauksen voi tunnistaa?",
       paragraphs: [
-        "Jos olet antanut väärennetylle sivustolle salasanasi, vaihda se mahdollisimman pian kyseisen palvelun oikealla verkkosivustolla tai sovelluksessa. Jos olet käyttänyt samaa salasanaa muilla sivustoilla, vaihda salasana myös niissä.",
-        "Jos olet antanut pankkitunnuksesi tai maksukorttisi tiedot tai lähettänyt rahaa huijarille, ota mahdollisimman nopeasti yhteyttä pankkiisi sen virallisen puhelinnumeron kautta. Pankki voi auttaa estämään tunnusten tai korttien väärinkäytön ja mahdollisesti estämään huijaukseen liittyvät tilitapahtumat.",
-        "Huijauksesta kannattaa tehdä rikosilmoitus poliisille. Lisäksi tapahtuneesta voi ilmoittaa Traficomin Kyberturvallisuuskeskukselle, jotta he osaavat tiedottaa ajankohtaisista huijausilmiöistä. Rikosuhripäivystys (RIKU) tarjoaa myös verkkohuijausten kohteiksi joutuneille tukea ja käytännön neuvoja.",
+        "Sijoitushuijauksissa päätöksenteossa pyritään usein aiheuttamaan kiirettä esimerkiksi väittämällä, että sijoitusmahdollisuus on tarjolla vain lyhyen aikaa. Vastaanottajalle pyritään näin luomaan mielikuva, että hänen olisi suostuttava nopeasti eikä siten käyttäisi aikaa tarjouksen harkitsemiseen tai sijoituskohteen taustojen selvittämiseen.",
+        "Epäilyksiä voi herättää myös se, jos sijoituksen tarjoaja välttelee kysymyksiä, ei kerro selkeästi sijoituksen riskeistä tai painostaa sijoittamaan lisää rahaa. Huijari voi myös pyrkiä estämään asiasta keskustelemisen läheisten kanssa esimerkiksi väittämällä tarjouksen olevan salainen. Epäilyttävää voi olla myös se, jos sijoituksen tarjoaja haluaa siirtää keskustelun pois alkuperäisestä palvelusta esimerkiksi yksityiseen viestisovellukseen.",
+        "Sijoitushuijauksen tunnistaminen ei aina ole helppoa, sillä huijari voi vaikuttaa asiantuntevalta ja sijoitukseen liittyvät asiakirjat voivat näyttää aidoilta. Siksi sijoituspalvelun luotettavuutta ei kannata arvioida pelkästään sen ulkoasun tai sitä tarjoavan henkilön perusteella. Huomionarvoista on se, ettei sijoituksen tarjoajan ystävällisyys tai kiinnostuneisuus ole yksistään merkkejä huijauksesta, vaan tärkeämpää on pohtia tarjouksen esittämistä kokonaisuutena. ",
       ],
     },
     {
-      heading: "Huijauksen kohteeksi joutumista ei tarvitse hävetä",
+      heading: "Miten sijoitushuijaus etenee?",
       paragraphs: [
-        "Huijausviestit voivat olla nykyisin hyvinkin uskottavia, ja kuka tahansa voi erehtyä luottamaan sellaiseen. Jos huomaat joutuneesi huijatuksi, tapahtunutta ei tarvitse hävetä, eikä asian kanssa tarvitse jäädä yksin.",
-        "Tapahtumasta voi kertoa esimerkiksi läheiselle tai muulle luotettavalle henkilölle. Voitte yhdessä selvittää tapahtunutta, ja toinen henkilö voi auttaa sinua tarvittavissa asioissa, kuten salasanojen vaihtamisessa. Avun pyytäminen on järkevä tapa toimia!",
-        "Huijauksesta ilmoittaminen auttaa myös muita: jos poliisi saa tietoa tapahtuneista huijauksista, se voi edistää verkkorikosten selvittämistä ja samanlaisten huijausten tunnistamista jatkossa.",
+        "Sijoitushuijaus voi alkaa pienellä rahasummalla, jonka huijari pyytää sijoittamaan. Sijoituksen arvo saattaa näyttää kasvavan nopeasti huijarin tarjoamalla verkkosivustolla. Sivustolla näkyvät tuotot voivat kuitenkin olla täysin keksittyjä, ja niiden tarkoituksena on saada sijoittaja luottamaan palveluun.",
+        "Kun sijoitus näyttää tuottavan hyvin, huijari voi kannustaa sijoittamaan lisää rahaa. Hän voi esimerkiksi kertoa uudesta sijoitusmahdollisuudesta tai väittää, että suuremmalla summalla voisi saada vielä parempaa tuottoa. Joissakin huijauksissa sijoittajalle voidaan myös palauttaa aluksi pieni summa rahaa luottamuksen vahvistamiseksi.",
+        "Huijaus voi paljastua vasta silloin, kun sijoittaja yrittää nostaa rahojaan takaisin. Huijari voi esimerkiksi vaatia maksamaan ylimääräisiä veroja tai palvelumaksuja ennen rahojen palauttamista. Näidenkin maksujen tarkoituksena voi olla saada huijauksen kohteelta lisää rahaa.",
+      ],
+    },
+    {
+      heading: "Mistä apua sijoitushuijauksen kohteeksi joutuneelle?",
+      paragraphs: [
+        "Jos epäilet joutuneesi sijoitushuijauksen kohteeksi, lopeta rahansiirrot ja yhteydenpito epäiltyyn huijariin. Jos olet jo lähettänyt rahaa, ota mahdollisimman nopeasti yhteyttä pankkiisi sen virallisten yhteystietojen kautta. Pankki voi auttaa estämään uusia rahansiirtoja ja selvittämään, onko jo lähetettyjä rahoja mahdollista saada takaisin.",
+        "Huijauksesta kannattaa tehdä rikosilmoitus poliisille, vaikka menetettyjä rahoja ei saataisikaan takaisin. Säilytä huijaukseen liittyvät viestit, maksutositteet ja muut mahdolliset todisteet esimerkiksi kuvankaappauksina. Ole myös varovainen, jos joku myöhemmin lupaa palauttaa menettämäsi rahat maksua vastaan, sillä kyseessä voi olla uusi huijaus.",
+        "Jos olet antanut huijarille salasanojasi tai muita kirjautumistietojasi, vaihda ne mahdollisimman pian kyseisten palveluiden oikeilla verkkosivustoilla tai sovelluksissa. Jos sama salasana on käytössä myös muissa palveluissa, vaihda se myös niissä. Näin voit vähentää mahdollisuutta, että huijari pääsisi käsiksi muihin käyttäjätileihisi.",
+        "Sijoitushuijauksen kohteeksi joutuminen voi aiheuttaa taloudellisen menetyksen lisäksi pettymystä, huolta ja häpeää. Huijaukseen voi kuitenkin joutua kuka tahansa, eikä tapahtuneen kanssa tarvitse jäädä yksin. Tilanteesta kannattaa keskustella läheisen tai muun luotettavan henkilön kanssa. Myös Rikosuhripäivystys (RIKU) tarjoaa maksutonta tukea ja käytännön neuvoja rikoksen kohteeksi joutuneille.",
       ],
     },
   ],
@@ -223,6 +233,7 @@ export const romanceTheory: TheoryContent = {
       heading: "Miksi romanssihuijaukset onnistuvat?",
       paragraphs: [
         "Onnistuakseen romanssihuijarit hyödyntävät ihmisten tunteita, kuten ihastumista, luottamusta ja halua auttaa muita. Huijari voi esimerkiksi lähettää päivittäin romanttisia viestejä, kehua uutta tuttavuuttaan ja osoittaa kiinnostusta tämän elämää kohtaan. Tällainen huomio voi saada suhteen tuntumaan läheiseltä ja tärkeältä.",
+        "Romanssihuijarit voivat pyrkiä lähestymään erityisesti ihmisiä, jotka kaipaavat uusia ihmissuhteita tai läheisyyttä elämäänsä. Esimerkiksi avioeron tai puolison menettämisen jälkeen uusi tuttavuus voi tuntua erityisen merkitykselliseltä. Huijari voi hyödyntää tätä osoittamalla runsaasti kiinnostusta ja tarjoamalla seuraa sekä huomiota.",
         "Huijari voi myös pyrkiä vahvistamaan luottamusta kertomalla omasta elämästään, tekemällä yhteisiä tulevaisuudensuunnitelmia tai lupaamalla lahjoja. Kun suhde tuntuu merkitykselliseltä, toisen henkilön kertomuksia voi olla vaikeampi epäillä. Huijarin tarkoituksena on saada toinen luottamaan häneen niin paljon, että tämä suostuu myöhemmin myös rahallisiin pyyntöihin.",
         "Uusiin ihmisiin tutustuessa on luonnollista toivoa toisesta hyvää ja luottaa hänen vilpittömyyteensä. Romanssihuijarit käyttävät tätä luottamusta hyväkseen rakentamalla läheiseltä vaikuttavan suhteen ja vetoamalla toisen tunteisiin. Siksi huijauksen kohteeksi voi joutua kuka tahansa.",
       ],
@@ -244,10 +255,11 @@ export const romanceTheory: TheoryContent = {
       ],
     },
     {
-      heading: "Mistä apua romanssihuijaukseen?",
+      heading: "Mistä apua romanssihuijauksen kohteelle?",
       paragraphs: [
         "Romanssihuijauksesta voi aiheutua sekä taloudellista että henkistä vahinkoa. Rahojen menettämisen lisäksi voi olla raskasta huomata, ettei läheiseksi ja tärkeäksi muodostunut ihminen ollutkaan se, joka hän väitti olevansa. Vaikka suhde olisi perustunut huijaukseen, sen aikana koetut tunteet ovat voineet olla täysin aitoja.",
         "Jos epäilet joutuneesi romanssihuijauksen kohteeksi, lopeta yhteydenpito epäiltyyn huijariin ja säilytä keskustelut sekä muut tapahtumaan liittyvät tiedot. Jos olet lähettänyt rahaa, ota mahdollisimman nopeasti yhteyttä pankkiisi ja tee tapahtuneesta rikosilmoitus poliisille. Tapahtuneesta on tärkeää myös keskustella läheisen tai muun luotettavan henkilön kanssa. Hän voi tarjota kuuntelevaa tukea ja auttaa tarvittaessa esimerkiksi rikosilmoituksen tekemisessä.",
+        "Jos olet antanut huijarille salasanojasi tai muita henkilökohtaisia tietojasi, vaihda ne mahdollisimman nopeasti kyseisten palveluiden verkkosivustoilla tai sovelluksissa. Jos sama salasana on käytössä myös muissa palveluissa, vaihda se myös niissä. Näin voit vähentää mahdollisuutta, että huijari pääsisi käsiksi muihin käyttäjätileihisi.",
         "Huijaukseen joutumista ei tarvitse hävetä, eikä tapahtuneesta tarvitse selviytyä yksin. Läheisten lisäksi tukea voi saada esimerkiksi Rikosuhripäivystyksestä (RIKU). Myös Nettideittiturvan verkkosivuilta löytyy maksutonta omatukimateriaalia, joka auttaa käsittelemään tapahtunutta ja siihen liittyviä tunteita. Huijauksesta on mahdollista toipua, vaikka se veisi aikaa.",
       ],
     },

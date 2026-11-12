@@ -146,7 +146,7 @@ function RomanceActivity({
                   <CharacterPortrait courseId="financial-fraud" />
                 </div>
                 <p>
-                  "Olen tutustunut uuteen mieheen, <strong>Hermanniin</strong>,
+                  "Vuosi eroni jälkeen olen tutustunut uuteen mieheen, <strong>Hermanniin</strong>,
                   sosiaalisen median kautta. Olemme jutelleet jo useamman
                   kuukauden ajan, ja hänestä on tullut minulle tärkeä. Viime
                   aikoina olemme puhuneet myös tapaamisesta, mutta jotkin asiat

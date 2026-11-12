@@ -136,7 +136,7 @@ function TheoryPages({
                   )}
                   {page.characterPortrait && (
                     <div className={styles.portrait}>
-                      <CharacterPortrait courseId={course.id} />
+                      <CharacterPortrait courseId={course.id} complete />
                     </div>
                   )}
                 </section>

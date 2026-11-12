@@ -15,11 +15,6 @@ export const sannaBestPractices = [
     correct: true,
   },
   {
-    id: "personal",
-    text: "Käytetään salasanoissa ja niiden tunnuksissa Sannan nimeä ja syntymäaikaa, jotta ne on helppo muistaa ja arvata.",
-    correct: false,
-  },
-  {
     id: "reuse",
     text: "Käytetään samaa vahvaa salasanaa kaikissa palveluissa.",
     correct: false,
@@ -28,11 +23,6 @@ export const sannaBestPractices = [
     id: "long",
     text: "Valitaan pitkät ja vaikeasti arvattavat salasanat.",
     correct: true,
-  },
-  {
-    id: "mainwordreuse",
-    text: "Marjoja on paljon erilaisia, joten käytetään eri marjaa eri palveluissa!",
-    correct: false,
   },
   {
     id: "title",
@@ -48,11 +38,6 @@ export const sannaBestPractices = [
     id: "manager",
     text: "Tallennetaan eri salasanat salasanojen hallintaohjelmaan, jotta niitä ei tarvitse muistaa ulkoa.",
     correct: true,
-  },
-  {
-    id: "similar",
-    text: "Vaihdetaan vain samaan salasanaan lisättyä numeroa eri palveluissa.",
-    correct: false,
   },
   {
     id: "advice",

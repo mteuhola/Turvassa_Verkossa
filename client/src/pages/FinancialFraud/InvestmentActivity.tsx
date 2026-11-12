@@ -269,7 +269,7 @@ function InvestmentActivity({
             {!submitted && (
               <p id="sorting-help">
                 Klikkaa ja raahaa kohdat haluamiisi laatikoihin tai valitse kohta ja
-                laatikko. Voit siirtää kohtia laatikosta toiseen.
+                laatikko. Voit siirtää kohtia laatikosta toiseen. Valinnat eivät ole oikeita tai vääriä, vaan omia tulkintojasi.
               </p>
             )}
             <div className={styles.bins}>

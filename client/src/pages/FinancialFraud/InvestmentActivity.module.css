@@ -98,7 +98,7 @@
   font-size: 0.875rem;
 }
 .imageSlot {
-  margin: 0 0 24px;
+  margin: 0 auto 24px;
   max-width: 30rem;
 }
 .imageSlot img {

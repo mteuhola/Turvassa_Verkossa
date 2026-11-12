@@ -1,6 +1,5 @@
-﻿import { useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 import Theory from "../Theory/Theory";
 import { investmentTheory } from "../Theory/theoryData";
 import { topicCourses } from "../TopicSelection/topicCourses";
@@ -37,7 +36,9 @@ export default function InvestmentLesson(
 
   if (reading) {
     const course = topicCourses.find((item) => item.id === "financial-fraud")!;
-    const topic = course.topics.find((item) => item.id === "investment-offers")!;
+    const topic = course.topics.find(
+      (item) => item.id === "investment-offers",
+    )!;
     return (
       <Theory
         {...props}
@@ -74,7 +75,6 @@ function InvestmentActivity({
   const [submitted, setSubmitted] = useState(!!saved);
   const [imageFailed, setImageFailed] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
   const resultRef = useRef<HTMLHeadingElement>(null);
   const cards = useRef(new Map<string, HTMLButtonElement>());
   useEffect(() => {
@@ -100,7 +100,6 @@ function InvestmentActivity({
   }
 
   function renderCard(part: (typeof offerParts)[number]) {
-    if (submitted) return part.text;
     return (
       <button
         type="button"
@@ -197,7 +196,8 @@ function InvestmentActivity({
             <p>
               {(answer === "wait"
                 ? "Kiire, harhaanjohtava kuva, salaperäisyys, tuottolupaus ja omituiset maksutiedot antavat syyn pysähtyä."
-                : "Näillä tiedoilla sijoittamista ei voi perustella turvalliseksi.") + " Raijan kannattaa keskustella asiasta Simon kanssa."}
+                : "Näillä tiedoilla sijoittamista ei voi perustella turvalliseksi.") +
+                " Raijan kannattaa keskustella asiasta Simon kanssa."}
             </p>
             <TopicCompletionProgress />
             <p className={styles.feedback} role="status">
@@ -266,12 +266,11 @@ function InvestmentActivity({
                 </div>
               </>
             )}
-            {!submitted && (
-              <p id="sorting-help">
-                Klikkaa ja raahaa kohdat haluamiisi laatikoihin tai valitse kohta ja
-                laatikko. Voit siirtää kohtia laatikosta toiseen. Valinnat eivät ole oikeita tai vääriä, vaan omia tulkintojasi.
-              </p>
-            )}
+            <p id="sorting-help">
+              Klikkaa ja raahaa kohdat haluamiisi laatikoihin tai valitse kohta
+              ja laatikko. Voit siirtää kohtia laatikosta toiseen. Valinnat
+              eivät ole oikeita tai vääriä, vaan omia tulkintojasi.
+            </p>
             <div className={styles.bins}>
               {categories.map(({ suspicious, label }) => {
                 const placed = displayed.filter(
@@ -284,7 +283,7 @@ function InvestmentActivity({
                     data-over={over === suspicious}
                     aria-label={label}
                     onDragOver={(event) => {
-                      if (dragging && !submitted) {
+                      if (dragging) {
                         event.preventDefault();
                         event.dataTransfer.dropEffect = "move";
                         setOver(suspicious);
@@ -302,21 +301,17 @@ function InvestmentActivity({
                       if (dragging) sort(dragging, suspicious);
                     }}
                   >
-                    {submitted ? (
-                      <h3>{label}</h3>
-                    ) : (
-                      <button
-                        className={styles.target}
-                        type="button"
-                        aria-disabled={!selected}
-                        onClick={() => sort(selected, suspicious)}
-                        onKeyDown={(event) => {
-                          if (event.key === "Escape") setSelected(null);
-                        }}
-                      >
-                        {label}
-                      </button>
-                    )}
+                    <button
+                      className={styles.target}
+                      type="button"
+                      aria-disabled={!selected}
+                      onClick={() => sort(selected, suspicious)}
+                      onKeyDown={(event) => {
+                        if (event.key === "Escape") setSelected(null);
+                      }}
+                    >
+                      {label}
+                    </button>
                     {placed.length > 0 && (
                       <ul>
                         {placed.map((part) => (
@@ -338,7 +333,6 @@ function InvestmentActivity({
             </p>
             {!review && remaining.length === 0 && (
               <button
-                ref={nextRef}
                 type="button"
                 className={`${styles.primary} ${styles.nextMessage}`}
                 onClick={advance}
@@ -356,7 +350,7 @@ function InvestmentActivity({
                 <h2 id="decision-heading">
                   Kannattaisiko Simon sijoittaa tähän?
                 </h2>
-                <fieldset disabled={submitted}>
+                <fieldset>
                   <legend>
                     Valitse keräämiesi tietojen perusteella, kannattaisiko Simon
                     sijoittaa yritykseen.
@@ -374,16 +368,14 @@ function InvestmentActivity({
                     </label>
                   ))}
                 </fieldset>
-                {!submitted && (
-                  <button
-                    type="button"
-                    className={styles.primary}
-                    disabled={!answer}
-                    onClick={finish}
-                  >
-                    Vastaa
-                  </button>
-                )}
+                <button
+                  type="button"
+                  className={styles.primary}
+                  disabled={!answer}
+                  onClick={finish}
+                >
+                  Vastaa
+                </button>
               </section>
             )}
           </>

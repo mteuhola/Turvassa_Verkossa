@@ -18,7 +18,11 @@ export const passageConcerns: ReadonlyArray<ReadonlyArray<readonly Concern[]>> =
     [["secrecy"], ["secrecy", "none"], ["secrecy", "love", "none"]],
     [["none"], ["guilt"], ["money", "guilt"]],
     [["guilt"], ["guilt", "money"], ["guilt"]],
-    [["delay", "guilt", "love"], ["guilt", "none"], ["money", "guilt"]],
+    [
+      ["delay", "guilt", "love"],
+      ["guilt", "none"],
+      ["money", "guilt"],
+    ],
   ];
 
 export const reflections: Record<Concern, string> = {
@@ -30,8 +34,7 @@ export const reflections: Record<Concern, string> = {
     "Ajattelin ensin, että minun pitäisi todistaa luottamukseni. Nyt huomaan, että minulle tuli syyllinen olo, kun en halunnut maksaa.",
   delay:
     "Odotin tapaamista, mutta maksamisen jälkeen tulikin uusi este. Kun katson viestejä yhdessä, huomaan, ettei tapaaminen ole edennyt lupauksista huolimatta.",
-  love:  
-    "Ajattelin, että sovimme yhteen nopeasti, kun aloimme jo puhua rakkaudesta. Nyt kun ajattelen asiaa, Hermanni on puhunut rakkaudesta jo todella aikaisessa vaiheessa jutteluamme...",
+  love: "Ajattelin, että sovimme yhteen nopeasti, kun aloimme jo puhua rakkaudesta. Nyt kun ajattelen asiaa, Hermanni on puhunut rakkaudesta jo todella aikaisessa vaiheessa jutteluamme...",
   none: "Tämä kohta ei yksin kerro huijauksesta. Ystävällisyys tai vaikeuksista kertominen voi kuulua tavalliseen keskusteluun. Minun pitää katsoa myös, mitä muissa viesteissä pyydetään.",
 };
 
@@ -43,7 +46,6 @@ export const guidance: Record<Concern, string> = {
     "Syyllistämisessä Raijan epäröinti käännetään esimerkiksi luottamuksen tai välittämisen puutteeksi.",
   delay:
     "Tapaamisen siirtymisessä aiempi suunnitelma muuttuu tai matkalle tulee uusi este.",
-  love:
-    "Rakkauden osoittaminen voi joko olla aitoa, tai yritys vedota huijauksen kohteen tunteisiin.",
+  love: "Rakkauden osoittaminen voi joko olla aitoa, tai yritys vedota huijauksen kohteen tunteisiin.",
   none: "Pohdi vielä, mitä Raijaa tässä pyydetään tekemään tai miltä hänen halutaan tuntevan.",
 };

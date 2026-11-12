@@ -11,7 +11,9 @@ export default function AssessmentStatus({
   if (!error) return null;
   return (
     <div>
-      <p>Salasanan arviointi ei onnistunut häiriöstä johtuen. Yritä uudelleen.</p>
+      <p>
+        Salasanan arviointi ei onnistunut häiriöstä johtuen. Yritä uudelleen.
+      </p>
       <button type="button" onClick={retry}>
         Yritä uudelleen
       </button>

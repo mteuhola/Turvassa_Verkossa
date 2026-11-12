@@ -163,19 +163,25 @@ export default function RaijaRecovery({ onFinish }: { onFinish: () => void }) {
           >
             <h3>Hermanni</h3>
             <p>
-              Rakas, tarvitsisin vielä 150 euroa matkaa varten. Sitten pääsen vihdoin luoksesi. 
-              Tämä on varmasti viimeinen kerta, lupaan. Autathan minua vielä tämän kerran? ❤️
+              Rakas, tarvitsisin vielä 150 euroa matkaa varten. Sitten pääsen
+              vihdoin luoksesi. Tämä on varmasti viimeinen kerta, lupaan.
+              Autathan minua vielä tämän kerran? ❤️
             </p>
           </div>
           <RaijaQuote>
-            Lähetin Hermannille jo ne 300 euroa aiempien 200 euron lisäksi. Nyt hän pyytää taas lisää. Haluaisin uskoa, että tämä olisi oikeasti viimeinen maksu. Mitä minun kannattaisi tehdä?
+            Lähetin Hermannille jo ne 300 euroa aiempien 200 euron lisäksi. Nyt
+            hän pyytää taas lisää. Haluaisin uskoa, että tämä olisi oikeasti
+            viimeinen maksu. Mitä minun kannattaisi tehdä?
           </RaijaQuote>
         </>
       )}
 
       {step === "boundary" && (
         <RaijaQuote>
-          Pitäisikö minun vielä selittää Hermannille, miksi en aio lähettää rahaa? En haluaisi vain kadota hänen elämästään, sillä minulla on kuitenkin edelleen tunteita häntä kohtaan. Mitä minun kannattaisi tehdä?
+          Pitäisikö minun vielä selittää Hermannille, miksi en aio lähettää
+          rahaa? En haluaisi vain kadota hänen elämästään, sillä minulla on
+          kuitenkin edelleen tunteita häntä kohtaan. Mitä minun kannattaisi
+          tehdä?
         </RaijaQuote>
       )}
 
@@ -207,7 +213,9 @@ export default function RaijaRecovery({ onFinish }: { onFinish: () => void }) {
         <>
           <p className={styles.small}>Harjoituspuhelu Raijan omaan pankkiin</p>
           <blockquote className={styles.quote}>
-            <p>”Tonttupankin asiakaspalvelusta hyvää päivää, kuinka voin auttaa?”</p>
+            <p>
+              ”Tonttupankin asiakaspalvelusta hyvää päivää, kuinka voin auttaa?”
+            </p>
             <footer>Pankin työntekijä</footer>
           </blockquote>
         </>
@@ -302,13 +310,18 @@ export default function RaijaRecovery({ onFinish }: { onFinish: () => void }) {
       {step === "support" && (
         <>
           <p>
-            Raija on nyt lopettanut yhteydenpidon Hermanniin, ottanut yhteyttä pankkiinsa ja tehnyt rikosilmoituksen poliisille. Hän on hoitanut tärkeimmät käytännön asiat, mutta tapahtunut painaa edelleen hänen mieltään.
+            Raija on nyt lopettanut yhteydenpidon Hermanniin, ottanut yhteyttä
+            pankkiinsa ja tehnyt rikosilmoituksen poliisille. Hän on hoitanut
+            tärkeimmät käytännön asiat, mutta tapahtunut painaa edelleen hänen
+            mieltään.
           </p>
           <RaijaQuote>
-            Minulla on vielä paha mieli kaikesta tapahtuneesta. En oikein haluaisi olla tänään yksin ajatusteni kanssa. Mitähän voisin tehdä?
+            Minulla on vielä paha mieli kaikesta tapahtuneesta. En oikein
+            haluaisi olla tänään yksin ajatusteni kanssa. Mitähän voisin tehdä?
           </RaijaQuote>
           <p id="raija-support-help">
-            Ehdota Raijalle, miten hän voisi viettää aikaa läheistensä kanssa. Molemmat vaihtoehdot voivat auttaa.
+            Ehdota Raijalle, miten hän voisi viettää aikaa läheistensä kanssa.
+            Molemmat vaihtoehdot voivat auttaa.
           </p>
           <div
             className={styles.conversationChoices}

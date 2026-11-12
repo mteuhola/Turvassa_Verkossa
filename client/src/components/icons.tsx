@@ -1,4 +1,4 @@
-export const LockIcon = ({ color }: { color: string }) => (
+const LockIcon = ({ color }: { color: string }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
     <rect
       x="5"
@@ -19,7 +19,7 @@ export const LockIcon = ({ color }: { color: string }) => (
   </svg>
 );
 
-export const EmailIcon = ({ color }: { color: string }) => (
+const EmailIcon = ({ color }: { color: string }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
     <rect
       x="3"
@@ -45,7 +45,7 @@ export const EmailIcon = ({ color }: { color: string }) => (
   </svg>
 );
 
-export const MaskIcon = ({ color }: { color: string }) => (
+const MaskIcon = ({ color }: { color: string }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
     <path
       d="M12 2.5
@@ -99,3 +99,16 @@ export const MaskIcon = ({ color }: { color: string }) => (
     />
   </svg>
 );
+
+export function CourseIcon({ courseId }: { courseId: string }) {
+  switch (courseId) {
+    case "passwords":
+      return <LockIcon color="currentColor" />;
+    case "phishing":
+      return <EmailIcon color="currentColor" />;
+    case "financial-fraud":
+      return <MaskIcon color="currentColor" />;
+    default:
+      return null;
+  }
+}

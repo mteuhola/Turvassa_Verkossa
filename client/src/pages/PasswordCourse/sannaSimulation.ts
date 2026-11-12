@@ -1,3 +1,5 @@
+import { isExactSelection } from "../../selection";
+
 export const sannaAccounts = [
   { id: "email", name: "Sähköposti" },
   { id: "shop", name: "Vaatekauppa" },
@@ -8,7 +10,7 @@ export type SannaAccountId = (typeof sannaAccounts)[number]["id"];
 export type SannaPasswords = Partial<Record<SannaAccountId, string>>;
 export const sannaOldPassword = "mustikka3";
 
-export const sannaBestPractices = [
+const sannaBestPractices = [
   {
     id: "unique",
     text: "Tehdään jokaiselle palvelulle eri salasana.",
@@ -60,18 +62,16 @@ export function createSannaPlanChoices(random = Math.random) {
 }
 
 export function isSannaPlanCorrect(selected: string[]) {
-  const expected = sannaBestPractices.filter((item) => item.correct);
-  return (
-    selected.length === expected.length &&
-    new Set(selected).size === selected.length &&
-    expected.every((item) => selected.includes(item.id))
+  return isExactSelection(
+    selected,
+    sannaBestPractices.filter((item) => item.correct).map((item) => item.id),
   );
 }
 
 export function entryNameProblem(
   account: SannaAccountId,
   name: string,
-  names: Partial<Record<SannaAccountId, string>>,
+  names: SannaPasswords,
 ) {
   const normalized = name.trim().normalize("NFKC").toLocaleLowerCase("fi");
   if (!normalized || name.trim().length > 60) return "empty";

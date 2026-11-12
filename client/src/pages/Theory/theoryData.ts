@@ -1,15 +1,7 @@
-export interface TheoryImage {
-  src: string;
-  alt: string;
-  caption?: string;
-}
-
 export interface TheoryContent {
-  characterName?: string;
   sections: {
     heading?: string;
     paragraphs: string[];
-    image?: TheoryImage;
     characterPortrait?: boolean;
   }[];
 }
@@ -77,7 +69,7 @@ export const courseIntroductions: Record<string, TheoryContent> = {
         paragraphs: [
           "Tässä on muita merkkejä mahdollisesta huijausviestistä, joita kannattaa pohtia vastaanottaessaan viestiä:",
           "Odottamaton viesti: Viesti ei liity omaan viimeaikaiseen toimintaan. Viestissä voidaan esitellä arvontavoittona saatavaa rahasummaa, joka ilmestyy tilille linkkiä painaessa ja maksukortin tiedot syötettyään. Tällaisessa tilanteessa on syytä epäillä voiton aitoutta, jos ei ole osallistunut arvontoihin.",
-          "Epätavallinen lähettäjän sähköpostiosoite: Tällainen viesti voi väittää tulevansa esimerkiksi pankilta, mutta lähettäjän sähköpostiosoite ei liity pankkipalveluihin. Osoite voi myös olla hyvin samankaltainen kuin oikea osoite, mutta pieni ero voi paljastaa huijauksen, esimerkiksi \"microsoft.com\" ja \"rnicrosoft.com\".",
+          'Epätavallinen lähettäjän sähköpostiosoite: Tällainen viesti voi väittää tulevansa esimerkiksi pankilta, mutta lähettäjän sähköpostiosoite ei liity pankkipalveluihin. Osoite voi myös olla hyvin samankaltainen kuin oikea osoite, mutta pieni ero voi paljastaa huijauksen, esimerkiksi "microsoft.com" ja "rnicrosoft.com".',
           "Avun pyytämisen estäminen: Huijari voi esittää syitä, miksi viestistä kertominen jollekin muulle olisi huono ajatus. Huijari yrittää näin jättää kohteensa toimimaan omien tietojensa varassa, sekä pyrkii vähentämään huijauksen paljastumisen mahdollisuutta.",
           "Linkit vievät eri osoitteeseen kuin mitä viestissä kerrotaan: tietokoneella linkin todellisen osoitteen voi yleensä nähdä viemällä hiiren osoittimen linkin päälle itse linkkiä painamatta.",
           "Odottamattomat liitteet: viestin mukana voi tulla esimerkiksi tiedosto, jonka avaaminen voi asentaa haittaohjelman laitteelle. Liitteitä ei kannata avata, jos viesti on vähänkään epäilyttävä.",
@@ -99,7 +91,7 @@ export const courseIntroductions: Record<string, TheoryContent> = {
         heading: "Mitä ovat sijoitushuijaukset?",
         paragraphs: [
           "Sijoitushuijaukset ovat huijauksia, joissa huijari tavoittelee taloudellista hyötyä houkuttelemalla ihmisiä sijoittamaan rahaa kohteeseen, jota ei välttämättä ole olemassa. Todellisuudessa rahat päätyvät huijarin taskuihin, eivätkä sijoittajat saa rahojaan enää takaisin.",
-          "Huijari voi esittää olevansa sijoitusalan ammattilainen, ja hän voi käyttää hyväkseen kohteensa luottamusta ja tietämättömyyttä sijoittamisesta. Huijari voi käyttää \"sijoittajien\" houkuttelemiseen esimerkiksi epärealistisen suuruisia tuottoja ja riskittömyyttä, väittää sijoituksen olevan juuri kohteelle suunnattu ainutkertainen mahdollisuus, tai esitellä väärennettyjä tietoja sijoituksen arvon kasvusta. Näin sijoitusmahdollisuus voidaan saada vaikuttamaan turvalliselta ja kannattavalta.",
+          'Huijari voi esittää olevansa sijoitusalan ammattilainen, ja hän voi käyttää hyväkseen kohteensa luottamusta ja tietämättömyyttä sijoittamisesta. Huijari voi käyttää "sijoittajien" houkuttelemiseen esimerkiksi epärealistisen suuruisia tuottoja ja riskittömyyttä, väittää sijoituksen olevan juuri kohteelle suunnattu ainutkertainen mahdollisuus, tai esitellä väärennettyjä tietoja sijoituksen arvon kasvusta. Näin sijoitusmahdollisuus voidaan saada vaikuttamaan turvalliselta ja kannattavalta.',
           "Sijoitushuijauksia voidaan levittää esimerkiksi sosiaalisessa mediassa, verkkomainoksissa tai henkilökohtaisten yhteydenottojen kautta. Huijausten kohteeksi voi joutua kuka tahansa iästä tai sijoituskokemuksesta riippumatta. Huijarit voivat hyödyntää esimerkiksi ihmisten kiinnostusta sijoittamiseen tai halua parantaa omaa taloudellista tilannettaan.",
         ],
       },

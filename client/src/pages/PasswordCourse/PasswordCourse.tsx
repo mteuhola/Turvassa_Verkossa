@@ -23,9 +23,11 @@ import { courseIntroductions, passwordTheory } from "../Theory/theoryData";
 import { topicCourses } from "../TopicSelection/topicCourses";
 import type { TextSizeProps } from "../../components/TextSizeControl";
 
-import { passwordExamples, isExampleCorrect } from "./passwordExamples";
-
-const examples = passwordExamples;
+import {
+  passwordExamples as examples,
+  isExampleCorrect,
+} from "./passwordExamples";
+import { toggleSelection } from "../../selection";
 
 function ExampleStrength({ password }: { password: string }) {
   const status = usePasswordAssessment(password);
@@ -127,9 +129,7 @@ export default function PasswordCourse({
       onComplete();
       setStage("complete");
     } catch {
-      setSaveError(
-        "Tallennus ei onnistunut.",
-      );
+      setSaveError("Tallennus ei onnistunut.");
     } finally {
       setIsSaving(false);
     }
@@ -237,13 +237,10 @@ export default function PasswordCourse({
                               onChange={() => {
                                 setChoices((current) => ({
                                   ...current,
-                                  [index]: (current[index] ?? []).includes(
+                                  [index]: toggleSelection(
+                                    current[index] ?? [],
                                     choiceIndex,
-                                  )
-                                    ? current[index].filter(
-                                        (value) => value !== choiceIndex,
-                                      )
-                                    : [...(current[index] ?? []), choiceIndex],
+                                  ),
                                 }));
                                 setCheckedAnswers((current) => {
                                   const next = { ...current };
@@ -329,12 +326,12 @@ export default function PasswordCourse({
                   merkeillä, kuten "kissa-kahvi_radio!sohva"
                 </li>
                 <br />
-                Arvioitu murtamisaika kertoo, kuinka kauan salasanan arvaaminen kestäisi,
-                jos salasana päätyisi vääriin käsiin tietomurrossa.
+                Arvioitu murtamisaika kertoo, kuinka kauan salasanan arvaaminen
+                kestäisi, jos salasana päätyisi vääriin käsiin tietomurrossa.
                 <br />
                 <br />
                 Kun olet kokeillut erilaisia salasanoja, keksi salasana tätä
-                kurssia varten. 
+                kurssia varten.
                 <strong>
                   Huom: Älä kuitenkaan valitse tähän tehtävään olemassaolevaa
                   salasanaasi!

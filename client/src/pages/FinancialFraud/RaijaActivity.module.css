@@ -1,20 +1,6 @@
 .main {
   max-width: 52rem;
 }
-
-.chapters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 32px;
-  padding: 0 0 20px;
-  list-style: none;
-  border-bottom: 1px solid var(--border);
-  color: var(--text-muted);
-}
-.chapters [aria-current] {
-  color: var(--course-ink);
-  font-weight: 700;
-}
 .quote {
   margin: 20px 0;
   padding: 20px;
@@ -47,10 +33,6 @@
 .small {
   font-size: 0.875em;
   color: var(--text-muted);
-}
-.response {
-  color: var(--course-notice-ink);
-  font-weight: 500;
 }
 .document {
   border-block-end: 1px solid var(--border);

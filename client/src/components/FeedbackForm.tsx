@@ -7,7 +7,9 @@ const MAX_LENGTH = 5000;
 export default function FeedbackForm() {
   const [open, setOpen] = useState(false);
   const [feedback, setFeedback] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
   const submitting = useRef(false);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -19,13 +21,17 @@ export default function FeedbackForm() {
       const response = await fetch("/api/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ uuid: getVisitorId(), feedback: feedback.trim() }),
+        body: JSON.stringify({
+          uuid: getVisitorId(),
+          feedback: feedback.trim(),
+        }),
         cache: "no-store",
         signal: AbortSignal.timeout(15000),
       });
       if (!response.ok) throw new Error("Feedback request failed");
       const result = await response.json();
-      if (result.status !== "received") throw new Error("Invalid feedback response");
+      if (result.status !== "received")
+        throw new Error("Invalid feedback response");
       setFeedback("");
       setStatus("success");
     } catch {
@@ -46,10 +52,15 @@ export default function FeedbackForm() {
       >
         {open ? "Sulje palautelomake" : "Anna palautetta"}
       </button>
-      <form id="feedback-form" className={styles.form} hidden={!open} onSubmit={submit}>
+      <form
+        id="feedback-form"
+        className={styles.form}
+        hidden={!open}
+        onSubmit={submit}
+      >
         <label htmlFor="feedback-message">Palautteesi</label>
         <p id="feedback-hint" className={styles.hint}>
-          Kerro, mikä toimi tai mitä voisimme parantaa. Enintään 5 000 merkkiä.
+          Kerro, mikä toimi tai mitä voisi parantaa. Enintään 5000 merkkiä.
         </p>
         <textarea
           id="feedback-message"
@@ -57,7 +68,9 @@ export default function FeedbackForm() {
           value={feedback}
           onChange={(event) => {
             event.target.setCustomValidity(
-              event.target.value.trim() ? "" : "Kirjoita palaute ennen lähettämistä.",
+              event.target.value.trim()
+                ? ""
+                : "Kirjoita palaute ennen lähettämistä.",
             );
             setFeedback(event.target.value);
             setStatus("idle");
@@ -67,7 +80,11 @@ export default function FeedbackForm() {
           required
           disabled={status === "sending"}
         />
-        <button type="submit" className={styles.send} disabled={status === "sending"}>
+        <button
+          type="submit"
+          className={styles.send}
+          disabled={status === "sending"}
+        >
           {status === "sending" ? "Lähetetään…" : "Lähetä palaute"}
         </button>
         <p role="status" className={styles.message}>
@@ -76,7 +93,8 @@ export default function FeedbackForm() {
         </p>
         {status === "error" && (
           <p role="alert" className={styles.message}>
-            Lähetys epäonnistui. Palautteesi on yhä kentässä. Tarkista verkkoyhteys ja yritä uudelleen.
+            Lähetys epäonnistui. Palautteesi on yhä kentässä. Tarkista
+            verkkoyhteys ja yritä uudelleen.
           </p>
         )}
       </form>

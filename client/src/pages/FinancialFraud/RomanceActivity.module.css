@@ -79,19 +79,6 @@
   flex-wrap: wrap;
   gap: 16px;
 }
-.summary {
-  list-style: none;
-  padding: 0;
-}
-.summary li {
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
-}
-.summary blockquote {
-  margin: 16px 0;
-  font-style: italic;
-}
 .evidenceChoice {
   display: block;
   width: 100%;
@@ -133,9 +120,6 @@
   width: 22px;
   height: 22px;
   accent-color: var(--course-ink);
-}
-.excerpt {
-  margin: 0;
 }
 .reflection {
   margin-block: 28px;

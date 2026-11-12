@@ -20,7 +20,6 @@ export default function KaarloInbox({
     title: string;
     explanation: string;
     response?: string;
-    closeEmail?: boolean;
   } | null>(null);
   const listHeading = useRef<HTMLHeadingElement>(null);
   const email = selected === null ? null : kaarloEmails[selected];
@@ -46,17 +45,14 @@ export default function KaarloInbox({
         : "Pohditaan vielä",
       explanation: email.explanation,
       response: correct ? email.response : undefined,
-      closeEmail: true,
     });
   }
 
   function dismissFeedback() {
     setFeedback(null);
-    if (feedback?.closeEmail) {
-      setSelected(null);
-      onSelect(null);
-      requestAnimationFrame(() => listHeading.current?.focus());
-    }
+    setSelected(null);
+    onSelect(null);
+    requestAnimationFrame(() => listHeading.current?.focus());
   }
 
   return (
@@ -65,7 +61,8 @@ export default function KaarloInbox({
         Avaa viestejä haluamassasi järjestyksessä. Ilmoita huijausviestit
         tietojenkalasteluksi <strong>varoitus- ja roskakoripainikkeella</strong>
         . Jätä muut viestit saapuneisiin. Kun olet valmis, voit painaa{" "}
-        <strong>Valmis</strong> -painiketta. Linkkejä ei tarvitse avata tehtävän suorittamiseksi.
+        <strong>Valmis</strong> -painiketta. Linkkejä ei tarvitse avata tehtävän
+        suorittamiseksi.
       </p>
       <PracticeInbox
         title="Kaarlon sähköposti"
@@ -216,15 +213,13 @@ export default function KaarloInbox({
                         <p key={paragraph}>{paragraph}</p>
                       ))}
                       {email.link && (
-                        <>
-                          <a
-                            href={email.link.destination}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {email.link.text}
-                          </a>
-                        </>
+                        <a
+                          href={email.link.destination}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {email.link.text}
+                        </a>
                       )}
                     </div>
                   </article>

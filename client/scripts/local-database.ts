@@ -1,19 +1,32 @@
 import { fileURLToPath } from "node:url";
-import { NetlifyDB, applyMigrations } from "@netlify/database-dev";
+import {
+  NetlifyDB,
+  applyMigrations,
+  type SQLExecutor,
+} from "@netlify/database-dev";
 import pg from "pg";
 
 const port = Number(process.env.LOCAL_DATABASE_PORT ?? 5433);
 if (!Number.isInteger(port) || port < 1024 || port > 65535) {
-  throw new Error("LOCAL_DATABASE_PORT must be an integer between 1024 and 65535.");
+  throw new Error(
+    "LOCAL_DATABASE_PORT must be an integer between 1024 and 65535.",
+  );
 }
 
-const directory = fileURLToPath(new URL("../../.netlify/local-database/", import.meta.url));
+const directory = fileURLToPath(
+  new URL("../../.netlify/local-database/", import.meta.url),
+);
 const command = process.argv[2];
-const migrations = fileURLToPath(new URL("../../netlify/database/migrations/", import.meta.url));
+const migrations = fileURLToPath(
+  new URL("../../netlify/database/migrations/", import.meta.url),
+);
 
 if (command === "query" || command === "migrate") {
   const sql = process.argv[3];
-  if (command === "query" && !sql) throw new Error('Supply SQL, for example: npm run db:query -- "SELECT version()"');
+  if (command === "query" && !sql)
+    throw new Error(
+      'Supply SQL, for example: npm run db:query -- "SELECT version()"',
+    );
   const client = new pg.Client({
     host: "localhost",
     port,
@@ -25,9 +38,10 @@ if (command === "query" || command === "migrate") {
   try {
     await client.connect();
     if (command === "migrate") {
-      const executor = {
+      const executor: SQLExecutor = {
         exec: (statement) => client.query(statement),
-        query: (statement, params) => client.query(statement, params),
+        query: <T>(statement: string, params?: unknown[]) =>
+          client.query<T & pg.QueryResultRow>(statement, params),
         async transaction(callback) {
           await client.query("BEGIN");
           try {
@@ -40,7 +54,10 @@ if (command === "query" || command === "migrate") {
           }
         },
       };
-      console.log("Applied migrations:", await applyMigrations(executor, migrations));
+      console.log(
+        "Applied migrations:",
+        await applyMigrations(executor, migrations),
+      );
     } else {
       const result = await client.query(sql);
       for (const item of Array.isArray(result) ? result : [result]) {
@@ -48,7 +65,9 @@ if (command === "query" || command === "migrate") {
       }
     }
   } catch (error) {
-    console.error(`Local database query failed: ${error.message}. Start npm run db:dev first.`);
+    console.error(
+      `Local database query failed: ${(error as Error).message}. Start npm run db:dev first.`,
+    );
     process.exitCode = 1;
   } finally {
     await client.end();
@@ -70,10 +89,14 @@ if (command === "query" || command === "migrate") {
     console.log(`Connection: ${connectionString}`);
     console.log(`Data directory: ${directory}`);
     console.log("Keep this terminal open. Press Ctrl+C to stop.");
-    process.once("SIGINT", () => { void stop(); });
-    process.once("SIGTERM", () => { void stop(); });
+    process.once("SIGINT", () => {
+      void stop();
+    });
+    process.once("SIGTERM", () => {
+      void stop();
+    });
   } catch (error) {
-    console.error(`Cannot start local database: ${error.message}`);
+    console.error(`Cannot start local database: ${(error as Error).message}`);
     await database.stop();
     process.exitCode = 1;
   }

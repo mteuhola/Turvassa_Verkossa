@@ -46,9 +46,10 @@ export default function RaijaActivity({
               </div>
               <blockquote className={shared.introQuote}>
                 <p>
-                  ”Muistatko sen lomakylän sijoitustarjouksen? Simo
-                  sijoitti siihen rahaa ennen kuin ehdin jutella tarjouksesta hänen kanssaan. Olen huolissani hänestä, mutten
-                  oikein tiedä, mitä sanoisin. Auttaisitko minua?”
+                  ”Muistatko sen lomakylän sijoitustarjouksen? Simo sijoitti
+                  siihen rahaa ennen kuin ehdin jutella tarjouksesta hänen
+                  kanssaan. Olen huolissani hänestä, mutten oikein tiedä, mitä
+                  sanoisin. Auttaisitko minua?”
                 </p>
                 <p>- Raija</p>
               </blockquote>
@@ -118,13 +119,21 @@ export default function RaijaActivity({
                 <CharacterPortrait courseId="financial-fraud" complete />
               </div>
               <p>
-                Raija: Minulla on vielä paha mieli kaikesta tapahtuneesta, mutta nyt tiedän, mistä voin saada apua. Vaikka Hermanni ei ollutkaan se, joka väitti olevansa, minun tunteeni olivat aitoja. On helpottavaa tietää, ettei minun tarvitse selviytyä tästä yksin.
+                Raija: Minulla on vielä paha mieli kaikesta tapahtuneesta, mutta
+                nyt tiedän, mistä voin saada apua. Vaikka Hermanni ei ollutkaan
+                se, joka väitti olevansa, minun tunteeni olivat aitoja. On
+                helpottavaa tietää, ettei minun tarvitse selviytyä tästä yksin.
               </p>
             </div>
             <p>
-              Kurssin aikana autoit Raijaa ja Simoa kohtaamaan vaikeita tilanteita. Autoit heitä tunnistamaan huijausten merkkejä, tekemään turvallisempia päätöksiä ja hakemaan apua. Erityisen tärkeää oli se, että suhtauduit heidän kokemuksiinsa ymmärtäväisesti ja ilman syyllistämistä.
-
-Huijauksia voi olla vaikea tunnistaa, ja niiden kohteeksi voi joutua kuka tahansa. Tärkeintä on muistaa, että apua on saatavilla eikä tapahtuneesta tarvitse selviytyä yksin.
+              Kurssin aikana autoit Raijaa ja Simoa kohtaamaan vaikeita
+              tilanteita. Autoit heitä tunnistamaan huijausten merkkejä,
+              tekemään turvallisempia päätöksiä ja hakemaan apua. Erityisen
+              tärkeää oli se, että suhtauduit heidän kokemuksiinsa
+              ymmärtäväisesti ja ilman syyllistämistä. Huijauksia voi olla
+              vaikea tunnistaa, ja niiden kohteeksi voi joutua kuka tahansa.
+              Tärkeintä on muistaa, että apua on saatavilla eikä tapahtuneesta
+              tarvitse selviytyä yksin.
             </p>
             <RecoverySupportLinks />
             <TopicCompletionProgress />

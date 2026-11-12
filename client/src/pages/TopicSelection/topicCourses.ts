@@ -1,4 +1,3 @@
-import { helpStories } from "../Theory/helpStories.ts";
 import {
   courseIntroductions,
   type TheoryContent,
@@ -25,6 +24,7 @@ export interface TopicCourse {
 
 type CourseCatalogEntry = TopicCourse & {
   introductionDescription: string;
+  helpActivity: Pick<CourseTopic, "id" | "title" | "description">;
 };
 
 const courseCatalog: CourseCatalogEntry[] = [
@@ -35,6 +35,12 @@ const courseCatalog: CourseCatalogEntry[] = [
     path: "/course/passwords",
     introductionDescription:
       "Lue, millainen on hyvä salasana, ja tutki esimerkkisalasanoja.",
+    helpActivity: {
+      id: "help-sanna",
+      title: "Auta Sannaa",
+      description:
+        "Sanna tarvitsee apuasi salasanojen vaihtamisessa ja salasanojen hallintaohjelman kanssa.",
+    },
     topics: [
       {
         id: "password-strength",
@@ -52,6 +58,12 @@ const courseCatalog: CourseCatalogEntry[] = [
     path: "/course/phishing",
     introductionDescription:
       "Lue tietojenkalastelusta ja huijausviestien varoitusmerkeistä. Etsi huijauksen merkkejä esimerkkiviestistä.",
+    helpActivity: {
+      id: "help-kaarlo",
+      title: "Auta Kaarloa",
+      description:
+        "Arvioi Kaarlon saamia outoja sähköposteja ja selvitä, mikä johti näiden viestien saapumiseen.",
+    },
     topics: [
       {
         id: "safe-responses",
@@ -71,14 +83,19 @@ const courseCatalog: CourseCatalogEntry[] = [
     path: "/course/financial-fraud",
     introductionDescription:
       "Tutustu kurssin aiheeseen ja siihen, mitä pääset harjoittelemaan.",
+    helpActivity: {
+      id: "help-raija",
+      title: "Auta Raijaa",
+      description:
+        "Auta ensin Raijaa tukemaan Simoa sijoitushuijauksen jälkeen. Auttakaa sitten yhdessä Raijaa ottamaan seuraavat askeleet.",
+    },
     topics: [
       {
         id: "investment-offers",
         kind: "activity",
         isComplete: false,
         title: "Sijoitushuijaukset",
-        description:
-          "Opi sijoitushuijauksista, ja pohdi sijoitustarjousta.",
+        description: "Opi sijoitushuijauksista, ja pohdi sijoitustarjousta.",
         path: "/course/financial-fraud/investment-offers",
       },
     ],
@@ -87,7 +104,7 @@ const courseCatalog: CourseCatalogEntry[] = [
 
 // Introductions and quizzes count toward progress just like activities.
 export const topicCourses: TopicCourse[] = courseCatalog.map(
-  ({ introductionDescription, ...course }) => ({
+  ({ introductionDescription, helpActivity, ...course }) => ({
     ...course,
     topics: [
       {
@@ -108,18 +125,16 @@ export const topicCourses: TopicCourse[] = courseCatalog.map(
               kind: "activity" as const,
               isComplete: false,
               title: "Romanssihuijaukset",
-              description: "Lue romanssihuijauksista ja etsi varoitusmerkkejä viesteistä.",
+              description:
+                "Lue romanssihuijauksista ja etsi varoitusmerkkejä viesteistä.",
               path: `${course.path}/theory`,
             },
           ]),
       {
-        id: helpStories[course.id].id,
-        kind: "theory",
+        ...helpActivity,
+        kind: "activity",
         isComplete: false,
-        title: helpStories[course.id].title,
-        description: helpStories[course.id].description,
-        path: `${course.path}/${helpStories[course.id].id}`,
-        content: helpStories[course.id].content,
+        path: `${course.path}/${helpActivity.id}`,
       },
       {
         id: "quiz",

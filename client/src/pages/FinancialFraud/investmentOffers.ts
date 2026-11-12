@@ -1,131 +1,86 @@
-export interface OfferPart {
-  id: string;
-  text: string;
-  suspicious: boolean;
-  explanation: string;
-}
-export interface InvestmentOffer {
-  id: string;
-  title: string;
-  intro: string;
-  parts: OfferPart[];
-}
-export const investmentOffers: InvestmentOffer[] = [
+export const investmentCaseId = "holiday-village-v1";
+
+export const villageImage: { src: string | null; alt: string } = {
+  src: "/images/investment-cottage.png",
+  alt: "Myyjän ainoana kuvana esittämä tekoälykuva lomakylästä.",
+};
+
+export const investmentMessages = [
   {
-    id: "crypto",
-    title: "Automaattinen kryptosijoitus",
-    intro: "Sosiaalisen median mainos tarjoaa uuden sijoitusrobotin palvelua.",
+    message:
+      "Sijoituksen tarjoaja soitti puhelun lomakylää perustavan yrityksen nimissä. Yrityksen tiedot löytyvät verkosta. Pankille tai läheisille tarjouksesta ei kuulemma saisi kertoa tarjouksesta, sillä se on erikoistarjous vain Simolle. Simo kertoi tarjoajan olleen puhelussa kovin ystävällinen ja vakuuttava.",
+    hasImage: false,
     parts: [
       {
-        id: "online",
-        text: "Palvelua esitellään verkkosivulla.",
-        suspicious: false,
-        explanation:
-          "Verkkosivu ei itsessään ole varoitusmerkki eikä todiste luotettavuudesta. Tutki erityisesti lupauksia ja maksupyyntöä.",
+        id: "phone",
+        text: "Sijoitustarjous esitetään puhelimitse.",
       },
       {
-        id: "guarantee",
-        text: "Saat varmasti 15 % tuottoa joka viikko. Et voi menettää rahojasi.",
-        suspicious: true,
-        explanation:
-          "Poikkeuksellisen suuri, varmaksi luvattu tuotto ja riskittömyys ovat varoitusmerkkejä. Lupaus ei todista sijoituksen turvallisuutta.",
+        id: "targeted",
+        text: "Tarjous on kuulemma kohdennettu vain Simolle.",
       },
       {
-        id: "celebrity",
-        text: "Tunnettu televisiokasvo suosittelee palvelua videolla. Sinun ei tarvitse tarkistaa yrityksen taustaa.",
-        suspicious: true,
-        explanation:
-          "Tunnetun henkilön kuvaa tai videota voidaan käyttää ilman lupaa tai muokata. Suositus ei korvaa yrityksen taustan tarkistamista.",
+        id: "secrecy",
+        text: "Tarjouksesta ei saa kertoa pankille tai läheisille.",
       },
       {
-        id: "wallet",
-        text: "Siirrä rahat neuvojamme henkilökohtaiseen kryptolompakkoon.",
-        suspicious: true,
-        explanation:
-          "Henkilökohtainen lompakko ei kerro, kuka vastaa palvelusta tai mihin rahat menevät. Maksutapa ja vastaanottaja vaativat selvittämistä.",
+        id: "salesman",
+        text: "Sijoituksen tarjoja vaikutti ystävälliseltä ja vakuuttavalta.",
+      },
+      {
+        id: "searched",
+        text: "Yrityksen tiedot löytyvät verkosta.",
       },
     ],
   },
   {
-    id: "shares",
-    title: "Osakkeita ennen pörssiin menoa",
-    intro:
-      "Tuntematon soittaja tarjoaa mahdollisuutta ostaa kuvitteellisen energiayhtiön osakkeita.",
+    message:
+      "Lomakylän rakentaminen alkaa vuoden päästä, ja se tulee sijaitsemaan keskellä suosittua lomakaupunkia. Simo sai esitteen sähköpostitse. Alempana on sijoituksen tarjoajan lähettämä kuva, joka kuulemma esittää valmista kylän mökkiä.",
+    hasImage: true,
+    parts: [
+      {
+        id: "image",
+        text: "Ainoa todiste sijoituskohteen olemassaolosta on tekoälyllä tehty kuva.",
+      },
+      {
+        id: "email",
+        text: "Esite lähetetään sähköpostitse.",
+      },
+      {
+        id: "location",
+        text: "Lomakylän kerrotaan sijaitsevan suositussa lomakaupungissa.",
+      },
+      {
+        id: "construction",
+        text: "Lomakylän rakentaminen alkaa vuoden päästä.",
+      },
+    ],
+  },
+    {
+    message:
+      "Simo kertoi, ettei nukkunut viime yönä hyvin miettiessään tarjousta. Hänelle nimittäin kerrottiin, että sijoitustarjous on voimassa vain ylihuomiseen, ja muuten tarjous esitetään jollekin toiselle, jos sijoitettujen rahojen kaksinkertaistaminen vuodessa ei kiinnosta. Myyjä pyysi siirtämään rahat yksityishenkilön tilille, jonka nimi ei vastaa yritystä, jonka nimissä sijoituksen tarjoaja alun perin soitti.",
+    hasImage: false,
     parts: [
       {
         id: "deadline",
-        text: "Tarjous päättyy kymmenen minuutin kuluttua. Päätös pitää tehdä puhelun aikana.",
-        suspicious: true,
-        explanation:
-          "Kiireellä painostaminen vie aikaa harkinnalta ja tietojen tarkistamiselta.",
+        text: "Päätös pitää tehdä nopeasti.",
       },
       {
-        id: "secret",
-        text: "Älä kerro tästä pankillesi tai läheisillesi. Tämä on vain valituille asiakkaille.",
-        suspicious: true,
-        explanation:
-          "Salailupyyntö estää saamasta ulkopuolista arviota. Erityisasemalla voidaan houkutella luottamaan tarjoukseen.",
-      },
-      {
-        id: "documents",
-        text: "Yrityksen viralliset tiedot ja sopimuksen saat vasta maksun jälkeen.",
-        suspicious: true,
-        explanation:
-          "Tarjoajan ja ehtojen tarkistamisen pitäisi olla mahdollista ennen päätöstä. Niiden salaaminen maksun taakse on varoitusmerkki.",
-      },
-      {
-        id: "sector",
-        text: "Yhtiön kerrotaan kehittävän aurinkoenergiaa.",
-        suspicious: false,
-        explanation:
-          "Toimiala ei yksin tee tarjouksesta huijausta tai turvallista. Arvioi tarjoajan toimintaa ja tarkistettavia tietoja.",
-      },
-    ],
-  },
-  {
-    id: "property",
-    title: "Vuokratuottoa loma-asunnoista",
-    intro: "Sähköpostissa esitellään sijoitusta ulkomaiseen lomakohteeseen.",
-    parts: [
-      {
-        id: "details",
-        text: "Kohteen osoitetta tai omistustietoja ei anneta. Esitteen kuvat riittävät todisteeksi.",
-        suspicious: true,
-        explanation:
-          "Kuvilla ei voi varmistaa kohteen olemassaoloa tai omistusta. Tarkistettavien tietojen puuttuminen on varoitusmerkki.",
-      },
-      {
-        id: "brochure",
-        text: "Esitteessä on kuvia asunnoista ja uima-altaasta.",
-        suspicious: false,
-        explanation:
-          "Kuvat eivät itsessään osoita huijausta. Ne eivät myöskään varmista sijoituksen aitoutta tai tuottoa.",
+        id: "double",
+        text: "Simo saisi sijoitetut rahansa takaisin kaksinkertaisena vuodessa.",
       },
       {
         id: "account",
-        text: "Varausmaksu pitää lähettää yksityishenkilön tilille, jonka nimi ei vastaa tarjoajaa.",
-        suspicious: true,
-        explanation:
-          "Maksunsaajan ja tarjoajan ristiriita vaatii selvittämistä. Pelkkä selitys viestissä ei varmista, kenelle maksat.",
-      },
-      {
-        id: "access",
-        text: "Asenna etähallintaohjelma ja kirjaudu pankkiisi, niin neuvojamme hoitaa sijoituksen puolestasi.",
-        suspicious: true,
-        explanation:
-          "Pankkiasioinnin yhdistäminen tuntemattoman etäyhteyteen voi antaa hänelle pääsyn tietoihisi ja rahojesi siirtoihin.",
+        text: "Rahat pyydetään eri nimisen yksityishenkilön tilille.",
       },
     ],
   },
 ];
-export const clueIds = investmentOffers.flatMap((offer) =>
-  offer.parts
-    .filter((part) => part.suspicious)
-    .map((part) => offer.id + "/" + part.id),
+export const offerParts = investmentMessages.flatMap(
+  (message) => message.parts,
 );
-export function discoverClue(found: string[], id: string): string[] {
-  return clueIds.includes(id) && !found.includes(id) ? [...found, id] : found;
-}
-export function allCluesFound(found: string[]): boolean {
-  return clueIds.every((id) => found.includes(id));
-}
+export type Recommendation = "invest" | "wait";
+export const recommendations: { id: Recommendation; text: string }[] = [
+  { id: "invest", text: "Kyllä, näillä tiedoilla." },
+  { id: "wait", text: "Ei näillä tiedoilla." },
+];

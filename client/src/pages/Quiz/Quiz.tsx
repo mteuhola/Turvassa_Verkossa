@@ -1,11 +1,12 @@
+import CourseBook from "../../components/CourseBook";
+import TopicCompletionProgress from "../../components/TopicCompletionProgress";
+import Navbar from "../../components/Navbar";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import TextSizeControl, {
-  type TextSizeProps,
-} from "../../components/TextSizeControl";
-import CompletionBadge from "../../components/CompletionBadge";
+import type { TextSizeProps } from "../../components/TextSizeControl";
 import PracticePasswordManager from "../../components/PracticePasswordManager";
 import CompletionNotice from "../../components/CompletionNotice";
+import CourseCompletionBadge from "../../components/CourseCompletionBadge";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import {
   canEnterQuiz,
@@ -30,19 +31,12 @@ export default function Quiz(props: QuizProps) {
   if (canEnterQuiz(props.course)) return <QuizActivity {...props} />;
   return (
     <div className={styles.root} data-course={props.course.id}>
-      <nav className={styles.nav} aria-label="Päänavigaatio">
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to={props.course.path}>← Takaisin aiheisiin</Link>
-          <TextSizeControl
-            textSize={props.textSize}
-            onTextSizeChange={props.onTextSizeChange}
-          />
-        </div>
-      </nav>
-      <main className={styles.main}>
+      <Navbar
+        {...props}
+        backTo={props.course.path}
+        backLabel="Takaisin aiheisiin"
+      />
+      <CourseBook className={styles.main}>
         <h1>{props.course.title}: tietovisa</h1>
         <h2>Suorita ensin muut aiheet</h2>
         <p>
@@ -57,7 +51,7 @@ export default function Quiz(props: QuizProps) {
           ))}
         </ul>
         <Link to={props.course.path}>Palaa kurssin aiheisiin</Link>
-      </main>
+      </CourseBook>
     </div>
   );
 }
@@ -77,6 +71,7 @@ function QuizActivity({
   const [correct, setCorrect] = useState(false);
   const [checking, setChecking] = useState(false);
   const [finished, setFinished] = useState(false);
+  const [celebrateCompletion, setCelebrateCompletion] = useState(false);
   const questionHeading = useRef<HTMLHeadingElement>(null);
   const question = quiz.questions[index];
   const missingPracticePassword =
@@ -134,6 +129,9 @@ function QuizActivity({
   function advance() {
     if (!correct) return;
     if (index === total - 1) {
+      setCelebrateCompletion(
+        !isComplete && unfinishedQuizPrerequisites(course).length === 0,
+      );
       setFinished(true);
       onComplete();
     } else {
@@ -145,44 +143,28 @@ function QuizActivity({
     }
   }
 
-  function restart() {
-    setIndex(0);
-    setSelected([]);
-    setPassword("");
-    setVisible(false);
-    setCorrect(false);
-    setFeedback("");
-    setFinished(false);
-  }
-
   return (
     <div className={styles.root} data-course={course.id}>
-      <nav
-        className={`${styles.nav} ${showNotifications ? styles.quizNav : ""}`}
-        aria-label="Päänavigaatio"
+      <Navbar
+        {...textSizeProps}
+        backTo={course.path}
+        backLabel="Takaisin aiheisiin"
+        className={showNotifications ? styles.quizNav : undefined}
       >
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to={course.path}>← Takaisin aiheisiin</Link>
-          <TextSizeControl {...textSizeProps} />
-          {showNotifications && (
-            <QuizNotifications
-              isLastQuestion={total > 0 && index === total - 1}
-            />
-          )}
-        </div>
-      </nav>
-      <main className={styles.main}>
+        {showNotifications && (
+          <QuizNotifications
+            isLastQuestion={total > 0 && index === total - 1}
+          />
+        )}
+      </Navbar>
+      <CourseBook className={styles.main}>
         <header>
           <h1>{course.title}: tietovisa</h1>
           <p>
             Kokeillaan, mitä jäi mieleen. Saat jokaisesta vastauksesta
             palautetta, ja voit yrittää uudelleen. Kun kaikki vastaukset ovat
-            oikein, saat tietovisasta merkin.
+            oikein, kurssi merkitään suoritetuksi!
           </p>
-          {isComplete && <CompletionBadge label="Tietovisa suoritettu" />}
         </header>
         <div className={styles.progress}>
           <p>
@@ -195,21 +177,46 @@ function QuizActivity({
           />
         </div>
         {finished ? (
-          <div role="status">
-            <CompletionNotice badgeLabel="Tietovisa suoritettu">
-              <h2>Valmista tuli, kaikki oikein!</h2>
+          celebrateCompletion ? (
+            <section
+              className={styles.celebration}
+              aria-labelledby="course-completed"
+            >
+              <CourseCompletionBadge />
+              <h2
+                id="course-completed"
+                tabIndex={-1}
+                ref={(node) => {
+                  node?.focus();
+                }}
+              >
+                Hienoa, suoritit koko kurssin!
+              </h2>
+              <TopicCompletionProgress />
               <p>
-                Voit jatkaa muihin aiheisiin tai kokeilla tietovisaa uudelleen.
-                Ansaitsemasi merkki säilyy.
+                <strong>{course.title}</strong>
+              </p>
+              <p>
+                Kaikki aiheet ja tietovisa on nyt suoritettu. Voit palata kertaamaan milloin tahansa.
               </p>
               <div className={styles.actions}>
-                <Link to={course.path}>Palaa aiheisiin →</Link>
-                <button type="button" onClick={restart}>
-                  Kertaa tietovisa
-                </button>
+                <Link className={styles.courseLink} to="/">
+                  Takaisin kursseihin →
+                </Link>
               </div>
-            </CompletionNotice>
-          </div>
+            </section>
+          ) : (
+            <div role="status">
+              <CompletionNotice badgeLabel="Tietovisa suoritettu">
+                <h2>Valmista tuli, kaikki oikein!</h2>
+                <TopicCompletionProgress />
+                <p>Voit jatkaa muihin aiheisiin.</p>
+                <div className={styles.actions}>
+                  <Link to={course.path}>Palaa aiheisiin</Link>
+                </div>
+              </CompletionNotice>
+            </div>
+          )
         ) : question ? (
           <section className={styles.card} aria-labelledby="question-heading">
             <h2 id="question-heading" ref={questionHeading} tabIndex={-1}>
@@ -225,9 +232,8 @@ function QuizActivity({
                 <div>
                   <h3>{question.prompt}</h3>
                   <p id="password-help">
-                    Käytä muistiinpanoasi tai avaa harjoituksen salasanojen
-                    hallintaohjelma. Älä kirjoita oikean tilisi salasanaa.
-                    Harjoitussalasanaa ei saa käyttää muualla.
+                    Käytä kirjoittamaasi muistiinpanoa tai avaa harjoituksen
+                    salasanojen hallintaohjelma.
                   </p>
                   {missingPracticePassword ? (
                     <p className={styles.feedback}>
@@ -359,11 +365,8 @@ function QuizActivity({
         ) : (
           <p>Tähän tietovisaan ei ole vielä lisätty kysymyksiä.</p>
         )}
-        <p className={styles.small}>
-          Keskeneräiset vastaukset eivät tallennu. Suoritusmerkki säilyy tässä
-          selaimessa, jos tallennus on sallittu.
-        </p>
-      </main>
+        <p className={styles.small}>Keskeneräiset vastaukset eivät tallennu.</p>
+      </CourseBook>
     </div>
   );
 }

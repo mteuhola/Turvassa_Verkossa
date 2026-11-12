@@ -1,0 +1,53 @@
+main.book {
+  --page-bg: var(--paper);
+  position: relative;
+  width: calc(100% - 2 * var(--page-gutter));
+  margin: 32px auto 48px;
+  padding: clamp(28px, 4vw, 64px) clamp(24px, 5vw, 80px);
+  background: var(--paper);
+  border-radius: 3px 10px 10px 3px;
+  box-shadow: 0 12px 28px rgb(53 45 38 / 12%);
+}
+
+/* A quiet binding and inset page edge frame one continuous reading surface. */
+main.book::before,
+main.book::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  pointer-events: none;
+}
+
+main.book::before {
+  left: 10px;
+  width: 12px;
+  border-left: 1px solid var(--border);
+  background: linear-gradient(to right, rgb(104 92 80 / 7%), transparent);
+}
+
+main.book::after {
+  right: 5px;
+  width: 4px;
+  border-inline: 1px solid var(--border);
+  border-radius: 0 4px 4px 0;
+}
+
+@media (max-width: 600px) {
+  main.book {
+    width: calc(100% - 16px);
+    margin-block: 16px 24px;
+    padding: 28px 16px 32px;
+    border-radius: 2px 6px 6px 2px;
+  }
+
+  main.book::before {
+    left: 3px;
+    width: 4px;
+  }
+
+  main.book::after {
+    right: 2px;
+    width: 2px;
+  }
+}

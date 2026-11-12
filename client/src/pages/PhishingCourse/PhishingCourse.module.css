@@ -70,6 +70,30 @@
 .main.responsePractice {
   max-width: 90rem;
 }
+.main.introductionComplete {
+  max-width: 52rem;
+}
+.introductionComplete header {
+  margin-bottom: 32px;
+}
+.completionContent {
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+}
+.completionContent .actions {
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+.root .secondaryAction {
+  border-color: transparent;
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.root .secondaryAction:hover {
+  background: var(--surface);
+}
 .recoveryQuestion {
   border: 0;
   padding: 0;
@@ -160,7 +184,7 @@
   margin: 0 0 24px;
   border-top: 1px solid var(--border);
 }
-.inboxList button {
+.inboxList > li > button {
   display: grid;
   gap: 4px;
   width: 100%;
@@ -174,10 +198,17 @@
   overflow-wrap: anywhere;
   cursor: pointer;
 }
-.inboxList button:hover,
-.inboxList button[aria-pressed="true"] {
+.inboxList > li > button:hover,
+.inboxList > li > button[aria-pressed="true"] {
   background: #e6f1fb;
   color: #0c447c;
+}
+.inboxMessageContent {
+  padding-block: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.inboxMessageContent .email {
+  border: 4px solid #0c447c;
 }
 .mailCommandBar {
   display: flex;
@@ -249,12 +280,6 @@
 .emailMetadata dd {
   margin: 0;
 }
-.destinationAddress {
-  padding: 16px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  overflow-wrap: anywhere;
-}
 @media (max-width: 480px) {
   .emailMetadata {
     grid-template-columns: minmax(0, 1fr);
@@ -262,22 +287,6 @@
   .emailMetadata dd {
     margin-bottom: 12px;
   }
-}
-.responseScenario {
-  margin-block: 32px;
-}
-.responseOptions {
-  display: grid;
-  gap: 12px;
-}
-.responseOptions button {
-  text-align: left;
-  overflow-wrap: anywhere;
-}
-.responseOptions button[aria-pressed="true"] {
-  border-color: var(--course-ink);
-  background: #e6f1fb;
-  color: var(--course-ink);
 }
 .root * {
   box-sizing: border-box;
@@ -296,25 +305,6 @@
   outline: 3px solid var(--course-ink);
   outline-offset: 4px;
 }
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px var(--page-gutter);
-
-  border-bottom: 1px solid var(--border);
-}
-.nav a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-}
-.brand {
-  font-family: "DM Serif Display", Georgia, serif;
-  font-size: 1.75rem;
-}
 .main {
   width: 100%;
   max-width: 100rem;
@@ -325,11 +315,6 @@
 .intro {
   margin-bottom: 32px;
   max-width: none;
-}
-.eyebrow {
-  color: var(--course-ink);
-  font-weight: 500;
-  display: none;
 }
 .root h1,
 .root h2 {
@@ -349,13 +334,6 @@
 .root h3 {
   font-size: 1.125rem;
   line-height: 1.5;
-}
-.notice {
-  padding: 16px 20px;
-
-  background: #e6f1fb;
-  border-radius: 8px;
-  color: #0c447c;
 }
 .layout {
   display: grid;
@@ -381,12 +359,6 @@
   border-bottom: 1px solid var(--border);
   color: var(--text-muted);
   font-size: 1rem;
-}
-.trainingBadge {
-  padding: 2px 10px;
-  border-radius: 20px;
-  background: #e6f1fb;
-  color: #0c447c;
 }
 .emailHeader {
   padding: var(--panel-padding);
@@ -603,9 +575,6 @@
   }
 }
 @media (max-width: 600px) {
-  .nav {
-    padding: 16px;
-  }
   .panel,
   .emailBody,
   .emailHeader {
@@ -614,19 +583,72 @@
 }
 
 /* Keep the simulated email distinct from its supporting guidance. */
-.nav .brand {
-  color: var(--text);
-  text-decoration: none;
-}
-.nav .brand:hover {
-  text-decoration: underline;
-}
-.notice,
 .feedback {
   border-radius: 0;
 }
 .practiceBrief {
   max-width: 70ch;
+}
+.practiceGuide {
+  padding: 16px 20px;
+  background: #fff3c4;
+  color: #173c5c;
+  border: 1px solid #986500;
+  max-width: 70ch;
+}
+.practiceBrowserLabel {
+  padding: 16px;
+  background: #173c5c;
+  color: #fff;
+}
+.practiceBrowserLabel p {
+  margin: 8px 0 0;
+}
+.practiceHighlight {
+  outline: 4px solid #986500;
+  outline-offset: 4px;
+  background: #fff3c4;
+}
+.action.practiceHighlight,
+.practiceBrowserTabs button.practiceHighlight[aria-pressed] {
+  background: #ffe28a;
+  color: #173c5c;
+  border-color: #986500;
+  font-weight: 700;
+}
+.action.practiceHighlight:hover {
+  background: #ffd45c;
+  color: #173c5c;
+}
+.practicePhone {
+  margin-block: 28px;
+  padding: clamp(16px, 4vw, 32px);
+  border: 1px solid #334b60;
+  border-radius: 12px;
+  max-width: 40rem;
+  background: var(--surface);
+}
+.practicePhone h2 {
+  margin-top: 0;
+}
+.practiceDecision.practiceHighlight {
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.practiceAnswerChoices {
+  display: grid;
+  gap: 12px;
+}
+.practiceAnswerChoices button {
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  min-height: 48px;
+}
+.practiceHighlight:focus-visible,
+.practiceHighlight :focus-visible {
+  outline: 3px solid #173c5c;
+  outline-offset: 2px;
 }
 .practiceBrowser {
   margin-block: 28px;

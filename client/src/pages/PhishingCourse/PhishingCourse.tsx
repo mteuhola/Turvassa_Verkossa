@@ -1,11 +1,11 @@
-import CompletionNotice from "../../components/CompletionNotice";
+import CourseBook from "../../components/CourseBook";
+import TopicCompletionProgress from "../../components/TopicCompletionProgress";
+import Navbar from "../../components/Navbar";
 import CompletionBadge from "../../components/CompletionBadge";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import TextSizeControl, {
-  type TextSizeProps,
-} from "../../components/TextSizeControl";
+import type { TextSizeProps } from "../../components/TextSizeControl";
 import { clues, emailParts } from "./phishingEmail";
 import styles from "./PhishingCourse.module.css";
 import ClueExplanation from "./ClueExplanation";
@@ -13,29 +13,22 @@ import ClueExplanation from "./ClueExplanation";
 export default function PhishingCourse({
   isComplete,
   onComplete,
+  onReturnTheory,
   ...textSizeProps
-}: TextSizeProps & ActivityProgressProps) {
+}: TextSizeProps & ActivityProgressProps & { onReturnTheory?: () => void }) {
   const [found, setFound] = useState<string[]>([]);
   const [activeClue, setActiveClue] = useState<{
     part: (typeof emailParts)[number];
     anchor: HTMLElement;
   } | null>(null);
-  const nextTopic = useRef<HTMLAnchorElement>(null);
   const [feedback, setFeedback] = useState(
     "Valitse viestistä kohta, jota pidät epäilyttävänä.",
   );
-  const firstPart = useRef<HTMLButtonElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
+  const complete = found.length === clues.length;
   useEffect(() => {
     window.scrollTo(0, 0);
     heading.current?.focus({ preventScroll: true });
-  }, []);
-  const complete = found.length === clues.length;
-  useEffect(() => {
-    if (complete) {
-      nextTopic.current?.focus();
-      nextTopic.current?.scrollIntoView({ block: "center" });
-    }
   }, [complete]);
 
   function inspect(part: (typeof emailParts)[number], anchor: HTMLElement) {
@@ -45,12 +38,6 @@ export default function PhishingCourse({
     } else {
       setActiveClue({ part, anchor });
     }
-  }
-
-  function restart() {
-    setFound([]);
-    setFeedback("Uusi yritys. Valitse viestistä epäilyttävä kohta.");
-    firstPart.current?.focus();
   }
 
   function renderEmailPart(id: (typeof emailParts)[number]["id"]) {
@@ -92,7 +79,6 @@ export default function PhishingCourse({
     }
     return (
       <button
-        ref={id === "subject" ? firstPart : undefined}
         type="button"
         className={`${styles.emailPart} ${id === "link" ? styles.emailLink : ""}`}
         data-found={discovered}
@@ -109,18 +95,49 @@ export default function PhishingCourse({
       </button>
     );
   }
+  if (complete) {
+    return (
+      <div className={styles.root} data-course="phishing">
+        <Navbar
+          {...textSizeProps}
+          backTo="/course/phishing"
+          backLabel="Takaisin aiheisiin"
+        />
+        <CourseBook className={`${styles.main} ${styles.introductionComplete}`}>
+          <header>
+            <h1>Johdanto</h1>
+          </header>
+          <section
+            className={styles.completionContent}
+            aria-labelledby="complete-title"
+          >
+            <h2 id="complete-title" ref={heading} tabIndex={-1}>
+              Johdanto suoritettu
+            </h2>
+            <CompletionBadge label="Aihe suoritettu!" />
+            <TopicCompletionProgress />
+            <div className={styles.actions}>
+              <Link
+                className={`${styles.action} ${styles.primaryAction}`}
+                to="/course/phishing/safe-responses"
+              >
+                Seuraava aihe
+              </Link>
+            </div>
+          </section>
+        </CourseBook>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.root} data-course="phishing">
-      <nav className={styles.nav} aria-label="Päänavigaatio">
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to="/course/phishing">← Takaisin aiheisiin</Link>
-          <TextSizeControl {...textSizeProps} />
-        </div>
-      </nav>
-      <main className={styles.main}>
+      <Navbar
+        {...textSizeProps}
+        backTo="/course/phishing"
+        backLabel="Takaisin aiheisiin"
+      />
+      <CourseBook className={styles.main}>
         <div className={styles.workspace}>
           <header className={styles.intro}>
             <h1 ref={heading} tabIndex={-1}>
@@ -206,19 +223,6 @@ export default function PhishingCourse({
               </div>
             </section>
             <aside className={styles.panel} aria-labelledby="progress-title">
-              {complete && (
-                <CompletionNotice labelledBy="complete-title">
-                  <h3 id="complete-title">Kaikki merkit löytyivät!</h3>
-                  <p>Johdanto suoritettu.</p>
-                  <Link
-                    ref={nextTopic}
-                    className={`${styles.action} ${styles.primaryAction}`}
-                    to="/course/phishing/safe-responses"
-                  >
-                    Jatka: Kuinka toimia epäilyttävän viestin kanssa?
-                  </Link>
-                </CompletionNotice>
-              )}
               <h2 id="progress-title">Sinun havaintosi</h2>
               <p className={styles.count}>
                 Löydetty{" "}
@@ -255,13 +259,6 @@ export default function PhishingCourse({
                 >
                   Anna vihje
                 </button>
-                <button
-                  type="button"
-                  className={styles.action}
-                  onClick={restart}
-                >
-                  Aloita alusta
-                </button>
               </div>
               {found.length > 0 && (
                 <details className={styles.findingsReview}>
@@ -283,7 +280,18 @@ export default function PhishingCourse({
             </aside>
           </div>
         </div>
-      </main>
+        {onReturnTheory && (
+          <div className={`${styles.actions} ${styles.theoryReturn}`}>
+            <button
+              type="button"
+              className={styles.action}
+              onClick={onReturnTheory}
+            >
+              Palaa teoriaan
+            </button>
+          </div>
+        )}
+      </CourseBook>
       {activeClue && (
         <ClueExplanation
           title={activeClue.part.title}

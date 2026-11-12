@@ -38,8 +38,8 @@ export default function KaarloRecovery({
         <>
           <p role="status">
             Kaarlo: Kirjoitin sivulle sähköpostiosoitteeni ja kaupan salasanan.
-            Käytän samaa salasanaa myös sähköpostissani. En ladannut tai asentanut mitään,
-            mutta pankkikortin tietoni menin antamaan.
+            Käytän samaa salasanaa myös sähköpostissani. En ladannut tai
+            asentanut mitään, mutta pankkikortin tietoni menin antamaan.
           </p>
           <form
             onSubmit={(event) => {
@@ -101,7 +101,7 @@ export default function KaarloRecovery({
           explanation={feedback.explanation}
           response={
             feedback.correct
-              ? "Kaarlo: En tajunnut, että kaupan salasana voisi avata myös sähköpostini. Vaihdan ne heti palvelujen omilla sivuilla. Ompa hyvä, että rohkenin kertomaan tästä!"
+              ? "Kaarlo: En tajunnut, että kaupan salasana voisi avata myös sähköpostini. Vaihdan salasanani heti palvelujen omilla sivuilla. Ompa hyvä, että rohkenin kertomaan tästä!"
               : undefined
           }
           onDismiss={() => setFeedback(null)}

@@ -56,7 +56,7 @@ export const emailParts = [
     suspicious: true,
     title: "Väärään osoitteeseen vievä linkki",
     explanation:
-      "Linkin osoite ei ole harjoituksen pankin tonttupankki.yksityinen. Pankin nimi osoitteen osana ei takaa aitoutta. Avaa pankin sovellus tai kirjoita tuntemasi osoite itse.",
+      "Linkin osoite ei ole harjoituksen pankin tonttupankki.yksityinen. Pankin nimi osoitteen osana ei takaa aitoutta.",
     hint: "Vertaa linkin verkkotunnusta harjoituksen pankin osoitteeseen.",
   },
   {
@@ -65,8 +65,7 @@ export const emailParts = [
     text: "Vaihtoehtoisesti voit kirjautua sisään tästä: https://tonttupankki.yksityinen/kirjaudu",
     href: "https://omituinen-osoite.netlify.app/",
     suspicious: true,
-    title:
-      "Linkki vie eri kohteeseen kuin väittää",
+    title: "Linkki vie eri kohteeseen kuin väittää",
     explanation:
       "Itse linkki näyttää vievän oikeaan osoitteeseen, mutta liikuttaessa hiiren osoittimella linkin päälle selaimen alareunassa näkyy väärä osoite. Tarkista linkin kohde ennen kuin klikkaat sitä.",
     hint: "Vertaa jälkimmäisen linkin kohdetta selaimen alareunassa näkyvään osoitteeseen.",
@@ -98,7 +97,7 @@ export const emailParts = [
     suspicious: false,
     title: "Asiallinen allekirjoitus",
     explanation:
-      "Kohtelias allekirjoitus on tavallinen myös aidoissa viesteissä. Sen voi kuitenkin kopioida, joten se ei todista viestin aitoutta. Tarkastele viestiä kokonaisuutena.",
+      "Kohtelias allekirjoitus on tavallinen myös aidoissa viesteissä, eli se ei ole varsinainen merkki huijausviestistä. Tarkastele viestiä kokonaisuutena.",
     hint: "",
   },
 ] as const;

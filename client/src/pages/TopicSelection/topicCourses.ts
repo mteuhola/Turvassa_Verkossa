@@ -10,7 +10,6 @@ interface TopicDetails {
   title: string;
   description: string;
   path: string;
-  flow?: "password-introduction" | "phishing-introduction";
 }
 
 export type CourseTopic = TopicDetails &
@@ -41,8 +40,7 @@ const courseCatalog: CourseCatalogEntry[] = [
         id: "password-strength",
         isComplete: false,
         title: "Kuinka kaikki salasanat voi muistaa?",
-        description:
-          "Opi millaisia keinoja salasanojen tallettamiseen on. Luo oma harjoitussalasanasi ja harjoittele sen tallettamista.",
+        description: "Opi keinoja salasanojen muistamiseen. ",
         path: "/course/passwords/password-strength",
       },
     ],
@@ -61,7 +59,7 @@ const courseCatalog: CourseCatalogEntry[] = [
         isComplete: false,
         title: "Kuinka toimia epäilyttävän viestin kanssa?",
         description:
-          "Lue mitä tehdä kohdatessaan huijausviestin, ja kuinka toimia, jos huijaus on jo tapahtunut. Harjoittele viestien aitouden tarkistamista tutun sovelluksen ja tallennetun yhteystiedon kautta.",
+          "Lue mitä tehdä kohdatessaan huijausviestin, ja kuinka toimia, jos huijaus on jo tapahtunut. Harjoittele viestien aitouden tarkistamista.",
         path: "/course/phishing/safe-responses",
       },
     ],
@@ -78,9 +76,9 @@ const courseCatalog: CourseCatalogEntry[] = [
         id: "investment-offers",
         kind: "activity",
         isComplete: false,
-        title: "Tunnista epäilyttävät sijoitustarjoukset",
+        title: "Sijoitushuijaukset",
         description:
-          "Tutki kolmea sijoitustarjousta ja etsi niiden varoitusmerkit.",
+          "Opi sijoitushuijauksista, ja pohdi sijoitustarjousta.",
         path: "/course/financial-fraud/investment-offers",
       },
     ],
@@ -95,11 +93,6 @@ export const topicCourses: TopicCourse[] = courseCatalog.map(
       {
         id: "introduction",
         kind: "theory",
-        ...(course.id === "passwords"
-          ? { flow: "password-introduction" as const }
-          : course.id === "phishing"
-            ? { flow: "phishing-introduction" as const }
-            : {}),
         isComplete: false,
         title: "Johdanto",
         description: introductionDescription,
@@ -112,12 +105,11 @@ export const topicCourses: TopicCourse[] = courseCatalog.map(
         : [
             {
               id: "theory",
-              kind: "theory" as const,
+              kind: "activity" as const,
               isComplete: false,
-              title: "Teoria",
-              description: "",
+              title: "Romanssihuijaukset",
+              description: "Lue romanssihuijauksista ja etsi varoitusmerkkejä viesteistä.",
               path: `${course.path}/theory`,
-              content: { sections: [] },
             },
           ]),
       {

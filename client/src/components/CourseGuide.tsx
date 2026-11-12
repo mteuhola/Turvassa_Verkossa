@@ -3,18 +3,25 @@ import styles from "./CourseGuide.module.css";
 
 const courseOverviews: Record<string, string> = {
   passwords:
-    "Tutustu salasanojen turvallisuuteen, kokeile salasanan vahvuutta ja pohdi, miten opittua voi käyttää arjessa. Lopuksi kertaa asiat tietovisassa.",
+    "Tutustu salasanojen turvallisuuteen, kokeile salasanan vahvuutta ja opettele, kuinka salasanat pysyvät tallessa.",
   phishing:
-    "Opi tunnistamaan huijausviestejä sekä harjoittele, miten toimia epäilyttävän viestin kanssa. Lopuksi kertaa oppimasi tietovisassa.",
+    "Opi tunnistamaan huijausviestejä sekä harjoittele, miten toimia epäilyttävän viestin kanssa.",
   "financial-fraud":
-    "Tutustu romanssi- ja sijoitushuijausten varoitusmerkkeihin. Pohdi verkossa syntyvää luottamusta ja rahapyyntöjä. Lopuksi kertaa aiheita tietovisassa.",
+    "Tutustu romanssi- ja sijoitushuijausten varoitusmerkkeihin. Pohdi verkossa syntyvää luottamusta ja rahapyyntöjä.",
 };
 
-export function CharacterPortrait({ courseId }: { courseId: string }) {
+export function CharacterPortrait({
+  courseId,
+  complete = false,
+}: {
+  courseId: string;
+  complete?: boolean;
+}) {
   return (
     <span
       className={styles.portrait}
       data-character={courseId}
+      data-complete={complete}
       aria-hidden="true"
     />
   );

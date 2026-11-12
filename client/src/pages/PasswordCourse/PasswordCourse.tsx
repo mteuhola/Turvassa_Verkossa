@@ -1,3 +1,6 @@
+import CourseBook from "../../components/CourseBook";
+import TopicCompletionProgress from "../../components/TopicCompletionProgress";
+import Navbar from "../../components/Navbar";
 import {
   canSavePracticePassword,
   readPracticePassword,
@@ -6,40 +9,45 @@ import {
 import CompletionBadge from "../../components/CompletionBadge";
 import PracticePasswordManager from "../../components/PracticePasswordManager";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { assessPassword, MAX_PASSWORD_LENGTH } from "./passwordStrength";
+import {
+  MAX_PASSWORD_LENGTH,
+  type PasswordAssessment,
+} from "./passwordStrength";
+import { usePasswordAssessment } from "./usePasswordAssessment";
+import AssessmentStatus from "./AssessmentStatus";
 import styles from "./PasswordCourse.module.css";
 import Theory from "../Theory/Theory";
 import { courseIntroductions, passwordTheory } from "../Theory/theoryData";
 import { topicCourses } from "../TopicSelection/topicCourses";
-import TextSizeControl, {
-  type TextSizeProps,
-} from "../../components/TextSizeControl";
+import type { TextSizeProps } from "../../components/TextSizeControl";
 
-import {
-  passwordExamples,
-  allExamplesCorrect,
-  isExampleCorrect,
-} from "./passwordExamples";
+import { passwordExamples, isExampleCorrect } from "./passwordExamples";
 
-const examples = passwordExamples.map((item) => ({
-  ...item,
-  assessment: assessPassword(item.value),
-}));
+const examples = passwordExamples;
 
-function StrengthMeter({
-  assessment,
-}: {
-  assessment: NonNullable<ReturnType<typeof assessPassword>>;
-}) {
+function ExampleStrength({ password }: { password: string }) {
+  const status = usePasswordAssessment(password);
+  return (
+    <div role="status">
+      {status.assessment ? (
+        <StrengthMeter assessment={status.assessment} />
+      ) : (
+        <AssessmentStatus {...status} />
+      )}
+    </div>
+  );
+}
+
+function StrengthMeter({ assessment }: { assessment: PasswordAssessment }) {
   return (
     <>
       <p className={styles.score}>
         Arvio: <strong>{assessment.label}</strong> ({assessment.score}/4)
       </p>
       <div className={styles.meter} aria-hidden="true">
-        {[0, 1, 2, 3, 4].map((level) => (
+        {[1, 2, 3, 4].map((level) => (
           <span
             key={level}
             data-filled={level <= assessment.score}
@@ -67,10 +75,10 @@ export default function PasswordCourse({
   const [checkedAnswers, setCheckedAnswers] = useState<
     Record<number, number[]>
   >({});
-  const reviewComplete = allExamplesCorrect(checkedAnswers);
   const correctCount = examples.filter((item, index) =>
     isExampleCorrect(checkedAnswers[index], item.correctAnswers),
   ).length;
+  const reviewComplete = correctCount === examples.length;
   const [visible, setVisible] = useState(false);
   const [hasTyped, setHasTyped] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -90,7 +98,8 @@ export default function PasswordCourse({
   }, [stage]);
   const [saveError, setSaveError] = useState("");
   const input = useRef<HTMLInputElement>(null);
-  const assessment = useMemo(() => assessPassword(password), [password]);
+  const status = usePasswordAssessment(password);
+  const { assessment } = status;
   const tooLong = password.length > MAX_PASSWORD_LENGTH;
 
   const canSave = canSavePracticePassword({
@@ -119,7 +128,7 @@ export default function PasswordCourse({
       setStage("complete");
     } catch {
       setSaveError(
-        "Tallennus ei onnistunut. Tarkista, että selaimen tallennus on sallittu ja käytössä on suojattu yhteys. Voit yrittää uudelleen. Merkkiä ei myönnetty tästä yrityksestä.",
+        "Tallennus ei onnistunut.",
       );
     } finally {
       setIsSaving(false);
@@ -160,16 +169,12 @@ export default function PasswordCourse({
 
   return (
     <div className={styles.root} data-course="passwords">
-      <nav className={styles.nav} aria-label="Päänavigaatio">
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to="/course/passwords">← Takaisin aiheisiin</Link>
-          <TextSizeControl {...textSizeProps} />
-        </div>
-      </nav>
-      <main className={styles.main}>
+      <Navbar
+        {...textSizeProps}
+        backTo="/course/passwords"
+        backLabel="Takaisin aiheisiin"
+      />
+      <CourseBook className={styles.main}>
         <header>
           <h1>
             {mode === "introduction"
@@ -184,29 +189,23 @@ export default function PasswordCourse({
                 Tutustu esimerkkeihin
               </h2>
               <p>
-                Tässä näet erilaisia esimerkkisalasanoja ja niiden arvioidun
-                vahvuuden. Arvio perustuu johdantokappaleessa esiteltyihin
-                salasanan ominaisuuksiin. Klikkaamalla salasanaa näet sen
-                vahvuusarvion sekä kysymyksiä salasanan vahvuuteen liittyen.
+                Alla on listattuna erilaisia esimerkkisalasanoja ja niiden
+                arvioitu vahvuus. Arvio perustuu johdantokappaleessa
+                esiteltyihin salasanan ominaisuuksiin. Klikkaamalla salasanaa
+                näet sen vahvuusarvion sekä kysymyksiä salasanan vahvuuteen
+                liittyen.
                 <br />
                 <br />
-                Valitse kaikki oikeat vaihtoehdot. Oikeita voi olla yksi, useita
-                tai ei yhtään. Pääset eteenpäin, kun vastaat kaikkiin viiteen
-                salasanaan liittyviin kysymyksiin oikein ja painat alhaalta
-                löytyvää <strong>Valmis</strong>-painiketta. Kysymyksiä voi
-                yrittää uudelleen.
-                <br />
-                <br />
-                <strong>Huom</strong>: Nämä esimerkit ovat julkisia, eivätkä
-                sovi oikeiksi salasanoiksi. Älä käytä niitä omilla
-                käyttäjilläsi.
+                Valitse kaikki oikeat vaihtoehdot. Oikeita vastauksia voi olla
+                yksi tai useita. Pääset eteenpäin, vastattuasi kysymyksiin
+                oikein ja painamalla alhaalta löytyvää <strong>Valmis</strong>
+                -painiketta. Kysymyksiä voi yrittää uudelleen.
               </p>
               <div className={styles.examples}>
                 {examples.map((item, index) => (
                   <details key={item.name}>
                     <summary>
                       {item.name}
-                      <span>{item.value}</span>
                       {isExampleCorrect(
                         checkedAnswers[index],
                         item.correctAnswers,
@@ -217,9 +216,7 @@ export default function PasswordCourse({
                       )}
                     </summary>
                     <div className={styles.exampleResult}>
-                      {item.assessment && (
-                        <StrengthMeter assessment={item.assessment} />
-                      )}
+                      <ExampleStrength password={item.value} />
                       <fieldset
                         className={styles.question}
                         disabled={isExampleCorrect(
@@ -321,7 +318,7 @@ export default function PasswordCourse({
               </h2>
               <p id="privacy" className={styles.privacy}>
                 Tässä näkymässä voit kokeilla erilaisten salasanojen vahvuutta
-                sekä nähdä ehdotuksia niiden vahvistamiseen. Voit kokeilla
+                sekä nähdä ehdotuksia salasanojen vahvistamiseen. Voit kokeilla
                 esimerkiksi:
                 <li>Lyhyitä sanoja, kuten "kissa"</li>
                 <li>Isoja ja pieniä kirjaimia</li>
@@ -332,8 +329,12 @@ export default function PasswordCourse({
                   merkeillä, kuten "kissa-kahvi_radio!sohva"
                 </li>
                 <br />
-                Kun olet kokeillut erilaisia salasanoja, keksi salasana vain
-                tätä harjoitusta varten. Sitä ei tallenneta mihinkään.
+                Arvioitu murtamisaika kertoo, kuinka kauan salasanan arvaaminen kestäisi,
+                jos salasana päätyisi vääriin käsiin tietomurrossa.
+                <br />
+                <br />
+                Kun olet kokeillut erilaisia salasanoja, keksi salasana tätä
+                kurssia varten. 
                 <strong>
                   Huom: Älä kuitenkaan valitse tähän tehtävään olemassaolevaa
                   salasanaasi!
@@ -398,6 +399,8 @@ export default function PasswordCourse({
                     Teksti on liian pitkä arvioitavaksi. Lyhennä sitä
                     kokeillaksesi uudelleen.
                   </p>
+                ) : status.loading || status.error ? (
+                  <AssessmentStatus {...status} />
                 ) : assessment ? (
                   <>
                     <StrengthMeter assessment={assessment} />
@@ -437,17 +440,6 @@ export default function PasswordCourse({
                   Jatka salasanan säilyttämiseen
                 </button>
               </div>
-              <button
-                type="button"
-                className={styles.secondary}
-                disabled={isSaving}
-                onClick={() => {
-                  setVisible(false);
-                  setStage("reading");
-                }}
-              >
-                Palaa teoriaan
-              </button>
             </section>
           )}
           {stage === "storage" && (
@@ -458,12 +450,6 @@ export default function PasswordCourse({
               <p>
                 Tarvitset salasanaa myöhemmin. Kirjoita se muistiin tai kokeile
                 harjoituksen salasanojen hallintaohjelmaa.
-              </p>
-              <p>
-                <strong>
-                  Käytä vain tätä harjoitusta varten keksittyä salasanaa. Älä
-                  käytä sitä missään oikeassa palvelussa.
-                </strong>
               </p>
               <fieldset className={styles.question} disabled={isSaving}>
                 <legend>Miten haluat säilyttää salasanan?</legend>
@@ -540,11 +526,7 @@ export default function PasswordCourse({
                   </div>
                   {storageMethod === "written" && (
                     <>
-                      <p>
-                        Kirjoita salasana muistiin täsmälleen tässä muodossa.
-                        Selaimeen tallennetaan vain tarkistustieto, ei luettavaa
-                        salasanaa.
-                      </p>
+                      <p></p>
                       <label className={styles.choice}>
                         <input
                           type="checkbox"
@@ -602,14 +584,10 @@ export default function PasswordCourse({
                   : "Harjoitussalasana tallennettu"}
               </h2>
               <CompletionBadge label="Aihe suoritettu!" />
+              <TopicCompletionProgress />
               {mode === "practice" && storageMethod === "manager" && (
                 <PracticePasswordManager />
               )}
-              <p>
-                {mode === "introduction"
-                  ? "Seuraavaksi voit kokeilla vahvan salasanan luomista ja parantamista, sekä harjoitella salasanojen hallintaohjelman käyttöä."
-                  : "Tarvitset harjoitussalasanaasi kurssin lopussa. Voit nyt jatkaa eteenpäin."}
-              </p>
               <div className={styles.actions}>
                 <Link
                   className={styles.primaryLink}
@@ -621,37 +599,40 @@ export default function PasswordCourse({
                 >
                   Seuraava aihe
                 </Link>
-                <button
-                  type="button"
-                  className={styles.secondary}
-                  onClick={() =>
-                    setStage(mode === "introduction" ? "reading" : "practice")
-                  }
-                >
-                  {mode === "introduction"
-                    ? "Kertaa johdanto"
-                    : "Vaihda harjoitussalasana"}
-                </button>
+                {mode === "practice" && (
+                  <button
+                    type="button"
+                    className={styles.secondary}
+                    onClick={() => setStage("practice")}
+                  >
+                    Vaihda harjoitussalasana
+                  </button>
+                )}
               </div>
               {mode === "practice" && (
                 <section
                   className={styles.takeaway}
                   aria-labelledby="remember-title"
-                >
-                  <h2 id="remember-title">Muista oikeilla tileilläsi</h2>
-                  <p>
-                    Käytä pitkää ja yksilöllistä salasanaa jokaisessa
-                    palvelussa. Salasanojen hallintaohjelma auttaa! Ota myös
-                    monivaiheinen tunnistautuminen käyttöön: silloin
-                    kirjautuminen vahvistetaan salasanan lisäksi esimerkiksi
-                    puhelimella.
-                  </p>
-                </section>
+                ></section>
               )}
             </section>
           )}
         </div>
-      </main>
+        {(stage === "examples" || stage === "practice") && (
+          <div className={styles.theoryReturn}>
+            <button
+              type="button"
+              disabled={isSaving}
+              onClick={() => {
+                setVisible(false);
+                setStage("reading");
+              }}
+            >
+              Palaa teoriaan
+            </button>
+          </div>
+        )}
+      </CourseBook>
     </div>
   );
 }

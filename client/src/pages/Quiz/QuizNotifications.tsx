@@ -94,7 +94,8 @@ export default function QuizNotifications({
                 <strong>turvassa verkossa kehittäjä</strong>
               </p>
               <p>
-                Hei! Pyydän sinua luomaan tilin välittömästi, jotta voit jatkaa harjoitusta. Muuten harjoitus ei mene läpi.
+                Hei! Pyydän sinua luomaan tilin välittömästi, jotta voit jatkaa
+                harjoitusta. Muuten harjoitus ei mene läpi.
               </p>
               <a
                 href={notificationLink.href}

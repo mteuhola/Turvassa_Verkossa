@@ -15,14 +15,22 @@ export const practiceLibraryLoans = [
   },
 ] as const;
 
+export const overduePracticeLoan = {
+  id: "birds",
+  title: "Linnut ja Metsäretket",
+  due: "Kolme päivää sitten",
+  status: "Myöhässä",
+  fee: "2,00 €",
+} as const;
+
 export const safeResponseScenarios = [
   {
     id: "library",
     bookId: "english",
-    title: "Onko kirjastomaksu aiheellinen?",
-    goal: "Sinulla on kirjoja lainassa. Kirjaston nimellä on tullut maksumuistutus. Selvitä, pitääkö sinun maksaa se.",
+    title: "Kirjanmerkkien hyödyntäminen",
+    goal: "Tässä esimerkissä sinulla on kirjoja lainassa, ja kirjaston nimellä on tullut maksumuistutus. Selvitä, onko kirjaston nimissä tullut viesti aiheellinen.",
     context:
-      "Olet käyttänyt selaimen Oma kirjasto -kirjanmerkkiä aiemminkin lainojesi tarkistamiseen.",
+      "Kuvitellaan, että olet käyttänyt harjoitusselaimen Oma kirjasto -kirjanmerkkiä aiemminkin lainojesi tarkistamiseen. Keltainen laatikko kertoo ensimmäisessä osassa ohjeet tehtävän suorittamiseen.",
     sender: "Oma kirjasto",
     address: "lainat@kirjaston-asiointi.fi",
     subject: "Muistutus avoimesta kirjastomaksusta",
@@ -34,13 +42,18 @@ export const safeResponseScenarios = [
       "Ystävällisin terveisin, kirjaston asiakaspalvelu",
     ],
     link: "Maksa",
+    destination: "https://omituinen-osoite.netlify.app/",
     claim:
       "Sähköposti: English for Beginners on myöhässä ja maksettavaa on 4,80 €.",
     evidence:
       "Oma kirjasto: English for Beginners -kirjan eräpäivään on viikko. Kirjan maksuja on 0,00 €.",
     question: "Miten toimit näiden tietojen perusteella?",
     choices: [
-      { id: "pay", label: "Maksan, sillä viestissä mainitaan oikea kirja, ja summa on pieni." },
+      {
+        id: "pay",
+        label:
+          "Maksan, sillä viestissä mainitaan oikea kirja, ja summa on pieni.",
+      },
       {
         id: "report",
         label:
@@ -53,10 +66,10 @@ export const safeResponseScenarios = [
   },
   {
     id: "friend",
-    title: "Leena pyytää apua",
-    goal: "Ystäväsi Leenan nimellä on tullut pyyntö. Selvitä, miten sinun kannattaa toimia.",
+    title: "Yhteystietojen hyödyntäminen",
+    goal: "Tässä esimerkissä ystäväsi Leenan nimellä on tullut pyyntö. Selvitä, miten sinun kannattaa toimia.",
     context:
-      "Olet soittanut Leenalle aiemmin sähköpostin Yhteystiedot-kohdassa olevaan numeroon.",
+      "Kuvitellaan, että sinulla on tallennettuna ennestään tuttu Leenan numero, joka löytyy sivun alareunasta.",
     sender: "Leena",
     address: "leena@hirvonen.fi",
     subject: "Voisitko auttaa laskun kanssa?",
@@ -71,7 +84,7 @@ export const safeResponseScenarios = [
     claim:
       "Sähköposti: Leena pyytää maksamaan laskun ja käyttämään uutta numeroa.",
     evidence:
-      "Puhelu Leenan ennestään tuttuun numeroon: ei vastausta. Pyyntöä ei ole vielä varmistettu.",
+      "Puhelu Leenan ennestään tuttuun numeroon: ei vastausta. Pyynnön aitous ei ole vielä selvillä.",
     question: "Mitä voit päätellä ja tehdä nyt?",
     choices: [
       {
@@ -90,6 +103,47 @@ export const safeResponseScenarios = [
     ],
     result:
       "Pyyntö jäi odottamaan varmistusta. Vastaamaton puhelu ei osoita viestiä aidoksi eikä huijaukseksi. Voit yrittää myöhemmin uudelleen tutusta numerosta ja jättää laskun maksamatta siihen asti.",
+  },
+  {
+    id: "library-real",
+    bookId: overduePracticeLoan.id,
+    title: "Kirjanmerkkien hyödyntäminen 2",
+    goal: "Kuvitellaan, että saat kirjastosta uuden maksumuistutuksen. Selvitä, onko maksu aiheellinen samalla lailla kuin ensimmäisessä osassa.",
+    context: "Tässä esimerkissä sinulla on lainassa kirja Linnut ja Metsäretket.",
+    sender: "Oma kirjasto",
+    address: "lainat@kirjaston-asiointi.fi",
+    subject: "Muistutus myöhässä olevasta lainasta",
+    time: "Tänään klo 12.30",
+    paragraphs: [
+      "Hei,",
+      'Lainaamasi kirjan "Linnut ja Metsäretket" palautus on myöhässä. Avoin myöhästymismaksu on 2,00 euroa.',
+      "Voit tarkistaa lainasi ja maksusi kirjaston verkkopalvelussa.",
+      "Ystävällisin terveisin, kirjaston asiakaspalvelu",
+    ],
+    claim:
+      "Sähköposti: Linnut ja Metsäretket on myöhässä ja maksettavaa on 2,00 €.",
+    evidence:
+      "Oma kirjasto: Linnut ja Metsäretket -kirjan eräpäivä oli kolme päivää sitten. Kirja on myöhässä ja sen maksuja on 2,00 €.",
+    question: "Miten toimit näiden tietojen perusteella?",
+    choices: [
+      {
+        id: "report",
+        label:
+          "Ilmoitan viestin tietojenkalasteluksi, koska siinä pyydetään maksua.",
+      },
+      {
+        id: "pay",
+        label:
+          "Maksan 2,00 € tutun kirjastopalvelun kautta, sillä lainan tiedot vahvistavat maksun aiheelliseksi. Jos silti epäilen, voin ottaa yhteyttä kirjastoon ennen maksamista.",
+      },
+      {
+        id: "wait",
+        label:
+          "Jätän maksun huomiotta, vaikka se näkyy myös kirjastopalvelussa.",
+      },
+    ],
+    result:
+      "Kirjastopalvelun tiedot vahvistivat maksun aiheelliseksi. Voit hoitaa maksun tutun palvelun kautta.",
   },
 ] as const;
 
@@ -131,7 +185,8 @@ export function assessPracticeDecision(
     };
   if (
     (scenario === 0 && decision === "report") ||
-    (scenario === 1 && decision === "wait")
+    (scenario === 1 && decision === "wait") ||
+    (scenario === 2 && decision === "pay")
   )
     return { correct: true, feedback: "" };
   if (scenario === 0)
@@ -141,6 +196,12 @@ export function assessPracticeDecision(
         decision === "wait"
           ? "Maksamatta jättäminen on varovainen ratkaisu. Sinulla on nyt myös tietoa maksupyynnön arvioimiseen: vertaa viestiä kirjaston lainatietoihin."
           : "Oikea kirjan nimi ei vahvista maksupyyntöä. Vertaa viestin summaa ja eräpäivää kirjaston tietoihin.",
+    };
+  if (scenario === 2)
+    return {
+      correct: false,
+      feedback:
+        "Tutusta kirjastopalvelusta löytyvät sama kirja, myöhästynyt laina ja 2,00 € maksu. Maksupyyntö ei yksin tarkoita huijausta. Voit hoitaa aiheellisen maksun tutun palvelun kautta.",
     };
   return {
     correct: false,

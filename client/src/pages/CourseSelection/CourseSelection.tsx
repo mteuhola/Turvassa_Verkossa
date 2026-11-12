@@ -1,11 +1,12 @@
+import Navbar from "../../components/Navbar";
+import FeedbackForm from "../../components/FeedbackForm";
 import DebugProgressReset from "../../components/DebugProgressReset";
+import { debugToolsEnabled } from "../../progress/debug";
 import { Link } from "react-router-dom";
 import CourseProgress from "../../components/CourseProgress";
 import { LockIcon, EmailIcon, MaskIcon } from "../../components/icons";
 import type { TopicCourse } from "../TopicSelection/topicCourses";
-import TextSizeControl, {
-  type TextSizeProps,
-} from "../../components/TextSizeControl";
+import type { TextSizeProps } from "../../components/TextSizeControl";
 import styles from "./CourseSelection.module.css";
 
 const courseDetails: Record<string, { description: string; duration: string }> =
@@ -37,24 +38,17 @@ export default function CourseSelection({
 }) {
   return (
     <div className={styles.root}>
-      <nav className={styles.nav} aria-label="Päänavigaatio">
-        <span className={styles.logoText}>Turvassa Verkossa</span>
-        <div className="nav-actions">
-          <TextSizeControl {...textSizeProps} />
-        </div>
-      </nav>
+      <Navbar {...textSizeProps} />
       <main className={styles.main}>
         <header className={styles.hero}>
           <h1>Tervetuloa oppimaan!</h1>
           <p>
-            Tämän oppimisympäristön avulla voit harjoitella turvallista verkon
-            käyttöä. Et tarvitse ennakkotietoja, ja voit edetä omaan tahtiisi.
+            Täällä voit harjoitella turvallista verkon käyttöä. Voit edetä omaan
+            tahtiisi.
           </p>
         </header>
         <section aria-labelledby="courses-title">
-          <div className={styles.sectionHeading}>
-            <h2 id="courses-title">Valitse kurssi, josta haluat aloittaa.</h2>
-          </div>
+          <div className={styles.sectionHeading}></div>
           <ul className={styles.courses}>
             {progressCourses.map((course) => {
               const details = courseDetails[course.id];
@@ -105,10 +99,8 @@ export default function CourseSelection({
             })}
           </ul>
         </section>
-        <footer className={styles.footer}></footer>
-        {import.meta.env.VITE_ENABLE_DEBUG_TOOLS === "true" && (
-          <DebugProgressReset onReset={onResetProgress} />
-        )}
+        <FeedbackForm />
+        {debugToolsEnabled && <DebugProgressReset onReset={onResetProgress} />}
       </main>
     </div>
   );

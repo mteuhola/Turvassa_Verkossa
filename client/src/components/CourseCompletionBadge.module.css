@@ -1,0 +1,20 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 100%;
+  margin-top: 12px;
+  padding: 10px 16px;
+  border: 1px solid #b28a36;
+  border-radius: 8px;
+  background: #fff3ce;
+  color: #684710;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.badge svg {
+  flex-shrink: 0;
+}

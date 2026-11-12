@@ -1,12 +1,12 @@
+import CourseBook from "../../components/CourseBook";
+import Navbar from "../../components/Navbar";
 import CompletionBadge from "../../components/CompletionBadge";
 import CourseProgress from "../../components/CourseProgress";
 import CourseGuide from "../../components/CourseGuide";
 import { Link } from "react-router-dom";
-import TextSizeControl, {
-  type TextSizeProps,
-} from "../../components/TextSizeControl";
+import type { TextSizeProps } from "../../components/TextSizeControl";
 import type { TopicCourse } from "./topicCourses";
-import { canEnterQuiz } from "../../progress/courseProgress";
+import { canEnterTopic } from "../../progress/courseProgress";
 import styles from "./TopicSelection.module.css";
 
 interface TopicSelectionProps extends TextSizeProps {
@@ -19,16 +19,8 @@ export default function TopicSelection({
 }: TopicSelectionProps) {
   return (
     <div className={styles.root} data-course={course.id}>
-      <nav className={styles.nav} aria-label="Päänavigaatio">
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to="/">← Takaisin kursseihin</Link>
-          <TextSizeControl {...textSizeProps} />
-        </div>
-      </nav>
-      <main className={styles.main}>
+      <Navbar {...textSizeProps} backTo="/" backLabel="Takaisin kursseihin" />
+      <CourseBook className={styles.main}>
         <header className={styles.header}>
           <h1>{course.title}</h1>
         </header>
@@ -41,7 +33,7 @@ export default function TopicSelection({
           {course.topics.length > 0 ? (
             <ol className={styles.topics}>
               {course.topics.map((topic, index) => {
-                const locked = topic.kind === "quiz" && !canEnterQuiz(course);
+                const locked = !canEnterTopic(course, topic.path);
                 const content = (
                   <>
                     <span className={styles.number} aria-hidden="true">
@@ -53,7 +45,7 @@ export default function TopicSelection({
                       <p>{topic.description}</p>
                       {locked && (
                         <p>
-                          Tietovisa avautuu, kun olet suorittanut kurssin muut
+                          Aihe avautuu, kun olet suorittanut edeltävät
                           aiheet.
                         </p>
                       )}
@@ -97,7 +89,7 @@ export default function TopicSelection({
             </div>
           )}
         </section>
-      </main>
+      </CourseBook>
     </div>
   );
 }

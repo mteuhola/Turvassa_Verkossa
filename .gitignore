@@ -30,6 +30,7 @@ out/
 
 ## Vite
 .vite/
+.netlify/
 
 ## TypeScript incremental build
 *.tsbuildinfo

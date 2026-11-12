@@ -1,12 +1,13 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import CourseBook from "../../components/CourseBook";
+import TopicCompletionProgress from "../../components/TopicCompletionProgress";
+import Navbar from "../../components/Navbar";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import TextSizeControl, {
-  type TextSizeProps,
-} from "../../components/TextSizeControl";
+import type { TextSizeProps } from "../../components/TextSizeControl";
 import CompletionBadge from "../../components/CompletionBadge";
 import { CharacterPortrait } from "../../components/CourseGuide";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
-import { assessPassword, MAX_PASSWORD_LENGTH } from "./passwordStrength";
+import { MAX_PASSWORD_LENGTH } from "./passwordStrength";
 import {
   canSignInAsSanna,
   createSannaLoginTask,
@@ -20,6 +21,8 @@ import {
   type SannaPasswords,
   type SannaAccountId,
 } from "./sannaSimulation";
+import { usePasswordAssessment } from "./usePasswordAssessment";
+import AssessmentStatus from "./AssessmentStatus";
 import styles from "./PasswordCourse.module.css";
 import own from "./SannaActivity.module.css";
 
@@ -54,10 +57,11 @@ export default function SannaActivity({
   >("intro");
   const [index, setIndex] = useState(0);
   const [saved, setSaved] = useState<SannaPasswords>({});
+  const savedScores = useRef(new Map<string, number>());
   const [entryNames, setEntryNames] = useState<SannaPasswords>({});
   const [entryName, setEntryName] = useState("");
   const [planChoices, setPlanChoices] = useState<string[]>([]);
-  const [planOptions, setPlanOptions] = useState(() =>
+  const [planOptions] = useState(() =>
     createSannaPlanChoices(),
   );
   const [planCorrect, setPlanCorrect] = useState(false);
@@ -66,12 +70,13 @@ export default function SannaActivity({
   const [feedback, setFeedback] = useState("");
   const [managerOpen, setManagerOpen] = useState(false);
   const [login, setLogin] = useState("");
-  const [loginTask, setLoginTask] = useState(() => createSannaLoginTask());
+  const [loginTask] = useState(() => createSannaLoginTask());
   const heading = useRef<HTMLHeadingElement>(null);
   const loginInput = useRef<HTMLInputElement>(null);
   const previous = useRef(`${stage}:${index}`);
   const account = sannaAccounts[index];
-  const assessment = useMemo(() => assessPassword(password), [password]);
+  const status = usePasswordAssessment(password);
+  const { assessment } = status;
   const count = Object.keys(saved).length;
   useEffect(() => {
     if (previous.current !== `${stage}:${index}`) {
@@ -113,7 +118,7 @@ export default function SannaActivity({
     const problem = passwordProblem(
       account.id,
       password,
-      assessPassword(password)?.score,
+      assessment?.score,
       saved,
     );
     if (problem) {
@@ -124,6 +129,8 @@ export default function SannaActivity({
       );
       return;
     }
+    if (!assessment) return;
+    savedScores.current.set(password, assessment.score);
     setSaved((current) => ({ ...current, [account.id]: password }));
     setEntryNames((current) => ({
       ...current,
@@ -136,22 +143,21 @@ export default function SannaActivity({
 
   return (
     <div className={styles.root} data-course="passwords">
-      <nav className={styles.nav} aria-label="Päänavigaatio">
-        <Link to="/" className={styles.brand}>
-          Turvassa Verkossa
-        </Link>
-        <div className="nav-actions">
-          <Link to="/course/passwords">← Takaisin aiheisiin</Link>
-          <TextSizeControl {...textSizeProps} />
-        </div>
-      </nav>
-      <main className={styles.main}>
+      <Navbar
+        {...textSizeProps}
+        backTo="/course/passwords"
+        backLabel="Takaisin aiheisiin"
+      />
+      <CourseBook className={styles.main}>
         <header>
           <h1>Auta Sannaa</h1>
         </header>
         <div className={own.companion}>
           <div className={own.portrait}>
-            <CharacterPortrait courseId="passwords" />
+            <CharacterPortrait
+              courseId="passwords"
+              complete={stage === "complete"}
+            />
           </div>
           <p>
             Sanna on kuvitteellinen harjoituskaverisi. Tehtäväsi on auttaa häntä
@@ -161,7 +167,6 @@ export default function SannaActivity({
         {stage !== "intro" && stage !== "plan" && stage !== "complete" && (
           <p className={styles.small}>
             Salasanat vaihdettu ja tallennettu: {count}/{sannaAccounts.length}.
-            Lopuksi autat Sannaa kirjautumaan.
           </p>
         )}
         <div className={styles.activity}>
@@ -174,7 +179,7 @@ export default function SannaActivity({
                 ”Olen käyttänyt salasanaa <strong>mustikka3</strong> melkein
                 kaikkialla, koska se on helppo muistaa. Alan kuitenkin epäillä,
                 että se on liian helppo arvata. Haluaisin vaihtaa jokaiselle
-                palvelulle oman salasanan, mutta en oikein tiedä miten se
+                palvelulle oman salasanan, mutten oikein tiedä miten se
                 kannattaa tehdä. Auttaisitko minua?”
               </p>
               <ul className={own.accounts}>
@@ -186,8 +191,8 @@ export default function SannaActivity({
                 ))}
               </ul>
               <p>
-                Vaihdat salasanat yksi kerrallaan ja tallennat ne Sannan
-                salasanojen hallintaohjelmaan. Lopuksi autat häntä kirjautumaan
+                Vaihda Sannan salasanat yksi kerrallaan ja säilytä ne
+                salasanojen hallintaohjelmaan. Auta lopuksi Sannaa kirjautumaan
                 yhteen palveluista.
               </p>
               <p className={styles.small}>
@@ -220,8 +225,7 @@ export default function SannaActivity({
                 Miten Sannaa kannattaa auttaa?
               </h2>
               <p>
-                ”Mitä meidän olisi hyvä tehdä, jotta osaisin käyttää
-                salasanojani turvallisemmin?”
+                ”Otin käyttöön salasanojen hallintaohjelman, mutten oikein osaa käyttää sitä vielä. Miten sen kanssa kannattaa toimia?”
               </p>
               <form
                 onSubmit={(event) => {
@@ -291,9 +295,9 @@ export default function SannaActivity({
               </h2>
               <p>
                 {index === 0
-                  ? "Sanna: Aloitetaan sähköpostista. Voisitko keksiä minulle uuden salasanan tai luoda sen salasanojen hallintaohjelmalla? Voisitko myös auttaa minua keksimään nimen, josta tunnistan palvelun salasanojen hallintaohjelmassa?"
+                  ? "Sanna: Aloitetaan sähköpostista. Avasin tähän salasanojen hallintaohjelmani. Voisitko näyttää minulle, miten salasanan voi luoda sen avulla? Voisitko myös auttaa minua keksimään salasanalle \"nimen\", josta tunnistan palvelun salasanojen hallintaohjelmassa myöhemmin?"
                   : index === 1
-                    ? "Sanna: Tehdään vaatekauppaan eri salasana kuin sähköpostiin. Saisiko tämänkin sanan salasanojen hallintaohjelmaan?"
+                    ? "Sanna: Tehdään vaatekauppaan eri salasana kuin sähköpostiin. Saisiko tämänkin talteen salasanojen hallintaohjelmaan?"
                     : "Sanna: Tehdään kirjakerhoonkin eri salasana kuin muihin. Nyt uskon jo, että salasanojen hallintaohjelma pitää sen tallessa."}
               </p>
               <form
@@ -303,16 +307,15 @@ export default function SannaActivity({
                 }}
               >
                 <label className={styles.label} htmlFor="sanna-password">
-                  Uusi harjoitussalasana
+                  Uusi salasana
                 </label>
                 <div className={own.generator}>
                   <p id="sanna-generator-help">
-                    Kirjoita salasana itse tai anna salasanojen hallintaohjelman
-                    luoda se tyhjään kenttään.
+                    Luo uusi vahva salasana harjoituksen salasanojen hallintaohjelman avulla.
                   </p>
                   <button
                     type="button"
-                    className={styles.secondary}
+                    className={styles.primary}
                     disabled={password.length > 0}
                     aria-describedby="sanna-generator-help"
                     onClick={() => {
@@ -327,16 +330,13 @@ export default function SannaActivity({
                   id="sanna-password"
                   type={visible ? "text" : "password"}
                   value={password}
+                  readOnly
                   autoComplete="off"
                   autoCapitalize="off"
                   autoCorrect="off"
                   spellCheck={false}
                   aria-describedby="sanna-strength"
                   aria-invalid={password.length > MAX_PASSWORD_LENGTH}
-                  onChange={(event) => {
-                    setPassword(event.target.value);
-                    setFeedback("");
-                  }}
                 />
                 <div className={styles.controls}>
                   <button
@@ -353,7 +353,9 @@ export default function SannaActivity({
                   role="status"
                   aria-atomic="true"
                 >
-                  {assessment ? (
+                  {status.loading || status.error ? (
+                    <AssessmentStatus {...status} />
+                  ) : assessment ? (
                     <>
                       <p className={styles.score}>
                         Arvio: <strong>{assessment.label}</strong> (
@@ -369,7 +371,7 @@ export default function SannaActivity({
                     <p>
                       {password
                         ? "Teksti on liian pitkä. Lyhennä salasanaa."
-                        : "Kirjoita salasana tai valitse Luo salasana automaattisesti."}
+                        : "Klikkaa \"Luo salasana automaattisesti\"."}
                     </p>
                   )}
                 </div>
@@ -383,7 +385,7 @@ export default function SannaActivity({
                   Keksi salasanalle nimi, josta Sanna tunnistaa palvelun
                   myöhemmin salasanojen hallintaohjelmassa. Voit käyttää
                   palvelun nimeä tai muuta kuvaavaa nimeä.{" "}
-                  <strong>Älä kirjoita tähän salasanaa.</strong>
+                  <strong>Älä kirjoita tähän itse salasanaa.</strong>
                 </p>
                 <input
                   id="sanna-entry-name"
@@ -426,7 +428,7 @@ export default function SannaActivity({
               </h2>
               <p>
                 {index === 0
-                  ? "Sanna: En kyllä muistaisi tätä ulkoa. Hyvä, että annoimme merkinnälle nimen. Sen avulla löydän salasanan myöhemmin."
+                  ? "Sanna: En kyllä muistaisi tällaista ulkoa! Hyvä, että annoimme salasanalle selkeän nimen. Sen avulla löydän salasanan myöhemmin."
                   : "Sanna: Kiitos! Tämänkin palvelun oma salasana on nyt tallessa."}
               </p>
               <h3>Sannan salasanojen hallintaohjelma</h3>
@@ -526,7 +528,7 @@ export default function SannaActivity({
                       saved,
                       login,
                       loginTask.target.id,
-                      (value) => assessPassword(value)?.score,
+                      (value) => savedScores.current.get(value),
                     )
                   ) {
                     setFeedback(
@@ -539,6 +541,7 @@ export default function SannaActivity({
                   setLogin("");
                   setPassword("");
                   setSaved({});
+                  savedScores.current.clear();
                   setEntryNames({});
                   setEntryName("");
                   setStage("complete");
@@ -595,6 +598,7 @@ export default function SannaActivity({
                 Kirjautuminen onnistui: {loginTask.target.name}
               </h2>
               <CompletionBadge label="Auta Sannaa suoritettu" />
+              <TopicCompletionProgress />
               <p>
                 ”Nyt jokaisella palvelulla on oma salasana, ja osaan löytää ne.
                 Kiitos avusta!”
@@ -608,28 +612,13 @@ export default function SannaActivity({
                   className={styles.primaryLink}
                   to="/course/passwords/quiz"
                 >
-                  Jatka eteenpäin
+                  Jatka tietovisaan
                 </Link>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIndex(0);
-                    setLoginTask(createSannaLoginTask());
-                    setPlanChoices([]);
-                    setPlanOptions(createSannaPlanChoices());
-                    setPlanCorrect(false);
-                    setFeedback("");
-                    setManagerOpen(false);
-                    setStage("intro");
-                  }}
-                >
-                  Auta Sannaa uudelleen
-                </button>
               </div>
             </section>
           )}
         </div>
-      </main>
+      </CourseBook>
     </div>
   );
 }

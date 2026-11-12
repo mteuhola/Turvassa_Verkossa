@@ -1,6 +1,6 @@
 export const passwordExamples = [
   {
-    name: "Yleinen salasana",
+    name: "salasana",
     value: "salasana",
     question: "Miksi tämä salasana on heikko?",
     choices: [
@@ -13,20 +13,7 @@ export const passwordExamples = [
       "Tuttu sana on helppo arvata. Myös suomalaiset sanat voivat löytyä hyökkääjän sanalistalta.",
   },
   {
-    name: "Pieni muutos 1",
-    value: "sal4sana1pekka",
-    question: "Mitkä väitteet tästä salasanasta pitävät paikkansa?",
-    choices: [
-      "Salasana on vahva: oman nimen lisääminen tekee siitä yksilöllisen.",
-      "A:n korvaaminen numerolla 4 tekee salasanasta arvaamattoman.",
-      "Salasana koostuu tutusta sanasta ja yleisestä nimestä, joten se on helppo arvata.",
-    ],
-    correctAnswers: [2],
-    lesson:
-      "Oman nimen lisääminen ja yksittäisten kirjainten korvaaminen numeroilla ovat tavallisia muutoksia. Ne eivät yksin tee salasanasta vahvaa, ja voivat paljastaa tietoja käyttäjästä.",
-  },
-  {
-    name: "Pieni muutos 2",
+    name: "Salasana123!",
     value: "Salasana123!",
     question: "Mitkä väitteet tästä salasanasta EIVÄT pidä paikkansa?",
     choices: [
@@ -39,7 +26,21 @@ export const passwordExamples = [
       "Iso alkukirjain, numerosarja ja huutomerkki ovat tavallisia muutoksia. Merkkien vaihtelu vahvistaa salasanaa, mutta se ei yksin tee salasanasta vahvaa.",
   },
   {
-    name: "Useita sanoja",
+    name: "5alasana1sana",
+    value: "5alasana1sana",
+    question: "Mitkä väitteet tästä salasanasta pitävät paikkansa?",
+    choices: [
+      "Sanassa toistuu sama sana kahdesti, mikä tekee sanasta helpommin arvattavan.",
+      "S:n korvaaminen numerolla 5 tekee salasanasta mahdottoman arvata.",
+      "Salasana on yli 12 merkkiä pitkä, jolloin se on taatusti turvallinen.",
+    ],
+    correctAnswers: [0],
+    lesson:
+      "Kirjainten korvaaminen samannäköisellä numerolla (S -> 5) on yleistä. Saman sanan toistaminen ei välttämättä tee salasanasta vahvempaa, vaikka pituus kasvaakin.",
+  },
+
+  {
+    name: "majakka sieni viulu pilvi",
     value: "majakka sieni viulu pilvi",
     question: "Mikä tekee tästä esimerkistä VAIKEAMMAN arvata?",
     choices: [
@@ -52,7 +53,7 @@ export const passwordExamples = [
       "Pituus ja toisistaan riippumattomat sanat vaikeuttavat arvaamista.",
   },
   {
-    name: "Monimutkainen salasana",
+    name: "k65I(g50*tw39x1&.}8QplsU4R0546A1",
     value: "k65I(g50*tw39x1&.}8QplsU4R0546A1",
     question: "Mikä tekee tästä esimerkistä vaikean arvata?",
     choices: [
@@ -75,11 +76,5 @@ export function isExampleCorrect(
     selected.length === expected.length &&
     new Set(selected).size === selected.length &&
     expected.every((choice) => selected.includes(choice))
-  );
-}
-
-export function allExamplesCorrect(answers: Record<number, number[]>) {
-  return passwordExamples.every((item, index) =>
-    isExampleCorrect(answers[index], item.correctAnswers),
   );
 }

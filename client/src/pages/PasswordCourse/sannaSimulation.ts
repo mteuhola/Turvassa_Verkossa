@@ -15,11 +15,6 @@ export const sannaBestPractices = [
     correct: true,
   },
   {
-    id: "personal",
-    text: "Käytetään salasanoissa ja niiden tunnuksissa Sannan nimeä ja syntymäaikaa, jotta ne on helppo muistaa ja arvata.",
-    correct: false,
-  },
-  {
     id: "reuse",
     text: "Käytetään samaa vahvaa salasanaa kaikissa palveluissa.",
     correct: false,
@@ -28,11 +23,6 @@ export const sannaBestPractices = [
     id: "long",
     text: "Valitaan pitkät ja vaikeasti arvattavat salasanat.",
     correct: true,
-  },
-  {
-    id: "mainwordreuse",
-    text: "Marjoja on paljon erilaisia, joten käytetään eri marjaa eri palveluissa!",
-    correct: false,
   },
   {
     id: "title",
@@ -50,24 +40,23 @@ export const sannaBestPractices = [
     correct: true,
   },
   {
-    id: "similar",
-    text: "Vaihdetaan vain samaan salasanaan lisättyä numeroa eri palveluissa.",
-    correct: false,
-  },
-  {
     id: "advice",
     text: "Neuvo Sannaa olemaan kertomatta salasanojaan muille.",
     correct: true,
   },
 ];
 
-export function createSannaPlanChoices(random = Math.random) {
-  const choices = [...sannaBestPractices];
+function shuffled<T>(items: readonly T[], random: () => number): T[] {
+  const choices = [...items];
   for (let index = choices.length - 1; index > 0; index--) {
     const other = Math.floor(random() * (index + 1));
     [choices[index], choices[other]] = [choices[other], choices[index]];
   }
   return choices;
+}
+
+export function createSannaPlanChoices(random = Math.random) {
+  return shuffled(sannaBestPractices, random);
 }
 
 export function isSannaPlanCorrect(selected: string[]) {
@@ -112,12 +101,7 @@ export function passwordProblem(
 
 export function createSannaLoginTask(random = Math.random) {
   const target = sannaAccounts[Math.floor(random() * sannaAccounts.length)];
-  const entries = [...sannaAccounts];
-  for (let index = entries.length - 1; index > 0; index--) {
-    const other = Math.floor(random() * (index + 1));
-    [entries[index], entries[other]] = [entries[other], entries[index]];
-  }
-  return { target, entries };
+  return { target, entries: shuffled(sannaAccounts, random) };
 }
 
 export function canSignInAsSanna(

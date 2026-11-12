@@ -1,0 +1,40 @@
+.nav {
+  /* Navigation keeps the home palette inside every course theme. */
+  --page-bg: var(--paper);
+  --course-ink: var(--text);
+  --course-tint: var(--paper);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px var(--page-gutter);
+  border-bottom: 1px solid var(--border);
+  background: var(--paper);
+  color: var(--text);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  color: var(--text);
+  text-underline-offset: 4px;
+}
+
+.nav .brand {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 1.75rem;
+  text-decoration: none;
+}
+
+.nav .brand:hover {
+  text-decoration: underline;
+}
+
+.nav a:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 4px;
+}

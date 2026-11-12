@@ -1,0 +1,131 @@
+.main {
+  max-width: 52rem;
+}
+
+.chapters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  padding: 0 0 20px;
+  list-style: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.chapters [aria-current] {
+  color: var(--course-ink);
+  font-weight: 700;
+}
+.quote {
+  margin: 20px 0;
+  padding: 20px;
+  background: var(--course-tint);
+  border-radius: 12px;
+  color: var(--course-notice-ink);
+}
+.quote p {
+  margin-top: 0;
+}
+.quote footer {
+  font-size: 0.875em;
+}
+.primary.primary {
+  background: var(--course-ink);
+  color: var(--surface);
+  border-color: var(--course-ink);
+  margin-block: 12px;
+}
+.primary:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+.primary:focus-visible,
+.document summary:focus-visible,
+.recovery button:focus-visible,
+.recovery a:focus-visible {
+  outline: 3px solid var(--course-ink);
+  outline-offset: 4px;
+}
+.small {
+  font-size: 0.875em;
+  color: var(--text-muted);
+}
+.response {
+  color: var(--course-notice-ink);
+  font-weight: 500;
+}
+.document {
+  border-block-end: 1px solid var(--border);
+  padding-block: 16px;
+}
+.document summary {
+  cursor: pointer;
+  padding: 8px 0;
+  min-height: 48px;
+  font-weight: 500;
+}
+.document p {
+  white-space: pre-line;
+}
+.feedback {
+  color: var(--course-notice-ink);
+}
+.feedback:empty {
+  margin: 0;
+}
+.story {
+  max-width: 65ch;
+}
+.simoPractice {
+  max-width: 32rem;
+}
+.conversationChoices {
+  display: grid;
+  gap: 12px;
+  margin-block: 20px;
+}
+.conversationChoices button {
+  width: 100%;
+  min-height: 48px;
+  padding: 16px 20px;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.conversationChoices button[aria-pressed="true"] {
+  background: var(--course-tint);
+  border-color: var(--course-ink);
+  color: var(--course-notice-ink);
+}
+.conversationChoices button:disabled {
+  opacity: 1;
+  cursor: default;
+}
+.simoPractice button:focus-visible,
+.simoPractice a:focus-visible {
+  outline: 3px solid var(--course-ink);
+  outline-offset: 4px;
+}
+.recovery {
+  max-width: 38rem;
+}
+.messenger {
+  margin-block: 24px;
+  padding: clamp(16px, 3vw, 24px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.messenger h3 {
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.125em;
+}
+.messenger p:last-child {
+  margin-bottom: 0;
+}
+.recovery button {
+  min-height: 48px;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}

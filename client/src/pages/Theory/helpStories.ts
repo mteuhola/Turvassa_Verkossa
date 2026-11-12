@@ -12,8 +12,7 @@ export const helpStories: Record<
   passwords: {
     id: "help-sanna",
     title: "Auta Sannaa",
-    description:
-      "Auta Sannaa vaihtamaan tilien salasanoja ja kirjautumaan salasanojen hallintaohjelman avulla.",
+    description: "Sanna tarvitsee apuasi salasanojen vaihtamisessa ja salasanojen hallintaohjelman kanssa.",
     content: {
       characterName: "Sanna",
       sections: [
@@ -84,24 +83,22 @@ export const helpStories: Record<
     id: "help-raija",
     title: "Auta Raijaa",
     description:
-      "Pohdi Raijan verkkotuttavan rahapyyntöä ja sitä, miten ottaisit asian puheeksi.",
+      "Auta ensin Raijaa tukemaan Simoa sijoitushuijauksen jälkeen. Auttakaa sitten yhdessä Raijaa ottamaan seuraavat askeleet.",
     content: {
       characterName: "Raija",
       sections: [
         {
           heading: "Raija kertoo",
           paragraphs: [
-            "”Olen jutellut jo jonkin aikaa erään ihmisen kanssa netissä. Hän kyselee kuulumisiani ja tuntuu ymmärtävän minua. Emme ole vielä tavanneet kasvotusten, mutta olemme puhuneet tapaamisesta.”",
-            "”Nyt hän sanoo, että voisi lentää luokseni. Hän pyytää minulta 850 euroa lentolippuun. Hänen mielestään se tasaisi kustannuksia, koska jos haluamme tavata, jommankumman täytyy matkustaa. Hän sanoo käyttävänsä matkaan omaa aikaansa ja toivoo minun maksavan osan kuluista.”",
-            "”Summa tuntuu minusta suurelta, mutta haluaisin nähdä hänet. En myöskään haluaisi loukata häntä vaikuttamalla epäluuloiselta. Mitä minun kannattaisi ajatella tästä?”",
+            "”Simo kertoi siirtäneensä rahat lomakyläsijoitukseen jo ennen kuin katsoimme tarjousta yhdessä. Auttaisitko minua auttamaan häntä?”",
+            "”Minä lähetin Hermannille ensin 200 euroa matkaan ja sitten 300 euroa hänen veljensä sairaalakuluihin. Sen jälkeen hänestä ei ole kuulunut mitään. Tarvitsen itsekin apua.”",
           ],
         },
         {
           heading: "Miten auttaisit Raijaa?",
           paragraphs: [
-            "Mitä tiedämme Raijan uudesta tuttavasta ja mitä jää vielä epäselväksi? Mitä ajatuksia suuri rahapyyntö ennen ensimmäistä tapaamista herättää?",
-            "Pohdi perustelua kustannusten tasaamisesta. Voiko reilulta kuulostava selitys saada rahapyynnön tuntumaan turvallisemmalta kuin se on?",
-            "Miten ottaisit huolesi puheeksi Raijan kanssa niin, että hän kokisi tulevansa kuulluksi? Mitä hänen kannattaisi selvittää ja kenen kanssa jutella ennen päätöstä?",
+            "Kuuntele huoli, auta ottamaan yhteyttä pankkiin ja säilytä tapahtumien tiedot. Valmistelkaa ilmoitus yhdessä ja sopikaa jatkosta.",
+            "Simo ja Raija voivat tukea toisiaan. Kummankaan ei tarvitse selvittää tapahtunutta yksin tai hävetä avun pyytämistä.",
           ],
         },
       ],

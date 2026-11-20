@@ -15,6 +15,12 @@ else:
 app = FastAPI()
 
 
+@app.get("/api/health")
+def health(response: Response):
+    response.headers["Cache-Control"] = "no-store"
+    return {"status": "ok"}
+
+
 class FeedbackRequest(BaseModel):
     uuid: UUID
     feedback: str = Field(min_length=1, max_length=5000, strict=True, repr=False)

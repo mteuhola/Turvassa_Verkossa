@@ -32,69 +32,53 @@ export default function PhishingCourse({
   }, [complete]);
 
   function inspect(part: (typeof emailParts)[number], anchor: HTMLElement) {
-    if (activeClue) return;
-    if (!part.suspicious) {
-      setFeedback(`${part.title}: ${part.explanation}`);
-    } else {
-      setActiveClue({ part, anchor });
-    }
+    if (activeClue || found.includes(part.id)) return;
+    setActiveClue({ part, anchor });
   }
 
   function renderEmailPart(id: (typeof emailParts)[number]["id"]) {
     const part = emailParts.find((item) => item.id === id)!;
     const discovered = found.includes(id);
-    if ("href" in part) {
-      const [prompt, linkText] = part.text.split(/(https?:\/\/\S+)/);
-      return (
-        <span
-          className={`${styles.emailPart} ${styles.emailLinkPart}`}
+    const [prompt, linkText] = part.text.split(/(https?:\/\/\S+)/);
+    const destination = "href" in part ? part.href : linkText;
+    return (
+      <span
+        className={styles.emailSelectionRow}
+        data-active={activeClue?.part.id === id}
+      >
+        <button
+          type="button"
+          className={styles.markSuspicious}
           data-found={discovered}
+          aria-disabled={discovered}
+          tabIndex={discovered ? -1 : undefined}
+          aria-label={`${discovered ? "Löydetty" : "Merkitse epäilyttäväksi"}: ${part.text}`}
+          onClick={(event) => inspect(part, event.currentTarget)}
         >
-          <button
-            type="button"
-            className={styles.emailPartOverlay}
-            aria-label={`${part.label}: ${part.text}${discovered ? ". Varoitusmerkki löydetty." : ""}`}
-            onClick={(event) => inspect(part, event.currentTarget)}
-          />
-          {prompt}
-          <a
-            href={part.href}
-            className={styles.emailLink}
-            onClick={(event) => {
-              event.preventDefault();
-              inspect(part, event.currentTarget);
-            }}
-            onAuxClick={(event) => event.preventDefault()}
-          >
-            {linkText}
-          </a>
-          {discovered && (
-            <span className={styles.found} aria-hidden="true">
-              {" "}
-              Löydetty
-            </span>
+          {discovered
+            ? "Löydetty"
+            : "Merkitse epäilyttäväksi"}
+        </button>
+        <span className={styles.emailPart} data-found={discovered}>
+          {linkText ? (
+            <>
+              {prompt}
+              <a
+                href={destination}
+                title={destination}
+                className={styles.emailLink}
+              >
+                {linkText}
+              </a>
+            </>
+          ) : (
+            part.text
           )}
         </span>
-      );
-    }
-    return (
-      <button
-        type="button"
-        className={`${styles.emailPart} ${id === "link" ? styles.emailLink : ""}`}
-        data-found={discovered}
-        aria-label={`${part.label}: ${part.text}${discovered ? ". Varoitusmerkki löydetty." : ""}`}
-        onClick={(event) => inspect(part, event.currentTarget)}
-      >
-        {part.text}
-        {discovered && (
-          <span className={styles.found} aria-hidden="true">
-            {" "}
-            Löydetty
-          </span>
-        )}
-      </button>
+      </span>
     );
   }
+
   if (complete) {
     return (
       <div className={styles.root} data-course="phishing">
@@ -145,16 +129,16 @@ export default function PhishingCourse({
             </h1>
             <p>
               Tutki sähköpostia ja etsi siitä varoitusmerkkejä. Valitse
-              epäilyttävä kohta suoraan viestistä. Voit tutkia viestin eri
+              epäilyttävä kohta viestin vierestä "Merkitse epäilyttäväksi"-painikkeella. Voit tutkia viestin eri
               osioita, kuten aihetta, lähettäjää, tekstiä ja liitettä. Kaikki
               valittavat kohdat eivät ole varoitusmerkkejä. Kun löydät
               varoitusmerkin, lue sen selitys ja valitse ”Ymmärsin, jatka” ennen
-              seuraavaa havaintoa.
+              seuraavan havainnon tekemistä.
             </p>
             <p>
               Oikean pankin osoite on tässä esimerkissä{" "}
-              <strong>tonttupankki.yksityinen</strong>. Valinnat eivät avaa
-              linkkejä tai liitteitä. Voit kokeilla rauhassa ilman aikarajaa.
+              <strong>tonttupankki.asiakas</strong>. Valinnat eivät avaa
+              linkkejä tai liitteitä.
             </p>
             <div role="status" aria-live="polite">
               {isComplete && <CompletionBadge label="Aihe suoritettu!" />}
@@ -295,10 +279,11 @@ export default function PhishingCourse({
           explanation={activeClue.part.explanation}
           anchor={activeClue.anchor}
           reviewed={found.includes(activeClue.part.id)}
+          suspicious={activeClue.part.suspicious}
           onDismiss={() => setActiveClue(null)}
           onConfirm={() => {
             const id = activeClue.part.id;
-            if (!found.includes(id)) {
+            if (activeClue.part.suspicious && !found.includes(id)) {
               const next = [...found, id];
               setFound(next);
               if (next.length === clues.length) onComplete();

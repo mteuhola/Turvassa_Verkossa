@@ -6,6 +6,7 @@ interface Props {
   explanation: string;
   anchor: HTMLElement;
   reviewed: boolean;
+  suspicious: boolean;
   onConfirm: () => void;
   onDismiss: () => void;
 }
@@ -15,6 +16,7 @@ export default function ClueExplanation({
   explanation,
   anchor,
   reviewed,
+  suspicious,
   onConfirm,
   onDismiss,
 }: Props) {
@@ -23,7 +25,9 @@ export default function ClueExplanation({
 
   useLayoutEffect(() => {
     const element = dialog.current!;
-    anchor.scrollIntoView({ block: "nearest", behavior: "instant" });
+    if (!suspicious) {
+      anchor.scrollIntoView({ block: "nearest", behavior: "instant" });
+    }
     element.showModal();
     heading.current?.focus({ preventScroll: true });
     const position = () => {
@@ -34,8 +38,13 @@ export default function ClueExplanation({
       const offsetY = viewport?.offsetTop ?? 0;
       element.style.maxHeight = `${Math.max(0, height - 32)}px`;
       element.style.width = `${Math.min(560, width - 32)}px`;
-      const target = anchor.getBoundingClientRect();
       const box = element.getBoundingClientRect();
+      if (suspicious) {
+        element.style.left = `${offsetX + (width - box.width) / 2}px`;
+        element.style.top = `${offsetY + (height - box.height) / 2}px`;
+        return;
+      }
+      const target = anchor.getBoundingClientRect();
       const right = target.right + 16;
       const fitsRight = right + box.width <= offsetX + width - 16;
       const fitsLeft = target.left - box.width - 16 >= offsetX + 16;
@@ -69,7 +78,7 @@ export default function ClueExplanation({
       element.close();
       anchor.focus({ preventScroll: true });
     };
-  }, [anchor]);
+  }, [anchor, suspicious]);
 
   return (
     <dialog
@@ -91,9 +100,9 @@ export default function ClueExplanation({
         className={`${styles.action} ${styles.primaryAction}`}
         onClick={onConfirm}
       >
-        {reviewed ? "Palaa viestiin" : "Ymmärsin, jatka"}
+        {reviewed || !suspicious ? "Palaa viestiin" : "Ymmärsin, jatka"}
       </button>
-      {!reviewed && (
+      {suspicious && !reviewed && (
         <p className={styles.small}>
           Havainto kirjataan, kun valitset ”Ymmärsin, jatka”.
         </p>

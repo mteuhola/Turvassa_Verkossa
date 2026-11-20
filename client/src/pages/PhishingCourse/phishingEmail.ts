@@ -2,17 +2,17 @@ export const emailParts = [
   {
     id: "sender",
     label: "Lähettäjä",
-    text: "Tonttupankki <pomo@tonttupankki-turvatilit.yksityinen>",
+    text: "Tonttupankki <pomo@tonttup4nkki.aasiakas>",
     suspicious: true,
     title: "Lähettäjän osoite",
     explanation:
-      "Näyttönimi voi olla mikä tahansa. Lähettäjän verkkotunnus tonttupankki-turvatilit.yksityinen eroaa harjoituksen pankin osoitteesta tonttupankki.yksityinen. Myöskään tutulta näyttävä lähettäjä ei yksin takaa aitoutta.",
+      "Näyttönimi voi olla mikä tahansa. Lähettäjän verkkotunnus tonttup4nkki.aasiakas eroaa harjoituksen pankin osoitteesta tonttupankki.asiakas. Myöskään tutulta näyttävä lähettäjä ei yksin takaa aitoutta.",
     hint: "Vertaa lähettäjän @-merkin jälkeistä osaa pankin osoitteeseen.",
   },
   {
     id: "subject",
     label: "Aihe",
-    text: "Tietoturvapäivitys - Tilisi vaatii välitöntä toimintaa",
+    text: "!!! TIETOTURVAPÄIVITYS !!! - Tilisi vaatii välitöntä toimintaa",
     suspicious: true,
     title: "Kiire ja uhkaus",
     explanation:
@@ -32,7 +32,7 @@ export const emailParts = [
   {
     id: "request",
     label: "Viesti",
-    text: "Olemme aloittaneet uuden tietoturvapäivityksen käyttöönoton palvelussamme. Taataksemme kaikkien tiliemme turvallisuuden, sinun tulee vahvistaa henkilöllisyytesi, kirjautua sisään palveluun, ja suorittaa vaadittavat toimenpiteet. Vaihtoehtoisesti voit vastata tähän viestiin lähettämällä salasanasi ja kirjautumisen vahvistuskoodin, jolloin voimme hoitaa asian puolestasi.",
+    text: "Olemme aloittaneet uuden tietoturvapäivityksen käyttöönoton palvelussamme. Taataksemme kaikkien tiliemme turvallisuuden, sinun tulee vastata tähän viestiin lähettämällä salasanasi ja kirjautumisen vahvistuskoodin, jolloin voimme hoitaa asian puolestasi.",
     suspicious: true,
     title: "Salaisten tietojen pyyntö",
     explanation:
@@ -52,23 +52,23 @@ export const emailParts = [
   {
     id: "link",
     label: "Linkki ja sen kohde",
-    text: "Vahvista tilisi: https://tonttupankki-turvatilit.yksityinen/kirjaudu",
+    text: "Vahvista tilisi: https://tonttup4nkki.aasiakas/kirjaudu",
     suspicious: true,
     title: "Väärään osoitteeseen vievä linkki",
     explanation:
-      "Linkin osoite ei ole harjoituksen pankin tonttupankki.yksityinen. Pankin nimi osoitteen osana ei takaa aitoutta.",
+      "Linkin osoite ei ole harjoituksen pankin tonttupankki.asiakas. Pankin nimi osoitteen osana ei takaa aitoutta.",
     hint: "Vertaa linkin verkkotunnusta harjoituksen pankin osoitteeseen.",
   },
   {
     id: "fakeLink",
     label: "Linkki ja sen kohde (huijauslinkki)",
-    text: "Vaihtoehtoisesti voit kirjautua sisään tästä: https://tonttupankki.yksityinen/kirjaudu",
+    text: "Vaihtoehtoisesti voit kirjautua sisään tästä: https://tonttupankki.asiakas/kirjaudu",
     href: "https://omituinen-osoite.netlify.app/",
     suspicious: true,
     title: "Linkki vie eri kohteeseen kuin väittää",
     explanation:
-      "Itse linkki näyttää vievän oikeaan osoitteeseen, mutta liikuttaessa hiiren osoittimella linkin päälle selaimen alareunassa näkyy väärä osoite. Tarkista linkin kohde ennen kuin klikkaat sitä.",
-    hint: "Vertaa jälkimmäisen linkin kohdetta selaimen alareunassa näkyvään osoitteeseen.",
+      "Linkin teksti näyttää oikean osoitteen, mutta kun pidät hiiren osoitinta linkin päällä hetken, osoittimen viereen ilmestyvä teksti näyttää eri osoitteen. Tarkista linkin kohde ennen kuin klikkaat sitä.",
+    hint: "Pidä hiiren osoitinta jälkimmäisen linkin päällä hetken. Vertaa linkin tekstiä osoittimen viereen ilmestyvään osoitteeseen.",
   },
   {
     id: "attachment",

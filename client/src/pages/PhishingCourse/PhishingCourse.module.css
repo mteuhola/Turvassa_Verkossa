@@ -380,6 +380,7 @@
   font-weight: 500;
 }
 .senderDetails {
+  flex: 1;
   min-width: 0;
 }
 .senderLabel,
@@ -395,17 +396,46 @@
   padding: var(--panel-padding);
 }
 .emailParagraph {
-  margin: 0 0 20px;
+  margin: 0 0 16px;
 }
 .emailParagraph:last-child {
   margin-bottom: 0;
 }
+.emailSelectionRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
+  align-items: start;
+  width: 100%;
+  min-width: 0;
+}
+.markSuspicious {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--course-ink);
+  font: 500 1rem/1.4 "DM Sans", Arial, sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.markSuspicious[data-found="true"] {
+  border-color: transparent;
+  background: transparent;
+  cursor: default;
+}
 .emailPart {
-  display: inline-block;
+  display: block;
+  width: 100%;
+  min-width: 0;
   max-width: 100%;
   min-height: 44px;
   padding: 4px 6px;
-  margin-inline: -6px;
+  margin-inline: 0;
   border: 0;
   border-radius: 4px;
   background: transparent;
@@ -414,15 +444,22 @@
   line-height: inherit;
   text-align: left;
   overflow-wrap: anywhere;
-  cursor: pointer;
-}
-.emailPart:hover {
-  background: var(--page-bg);
-  box-shadow: 0 0 0 1px var(--border);
 }
 .emailPart[data-found="true"] {
   background: #e6f1fb;
   box-shadow: 0 2px var(--course-accent);
+}
+.markSuspicious:not([data-found="true"]):hover,
+.markSuspicious:not([data-found="true"]):focus-visible {
+  background: #e6f1fb;
+  border-color: var(--course-ink);
+}
+.emailSelectionRow:has(.markSuspicious:not([data-found="true"]):hover) .emailPart,
+.emailSelectionRow:has(.markSuspicious:not([data-found="true"]):focus-visible) .emailPart,
+.emailSelectionRow[data-active="true"] .emailPart {
+  background: #e6f1fb;
+  outline: 2px solid var(--course-ink);
+  outline-offset: 2px;
 }
 .emailLink {
   color: var(--course-ink);
@@ -465,7 +502,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  width: fit-content;
+  width: 100%;
   max-width: 100%;
   padding: 8px 16px;
   border: 1px solid var(--border);
@@ -544,11 +581,26 @@
   color: var(--text-muted);
   margin-top: 24px;
 }
-/* Give the email the primary reading column; findings support it on the right. */
-@container (min-width: 60rem) {
+@container (min-width: 46rem) {
+  .layout > .email {
+    position: relative;
+    margin-left: calc(15rem + var(--layout-gap));
+  }
+  .emailSelectionRow {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 44px;
+  }
+  .markSuspicious {
+    position: absolute;
+    right: calc(100% + 16px);
+    width: max-content;
+  }
+}
+
+@container (min-width: 72rem) {
   .workspace {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 50rem) minmax(18rem, 20rem);
+    grid-template-columns: 15rem minmax(0, 1fr) minmax(16rem, 18rem);
     column-gap: var(--layout-gap);
   }
   .intro {
@@ -558,8 +610,9 @@
     grid-column: 1 / -1;
     grid-template-columns: subgrid;
   }
-  .email {
+  .layout > .email {
     grid-column: 2;
+    margin-left: 0;
   }
   .panel {
     grid-column: 3;

@@ -30,7 +30,8 @@ export const passwordExamples = [
   {
     name: "5alasana1sana",
     value: "5alasana1sana",
-    question: "Miten numeroiden käyttäminen vaikuttaa tämän salasanan vahvuuteen?",
+    question:
+      "Miten numeroiden käyttäminen vaikuttaa tämän salasanan vahvuuteen?",
     choices: [
       "Numerot tekevät salasanasta aina vahvan.",
       "Kirjainten korvaaminen numeroilla tekee sanasta mahdottoman tunnistaa.",
@@ -65,7 +66,7 @@ export const passwordExamples = [
     ],
     correctAnswers: [1],
     lesson:
-      'Salasana on pitkä ja sen sisältöä on vaikea päätellä tai arvata. Tällaisten salasanojen muistamisessa voi hyödyntää esimerkiksi salasanojen hallintaohjelmaa.',
+      "Salasana on pitkä ja sen sisältöä on vaikea päätellä tai arvata. Tällaisten salasanojen muistamisessa voi hyödyntää esimerkiksi salasanojen hallintaohjelmaa.",
   },
 ];
 

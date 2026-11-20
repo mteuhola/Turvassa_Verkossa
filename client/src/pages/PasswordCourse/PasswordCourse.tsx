@@ -196,9 +196,9 @@ export default function PasswordCourse({
                 liittyen.
                 <br />
                 <br />
-                Jokaisessa kysymyksessä on yksi oikea vastaus.
-                Pääset eteenpäin vastattuasi kysymyksiin
-                oikein ja painamalla alhaalta löytyvää <strong>Valmis</strong>
+                Jokaisessa kysymyksessä on yksi oikea vastaus. Pääset eteenpäin
+                vastattuasi kysymyksiin oikein ja painamalla alhaalta löytyvää{" "}
+                <strong>Valmis</strong>
                 -painiketta. Kysymyksiä voi yrittää uudelleen.
               </p>
               <div className={styles.examples}>

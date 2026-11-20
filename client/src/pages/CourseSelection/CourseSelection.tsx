@@ -15,17 +15,17 @@ const courseDetails: Record<string, { description: string; duration: string }> =
     passwords: {
       description:
         "Kokeile, millainen salasana on helppo muistaa mutta vaikea arvata.",
-      duration: "Noin 15 minuuttia",
+      duration: "Noin 20 minuuttia",
     },
     phishing: {
       description:
         "Harjoittele tunnistamaan huijausviestit ja epäilyttävät linkit.",
-      duration: "Noin 15 minuuttia",
+      duration: "Noin 20 minuuttia",
     },
     "financial-fraud": {
       description:
         "Harjoittele tunnistamaan epäilyttävät sijoitustarjoukset ja verkossa esitetyt rahapyynnöt.",
-      duration: "Noin 20 minuuttia",
+      duration: "Noin 25 minuuttia",
     },
   };
 
@@ -118,16 +118,21 @@ export default function CourseSelection({
         <div className={styles.aboutContent}>
           <h2 id="about-site-title">Mikä tämä sivusto on?</h2>
           <p id="about-site-description">
-            Tämä sivusto on osa tietotekniikan diplomityötä, jossa arvioidaan pelillisen oppimisympäristön vaikutusta tietoturvataitojen oppimiseen.
-            Sivusto on toteutettu yhteistyössä SeniorSurfin kanssa laatimalla opetusmateriaalista tiettyyn aiheeseen keskittyviä kursseja.
-            <br/>
-            <br/>
-            Sivusto ei kysy henkilökohtaisia tietojasi, eikä tänne tarvitse luoda käyttäjää edetäkseen tehtävissä. Sivuston on tarkoitus
-            tarjota käyttäjilleen hyödyllistä ja opettavaa sisältöä, joten palautteen antaminen on arvostettua! Palautetta on mahdollista 
-            antaa päävalikon alareunasta <strong>Anna palautetta</strong> -painikkeen kautta.
-            <br/>
-            <br/>
-            Mukavia oppimishetkiä sivuston parissa! 
+            Tämä sivusto on osa tietotekniikan diplomityötä, jossa arvioidaan
+            pelillisen oppimisympäristön vaikutusta tietoturvataitojen
+            oppimiseen. Sivusto on toteutettu yhteistyössä SeniorSurfin kanssa
+            laatimalla opetusmateriaalista tiettyyn aiheeseen keskittyviä
+            kursseja.
+            <br />
+            <br />
+            Sivusto ei kysy henkilökohtaisia tietojasi, eikä tänne tarvitse
+            luoda käyttäjää edetäkseen tehtävissä. Sivuston on tarkoitus tarjota
+            käyttäjilleen hyödyllistä ja opettavaa sisältöä, joten palautteen
+            antaminen on arvostettua! Palautetta on mahdollista antaa päävalikon
+            alareunasta <strong>Anna palautetta</strong> -painikkeen kautta.
+            <br />
+            <br />
+            Mukavia oppimishetkiä sivuston parissa!
           </p>
         </div>
         <footer className={styles.aboutFooter}>

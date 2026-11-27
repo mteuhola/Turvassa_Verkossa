@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" fill="none">
+  <defs>
+    <!-- Matches the brand shield, at a smaller size for the home background. -->
+    <svg id="shield" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#865c3a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3 4 6v5c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6Z"/>
+      <path d="m8.5 12 2.5 2.5 4.5-5"/>
+    </svg>
+  </defs>
+  <g opacity="0.11">
+    <use href="#shield" x="26" y="26"/>
+    <use href="#shield" x="106" y="106"/>
+  </g>
+</svg>

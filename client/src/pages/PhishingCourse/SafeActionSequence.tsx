@@ -241,6 +241,7 @@ export default function SafeActionSequence({
                   <a
                     className={`${styles.action} ${styles.emailLink}`}
                     href={scenario.destination}
+                    title={scenario.destination}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() =>

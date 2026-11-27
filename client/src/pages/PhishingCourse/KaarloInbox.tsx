@@ -215,6 +215,7 @@ export default function KaarloInbox({
                       {email.link && (
                         <a
                           href={email.link.destination}
+                          title={email.link.destination}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

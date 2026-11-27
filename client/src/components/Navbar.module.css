@@ -25,9 +25,22 @@
 }
 
 .nav .brand {
+  gap: 12px;
+  max-width: 100%;
   font-family: "DM Serif Display", Georgia, serif;
   font-size: 1.75rem;
   text-decoration: none;
+}
+
+.brandLogo {
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+}
+
+.brand span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .nav .brand:hover {

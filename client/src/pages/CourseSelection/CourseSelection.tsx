@@ -18,12 +18,12 @@ const courseDetails: Record<string, { description: string; duration: string }> =
     },
     phishing: {
       description:
-        "Harjoittele tunnistamaan huijausviestit ja epäilyttävät linkit.",
+        "Harjoittele huijausviestien ja epäilyttävien linkkien tunnistamista.",
       duration: "Noin 15 minuuttia",
     },
     "financial-fraud": {
       description:
-        "Harjoittele tunnistamaan epäilyttävät sijoitustarjoukset ja verkossa esitetyt rahapyynnöt.",
+        "Harjoittele epäilyttävien sijoitustarjousten ja verkossa esitettyjen rahapyyntöjen tunnistamista.",
       duration: "Noin 20 minuuttia",
     },
   };

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" fill="none" color="#993556">
+  <!-- Same artwork as CourseIcon, staggered to form a diamond repeat. -->
+  <defs><svg id="icon" width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M12 2.5 C7.5 2.5 4.5 5.5 4.5 10 C4.5 13 5.5 16 7.5 18.5 C9 20.3 10.5 21.5 12 21.5 C13.5 21.5 15 20.3 16.5 18.5 C18.5 16 19.5 13 19.5 10 C19.5 5.5 16.5 2.5 12 2.5 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M12 2.5 C7.5 2.5 4.5 5.5 4.5 10 C4.5 13 5.5 16 7.5 18.5 C9 20.3 10.5 21.5 12 21.5 L12 2.5 Z" fill="currentColor" opacity="0.5"></path><ellipse cx="9" cy="10.5" rx="1.1" ry="1.2" fill="currentColor" opacity="0.9"></ellipse><ellipse cx="15" cy="10.5" rx="1.1" ry="1.4" fill="none" stroke="currentColor" stroke-width="1.2"></ellipse><path d="M10 16.3 Q11 15.6 12 16.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" fill="none"></path><path d="M12 16.2 Q13 17.2 14 15.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" fill="none"></path></svg></defs>
+  <g opacity="0.15">
+    <use href="#icon" x="22" y="22"/>
+    <use href="#icon" x="102" y="102"/>
+  </g>
+</svg>

@@ -63,13 +63,14 @@ export default function PhishingCourse({
           {linkText ? (
             <>
               {prompt}
-              <a
-                href={destination}
+              <span
+                role="link"
+                aria-disabled="true"
                 title={destination}
                 className={styles.emailLink}
               >
                 {linkText}
-              </a>
+              </span>
             </>
           ) : (
             part.text

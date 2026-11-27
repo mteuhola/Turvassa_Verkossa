@@ -99,6 +99,7 @@ export default function QuizNotifications({
               </p>
               <a
                 href={notificationLink.href}
+                title={notificationLink.href}
                 target="_blank"
                 rel="noopener noreferrer"
               >

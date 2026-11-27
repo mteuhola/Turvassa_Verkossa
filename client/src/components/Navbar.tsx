@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import TextSizeControl, { type TextSizeProps } from "./TextSizeControl";
 import styles from "./Navbar.module.css";
+import shieldLogo from "../assets/shield.svg";
 
 interface NavbarProps extends TextSizeProps {
   backTo?: string;
@@ -20,7 +21,14 @@ export default function Navbar({
   return (
     <nav className={`${styles.nav} ${className}`} aria-label="Päänavigaatio">
       <Link to="/" className={styles.brand}>
-        Turvassa Verkossa
+        <img
+          className={styles.brandLogo}
+          src={shieldLogo}
+          alt=""
+          width="48"
+          height="48"
+        />
+        <span>Turvassa Verkossa</span>
       </Link>
       <div className="nav-actions">
         {backTo && (

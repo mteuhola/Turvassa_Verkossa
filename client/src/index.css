@@ -101,6 +101,7 @@ nav button.text-size-control:focus-visible {
   outline-offset: 3px;
 }
 [data-course="passwords"] {
+  --course-pattern: url("./assets/course-patterns/passwords.svg");
   --page-bg: #e3fade;
   --course-tint: #e3fade;
   --course-notice-ink: #085041;
@@ -109,6 +110,7 @@ nav button.text-size-control:focus-visible {
 }
 
 [data-course="phishing"] {
+  --course-pattern: url("./assets/course-patterns/phishing.svg");
   --page-bg: #ebf1fc;
   --course-tint: #ebf1fc;
   --course-notice-ink: #0c447c;
@@ -117,6 +119,7 @@ nav button.text-size-control:focus-visible {
 }
 
 [data-course="financial-fraud"] {
+  --course-pattern: url("./assets/course-patterns/financial-fraud.svg");
   --page-bg: #f8e4ea;
   --course-tint: #f8e4ea;
   --course-notice-ink: #72243e;
@@ -127,4 +130,7 @@ nav button.text-size-control:focus-visible {
 div[data-course] {
   display: flow-root;
   background-color: var(--page-bg);
+  background-image: var(--course-pattern, none);
+  background-repeat: repeat;
+  background-size: 160px 160px;
 }

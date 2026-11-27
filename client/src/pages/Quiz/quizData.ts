@@ -26,7 +26,7 @@ function shuffled<T>(items: readonly T[]): T[] {
 }
 
 export function createQuizQuestions(quiz: CourseQuiz): QuizQuestion[] {
-  return shuffled(quiz.questions).map((question) =>
+  return quiz.questions.map((question) =>
     question.type === "practice-password"
       ? question
       : { ...question, options: shuffled(question.options) },

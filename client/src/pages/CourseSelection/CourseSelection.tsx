@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import Navbar from "../../components/Navbar";
 import FeedbackForm from "../../components/FeedbackForm";
 import DebugProgressReset from "../../components/DebugProgressReset";
@@ -14,17 +15,17 @@ const courseDetails: Record<string, { description: string; duration: string }> =
     passwords: {
       description:
         "Kokeile, millainen salasana on helppo muistaa mutta vaikea arvata.",
-      duration: "Noin 15 minuuttia",
+      duration: "Noin 20 minuuttia",
     },
     phishing: {
       description:
         "Harjoittele huijausviestien ja epäilyttävien linkkien tunnistamista.",
-      duration: "Noin 15 minuuttia",
+      duration: "Noin 20 minuuttia",
     },
     "financial-fraud": {
       description:
         "Harjoittele epäilyttävien sijoitustarjousten ja verkossa esitettyjen rahapyyntöjen tunnistamista.",
-      duration: "Noin 20 minuuttia",
+      duration: "Noin 25 minuuttia",
     },
   };
 
@@ -36,12 +37,25 @@ export default function CourseSelection({
   progressCourses: TopicCourse[];
   onResetProgress: () => boolean;
 }) {
+  const aboutDialog = useRef<HTMLDialogElement>(null);
+
   return (
     <div className={styles.root}>
       <Navbar {...textSizeProps} />
       <main className={styles.main}>
         <header className={styles.hero}>
-          <h1>Tervetuloa oppimaan!</h1>
+          <div className={styles.heroHeading}>
+            <h1>Tervetuloa oppimaan!</h1>
+            <button
+              type="button"
+              className={styles.aboutButton}
+              aria-haspopup="dialog"
+              aria-controls="about-site-dialog"
+              onClick={() => aboutDialog.current?.showModal()}
+            >
+              Mikä tämä sivusto on?
+            </button>
+          </div>
           <p>
             Täällä voit harjoitella turvallista verkon käyttöä. Voit edetä omaan
             tahtiisi.
@@ -94,6 +108,43 @@ export default function CourseSelection({
         <FeedbackForm />
         {debugToolsEnabled && <DebugProgressReset onReset={onResetProgress} />}
       </main>
+      <dialog
+        ref={aboutDialog}
+        id="about-site-dialog"
+        className={styles.aboutDialog}
+        aria-labelledby="about-site-title"
+        aria-describedby="about-site-description"
+      >
+        <div className={styles.aboutContent}>
+          <h2 id="about-site-title">Mikä tämä sivusto on?</h2>
+          <p id="about-site-description">
+            Tämä sivusto on osa tietotekniikan diplomityötä, jossa arvioidaan
+            pelillisen oppimisympäristön vaikutusta tietoturvataitojen
+            oppimiseen. Sivusto on toteutettu yhteistyössä SeniorSurfin kanssa
+            laatimalla opetusmateriaalista tiettyyn aiheeseen keskittyviä
+            kursseja.
+            <br />
+            <br />
+            Sivusto ei kysy henkilökohtaisia tietojasi, eikä tänne tarvitse
+            luoda käyttäjää edetäkseen tehtävissä. Sivuston on tarkoitus tarjota
+            käyttäjilleen hyödyllistä ja opettavaa sisältöä, joten palautteen
+            antaminen on arvostettua! Palautetta on mahdollista antaa päävalikon
+            alareunasta <strong>Anna palautetta</strong> -painikkeen kautta.
+            <br />
+            <br />
+            Mukavia oppimishetkiä sivuston parissa!
+          </p>
+        </div>
+        <footer className={styles.aboutFooter}>
+          <button
+            type="button"
+            className={styles.closeButton}
+            onClick={() => aboutDialog.current?.close()}
+          >
+            Sulje
+          </button>
+        </footer>
+      </dialog>
     </div>
   );
 }

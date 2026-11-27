@@ -192,18 +192,18 @@ export default function PasswordCourse({
                 Alla on listattuna erilaisia esimerkkisalasanoja ja niiden
                 arvioitu vahvuus. Arvio perustuu johdantokappaleessa
                 esiteltyihin salasanan ominaisuuksiin. Klikkaamalla salasanaa
-                näet sen vahvuusarvion sekä kysymyksiä salasanan vahvuuteen
+                näet sen vahvuusarvion sekä kysymyksen salasanan vahvuuteen
                 liittyen.
                 <br />
                 <br />
-                Valitse kaikki oikeat vaihtoehdot. Oikeita vastauksia voi olla
-                yksi tai useita. Pääset eteenpäin, vastattuasi kysymyksiin
-                oikein ja painamalla alhaalta löytyvää <strong>Valmis</strong>
+                Jokaisessa kysymyksessä on yksi oikea vastaus. Pääset eteenpäin
+                vastattuasi kysymyksiin oikein ja painamalla alhaalta löytyvää{" "}
+                <strong>Valmis</strong>
                 -painiketta. Kysymyksiä voi yrittää uudelleen.
               </p>
               <div className={styles.examples}>
                 {examples.map((item, index) => (
-                  <details key={item.name}>
+                  <details key={item.name} name="password-examples">
                     <summary>
                       {item.name}
                       {isExampleCorrect(

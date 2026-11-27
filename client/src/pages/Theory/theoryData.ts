@@ -121,6 +121,7 @@ export const passwordTheory: TheoryContent = {
       paragraphs: [
         "Kun käytössä on useita verkkopalveluita, myös salasanoja kertyy paljon. Jokaisessa palvelussa tulisi käyttää eri salasanaa, mutta pitkien ja erilaisten salasanojen muistaminen voi olla vaikeaa, varsinkin jos ne ovat sellaisia, joiden sisältöä ei voi helposti päätellä. Kaikkia salasanoja ei kuitenkaan tarvitse opetella ulkoa!",
         "Salasanojen muistamiseen ja säilyttämiseen on erilaisia apukeinoja. Voit esimerkiksi kirjoittaa salasanasi muistivihkoon tai käyttää salasanojen hallintaohjelmaa.",
+        'Johdannossa mainittu tapa muodostaa salasana useasta toisiinsa liittymättömistä sanoista on tehokas tapa muodostaa helposti muistettavia mutta vahvoja salasanoja: esimerkiksi salasanan "kello lintu kattila myrsky" voi muistaa kuvittelemalla tilanteen tai tarinan, jossa nämä sanat esiintyvät. Kaikkien salasanojen muistaminen voi kuitenkin olla haastavaa tälläkin tavalla, varsinkin kun käytössä on monia eri tilejä, jotka tarvitsevat salasanoja.',
       ],
     },
     {
@@ -194,9 +195,10 @@ export const investmentTheory: TheoryContent = {
     {
       heading: "Millaisista merkeistä sijoitushuijauksen voi tunnistaa?",
       paragraphs: [
-        "Sijoitushuijauksissa päätöksenteossa pyritään usein aiheuttamaan kiirettä esimerkiksi väittämällä, että sijoitusmahdollisuus on tarjolla vain lyhyen aikaa. Vastaanottajalle pyritään näin luomaan mielikuva, että hänen olisi suostuttava nopeasti eikä siten käyttäisi aikaa tarjouksen harkitsemiseen tai sijoituskohteen taustojen selvittämiseen.",
+        "Sijoitushuijauksissa huijarit pyrkivat usein luomaan kiirettä kohteensa päätöksenteossa väittämällä esimerkiksi, että sijoitusmahdollisuus on tarjolla vain lyhyen aikaa. Vastaanottajalle pyritään näin luomaan mielikuva, että hänen olisi suostuttava nopeasti eikä siten käyttäisi aikaa tarjouksen harkitsemiseen tai sijoituskohteen taustojen selvittämiseen.",
         "Epäilyksiä voi herättää myös se, jos sijoituksen tarjoaja välttelee kysymyksiä, ei kerro selkeästi sijoituksen riskeistä tai painostaa sijoittamaan lisää rahaa. Huijari voi myös pyrkiä estämään asiasta keskustelemisen läheisten kanssa esimerkiksi väittämällä tarjouksen olevan salainen. Epäilyttävää voi olla myös se, jos sijoituksen tarjoaja haluaa siirtää keskustelun pois alkuperäisestä palvelusta esimerkiksi yksityiseen viestisovellukseen.",
         "Sijoitushuijauksen tunnistaminen ei aina ole helppoa, sillä huijari voi vaikuttaa asiantuntevalta ja sijoitukseen liittyvät asiakirjat voivat näyttää aidoilta. Siksi sijoituspalvelun luotettavuutta ei kannata arvioida pelkästään sen ulkoasun tai sitä tarjoavan henkilön perusteella. Huomionarvoista on se, ettei sijoituksen tarjoajan ystävällisyys tai kiinnostuneisuus ole yksistään merkkejä huijauksesta, vaan tärkeämpää on pohtia tarjouksen esittämistä kokonaisuutena. ",
+        "Tekoälyä on mahdollista hyödyntää sijoitushuijauksissa luomalla kuvia ja videoita. Näitä voi tehdä itse sijoituskohteen lisäksi myös julkisuuden henkilöistä mainostamaan sijoituskohdetta. Tunnetun henkilön näennäisellä suosituksella pyritään kasvattamaan luottamusta sijoituspalvelua kohtaan tekemällä siitä uskottavan ja houkuttelevan. Todellisuudessa henkilö, josta kuvia tehdään, ei välttämättä ole missään tekemisissä sijoituskohteen kanssa.",
       ],
     },
     {
@@ -236,6 +238,7 @@ export const romanceTheory: TheoryContent = {
         "Romanssihuijaukseen voi viitata esimerkiksi se, että uusi tuttavuus alkaa puhua voimakkaista tunteista hyvin nopeasti tai vaatii jatkuvaa yhteydenpitoa. Hänen kertomuksissaan voi myös esiintyä ristiriitaisuuksia, kuten muuttuvia tietoja työpaikasta tai asuinpaikasta. Joskus huijari voi vältellä kasvokkain tapaamista ja keksiä toistuvasti esteitä sovituille tapaamisille.",
         "Huijari voi myös yrittää vaikuttaa siihen, kenelle suhteesta kerrotaan. Hän saattaa esimerkiksi pyytää pitämään suhteen salassa tai väittää, etteivät läheiset ymmärtäisi sitä. Näin huijari voi pyrkiä estämään muita ihmisiä huomaamasta epäilyttäviä piirteitä suhteessa.",
         "Yksittäinen merkki ei kuitenkaan automaattisesti tarkoita keskustelun vastapuolen olevan huijari. Tärkeämpää on huomioida useampia merkkejä yhdessä ja tarkastella keskustelua kokonaisuutena, sekä sitä, miten uusi tuttavuus suhtautuu epäilyksiin, kysymyksiin ja omiin päätöksiisi.",
+        "Kuten sijoitushuijauksissa, huijarit voivat hyödyntää tekoälyä myös romanssihuijauksissa luomalla kuvia henkilöstä, jota ei todellisuudessa ole olemassa. Huijari voi myös luoda tästä henkilöstä kuvia ja videoita erilaisissa arjen tilanteissa saadakseen kertomuksensa vaikuttamaan uskottavalta.",
       ],
     },
     {

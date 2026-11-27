@@ -16,7 +16,7 @@ export const romanceMessages = [
   {
     title: "Salaisuus ja rakkauden tunnustaminen - 2 kuukautta",
     raija:
-      "Hei, Hermanni! Ystäväni Simo kävi tänään kylässä ja kyseli kuulumisiani. Ajattelin kertoa hänelle sinusta, kun olemme jo jonkin aikaa jutelleet.",
+      "Hei, Hermanni! Kiitos lähettämistäsi kukista, ne ovat kauniita! Ystäväni Simo kävi tänään kylässä ja kyseli kuulumisiani. Ajattelin kertoa hänelle sinusta, kun olemme jo jonkin aikaa jutelleet.",
     parts: [
       "On ihanaa, että haluaisit kertoa minusta ystävillesi. Mutta voisimmeko vielä pitää tämän meidän välisenämme?",
       "Minulle on käynyt ennenkin niin, että muut ovat alkaneet arvostella suhdettani ennen kuin ovat edes tutustuneet toiseen ihmiseen.",

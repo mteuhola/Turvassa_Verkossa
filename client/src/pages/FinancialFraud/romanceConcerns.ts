@@ -27,9 +27,9 @@ export const passageConcerns: ReadonlyArray<ReadonlyArray<readonly Concern[]>> =
 
 export const reflections: Record<Concern, string> = {
   secrecy:
-    "Ajattelin, että suojelimme suhdettamme muiden mielipiteiltä. Nyt huomaan, että samalla minun oli vaikeampi puhua Simolle siitä, mitä välillämme tapahtuu.",
+    "Ajattelin, että suojelimme suhdettamme muiden mielipiteiltä. Nyt huomaan, että samalla minun oli vaikeampi puhua läheisilleni siitä, mitä välillämme tapahtuu.",
   money:
-    "Ajattelin auttavani, jotta voisimme tavata. Nyt huomaan, että minulta pyydetään rahaa, vaikka emme ole vielä edes tavanneet.",
+    "Ajattelin auttavani, jotta voisimme tavata. Nyt huomaan, että minulta pyydetään melko suuria summia rahaa, vaikkemme ole vielä edes tavanneet.",
   guilt:
     "Ajattelin ensin, että minun pitäisi todistaa luottamukseni. Nyt huomaan, että minulle tuli syyllinen olo, kun en halunnut maksaa.",
   delay:

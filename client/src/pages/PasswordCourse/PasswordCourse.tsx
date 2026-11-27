@@ -445,7 +445,7 @@ export default function PasswordCourse({
                 Säilytä harjoitussalasanasi
               </h2>
               <p>
-                Tarvitset salasanaa myöhemmin. Kirjoita se muistiin tai kokeile
+                Tarvitset salasanaa myöhemmin. Kirjoita se muistiin, opettele se ulkoa tai kokeile
                 harjoituksen salasanojen hallintaohjelmaa.
               </p>
               <fieldset className={styles.question} disabled={isSaving}>
@@ -457,7 +457,7 @@ export default function PasswordCourse({
                     checked={storageMethod === "written"}
                     onChange={() => setStorageMethod("written")}
                   />
-                  Kirjoitan harjoitussalasanan muistiin
+                  Kirjoitan harjoitussalasanan muistiin tai opettelen sen ulkoa
                 </label>
                 <label className={styles.choice}>
                   <input
@@ -533,7 +533,7 @@ export default function PasswordCourse({
                             setWrittenConfirmed(event.target.checked)
                           }
                         />
-                        Olen kirjoittanut harjoitussalasanan muistiin.
+                        Olen kirjoittanut harjoitussalasanan muistiin tai muistan sen.
                       </label>
                     </>
                   )}
@@ -596,15 +596,6 @@ export default function PasswordCourse({
                 >
                   Seuraava aihe
                 </Link>
-                {mode === "practice" && (
-                  <button
-                    type="button"
-                    className={styles.secondary}
-                    onClick={() => setStage("practice")}
-                  >
-                    Vaihda harjoitussalasana
-                  </button>
-                )}
               </div>
               {mode === "practice" && (
                 <section

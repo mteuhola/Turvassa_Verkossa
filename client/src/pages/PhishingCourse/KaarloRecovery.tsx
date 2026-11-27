@@ -32,7 +32,7 @@ export default function KaarloRecovery({
             className={`${styles.action} ${styles.primaryAction}`}
             onClick={() => setRevealed(true)}
           >
-            Kysy: annoitko tietoja tai asensitko jotain?
+            Kysy: mitä tietoja annoit tai asensitko jotain?
           </button>
         </>
       ) : (

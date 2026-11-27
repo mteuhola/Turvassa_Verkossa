@@ -257,7 +257,7 @@ export const courseQuizzes: Record<string, CourseQuiz> = {
           },
           {
             id: "third",
-            text: "Varmistaakseen, että vastaanottaja ymmärtää kaikki tarjoukseen liittyvät riskit",
+            text: "Varmistaakseen, että vastaanottaja ymmärtää kaikki tarjoukseen liittyvät riskit.",
           },
         ],
         correctOptionIds: ["first"],
